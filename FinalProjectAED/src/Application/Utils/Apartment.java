@@ -21,8 +21,8 @@ public class Apartment {
     private Date avlblDate;
     private int rent;
     private String details;
-    private int lattitude;
-    private int longitude;
+    private String lattitude;
+    private String longitude;
     private boolean isLeased;
     public Property prop;
 
@@ -98,19 +98,19 @@ public class Apartment {
         this.details = details;
     }
 
-    public int getLattitude() {
+    public String getLattitude() {
         return lattitude;
     }
 
-    public void setLattitude(int lattitude) {
+    public void setLattitude(String lattitude) {
         this.lattitude = lattitude;
     }
 
-    public int getLongitude() {
+    public String getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(int longitude) {
+    public void setLongitude(String longitude) {
         this.longitude = longitude;
     }
 

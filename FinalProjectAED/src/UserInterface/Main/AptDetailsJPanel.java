@@ -4,6 +4,8 @@
  */
 package UserInterface.Main;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author hmitt
@@ -256,6 +258,10 @@ public class AptDetailsJPanel extends javax.swing.JPanel {
 
     private void BookAptjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BookAptjButtonActionPerformed
         // TODO add your handling code here:
+        
+        JOptionPane.showMessageDialog(BookAptjButton, "Apartment booking request placed!");
+        //Send booking request to management company.
+        
     }//GEN-LAST:event_BookAptjButtonActionPerformed
 
     private void GoBackjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GoBackjButtonActionPerformed
