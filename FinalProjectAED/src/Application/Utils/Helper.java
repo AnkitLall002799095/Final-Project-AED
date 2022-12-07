@@ -10,13 +10,14 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.channels.FileChannel;
 import org.apache.commons.io.FileUtils;
+import java.sql.Connection;
+import java.sql.DriverManager;
 
 /**
  *
  * @author Bhawna Bassarmalani <your.name at your.org>
  */
 public class Helper {
-    
     
 //    public static void copyFile(File sourceFile, File destFile) {
     public static String copyFile(String filePath) {
@@ -44,6 +45,18 @@ public class Helper {
         }
         
         return relFilePath;
+    }
+    
+    public static Connection getConnection(){
+        try{
+            Connection conn;
+            conn = (Connection) DriverManager.getConnection("jdbc:mysql://aeddatabase.cvxm5l9d0hm0.us-east-1.rds.amazonaws.com:3306/aedfinalproject", "admin", "password");
+            return conn;
+        }
+        catch (Exception e) {
+            System.out.println(e);
+            return null;
+        }
     }
     
 }

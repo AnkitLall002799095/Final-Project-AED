@@ -94,7 +94,6 @@ public class AppView extends javax.swing.JFrame {
             setContentPane(viewPanel);
             repaint();
     }
-    
     	/**
 	 * Create Application Frame.
 	 */
@@ -102,30 +101,30 @@ public class AppView extends javax.swing.JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(0, 0, 1040, 750);
 		
-		setView(new WorkAreaContPanel());
+//		setView();
 	}
         
-        	/**
-	 * To show different error and informational messages in the application.
-	 */
-	public void showErrorMsg(List<String> msgs, String type) {
-		String msgString = "";
-		
-		for(String msg : msgs) {
-			msgString += msg + "\n";
-		}
-		
-		switch(type) {
-			case "error":
-				JOptionPane.showMessageDialog(this,
-					    msgString,
-					    "Error",
-					    JOptionPane.ERROR_MESSAGE);
-				break;
-			case "info":
-				JOptionPane.showMessageDialog(this, msgString);
-		}
-	}
+    /**
+     * To show different error and informational messages in the application.
+     */
+    public void showErrorMsg(List<String> msgs, String type) {
+        String msgString = "";
+
+        for(String msg : msgs) {
+                msgString += msg + "\n";
+        }
+
+        switch(type) {
+                case "error":
+                        JOptionPane.showMessageDialog(this,
+                                    msgString,
+                                    "Error",
+                                    JOptionPane.ERROR_MESSAGE);
+                        break;
+                case "info":
+                        JOptionPane.showMessageDialog(this, msgString);
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
