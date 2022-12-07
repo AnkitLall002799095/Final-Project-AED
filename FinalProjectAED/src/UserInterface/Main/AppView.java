@@ -81,7 +81,7 @@ public class AppView extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AppView().setVisible(true);
+                new AppView().setVisible(true);                
             }
         });
     }
@@ -94,16 +94,15 @@ public class AppView extends javax.swing.JFrame {
             setContentPane(viewPanel);
             repaint();
     }
-    
-    /**
-     * Create Application Frame.
-     */
-    private void createGUI() {
-            setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            setBounds(0, 0, 1040, 750);
-
-            setView(new ListingViewJPanel());
-    }
+    	/**
+	 * Create Application Frame.
+	 */
+	private void createGUI() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(0, 0, 1040, 750);
+		
+//		setView();
+	}
         
     /**
      * To show different error and informational messages in the application.
