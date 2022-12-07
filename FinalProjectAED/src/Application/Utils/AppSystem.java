@@ -4,7 +4,9 @@
  */
 package Application.Utils;
 
+import Business.ContractApplication.ContractApplicationCatalog;
 import UserInterface.Main.AppView;
+import UserInterface.Main.WorkAreaContPanel;
 
 /**
  *
@@ -13,8 +15,11 @@ import UserInterface.Main.AppView;
 public class AppSystem {
     
     public static AppView appViewObj;
+    public static ContractApplicationCatalog contractApplicationCatalog;
+    public static WorkAreaContPanel workAreaPanel;
     
     public AppSystem(AppView appViewObj) {
         this.appViewObj = appViewObj;
+        this.contractApplicationCatalog = new ContractApplicationCatalog();
     }
 }

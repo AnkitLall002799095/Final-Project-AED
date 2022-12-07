@@ -4,6 +4,7 @@
  */
 package UserInterface.Main;
 
+import Application.Utils.AppSystem;
 import UserInterface.ManagementCompany.ApplicationsListing;
 import UserInterface.ManagementCompany.CompanyEmployeeLeftPanel;
 import javax.swing.JPanel;
@@ -21,6 +22,7 @@ public class WorkAreaContPanel extends javax.swing.JPanel {
         setBounds(0, 0, 1040, 700);
         initComponents();
         setDefaultPanelViews();
+        AppSystem.workAreaPanel = this;                
     }
 
     /**
