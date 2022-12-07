@@ -6,9 +6,11 @@ package UserInterface.Main;
 
 import Application.Utils.Apartment;
 import Application.Utils.ApartmentDirectory;
+import Application.Utils.AppSystem;
 import java.sql.*;
 import Application.Utils.Helper;
 import Application.Utils.Property;
+import Application.Utils.PropertyDirectory;
 import javax.swing.*;
 
 /**
@@ -20,8 +22,9 @@ public class ListingViewJPanel extends javax.swing.JPanel {
     /**
      * Creates new form ListingViewJPanel
      */
-    
+    WorkAreaContPanel workAreaPanel;
     ApartmentDirectory aptList;
+    PropertyDirectory propList;
     
     public static void main(String[] args) {
         
@@ -29,7 +32,9 @@ public class ListingViewJPanel extends javax.swing.JPanel {
     }
     
     public ListingViewJPanel() {
+        this.workAreaPanel = AppSystem.workAreaPanel;
         aptList = new ApartmentDirectory();
+        propList = new PropertyDirectory();
         initComponents();        
         getApartmentListFromDB();
         populateTable();
@@ -172,7 +177,9 @@ public class ListingViewJPanel extends javax.swing.JPanel {
         }
 
         else {
-            //Change right panel to apartment details panel.
+            
+            workAreaPanel.setRightPanel(new AptDetailsJPanel(workAreaPanel));
+            
         }
         
     }//GEN-LAST:event_ViewDetailsjButtonActionPerformed
@@ -181,27 +188,43 @@ public class ListingViewJPanel extends javax.swing.JPanel {
         try{
             Connection conn = Helper.getConnection();
             Statement st = conn.createStatement();
-            ResultSet rs = st.executeQuery("SELECT * FROM aedfinalproject.apartment_details");
+            Statement st2 = conn.createStatement();
+            ResultSet aptRs = st.executeQuery("SELECT * FROM aedfinalproject.apartment_details");
+            ResultSet propRs = st2.executeQuery("SELECT * FROM aedfinalproject.property_details");
+            
+            while (propRs.next()){
+                Property prop = propList.addNewProfile();
+                prop.setPropId(propRs.getInt(1));
+                prop.setOwnerId(propRs.getInt(2));
+                prop.setMgtComp(propRs.getInt(3));
+                prop.setMgtBroker(propRs.getInt(4));
+                prop.setStreet(propRs.getString(5));
+                prop.setCommunity(propRs.getString(6));
+                prop.setCity(propRs.getString(7));
+                prop.setState(propRs.getString(8));
+                prop.setPropName(propRs.getString(9));
+            }
 
-            while (rs.next()){
+            while (aptRs.next()){
                 Apartment apt = aptList.addNewProfile();
-                apt.setAptId(rs.getInt(1));
-                apt.setTenantId(rs.getInt(2));
-                apt.setSize(rs.getInt(3));
-                apt.setBedroom(rs.getInt(4));
-                apt.setBathroom(rs.getInt(5));
-                apt.setType(rs.getString(6));
-                apt.setAvlblDate(rs.getDate(7));
-                apt.setRent(rs.getInt(8));
-                apt.setDetails(rs.getString(9));
-                apt.setLattitude(rs.getString(10));
-                apt.setLongitude(rs.getString(11));
-                apt.setIsLeased(rs.getBoolean(12));
+                apt.setAptId(aptRs.getInt(1));
+                apt.setTenantId(aptRs.getInt(2));
+                apt.setSize(aptRs.getInt(3));
+                apt.setBedroom(aptRs.getInt(4));
+                apt.setBathroom(aptRs.getInt(5));
+                apt.setType(aptRs.getString(6));
+                apt.setAvlblDate(aptRs.getDate(7));
+                apt.setRent(aptRs.getInt(8));
+                apt.setDetails(aptRs.getString(9));
+                apt.setLattitude(aptRs.getString(10));
+                apt.setLongitude(aptRs.getString(11));
+                apt.setIsLeased(aptRs.getBoolean(12));
+                apt.setAptPropId(aptRs.getInt(13));
                 
-                Property prop = new Property();
-                prop.setPropId(rs.getInt(13));
-                
-                //for (Property p : propList.getpropList()){}
+                for (Property p : propList.getPropList()){
+                    if (p.getPropId()==apt.getAptPropId())
+                        apt.setProp(p);
+                }
                 
             }
         }
@@ -218,20 +241,16 @@ public class ListingViewJPanel extends javax.swing.JPanel {
         
         for (Apartment a : aptList.getAptList()) {
             
-            Object[] row = new Object[13];
-            row[0] = a.getAptId();
-            row[1] = a.getTenantId();
-            row[2] = a.getSize();
-            row[3] = a.getBedroom();
-            row[4] = a.getBathroom();
-            row[5] = a.getType();
-            row[6] = a.getAvlblDate();
-            row[7] = a.getRent();
-            row[8] = a.getDetails();
-            row[9] = a.getLattitude();
-            row[10] = a.getLongitude();
-            row[11] = a.isIsLeased();
-            row[12] = a.getProp();
+            Object[] row = new Object[9];
+            row[0] = a;
+            row[1] = a.prop.getPropName();
+            row[2] = a.getType();
+            row[3] = a.prop.getMgtComp();
+            row[4] = a.getSize();
+            row[5] = a.getAvlblDate();
+            row[6] = a.prop.getStreet();
+            row[7] = a.prop.getCommunity();
+            row[8] = a.prop.getCity();
             
             model.addRow(row);
         }
