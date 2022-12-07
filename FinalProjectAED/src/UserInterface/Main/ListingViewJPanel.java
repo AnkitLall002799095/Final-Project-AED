@@ -4,13 +4,13 @@
  */
 package UserInterface.Main;
 
-import Application.Utils.Apartment;
-import Application.Utils.ApartmentDirectory;
+import Business.Apartment.Apartment;
+import Business.Apartment.ApartmentDirectory;
 import Application.Utils.AppSystem;
 import java.sql.*;
 import Application.Utils.Helper;
-import Application.Utils.Property;
-import Application.Utils.PropertyDirectory;
+import Business.Property.Property;
+import Business.Property.PropertyDirectory;
 import javax.swing.*;
 
 /**
@@ -178,8 +178,13 @@ public class ListingViewJPanel extends javax.swing.JPanel {
 
         else {
             
-            workAreaPanel.setRightPanel(new AptDetailsJPanel(workAreaPanel));
+            javax.swing.table.DefaultTableModel model = (javax.swing.table.DefaultTableModel) AptListjTable.getModel();
             
+            for (int i=0;i<selectedRow.length;i++){
+                Apartment apt = (Apartment) model.getValueAt(selectedRow[i], 0);
+                workAreaPanel.setRightPanel(new AptDetailsJPanel(workAreaPanel, apt));
+            }
+
         }
         
     }//GEN-LAST:event_ViewDetailsjButtonActionPerformed

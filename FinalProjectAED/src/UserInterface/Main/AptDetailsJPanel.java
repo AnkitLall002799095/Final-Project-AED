@@ -4,6 +4,8 @@
  */
 package UserInterface.Main;
 
+import Business.Apartment.Apartment;
+import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
 
 /**
@@ -17,10 +19,13 @@ public class AptDetailsJPanel extends javax.swing.JPanel {
      */
     
     WorkAreaContPanel workAreaPanel;
+    Apartment apt;
     
-    public AptDetailsJPanel(WorkAreaContPanel workAreaPanel) {
+    public AptDetailsJPanel(WorkAreaContPanel workAreaPanel, Apartment apt) {
         this.workAreaPanel=workAreaPanel;
+        this.apt=apt;
         initComponents();
+        displayAptDetails();
     }
 
     /**
@@ -269,6 +274,9 @@ public class AptDetailsJPanel extends javax.swing.JPanel {
 
     private void GoBackjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GoBackjButtonActionPerformed
         // TODO add your handling code here:
+        
+        workAreaPanel.setRightPanel(new ListingViewJPanel());
+        
     }//GEN-LAST:event_GoBackjButtonActionPerformed
 
 
@@ -304,4 +312,39 @@ public class AptDetailsJPanel extends javax.swing.JPanel {
     private javax.swing.JButton BookAptjButton;
     private javax.swing.JButton GoBackjButton;
     // End of variables declaration//GEN-END:variables
+    
+    public void displayAptDetails(){
+        
+        SimpleDateFormat dFormatView = new SimpleDateFormat("MM/dd/yyyy");
+        
+        AptNoTextField.setText (Integer.toString(apt.getAptId()));
+        AptBuildingTextField.setText(apt.prop.getPropName());
+        AptSizeTextField.setText(Integer.toString(apt.getSize()));
+        AptBedroomsTextField.setText(Integer.toString(apt.getBedroom()));
+        AptBathroomsTextField.setText(Integer.toString(apt.getBathroom()));
+        AptTypeTextField.setText(apt.getType());
+        AptAvlblDateTextField.setText(dFormatView.format(apt.getAvlblDate()));
+        AptRentTextField.setText(Integer.toString(apt.getRent()));
+        AptDetailsTextField.setText(apt.getDetails());
+        AptStreetTextField.setText(apt.prop.getStreet());
+        AptCommTextField.setText(apt.prop.getCommunity());
+        AptCityTextField.setText(apt.prop.getCity());
+        AptStateTextField.setText(apt.prop.getState());
+        
+        AptNoTextField.setEditable(false);
+        AptBuildingTextField.setEditable(false);
+        AptSizeTextField.setEditable(false);
+        AptBedroomsTextField.setEditable(false);
+        AptBathroomsTextField.setEditable(false);
+        AptTypeTextField.setEditable(false);
+        AptAvlblDateTextField.setEditable(false);
+        AptRentTextField.setEditable(false);
+        AptDetailsTextField.setEditable(false);
+        AptStreetTextField.setEditable(false);
+        AptCommTextField.setEditable(false);
+        AptCityTextField.setEditable(false);
+        AptStateTextField.setEditable(false);
+        
+    }
+    
 }
