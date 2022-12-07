@@ -21,8 +21,8 @@ public class WorkAreaContPanel extends javax.swing.JPanel {
     public WorkAreaContPanel() {
         setBounds(0, 0, 1040, 700);
         initComponents();
-        setDefaultPanelViews();
-        AppSystem.workAreaPanel = this;                
+        AppSystem.workAreaPanel = this;
+        setDefaultPanelViews();                        
     }
 
     /**
@@ -52,7 +52,7 @@ public class WorkAreaContPanel extends javax.swing.JPanel {
 
     private void setDefaultPanelViews() {
         jSplitPane1.setLeftComponent(new CompanyEmployeeLeftPanel());
-        jSplitPane1.setRightComponent(new ApplicationsListing(this));
+        jSplitPane1.setRightComponent(new ApplicationsListing());
     }
     
     public void setLeftPanel(JPanel panel) {
