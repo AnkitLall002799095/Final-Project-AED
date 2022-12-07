@@ -17,6 +17,7 @@ public class Property {
     private String community;
     private String city;
     private String state;
+    private String propName;
 
     public int getPropId() {
         return propId;
@@ -80,6 +81,14 @@ public class Property {
 
     public void setState(String state) {
         this.state = state;
+    }
+
+    public String getPropName() {
+        return propName;
+    }
+
+    public void setPropName(String propName) {
+        this.propName = propName;
     }
     
 }

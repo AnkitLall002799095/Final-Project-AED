@@ -24,6 +24,7 @@ public class Apartment {
     private String lattitude;
     private String longitude;
     private boolean isLeased;
+    private int aptPropId;
     public Property prop;
 
     public int getAptId() {
@@ -121,6 +122,14 @@ public class Apartment {
     public void setIsLeased(boolean isLeased) {
         this.isLeased = isLeased;
     }
+
+    public int getAptPropId() {
+        return aptPropId;
+    }
+
+    public void setAptPropId(int aptPropId) {
+        this.aptPropId = aptPropId;
+    }
     
     public Property getProp() {
         return prop;
@@ -128,6 +137,11 @@ public class Apartment {
 
     public void setProp(Property prop) {
         this.prop = prop;
+    }
+    
+    @Override
+    public String toString(){
+        return Integer.toString(aptId);
     }
     
 }
