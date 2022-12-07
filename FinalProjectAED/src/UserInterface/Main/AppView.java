@@ -4,6 +4,7 @@
  */
 package UserInterface.Main;
 
+import Application.Utils.AppSystem;
 import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -22,6 +23,7 @@ public class AppView extends javax.swing.JFrame {
      */
     public AppView() {
         createGUI();
+        new AppSystem(this);
     }
 
     /**
@@ -79,7 +81,7 @@ public class AppView extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AppView().setVisible(true);
+                new AppView().setVisible(true);                
             }
         });
     }
@@ -100,7 +102,7 @@ public class AppView extends javax.swing.JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(0, 0, 1040, 750);
 		
-		setView(new TestPanel());
+		setView(new WorkAreaContPanel());
 	}
         
         	/**
