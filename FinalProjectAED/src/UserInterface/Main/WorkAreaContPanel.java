@@ -4,9 +4,12 @@
  */
 package UserInterface.Main;
 
+import UserInterface.User.UserLeftPanel;
+import UserInterface.User.ListingViewJPanel;
 import Application.Utils.AppSystem;
 import UserInterface.ManagementCompany.ApplicationsListingMgtComp;
 import UserInterface.ManagementCompany.CompanyEmployeeLeftPanel;
+import UserInterface.User.UserDefaultJPanel;
 import javax.swing.JPanel;
 
 /**
@@ -51,6 +54,8 @@ public class WorkAreaContPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void setDefaultPanelViews() {
+        jSplitPane1.setLeftComponent(new UserLeftPanel());
+        jSplitPane1.setRightComponent(new UserDefaultJPanel());
         jSplitPane1.setLeftComponent(new CompanyEmployeeLeftPanel());
         jSplitPane1.setRightComponent(new ApplicationsListingMgtComp());
     }

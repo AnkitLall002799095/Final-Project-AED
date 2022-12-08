@@ -13,7 +13,11 @@ public class UserDefaultJPanel extends javax.swing.JPanel {
     /**
      * Creates new form UserDefaultJPanel
      */
+    
+    public static int requestCounter;
+    
     public UserDefaultJPanel() {
+        requestCounter=1;
         initComponents();
     }
 

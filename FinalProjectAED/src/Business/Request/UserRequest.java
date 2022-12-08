@@ -18,7 +18,7 @@ public class UserRequest {
     private int mgmtId;
     private String requestType;
     private String status;
-    private Date lastMdfdDate;
+    private String lastMdfdDate;
     private int userId;
 
     public int getRequestId() {
@@ -69,11 +69,11 @@ public class UserRequest {
         this.status = status;
     }
 
-    public Date getLastMdfdDate() {
+    public String getLastMdfdDate() {
         return lastMdfdDate;
     }
 
-    public void setLastMdfdDate(Date lastMdfdDate) {
+    public void setLastMdfdDate(String lastMdfdDate) {
         this.lastMdfdDate = lastMdfdDate;
     }
 
