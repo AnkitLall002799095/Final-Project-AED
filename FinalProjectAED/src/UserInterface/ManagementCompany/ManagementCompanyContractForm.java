@@ -446,6 +446,9 @@ public class ManagementCompanyContractForm extends javax.swing.JPanel implements
                 "management company",
                 0,
                 0,
+                0,
+                "",
+                "",
                 0
         );
         

@@ -5,8 +5,10 @@
 package UserInterface.ManagementCompany;
 
 import Application.Utils.AppSystem;
+import Business.ContractApplication.ContractApplication;
 import Business.ContractApplication.ContractApplicationCatalog;
 import UserInterface.Main.WorkAreaContPanel;
+import java.util.ArrayList;
 
 /**
  *
@@ -15,6 +17,7 @@ import UserInterface.Main.WorkAreaContPanel;
 public class ApplicationsListingMgtComp extends javax.swing.JPanel {
 
     public WorkAreaContPanel workAreaPanel;
+    ArrayList<ContractApplication> contractApplicationCatalog;
     
     /**
      * Creates new form ApplicationsListing
@@ -28,30 +31,28 @@ public class ApplicationsListingMgtComp extends javax.swing.JPanel {
     
     public void generateTableData() {
         AppSystem.contractApplicationCatalog.getContracts(1);
+        contractApplicationCatalog = AppSystem.contractApplicationCatalog.getContractApplicationCatalog();
+        populateTable();
     }
     
-//    public void populateTable(){
-//        
-//        javax.swing.table.DefaultTableModel model = (javax.swing.table.DefaultTableModel) AptListjTable.getModel();
-//        model.setRowCount(0);
-//        
-//        for (Apartment a : aptList.getAptList()) {
-//            
-//            Object[] row = new Object[9];
-//            row[0] = a;
-//            row[1] = a.prop.getPropName();
-//            row[2] = a.getType();
-//            row[3] = a.prop.getMgtComp();
-//            row[4] = a.getSize();
-//            row[5] = a.getAvlblDate();
-//            row[6] = a.prop.getStreet();
-//            row[7] = a.prop.getCommunity();
-//            row[8] = a.prop.getCity();
-//            
-//            model.addRow(row);
-//        }
-//            
-//    }
+    public void populateTable(){
+        
+        javax.swing.table.DefaultTableModel model = (javax.swing.table.DefaultTableModel) jTable1.getModel();
+        model.setRowCount(0);
+        
+        for (ContractApplication contract : contractApplicationCatalog) {
+            
+            Object[] row = new Object[5];
+            row[0] = contract.getAppId();
+            row[1] = contract.getAptNum();
+            row[2] = contract.getCommunity();
+            row[3] = contract.getCity();
+            row[4] = contract.getAppStatus();
+            
+            model.addRow(row);
+        }
+            
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.

@@ -12,6 +12,7 @@ import Business.Property.PropertyDirectory;
 import Business.Request.UserRequest;
 import Business.Request.UserRequestDirectory;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.Statement;
 import java.util.HashMap;
@@ -20,6 +21,7 @@ import javax.swing.JOptionPane;
 import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -62,46 +64,46 @@ public class DatabaseUtils {
         }
     }
     
-    public static ArrayList<HashMap<String, Object>> getContractApplications(int id) {
-        ArrayList<HashMap<String, Object>> results = new ArrayList<>();
+    public static ArrayList<ContractApplication> getContractApplications(int id) {
+        ArrayList<ContractApplication> contracts = new ArrayList<>();
         try {
             Connection dbConn = (Connection) DriverManager.getConnection("jdbc:mysql://aeddatabase.cvxm5l9d0hm0.us-east-1.rds.amazonaws.com:3306/aedfinalproject", "admin", "password");
             Statement stmt = dbConn.createStatement();
             String query = "SELECT * FROM aedfinalproject.contract_application where mgt_comp_id="+id;
             ResultSet res = stmt.executeQuery(query);            
             while(res.next()) {
-                 HashMap<String, Object> result = new HashMap<>(){
-                     {                         
-                        put("aptId", res.getInt("app_id"));
-                        put("aptNum", res.getInt("apt_num"));
-                        put("propId", res.getString("prop_id"));
-                        put("propName", res.getString("prop_name"));
-                        put("date", Helper.getDate(res.getString("start_date")));
-                        put("street", res.getString("street"));
-                        put("community", res.getString("community"));
-                        put("city", res.getString("city"));
-                        put("state", res.getString("state"));
-                        put("images", Helper.convertStringToArr(res.getString("prop_images")));
-                        put("type", res.getString("apt_type"));
-                        put("roomCount", res.getInt("room_count"));
-                        put("bathCount", res.getInt("bath_count"));
-                        put("features", Helper.convertStringToArr(res.getString("features")));
-                        put("availability", Helper.getDate(res.getString("avl_date")));
-                        put("utilities", Helper.convertStringToArr(res.getString("utilities")));
-                        put("managementCompanyId", res.getString("mgt_comp_id"));
-                        put("managementCompany", res.getString("mgt_comp"));
-                        put("status", res.getString("app_status"));
-                        put("appOwner", res.getString("app_owner"));
-                     }
-                 };
+                ContractApplication contract = new ContractApplication(
+                    res.getInt("apt_num"), 
+                    res.getString("prop_name"), 
+                    Helper.getDate(res.getString("start_date")), 
+                    res.getString("street"), 
+                    res.getString("community"), 
+                    res.getString("city"), 
+                    res.getString("state"), 
+                    res.getString("apt_type"), 
+                    res.getInt("room_count"), 
+                    res.getInt("bath_count"),
+                    Helper.convertStringToArr(res.getString("features")),
+                    res.getDouble("sqft"),
+                    Helper.getDate(res.getString("avl_date")),
+                    Helper.convertStringToArr(res.getString("utilities")), 
+                    Helper.convertStringToArr(res.getString("prop_images")),
+                    res.getString("mgt_comp"),
+                    res.getInt("app_id"),
+                    res.getInt("prop_id"),
+                    res.getInt("mgt_comp_id"),
+                    res.getString("app_status"),
+                    res.getString("app_owner"),
+                    res.getInt("app_id")
+                );
                  
-                 results.add(result);
+                 contracts.add(contract);
             }              
         }catch(Exception exception) {
             System.out.println(exception);
         }
         
-        return results;
+        return contracts;
     }
     
         public static PropertyDirectory getPropListFromDB(){

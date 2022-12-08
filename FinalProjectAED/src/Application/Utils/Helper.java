@@ -28,6 +28,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.Arrays;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 
 /**
  *
@@ -177,13 +178,13 @@ public class Helper {
     }
     
         // Function to convert day, month, year values to Date Object.
-    public static LocalDate getDate(String date) {
+    public static Date getDate(String date) {
     	
 //    	String dateInString = day+"-"+month+"-"+year;
 //    	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d-MMMM-yyyy", Locale.ENGLISH);
 //    	LocalDate date = LocalDate.parse(dateInString, formatter);
 //    	String d = getFormattedDate(date);
-    	return LocalDate.now();
+    	return new Date();
     }
     
         // Convert date object to formatted string. 
