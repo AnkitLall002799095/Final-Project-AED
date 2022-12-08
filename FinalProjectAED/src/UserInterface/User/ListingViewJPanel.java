@@ -7,6 +7,7 @@ package UserInterface.User;
 import Business.Apartment.Apartment;
 import Business.Apartment.ApartmentDirectory;
 import Application.Utils.AppSystem;
+import Application.Utils.DatabaseUtils;
 import java.sql.*;
 import Application.Utils.Helper;
 import Business.Property.Property;
@@ -44,9 +45,9 @@ public class ListingViewJPanel extends javax.swing.JPanel {
     public ListingViewJPanel(WorkAreaContPanel workAreaPanel) {
         
         this.workAreaPanel=workAreaPanel;
-        aptList = Helper.getAptListFromDB();
-        propList = Helper.getPropListFromDB();
-        reqList = Helper.getRequestListFromDB();
+        aptList = DatabaseUtils.getAptListFromDB();
+        propList = DatabaseUtils.getPropListFromDB();
+        reqList = DatabaseUtils.getRequestListFromDB();
         
         initComponents();        
         populateListingTable();
@@ -275,7 +276,7 @@ public class ListingViewJPanel extends javax.swing.JPanel {
             
             for (int i=0;i<selectedRow.length;i++){
                 Apartment apt = (Apartment) model.getValueAt(selectedRow[i], 0);
-                workAreaPanel.setRightPanel(new AptDetailsJPanel(workAreaPanel, apt));
+                workAreaPanel.setRightPanel(new AptDetailsJPanel(workAreaPanel, apt, reqList));
             }
 
         }

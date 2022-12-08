@@ -30,9 +30,10 @@ public class AptDetailsJPanel extends javax.swing.JPanel {
     Apartment apt;
     UserRequestDirectory reqList;
     
-    public AptDetailsJPanel(WorkAreaContPanel workAreaPanel, Apartment apt) {
+    public AptDetailsJPanel(WorkAreaContPanel workAreaPanel, Apartment apt, UserRequestDirectory reqList) {
         this.workAreaPanel=workAreaPanel;
         this.apt=apt;
+        this.reqList=reqList;
         initComponents();
         displayAptDetails();
     }
@@ -282,9 +283,9 @@ public class AptDetailsJPanel extends javax.swing.JPanel {
 
         UserRequest newReq = reqList.addNewProfile();
         newReq.setRequestId(requestCounter++);
-        newReq.setPropId(myApt.getAptPropId());
-        newReq.setAptId(myApt.getAptId());
-        newReq.setMgmtId(myApt.prop.getMgtComp());
+        newReq.setPropId(apt.getAptPropId());
+        newReq.setAptId(apt.getAptId());
+        newReq.setMgmtId(apt.prop.getMgtComp());
         newReq.setRequestType("Lease");
         newReq.setStatus("Pending");
         newReq.setLastMdfdDate(statusDate);
@@ -295,8 +296,6 @@ public class AptDetailsJPanel extends javax.swing.JPanel {
             Connection conn= Helper.getConnection();
             Statement st = conn.createStatement();
             st.executeUpdate("INSERT INTO `aedfinalproject`.`user_application_request` (`Request_Id`, `Prop_Id`, `Apt_Id`, `Mgmt_Comp_Id`, `Request_Type`, `Status`, `Last_Mdfd_Date`, `User_Id`) VALUES ('" + newReq.getRequestId() + "','" + newReq.getPropId() + "','" + newReq.getAptId() + "','" + newReq.getMgmtId() + "','" + newReq.getRequestType() + "','" + newReq.getStatus() + "','" + newReq.getLastMdfdDate() + "','" + newReq.getUserId()+ "')");
-
-            populateRequestTable();
 
         }
             catch(Exception e){
