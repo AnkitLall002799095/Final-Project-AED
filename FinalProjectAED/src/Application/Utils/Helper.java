@@ -4,6 +4,8 @@
  */
 package Application.Utils;
 
+import Business.Property.Property;
+import Business.Property.PropertyDirectory;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -12,6 +14,9 @@ import java.nio.channels.FileChannel;
 import org.apache.commons.io.FileUtils;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
 
 /**
  *
@@ -58,5 +63,30 @@ public class Helper {
             return null;
         }
     }
+    
+//    public static ArrayList<Property> getPropListFromDB(){
+//        
+//        ArrayList<Property> propArrayList= new ArrayList<Property>();
+//        Connection conn=Helper.getConnection();
+//        Statement st = conn.createStatement();
+//        ResultSet propRs = st.executeQuery("SELECT * FROM aedfinalproject.property_details");
+//
+//        while (propRs.next()){
+//            Property prop= new Property();
+//            propArrayList.add(prop);
+//            prop.setPropId(propRs.getInt(1));
+//            prop.setOwnerId(propRs.getInt(2));
+//            prop.setMgtComp(propRs.getInt(3));
+//            prop.setMgtBroker(propRs.getInt(4));
+//            prop.setStreet(propRs.getString(5));
+//            prop.setCommunity(propRs.getString(6));
+//            prop.setCity(propRs.getString(7));
+//            prop.setState(propRs.getString(8));
+//            prop.setPropName(propRs.getString(9));
+//        }
+//       
+//        return propArrayList;
+//        
+//    }
     
 }
