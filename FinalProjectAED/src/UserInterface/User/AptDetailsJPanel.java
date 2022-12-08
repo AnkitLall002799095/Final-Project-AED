@@ -4,9 +4,16 @@
  */
 package UserInterface.User;
 
+import Application.Utils.Helper;
 import Business.Apartment.Apartment;
+import Business.Request.UserRequest;
+import Business.Request.UserRequestDirectory;
 import UserInterface.Main.WorkAreaContPanel;
+import static UserInterface.User.UserDefaultJPanel.requestCounter;
+import java.sql.Connection;
+import java.sql.Statement;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.swing.JOptionPane;
 
 /**
@@ -21,10 +28,12 @@ public class AptDetailsJPanel extends javax.swing.JPanel {
     
     WorkAreaContPanel workAreaPanel;
     Apartment apt;
+    UserRequestDirectory reqList;
     
-    public AptDetailsJPanel(WorkAreaContPanel workAreaPanel, Apartment apt) {
+    public AptDetailsJPanel(WorkAreaContPanel workAreaPanel, Apartment apt, UserRequestDirectory reqList) {
         this.workAreaPanel=workAreaPanel;
         this.apt=apt;
+        this.reqList=reqList;
         initComponents();
         displayAptDetails();
     }
@@ -267,6 +276,31 @@ public class AptDetailsJPanel extends javax.swing.JPanel {
 
     private void BookAptjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BookAptjButtonActionPerformed
         // TODO add your handling code here:
+        
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = new Date();
+        String statusDate = formatter.format(date);
+
+        UserRequest newReq = reqList.addNewProfile();
+        newReq.setRequestId(requestCounter++);
+        newReq.setPropId(apt.getAptPropId());
+        newReq.setAptId(apt.getAptId());
+        newReq.setMgmtId(apt.prop.getMgtComp());
+        newReq.setRequestType("Lease");
+        newReq.setStatus("Pending");
+        newReq.setLastMdfdDate(statusDate);
+        newReq.setUserId(123);
+
+        try{
+
+            Connection conn= Helper.getConnection();
+            Statement st = conn.createStatement();
+            st.executeUpdate("INSERT INTO `aedfinalproject`.`user_application_request` (`Request_Id`, `Prop_Id`, `Apt_Id`, `Mgmt_Comp_Id`, `Request_Type`, `Status`, `Last_Mdfd_Date`, `User_Id`) VALUES ('" + newReq.getRequestId() + "','" + newReq.getPropId() + "','" + newReq.getAptId() + "','" + newReq.getMgmtId() + "','" + newReq.getRequestType() + "','" + newReq.getStatus() + "','" + newReq.getLastMdfdDate() + "','" + newReq.getUserId()+ "')");
+
+        }
+            catch(Exception e){
+                System.out.println(e);
+            }
         
         JOptionPane.showMessageDialog(BookAptjButton, "Apartment booking request placed!");
         //Send booking request to management company.

@@ -9,8 +9,10 @@ import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Arrays;
 
 /**
  *
@@ -18,7 +20,7 @@ import java.util.HashMap;
  */
 public class ContractApplicationCatalog {
     
-    List<ContractApplication> contractApplicationCatalog;
+    ArrayList<ContractApplication> contractApplicationCatalog;
     
     public void newContract(ContractApplication contract) {
         HashMap<String, Object> contractObj = new HashMap<>(){
@@ -46,38 +48,11 @@ public class ContractApplicationCatalog {
         DatabaseUtils.createNewContract(contractObj);
     }
     
-    public List<ContractApplication> getContractApplications() {
-        
-        return contractApplicationCatalog;
+    public void getContracts(int id) {
+        contractApplicationCatalog = DatabaseUtils.getContractApplications(id);
     }
     
-    public List<ContractApplication> getContracts(int id) {
-        ArrayList<HashMap<String, Object>> results = DatabaseUtils.getContractApplications(id);
-        
-//        for(HashMap<String, Object> result : results) {
-//            contractApplicationCatalog.add(new ContractApplication(
-//                result.get("aptNUm"), 
-//                result.get("propName"), 
-//                result.get("propName")conDate, 
-//                result.get("propName")street, 
-//                result.get("propName")community, 
-//                result.get("propName")city, 
-//                result.get("propName")state, 
-//                result.get("propName")aptType, 
-//                result.get("propName")roomCount, 
-//                result.get("propName")bathCount,
-//                result.get("propName")features,
-//                result.get("propName")sqft,
-//                result.get("propName")availability,
-//                result.get("propName")utilities, 
-//                result.get("propName")filePaths,
-//                "management company",
-//                0,
-//                0,
-//                0
-//            ));
-//        }
-        
+    public ArrayList<ContractApplication> getContractApplicationCatalog() {
         return contractApplicationCatalog;
     }
 }

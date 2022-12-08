@@ -4,6 +4,12 @@
  */
 package Application.Utils;
 
+import Business.Apartment.Apartment;
+import Business.Apartment.ApartmentDirectory;
+import Business.Property.Property;
+import Business.Property.PropertyDirectory;
+import Business.Request.UserRequest;
+import Business.Request.UserRequestDirectory;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -12,6 +18,10 @@ import java.nio.channels.FileChannel;
 import org.apache.commons.io.FileUtils;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
@@ -67,7 +77,7 @@ public class Helper {
             return null;
         }
     }
-    
+     
     public static String validateInput(String value, String type) {   
         String msg = "";
     	switch(type) {
