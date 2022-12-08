@@ -5,24 +5,53 @@
 package UserInterface.ManagementCompany;
 
 import Application.Utils.AppSystem;
+import Business.ContractApplication.ContractApplicationCatalog;
 import UserInterface.Main.WorkAreaContPanel;
 
 /**
  *
  * @author ankitlall
  */
-public class ApplicationsListing extends javax.swing.JPanel {
+public class ApplicationsListingMgtComp extends javax.swing.JPanel {
 
     public WorkAreaContPanel workAreaPanel;
     
     /**
      * Creates new form ApplicationsListing
      */
-    public ApplicationsListing() {
+    public ApplicationsListingMgtComp() {
         this.workAreaPanel = AppSystem.workAreaPanel;
         setBounds(0, 0, 810, 700);
         initComponents();
+        generateTableData();
     }
+    
+    public void generateTableData() {
+        AppSystem.contractApplicationCatalog.getContracts(1);
+    }
+    
+//    public void populateTable(){
+//        
+//        javax.swing.table.DefaultTableModel model = (javax.swing.table.DefaultTableModel) AptListjTable.getModel();
+//        model.setRowCount(0);
+//        
+//        for (Apartment a : aptList.getAptList()) {
+//            
+//            Object[] row = new Object[9];
+//            row[0] = a;
+//            row[1] = a.prop.getPropName();
+//            row[2] = a.getType();
+//            row[3] = a.prop.getMgtComp();
+//            row[4] = a.getSize();
+//            row[5] = a.getAvlblDate();
+//            row[6] = a.prop.getStreet();
+//            row[7] = a.prop.getCommunity();
+//            row[8] = a.prop.getCity();
+//            
+//            model.addRow(row);
+//        }
+//            
+//    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -50,15 +79,23 @@ public class ApplicationsListing extends javax.swing.JPanel {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Application Id", "Apartment Number", "Community", "City", "Status"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         jLabel2.setText("Search As:");

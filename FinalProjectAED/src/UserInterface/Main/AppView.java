@@ -22,8 +22,8 @@ public class AppView extends javax.swing.JFrame {
      * Creates new form AppView
      */
     public AppView() {
-        createGUI();
         new AppSystem(this);
+        createGUI();        
     }
 
     /**
@@ -101,7 +101,7 @@ public class AppView extends javax.swing.JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(0, 0, 1040, 750);
 		
-//		setView();
+		setView(new WorkAreaContPanel());
 	}
         
     /**
