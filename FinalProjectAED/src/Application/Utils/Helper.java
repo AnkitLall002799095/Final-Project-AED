@@ -8,6 +8,8 @@ import Business.Apartment.Apartment;
 import Business.Apartment.ApartmentDirectory;
 import Business.Property.Property;
 import Business.Property.PropertyDirectory;
+import Business.Request.UserRequest;
+import Business.Request.UserRequestDirectory;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -18,6 +20,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 /**
@@ -132,6 +135,35 @@ public class Helper {
             System.out.println(e);
             return null;
         }
-    }   
+    }
+    
+    public static UserRequestDirectory getRequestListFromDB(){
+        
+        try{
+            UserRequestDirectory reqListFromDB = new UserRequestDirectory();
+            Connection conn= Helper.getConnection();
+            Statement st = conn.createStatement();
+            ResultSet reqRs = st.executeQuery("SELECT * FROM aedfinalproject.user_application_request");
+            
+            SimpleDateFormat dFormatView = new SimpleDateFormat("yyyy-MM-dd");
+            
+            while (reqRs.next()){
+                UserRequest req = reqListFromDB.addNewProfile();
+                req.setRequestId(reqRs.getInt(1));
+                req.setPropId(reqRs.getInt(2));
+                req.setAptId(reqRs.getInt(3));
+                req.setMgmtId(reqRs.getInt(4));
+                req.setRequestType(reqRs.getString(5));
+                req.setStatus(reqRs.getString(6));
+                req.setLastMdfdDate(dFormatView.format(reqRs.getDate(7)));
+                
+            }
+            return reqListFromDB;
+        }
+        catch(Exception e){
+            System.out.println(e);
+            return null;
+        }
+    } 
     
 }

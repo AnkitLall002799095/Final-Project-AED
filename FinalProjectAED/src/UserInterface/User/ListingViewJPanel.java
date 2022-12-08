@@ -14,6 +14,7 @@ import Business.Property.PropertyDirectory;
 import Business.Request.UserRequest;
 import Business.Request.UserRequestDirectory;
 import UserInterface.Main.WorkAreaContPanel;
+import static UserInterface.User.UserDefaultJPanel.requestCounter;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -41,11 +42,15 @@ public class ListingViewJPanel extends javax.swing.JPanel {
     }
     
     public ListingViewJPanel(WorkAreaContPanel workAreaPanel) {
+        
         this.workAreaPanel=workAreaPanel;
         aptList = Helper.getAptListFromDB();
         propList = Helper.getPropListFromDB();
+        reqList = Helper.getRequestListFromDB();
+        
         initComponents();        
-        populateTable();
+        populateListingTable();
+        populateRequestTable();
     }
 
     /**
@@ -64,7 +69,7 @@ public class ListingViewJPanel extends javax.swing.JPanel {
         BookAptjButton = new javax.swing.JButton();
         ViewDetailsjButton = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        UserRequestjTable = new javax.swing.JTable();
         RequestListjLabel = new javax.swing.JLabel();
 
         WelcomjLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -111,7 +116,7 @@ public class ListingViewJPanel extends javax.swing.JPanel {
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        UserRequestjTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null},
@@ -137,7 +142,7 @@ public class ListingViewJPanel extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(jTable1);
+        jScrollPane2.setViewportView(UserRequestjTable);
 
         RequestListjLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         RequestListjLabel.setText("My requests:-");
@@ -216,12 +221,12 @@ public class ListingViewJPanel extends javax.swing.JPanel {
                     myApt.setProp(p);
             }
             
-            SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
             Date date = new Date();
             String statusDate = formatter.format(date);
-
+            
             UserRequest newReq = reqList.addNewProfile();
-            newReq.setRequestId(12);
+            newReq.setRequestId(requestCounter++);
             newReq.setPropId(myApt.getAptPropId());
             newReq.setAptId(myApt.getAptId());
             newReq.setMgmtId(myApt.prop.getMgtComp());
@@ -229,6 +234,19 @@ public class ListingViewJPanel extends javax.swing.JPanel {
             newReq.setStatus("Pending");
             newReq.setLastMdfdDate(statusDate);
             newReq.setUserId(123);
+            
+            try{
+                
+                Connection conn= Helper.getConnection();
+                Statement st = conn.createStatement();
+                st.executeUpdate("INSERT INTO `aedfinalproject`.`user_application_request` (`Request_Id`, `Prop_Id`, `Apt_Id`, `Mgmt_Comp_Id`, `Request_Type`, `Status`, `Last_Mdfd_Date`, `User_Id`) VALUES ('" + newReq.getRequestId() + "','" + newReq.getPropId() + "','" + newReq.getAptId() + "','" + newReq.getMgmtId() + "','" + newReq.getRequestType() + "','" + newReq.getStatus() + "','" + newReq.getLastMdfdDate() + "','" + newReq.getUserId()+ "')");
+                
+                populateRequestTable();
+                
+            }
+            catch(Exception e){
+                System.out.println(e);
+            }
             
             JOptionPane.showMessageDialog(BookAptjButton, "Apartment booking request placed!");
             return;
@@ -264,7 +282,7 @@ public class ListingViewJPanel extends javax.swing.JPanel {
         
     }//GEN-LAST:event_ViewDetailsjButtonActionPerformed
 
-    public void populateTable(){
+    public void populateListingTable(){
         
         javax.swing.table.DefaultTableModel model = (javax.swing.table.DefaultTableModel) AptListjTable.getModel();
         model.setRowCount(0);
@@ -286,15 +304,37 @@ public class ListingViewJPanel extends javax.swing.JPanel {
         }
             
     }
+    
+    public void populateRequestTable(){
+        
+        javax.swing.table.DefaultTableModel model = (javax.swing.table.DefaultTableModel) UserRequestjTable.getModel();
+        model.setRowCount(0);
+        
+        for (UserRequest u : reqList.getReqList()){
+            
+            Object[] row = new Object[7];
+            row[0] = u.getRequestId();
+            row[1] = u.getPropId();
+            row[2] = u.getAptId();
+            row[3] = u.getMgmtId();
+            row[4] = u.getRequestType();
+            row[5] = u.getStatus();
+            row[6] = u.getLastMdfdDate();
+            
+            model.addRow(row);
+            
+        }
+        
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel AptListjLabel;
     private javax.swing.JTable AptListjTable;
     private javax.swing.JButton BookAptjButton;
     private javax.swing.JLabel RequestListjLabel;
+    private javax.swing.JTable UserRequestjTable;
     private javax.swing.JButton ViewDetailsjButton;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }
