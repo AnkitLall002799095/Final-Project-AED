@@ -12,7 +12,13 @@ import Application.Utils.Helper;
 import Business.Property.Property;
 import Business.Property.PropertyDirectory;
 import Business.Request.UserRequest;
+import Business.Request.UserRequestDirectory;
 import UserInterface.Main.WorkAreaContPanel;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import javax.swing.*;
 
 /**
@@ -25,8 +31,9 @@ public class ListingViewJPanel extends javax.swing.JPanel {
      * Creates new form ListingViewJPanel
      */
     WorkAreaContPanel workAreaPanel;
-    ApartmentDirectory aptList;
-    PropertyDirectory propList;
+    ApartmentDirectory aptList= new ApartmentDirectory();;
+    PropertyDirectory propList= new PropertyDirectory();
+    UserRequestDirectory reqList = new UserRequestDirectory();
     
     public static void main(String[] args) {
         
@@ -35,10 +42,9 @@ public class ListingViewJPanel extends javax.swing.JPanel {
     
     public ListingViewJPanel(WorkAreaContPanel workAreaPanel) {
         this.workAreaPanel=workAreaPanel;
-        aptList = new ApartmentDirectory();
-        propList = new PropertyDirectory();
+        aptList = Helper.getAptListFromDB();
+        propList = Helper.getPropListFromDB();
         initComponents();        
-        getApartmentListFromDB();
         populateTable();
     }
 
@@ -205,21 +211,24 @@ public class ListingViewJPanel extends javax.swing.JPanel {
                 myApt = (Apartment) model.getValueAt(selectedRow[i], 0);
             }
             
-            Statement st3 = conn.createStatement();
-            ResultSet propRs = st3.executeQuery("SELECT * FROM aedfinalproject.property_details");
-            Property myProp = new Property();
-            
             for (Property p : propList.getPropList()){
-                    if (p.getPropId()==apt.getAptPropId())
-                        apt.setProp(p);
-                }
+                if (p.getPropId()==myApt.getAptPropId())
+                    myApt.setProp(p);
+            }
             
-            UserRequest newReq = new UserRequest();
+            SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+            Date date = new Date();
+            String statusDate = formatter.format(date);
+
+            UserRequest newReq = reqList.addNewProfile();
             newReq.setRequestId(12);
-            newReq.setPropId(PROPERTIES);
+            newReq.setPropId(myApt.getAptPropId());
             newReq.setAptId(myApt.getAptId());
-            newReq.
-            
+            newReq.setMgmtId(myApt.prop.getMgtComp());
+            newReq.setRequestType("Lease");
+            newReq.setStatus("Pending");
+            newReq.setLastMdfdDate(statusDate);
+            newReq.setUserId(123);
             
             JOptionPane.showMessageDialog(BookAptjButton, "Apartment booking request placed!");
             return;
@@ -255,59 +264,6 @@ public class ListingViewJPanel extends javax.swing.JPanel {
         
     }//GEN-LAST:event_ViewDetailsjButtonActionPerformed
 
-    public void getApartmentListFromDB(){
-        try{
-            
-            propList = Helper.getPropListFromDB();
-            
-            Connection conn = Helper.getConnection();
-            Statement st = conn.createStatement();
-            //Statement st2 = conn.createStatement();
-            ResultSet aptRs = st.executeQuery("SELECT * FROM aedfinalproject.apartment_details");
-            //ResultSet propRs = st2.executeQuery("SELECT * FROM aedfinalproject.property_details");
-            
-//            while (propRs.next()){
-//                Property prop = propList.addNewProfile();
-//                prop.setPropId(propRs.getInt(1));
-//                prop.setOwnerId(propRs.getInt(2));
-//                prop.setMgtComp(propRs.getInt(3));
-//                prop.setMgtBroker(propRs.getInt(4));
-//                prop.setStreet(propRs.getString(5));
-//                prop.setCommunity(propRs.getString(6));
-//                prop.setCity(propRs.getString(7));
-//                prop.setState(propRs.getString(8));
-//                prop.setPropName(propRs.getString(9));
-//            }
-
-            while (aptRs.next()){
-                Apartment apt = aptList.addNewProfile();
-                apt.setAptId(aptRs.getInt(1));
-                apt.setTenantId(aptRs.getInt(2));
-                apt.setSize(aptRs.getInt(3));
-                apt.setBedroom(aptRs.getInt(4));
-                apt.setBathroom(aptRs.getInt(5));
-                apt.setType(aptRs.getString(6));
-                apt.setAvlblDate(aptRs.getDate(7));
-                apt.setRent(aptRs.getInt(8));
-                apt.setDetails(aptRs.getString(9));
-                apt.setLattitude(aptRs.getString(10));
-                apt.setLongitude(aptRs.getString(11));
-                apt.setIsLeased(aptRs.getBoolean(12));
-                apt.setAptPropId(aptRs.getInt(13));
-                
-                for (Property p : propList.getPropList()){
-                    if (p.getPropId()==apt.getAptPropId())
-                        apt.setProp(p);
-                }
-                
-            }
-        }
-        catch(Exception e){
-            System.out.println(e);
-        }
-            
-    }
-    
     public void populateTable(){
         
         javax.swing.table.DefaultTableModel model = (javax.swing.table.DefaultTableModel) AptListjTable.getModel();
