@@ -22,13 +22,21 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.Arrays;
+import java.time.format.DateTimeFormatter;
 
 /**
  *
  * @author Bhawna Bassarmalani <your.name at your.org>
  */
 public class Helper {
-        
+    
+    public static String[] fileTypesAllowed = {"png", "jpg"};
+    
 //    public static void copyFile(File sourceFile, File destFile) {
     public static String copyFile(String filePath) {
         String relFilePath = "";
@@ -165,5 +173,118 @@ public class Helper {
             return null;
         }
     } 
+    public static String validateInput(String value, String type) {   
+        String msg = "";
+    	switch(type) {
+    		// First & last Name
+    		case "name":
+    			if(value.length() < 3 || value.length() > 30) {
+    				msg="This field must contain 3-30 letters.";
+    			}
+    			
+    			if(!value.matches("^[a-zA-Z \\-\\.\\']*$")) {
+    				msg="This field must only contain letters (a-z).";
+    			}
+    			
+    			break;
+    		//  Age
+    		case "age":
+    			if(!value.matches("[0-9]+")) {
+    				msg="This field must only contain digits (0-9).";
+    				break;
+    			}
+    			
+    			if(value.length() > 3 || (Integer.parseInt(value) < 18 || Integer.parseInt(value) > 80)) {
+    				msg="Age must be in the range of 18-80.";
+    			}
+    			break;
+    		// Phone number
+    		case "phNum":
+    			if(!value.matches("[0-9]+")) {
+    				msg="Phone Number field must only contain digits (0-9).";
+    			}
+    			
+    			if(value.length() != 10) {
+    				msg="Phone Number must have 10 digits.";
+    			}
+    			break;
+    		// Email
+    		case "email":   
+    			String regex = "^(.+)@(.+)$";
+    			 
+    			Pattern pattern = Pattern.compile(regex);
+    			Matcher matcher = pattern.matcher(value);
+    			if(!matcher.matches()) {
+    				msg="Incorrect email address.";
+    			}
+    			
+    			break;
+    		// Password
+    		case "password":   
+    			if(value.length() < 8 && value.length() > 30) {
+    				msg="Password must be 8 characters long.";
+    			}
+    			
+    			if(!value.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&-+=()])(?=\\S+$).{8,30}$")) {
+    				msg="Password field must only contain at least 1 digit, atleast one upper case letter and atleast one special character.";
+    			}
+    			
+    			break;
+    		case "image":
+    			if(value == "No file selected") {
+    				msg="Profile picture not selected.";
+    			}
+    			if(!Arrays.asList(fileTypesAllowed).contains(new File(value).toString().substring(new File(value).toString().lastIndexOf('.') + 1))) {
+    				msg="Profile picture must be png, jpg format.";	
+    			}
+                case "aptNum":
+                case "roomCount":
+                case "bathCount":
+                        if(!value.matches("[0-9]+")) {
+    				msg="This field must only contain digits (0-9).";
+    				break;
+    			}
+                case "propName":
+                case "street":
+                case "state":
+                case "city":
+                case "community":  
+                case "aptType":
+                        if(value.length() < 3 || value.length() > 40) {
+    				msg="Street field must contain 10-30 letters.";
+    			}
+    			
+    			if(!value.matches("^[a-zA-Z[0-9] \\-\\.\\,\\']*$")) {
+    				msg="Street field must only contain letters (a-z) & some special characters.";
+    			}
+                        break;
+                
+    		default: 
+    			System.out.println("Unmatched param: " + value);
+    	}
+        
+        return msg;
+    }
+    
+    public static ArrayList<String> convertStringToArr(String str) {
+        String str1 = str.replace("[","");
+        String str2 = str1.replace("]","");
+        return new ArrayList<String>(Arrays.asList(str2.split(",")));
+    }
+    
+        // Function to convert day, month, year values to Date Object.
+    public static LocalDate getDate(String date) {
+    	
+//    	String dateInString = day+"-"+month+"-"+year;
+//    	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d-MMMM-yyyy", Locale.ENGLISH);
+//    	LocalDate date = LocalDate.parse(dateInString, formatter);
+//    	String d = getFormattedDate(date);
+    	return LocalDate.now();
+    }
+    
+        // Convert date object to formatted string. 
+    public static String getFormattedDate(LocalDate date) {
+    	return date.format(DateTimeFormatter.ofPattern("d-MMMM-yy"));
+    }
     
 }
