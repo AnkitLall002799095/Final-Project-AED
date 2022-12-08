@@ -5,7 +5,7 @@
 package UserInterface.Main;
 
 import Application.Utils.AppSystem;
-import UserInterface.ManagementCompany.ApplicationsListing;
+import UserInterface.ManagementCompany.ApplicationsListingMgtComp;
 import UserInterface.ManagementCompany.CompanyEmployeeLeftPanel;
 import javax.swing.JPanel;
 
@@ -52,7 +52,7 @@ public class WorkAreaContPanel extends javax.swing.JPanel {
 
     private void setDefaultPanelViews() {
         jSplitPane1.setLeftComponent(new CompanyEmployeeLeftPanel());
-        jSplitPane1.setRightComponent(new ApplicationsListing());
+        jSplitPane1.setRightComponent(new ApplicationsListingMgtComp());
     }
     
     public void setLeftPanel(JPanel panel) {

@@ -4,6 +4,7 @@
  */
 package Business.ContractApplication;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -13,8 +14,10 @@ import java.util.List;
  */
 public class ContractApplication {
     
+    int aptId;
     int aptNum;
-    int propNum;
+    int propId;
+    String propName;
     Date date;
     String street;
     String community;
@@ -28,10 +31,12 @@ public class ContractApplication {
     Date availability;
     List<String> utilities;
     String appStatus;
+    int managementCompanyId;
     String managementCompany;
-    
-    public ContractApplication(int aptNum, 
-            int propNum, 
+    List<String> images;
+            
+    public ContractApplication(int aptNum,             
+            String propName, 
             Date date, 
             String street, 
             String community, 
@@ -40,12 +45,19 @@ public class ContractApplication {
             String type, 
             int roomCount, 
             int bathCount,
-            List<String> features,
+            ArrayList<String> features,
             Double sqft,
             Date availability,
-            List<String> utilities,
-            String managementCompany) 
+            ArrayList<String> utilities,
+            ArrayList<String> images,            
+            String managementCompany,
+            int aptId,
+            int propId,
+            int managementCompanyId) 
     {
+        this.aptId = aptId;
+        this.propId = propId;
+        this.managementCompanyId = managementCompanyId;
         this.aptNum = aptNum;
         this.appStatus = appStatus;
         this.availability = availability;
@@ -60,7 +72,8 @@ public class ContractApplication {
         this.features = features;
         this.sqft = sqft;
         this.utilities = utilities;
-        this.propNum = propNum;
+        this.propName = propName;
+        this.images = images;
         this.managementCompany = managementCompany;
         
         this.appStatus = "utilityComp";

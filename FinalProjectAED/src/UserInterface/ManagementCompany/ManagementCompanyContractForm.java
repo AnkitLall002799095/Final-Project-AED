@@ -30,12 +30,14 @@ public class ManagementCompanyContractForm extends javax.swing.JPanel implements
     public WorkAreaContPanel workAreaPanel;
     
     private String newFilePath;
-    private List<String> filePaths;
-    private List<String> features;
-    private List<String> utilities;
+    private ArrayList<String> filePaths;
+    private ArrayList<String> features;
+    private ArrayList<String> utilities;
     private String city;
     private String state;
     private String community;
+    
+    private Boolean isValid;
 
     /**
      * Creates new form ManagementCompanyContractForm
@@ -44,6 +46,7 @@ public class ManagementCompanyContractForm extends javax.swing.JPanel implements
         this.workAreaPanel = workAreaPanel;
         filePaths = new ArrayList<String>();
         features = new ArrayList<String>();
+        utilities= new ArrayList<String>();
         setBounds(0, 0, 810, 750);
         initComponents();
     }
@@ -95,6 +98,17 @@ public class ManagementCompanyContractForm extends javax.swing.JPanel implements
         stateField = new javax.swing.JTextField();
         cityField = new javax.swing.JTextField();
         commField = new javax.swing.JTextField();
+        aptNumErr = new javax.swing.JLabel();
+        propNumErr = new javax.swing.JLabel();
+        streetErr = new javax.swing.JLabel();
+        commErr = new javax.swing.JLabel();
+        cityErr = new javax.swing.JLabel();
+        stateErr = new javax.swing.JLabel();
+        imageErr = new javax.swing.JLabel();
+        aptTypeErr = new javax.swing.JLabel();
+        roomCountErr = new javax.swing.JLabel();
+        bathCountErr = new javax.swing.JLabel();
+        sqftErr = new javax.swing.JLabel();
 
         setSize(new java.awt.Dimension(810, 700));
 
@@ -124,7 +138,7 @@ public class ManagementCompanyContractForm extends javax.swing.JPanel implements
 
         jLabel9.setText("State:");
 
-        jLabel10.setText("Type:");
+        jLabel10.setText("Apt Type:");
 
         jLabel11.setText("Property images:");
 
@@ -139,6 +153,12 @@ public class ManagementCompanyContractForm extends javax.swing.JPanel implements
         jLabel16.setText("Availability:");
 
         jLabel17.setText("Utilities Included:");
+
+        aptNumField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                aptNumFieldActionPerformed(evt);
+            }
+        });
 
         jButton1.setText("Choose File");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -190,6 +210,8 @@ public class ManagementCompanyContractForm extends javax.swing.JPanel implements
             }
         });
 
+        sqftErr.setText("jLabel18");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -219,30 +241,50 @@ public class ManagementCompanyContractForm extends javax.swing.JPanel implements
                 .addGap(99, 99, 99)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(utilitiesTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 128, Short.MAX_VALUE)
-                        .addComponent(addUtilities))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(featuresTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(addFeature))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(addFeature))
+                            .addComponent(bathCountField, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(roomCountField, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(typeField, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jButton1)
+                                .addGap(18, 18, 18)
+                                .addComponent(fileName, javax.swing.GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE)
+                                .addGap(18, 18, 18)
+                                .addComponent(addImage)))
                         .addGap(18, 18, 18)
-                        .addComponent(fileName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(70, 70, 70)
-                        .addComponent(addImage))
-                    .addComponent(propNameField)
-                    .addComponent(streetField)
-                    .addComponent(typeField)
-                    .addComponent(roomCountField)
-                    .addComponent(bathCountField)
-                    .addComponent(sqftField)
-                    .addComponent(aptNumField)
-                    .addComponent(cityField)
-                    .addComponent(commField)
-                    .addComponent(stateField))
-                .addGap(238, 238, 238))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(imageErr)
+                            .addComponent(aptTypeErr)
+                            .addComponent(roomCountErr)
+                            .addComponent(bathCountErr))
+                        .addGap(215, 215, 215))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(utilitiesTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 76, Short.MAX_VALUE)
+                                .addComponent(addUtilities))
+                            .addComponent(featuresTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cityField)
+                            .addComponent(commField)
+                            .addComponent(streetField)
+                            .addComponent(propNameField)
+                            .addComponent(aptNumField)
+                            .addComponent(stateField)
+                            .addComponent(sqftField))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(aptNumErr, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(propNumErr)
+                            .addComponent(streetErr)
+                            .addComponent(commErr)
+                            .addComponent(cityErr)
+                            .addComponent(stateErr)
+                            .addComponent(sqftErr))
+                        .addGap(0, 0, Short.MAX_VALUE))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton5)
@@ -260,9 +302,13 @@ public class ManagementCompanyContractForm extends javax.swing.JPanel implements
                         .addGap(18, 18, 18)
                         .addComponent(jLabel3))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(aptNumField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(aptNumField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(aptNumErr))
                         .addGap(18, 18, 18)
-                        .addComponent(propNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(propNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(propNumErr))))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel4)
                 .addGap(18, 18, 18)
@@ -270,37 +316,47 @@ public class ManagementCompanyContractForm extends javax.swing.JPanel implements
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(streetField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(streetField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(streetErr))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(commField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(commField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(commErr))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(cityField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cityField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cityErr))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(stateField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel9))
+                    .addComponent(jLabel9)
+                    .addComponent(stateErr))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
                     .addComponent(jButton1)
                     .addComponent(addImage)
-                    .addComponent(fileName))
+                    .addComponent(fileName)
+                    .addComponent(imageErr))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel10)
-                    .addComponent(typeField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(typeField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(aptTypeErr)))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel12)
-                    .addComponent(roomCountField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(roomCountField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(roomCountErr)))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13)
-                    .addComponent(bathCountField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(bathCountField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bathCountErr))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel14)
@@ -310,7 +366,8 @@ public class ManagementCompanyContractForm extends javax.swing.JPanel implements
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel15)
-                    .addComponent(sqftField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(sqftField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(sqftErr))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel16)
                 .addGap(18, 18, 18)
@@ -350,18 +407,19 @@ public class ManagementCompanyContractForm extends javax.swing.JPanel implements
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
-        SwingUtilities.invokeLater(() -> AppSystem.appViewObj.setView(new ApplicationsListing()));
+        SwingUtilities.invokeLater(() -> AppSystem.workAreaPanel.setRightPanel(new ApplicationsListingMgtComp()));
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
         // TODO add your handling code here:
+//        System.out.println(AppSystem.contractApplicationCatalog);
         int aptNUm = Integer.parseInt(aptNumField.getText());
-        int propName = Integer.parseInt(propNameField.getText());
+        String propName = propNameField.getText();
         String street = streetField.getText();
         String city = cityField.getText();
         String community = commField.getText();
         String state = stateField.getText();
-        String type = typeField.getText();
+        String aptType = typeField.getText();
         int roomCount = Integer.parseInt(roomCountField.getText());
         int bathCount = Integer.parseInt(bathCountField.getText());
         Double sqft = Double.parseDouble(sqftField.getText());
@@ -377,14 +435,18 @@ public class ManagementCompanyContractForm extends javax.swing.JPanel implements
                 community, 
                 city, 
                 state, 
-                type, 
+                aptType, 
                 roomCount, 
                 bathCount,
                 features,
                 sqft,
                 availability,
                 utilities, 
-                ""
+                filePaths,
+                "management company",
+                0,
+                0,
+                0
         );
         
         AppSystem.contractApplicationCatalog.newContract(contract);
@@ -403,11 +465,12 @@ public class ManagementCompanyContractForm extends javax.swing.JPanel implements
         // TODO add your handling code here:
         String filePath = Helper.copyFile(newFilePath);
         
-        if(features.contains(filePath)) {
+        if(filePaths.contains(filePath)) {
             return;
         }
         
-        features.add(filePath);
+        filePaths.add(filePath);
+        fileName.setText("");
     }//GEN-LAST:event_addImageActionPerformed
 
     private void addFeatureActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addFeatureActionPerformed
@@ -416,7 +479,8 @@ public class ManagementCompanyContractForm extends javax.swing.JPanel implements
             return;
         }
         
-        filePaths.add(featuresTextField.getText());
+        features.add(featuresTextField.getText());
+        featuresTextField.setText("");
     }//GEN-LAST:event_addFeatureActionPerformed
 
     private void addUtilitiesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addUtilitiesActionPerformed
@@ -426,11 +490,17 @@ public class ManagementCompanyContractForm extends javax.swing.JPanel implements
         }
         
         utilities.add(utilitiesTextField.getText());
+        utilitiesTextField.setText("");
     }//GEN-LAST:event_addUtilitiesActionPerformed
 
     private void commFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_commFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_commFieldActionPerformed
+
+    private void aptNumFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aptNumFieldActionPerformed
+        // TODO add your handling code here:
+        System.out.println("hello");
+    }//GEN-LAST:event_aptNumFieldActionPerformed
 
     	/**
 	 * Start date comboboxes selection event
@@ -462,12 +532,18 @@ public class ManagementCompanyContractForm extends javax.swing.JPanel implements
     private javax.swing.JButton addFeature;
     private javax.swing.JButton addImage;
     private javax.swing.JButton addUtilities;
+    private javax.swing.JLabel aptNumErr;
     private javax.swing.JTextField aptNumField;
+    private javax.swing.JLabel aptTypeErr;
+    private javax.swing.JLabel bathCountErr;
     private javax.swing.JTextField bathCountField;
+    private javax.swing.JLabel cityErr;
     private javax.swing.JTextField cityField;
+    private javax.swing.JLabel commErr;
     private javax.swing.JTextField commField;
     private javax.swing.JTextField featuresTextField;
     private javax.swing.JLabel fileName;
+    private javax.swing.JLabel imageErr;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
@@ -490,10 +566,15 @@ public class ManagementCompanyContractForm extends javax.swing.JPanel implements
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField propNameField;
+    private javax.swing.JLabel propNumErr;
+    private javax.swing.JLabel roomCountErr;
     private javax.swing.JTextField roomCountField;
     private javax.swing.JButton saveButton;
+    private javax.swing.JLabel sqftErr;
     private javax.swing.JTextField sqftField;
+    private javax.swing.JLabel stateErr;
     private javax.swing.JTextField stateField;
+    private javax.swing.JLabel streetErr;
     private javax.swing.JTextField streetField;
     private javax.swing.JTextField typeField;
     private javax.swing.JTextField utilitiesTextField;
