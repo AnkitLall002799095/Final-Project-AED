@@ -11,6 +11,7 @@ import Business.Property.Property;
 import Business.Property.PropertyDirectory;
 import Business.Request.UserRequest;
 import Business.Request.UserRequestDirectory;
+import Business.Users.Person;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.DriverManager;
@@ -29,6 +30,39 @@ import java.util.List;
  * @author ankitlall
  */
 public class DatabaseUtils {
+    
+    public static Connection getConnection(){
+        try{
+            Connection conn;
+            conn = (Connection) DriverManager.getConnection("jdbc:mysql://aeddatabase.cvxm5l9d0hm0.us-east-1.rds.amazonaws.com:3306/aedfinalproject", "admin", "password");
+            return conn;
+        }
+        catch (Exception e) {
+            System.out.println(e);
+            return null;
+        }
+    }
+    
+    
+    public static void createNewUser(Person person){
+    
+    try{
+
+            Connection conn= getConnection();
+            Statement st = conn.createStatement();
+            st.executeUpdate("INSERT INTO `aedfinalproject`.`user_table` (`Uid`, `UserRole`, `Name`, `DOB`, `Gender`, `Email`, `PhoneNumber`, `Password` , `Street` , `Community` , `City` , `State`) "
+                    + "VALUES ('" + person.getUid() + "','" + person.getUserRole() + "','" + person.getName() + "','" + person.getDob() + "','" + person.getGender() + "','" + person.getEmail() + "','" + person.getPhoneNumber() + "','" + person.getPassword()+ "','" + person.getStreet()+ "','" + person.getCommunity()+ "','" + person.getCity()+ "','" + person.getState()+ "')");
+
+        }
+            catch(Exception e){
+                System.out.println(e);
+            }
+    
+    
+    
+    
+    
+    }
     
     public static void createNewContract(HashMap<String, Object> contract) {
         try {
@@ -110,7 +144,7 @@ public class DatabaseUtils {
         
         try{
             PropertyDirectory propListFromDB = new PropertyDirectory();
-            Connection conn= Helper.getConnection();
+            Connection conn= getConnection();
             Statement st = conn.createStatement();
             ResultSet propRs = st.executeQuery("SELECT * FROM aedfinalproject.property_details");
             
@@ -138,7 +172,7 @@ public class DatabaseUtils {
         
         try{
             ApartmentDirectory aptListFromDB = new ApartmentDirectory();
-            Connection conn= Helper.getConnection();
+            Connection conn= getConnection();
             Statement st = conn.createStatement();
             ResultSet aptRs = st.executeQuery("SELECT * FROM aedfinalproject.apartment_details");
             
@@ -178,7 +212,7 @@ public class DatabaseUtils {
         
         try{
             UserRequestDirectory reqListFromDB = new UserRequestDirectory();
-            Connection conn= Helper.getConnection();
+            Connection conn= getConnection();
             Statement st = conn.createStatement();
             ResultSet reqRs = st.executeQuery("SELECT * FROM aedfinalproject.user_application_request");
             
