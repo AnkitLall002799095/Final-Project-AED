@@ -178,6 +178,29 @@ public class DatabaseUtils {
         }
     }
     
+//    public static ManagementCompanyDirectory getMgmtListFromDB(){
+//        
+//        try{
+//            ManagementCompanyDirectory mgmtListFromDB = new ManagementCompanyDirectory();
+//            Connection conn= Helper.getConnection();
+//            Statement st = conn.createStatement();
+//            ResultSet mgmtRs = st.executeQuery("SELECT * FROM aedfinalproject.management_companies");
+//            
+//            while (mgmtRs.next()){
+//                ManagementCompany mgmt = MgmtListFromDB.addNewProfile();
+//                mgmt.setMgmtId(mgmtRs.getInt(1));
+//                mgmt.setMgmtName(mgmtRs.getString(2));
+//                mgmt.setCity(mgmtRs.getString(7));
+//                mgmt.setState(mgmtRs.getString(8));
+//            }
+//            return mgmtListFromDB;
+//        }
+//        catch(Exception e){
+//            System.out.println(e);
+//            return null;
+//        }
+//    }
+    
     public static UserRequestDirectory getRequestListFromDB(){
         
         try{

@@ -23,7 +23,7 @@ public class AppView extends javax.swing.JFrame {
      */
     public AppView() {
         new AppSystem(this);
-        createGUI();        
+        createGUI();
     }
 
     /**
@@ -100,7 +100,7 @@ public class AppView extends javax.swing.JFrame {
 	private void createGUI() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(0, 0, 1040, 750);
-//		setView();
+		setView(new WorkAreaContPanel());
 	}
         
     /**

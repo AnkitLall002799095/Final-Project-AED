@@ -49,6 +49,7 @@ public class CreateListingRequestJPanel extends javax.swing.JPanel {
         waterList = DatabaseUtils.getWaterListFromDB();
         createPropList = new PropertyDirectory();
         initComponents();
+        populateRequestTable();
         populateMgmtCompCombo();
         populateGasCompCombo();
         populateElecCompCombo();
@@ -336,21 +337,44 @@ public class CreateListingRequestJPanel extends javax.swing.JPanel {
         newReq.setLastMdfdDate(statusDate);
         newReq.setUserId(123);
 
-//        try{
-//
-//            Connection conn= Helper.getConnection();
-//            Statement st = conn.createStatement();
-//            st.executeUpdate("INSERT INTO `aedfinalproject`.`user_application_request` (`Request_Id`, `Prop_Id`, `Apt_Id`, `Mgmt_Comp_Id`, `Request_Type`, `Status`, `Last_Mdfd_Date`, `User_Id`) VALUES ('" + newReq.getRequestId() + "','" + newReq.getPropId() + "','" + newReq.getAptId() + "','" + newReq.getMgmtId() + "','" + newReq.getRequestType() + "','" + newReq.getStatus() + "','" + newReq.getLastMdfdDate() + "','" + newReq.getUserId()+ "')");
-//
-//            populateRequestTable();
-//
-//        }
-//        catch(Exception e){
-//            System.out.println(e);
-//        }
-//
-//        JOptionPane.showMessageDialog(BookAptjButton, "Apartment booking request placed!");
-//        return;
+        createProp.getPropId();
+        createProp.getOwnerId();
+        createProp.getMgtComp();
+        createProp.getStreet();
+        createProp.getCommunity();
+        createProp.getCity();
+        createProp.getState();
+        createProp.getPropName();
+        createProp.electricity.getElectricityId();
+        createProp.water.getWaterId();
+        createProp.gas.getGasId();
+        
+        try{
+
+            Connection conn= Helper.getConnection();
+            Statement st1 = conn.createStatement();
+            st1.executeUpdate("INSERT INTO `aedfinalproject`.`property_details` (`prop_id`, `user_id`, `mgt_comp_id`, `street`, `community`, `city`, `state`, `prop_names`, `elec_comp_id`, `water_comp_id`, `gas_comp_id`) VALUES ('" + createProp.getPropId() + "','" + createProp.getOwnerId() + "','" + createProp.getMgtComp() + "','" + createProp.getStreet() + "','" + createProp.getCommunity() + "','" + createProp.getCity() + "','" + createProp.getState() + "','" + createProp.getPropName() + "','" + createProp.electricity.getElectricityId() + "','" + createProp.water.getWaterId() + "','" + createProp.gas.getGasId() + "')");
+            
+            Statement st2 = conn.createStatement();
+            st2.executeUpdate("INSERT INTO `aedfinalproject`.`user_application_request` (`Request_Id`, `Prop_Id`, `Mgmt_Comp_Id`, `Request_Type`, `Status`, `Last_Mdfd_Date`, `User_Id`) VALUES ('" + newReq.getRequestId() + "','" + newReq.getPropId() + "','" + newReq.getMgmtId() + "','" + newReq.getRequestType() + "','" + newReq.getStatus() + "','" + newReq.getLastMdfdDate() + "','" + newReq.getUserId()+ "')");
+
+            populateRequestTable();
+
+        }
+        catch(Exception e){
+            System.out.println(e);
+        }
+
+        JOptionPane.showMessageDialog(CreatejButton, "Property lisitng request placed!");
+        
+        PropIdjTextField.setText("");
+        PropNamejTextField.setText("");
+        StreetjTextField.setText("");
+        CommunityjTextField.setText("");
+        CityjTextField.setText("");
+        StatejTextField.setText("");
+        
+        return;
         
     }//GEN-LAST:event_CreatejButtonActionPerformed
 
@@ -495,6 +519,28 @@ public class CreateListingRequestJPanel extends javax.swing.JPanel {
             System.out.println(e);
         }
             
+    }
+    
+    public void populateRequestTable(){
+        
+        javax.swing.table.DefaultTableModel model = (javax.swing.table.DefaultTableModel) UserRequestjTable.getModel();
+        model.setRowCount(0);
+        
+        for (UserRequest u : reqList.getReqList()){
+            
+            Object[] row = new Object[7];
+            row[0] = u.getRequestId();
+            row[1] = u.getPropId();
+            row[2] = u.getAptId();
+            row[3] = u.getMgmtId();
+            row[4] = u.getRequestType();
+            row[5] = u.getStatus();
+            row[6] = u.getLastMdfdDate();
+            
+            model.addRow(row);
+            
+        }
+        
     }
 
 }
