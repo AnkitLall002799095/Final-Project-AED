@@ -11,6 +11,12 @@ import Business.Property.Property;
 import Business.Property.PropertyDirectory;
 import Business.Request.UserRequest;
 import Business.Request.UserRequestDirectory;
+import Business.UtilityCompany.ElectricityCompany;
+import Business.UtilityCompany.ElectricityCompanyDirectory;
+import Business.UtilityCompany.GasCompany;
+import Business.UtilityCompany.GasCompanyDirectory;
+import Business.UtilityCompany.WaterCompany;
+import Business.UtilityCompany.WaterCompanyDirectory;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
@@ -201,4 +207,66 @@ public class DatabaseUtils {
         }
     }
     
+    public static GasCompanyDirectory getGasListFromDB(){
+        
+        try{
+            GasCompanyDirectory gasListFromDB = new GasCompanyDirectory();
+            Connection conn= Helper.getConnection();
+            Statement st = conn.createStatement();
+            ResultSet gasRs = st.executeQuery("SELECT * FROM aedfinalproject.gas_companies");
+            
+            while (gasRs.next()){
+                GasCompany gas= gasListFromDB.addNewProfile();
+                gas.setGasId(gasRs.getInt(1));
+                gas.setGasName(gasRs.getString(2));
+            }
+            return gasListFromDB;
+        }
+        catch(Exception e){
+            System.out.println(e);
+            return null;
+        }
+    } 
+    
+    public static WaterCompanyDirectory getWaterListFromDB(){
+        
+        try{
+            WaterCompanyDirectory waterListFromDB = new WaterCompanyDirectory();
+            Connection conn= Helper.getConnection();
+            Statement st = conn.createStatement();
+            ResultSet waterRs = st.executeQuery("SELECT * FROM aedfinalproject.water_companies");
+            
+            while (waterRs.next()){
+                WaterCompany water= waterListFromDB.addNewProfile();
+                water.setWaterId(waterRs.getInt(1));
+                water.setWaterName(waterRs.getString(2));
+            }
+            return waterListFromDB;
+        }
+        catch(Exception e){
+            System.out.println(e);
+            return null;
+        }
+    }
+    
+    public static ElectricityCompanyDirectory getElecListFromDB(){
+        
+        try{
+            ElectricityCompanyDirectory elecListFromDB = new ElectricityCompanyDirectory();
+            Connection conn= Helper.getConnection();
+            Statement st = conn.createStatement();
+            ResultSet elecRs = st.executeQuery("SELECT * FROM aedfinalproject.electricity_companies");
+            
+            while (elecRs.next()){
+                ElectricityCompany elec= elecListFromDB.addNewProfile();
+                elec.setElectricityId(elecRs.getInt(1));
+                elec.setElectricityName(elecRs.getString(2));
+            }
+            return elecListFromDB;
+        }
+        catch(Exception e){
+            System.out.println(e);
+            return null;
+        }
+    }
 }

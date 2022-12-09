@@ -4,6 +4,7 @@
  */
 package Business.Request;
 
+import Business.Property.Property;
 import java.util.Date;
 
 /**
@@ -84,5 +85,5 @@ public class UserRequest {
     public void setUserId(int userId) {
         this.userId = userId;
     }
-    
+
 }

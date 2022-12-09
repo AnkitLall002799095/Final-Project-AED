@@ -1,0 +1,31 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package Business.UtilityCompany;
+
+/**
+ *
+ * @author hmitt
+ */
+public class ElectricityCompany {
+    private int electricityId;
+    private String electricityName;
+
+    public int getElectricityId() {
+        return electricityId;
+    }
+
+    public void setElectricityId(int electricityId) {
+        this.electricityId = electricityId;
+    }
+
+    public String getElectricityName() {
+        return electricityName;
+    }
+
+    public void setElectricityName(String electricityName) {
+        this.electricityName = electricityName;
+    }
+    
+}
