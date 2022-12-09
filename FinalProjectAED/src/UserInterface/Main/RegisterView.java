@@ -164,13 +164,49 @@ public class RegisterView extends javax.swing.JPanel {
 
         lbl_community.setText("Community: ");
 
+        txt_street.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txt_streetKeyPressed(evt);
+            }
+        });
+
+        txt_community.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txt_communityKeyPressed(evt);
+            }
+        });
+
         lbl_city.setText("City: ");
 
+        txt_city.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txt_cityKeyPressed(evt);
+            }
+        });
+
         jLabel1.setText("State: ");
+
+        txt_state.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txt_stateKeyPressed(evt);
+            }
+        });
 
         txt_dob.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txt_dobKeyPressed(evt);
+            }
+        });
+
+        communityErrLabel.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                communityErrLabelKeyPressed(evt);
+            }
+        });
+
+        cityErrLabel.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                cityErrLabelKeyPressed(evt);
             }
         });
 
@@ -286,12 +322,10 @@ public class RegisterView extends javax.swing.JPanel {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(124, 124, 124)
                                 .addComponent(cityErrLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(stateErrLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addGap(93, 93, 93)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(82, 82, 82)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(stateErrLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(communityErrLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
@@ -474,6 +508,46 @@ public class RegisterView extends javax.swing.JPanel {
         String err = Helper.validateInput(password, "password");
         passwordErrLabel.setText(err);
     }//GEN-LAST:event_txt_passwordKeyPressed
+
+    private void txt_streetKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_streetKeyPressed
+        // TODO add your handling code here:
+        String street = txt_street.getText();
+        String err = Helper.validateInput(street, "street");
+        streetErrLabel.setText(err);
+    }//GEN-LAST:event_txt_streetKeyPressed
+
+    private void communityErrLabelKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_communityErrLabelKeyPressed
+        // TODO add your handling code here:
+       
+    }//GEN-LAST:event_communityErrLabelKeyPressed
+
+    private void cityErrLabelKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cityErrLabelKeyPressed
+        // TODO add your handling code here:
+       
+    }//GEN-LAST:event_cityErrLabelKeyPressed
+
+    private void txt_stateKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_stateKeyPressed
+        // TODO add your handling code here:
+        String state = txt_state.getText();
+        String err = Helper.validateInput(state, "state");
+        stateErrLabel.setText(err);
+        
+        
+    }//GEN-LAST:event_txt_stateKeyPressed
+
+    private void txt_communityKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_communityKeyPressed
+        // TODO add your handling code here:
+        String community = txt_community.getText();
+        String err = Helper.validateInput(community, "community");
+        communityErrLabel.setText(err);
+    }//GEN-LAST:event_txt_communityKeyPressed
+
+    private void txt_cityKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_cityKeyPressed
+        // TODO add your handling code here:
+        String city = txt_city.getText();
+        String err = Helper.validateInput(city, "city");
+        cityErrLabel.setText(err);
+    }//GEN-LAST:event_txt_cityKeyPressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
