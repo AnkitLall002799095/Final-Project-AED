@@ -85,5 +85,10 @@ public class UserRequest {
     public void setUserId(int userId) {
         this.userId = userId;
     }
+    
+    @Override
+    public String toString(){
+        return Integer.toString(requestId);
+    }
 
 }
