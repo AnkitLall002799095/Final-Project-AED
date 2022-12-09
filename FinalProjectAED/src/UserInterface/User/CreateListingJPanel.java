@@ -4,6 +4,7 @@
  */
 package UserInterface.User;
 
+import Application.Utils.DatabaseUtils;
 import Application.Utils.Helper;
 import UserInterface.Main.WorkAreaContPanel;
 import java.sql.*;
@@ -302,7 +303,7 @@ public class CreateListingJPanel extends javax.swing.JPanel {
             
             ArrayList<String> mgmtCompList = new ArrayList<String>();
             
-            Connection conn= Helper.getConnection();
+            Connection conn= DatabaseUtils.getConnection();
             Statement st = conn.createStatement();
             ResultSet mgmtRs = st.executeQuery("SELECT * FROM aedfinalproject.management_companies");
             while (mgmtRs.next()){
