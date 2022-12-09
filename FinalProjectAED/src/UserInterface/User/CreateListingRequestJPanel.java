@@ -258,32 +258,35 @@ public class CreateListingRequestJPanel extends javax.swing.JPanel {
                     .addComponent(MgmtCompjLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(1, 1, 1)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(MgmtCompjComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(StreetjLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(StreetjTextField)))))
+                                .addComponent(StreetjTextField))
+                            .addComponent(MgmtCompjComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(GasCompjLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(GasCompjComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(CommunityjLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(CommunityjTextField)))
+                        .addComponent(CommunityjTextField))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(GasCompjLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(GasCompjComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(ElecCompjLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ElecCompjComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(CityjLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(CityjTextField)))
+                        .addComponent(CityjTextField))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(ElecCompjLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(ElecCompjComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(WaterCompjLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(WaterCompjComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(StatejLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(StatejTextField)))
+                        .addComponent(StatejTextField))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(WaterCompjLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(WaterCompjComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(CreatejButton, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -351,7 +354,7 @@ public class CreateListingRequestJPanel extends javax.swing.JPanel {
         
         try{
 
-            Connection conn= Helper.getConnection();
+            Connection conn= DatabaseUtils.getConnection();
             Statement st1 = conn.createStatement();
             st1.executeUpdate("INSERT INTO `aedfinalproject`.`property_details` (`prop_id`, `user_id`, `mgt_comp_id`, `street`, `community`, `city`, `state`, `prop_names`, `elec_comp_id`, `water_comp_id`, `gas_comp_id`) VALUES ('" + createProp.getPropId() + "','" + createProp.getOwnerId() + "','" + createProp.getMgtComp() + "','" + createProp.getStreet() + "','" + createProp.getCommunity() + "','" + createProp.getCity() + "','" + createProp.getState() + "','" + createProp.getPropName() + "','" + createProp.electricity.getElectricityId() + "','" + createProp.water.getWaterId() + "','" + createProp.gas.getGasId() + "')");
             
@@ -427,7 +430,7 @@ public class CreateListingRequestJPanel extends javax.swing.JPanel {
             
             ArrayList<String> mgmtCompList = new ArrayList<String>();
             
-            Connection conn= Helper.getConnection();
+            Connection conn= DatabaseUtils.getConnection();
             Statement st = conn.createStatement();
             ResultSet mgmtRs = st.executeQuery("SELECT * FROM aedfinalproject.management_companies");
             while (mgmtRs.next()){
@@ -452,7 +455,7 @@ public class CreateListingRequestJPanel extends javax.swing.JPanel {
             
             ArrayList<String> gasCompList = new ArrayList<String>();
             
-            Connection conn= Helper.getConnection();
+            Connection conn= DatabaseUtils.getConnection();
             Statement st = conn.createStatement();
             ResultSet gasRs = st.executeQuery("SELECT * FROM aedfinalproject.gas_companies");
             while (gasRs.next()){
@@ -477,7 +480,7 @@ public class CreateListingRequestJPanel extends javax.swing.JPanel {
             
             ArrayList<String> elecCompList = new ArrayList<String>();
             
-            Connection conn= Helper.getConnection();
+            Connection conn= DatabaseUtils.getConnection();
             Statement st = conn.createStatement();
             ResultSet elecRs = st.executeQuery("SELECT * FROM aedfinalproject.electricity_companies");
             while (elecRs.next()){
@@ -502,7 +505,7 @@ public class CreateListingRequestJPanel extends javax.swing.JPanel {
             
             ArrayList<String> waterCompList = new ArrayList<String>();
             
-            Connection conn= Helper.getConnection();
+            Connection conn= DatabaseUtils.getConnection();
             Statement st = conn.createStatement();
             ResultSet waterRs = st.executeQuery("SELECT * FROM aedfinalproject.water_companies");
             while (waterRs.next()){
