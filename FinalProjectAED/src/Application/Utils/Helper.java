@@ -172,4 +172,10 @@ public class Helper {
     	return date.format(DateTimeFormatter.ofPattern("d-MMMM-yy"));
     }
     
+    public static int getCompIDfromCombo(javax.swing.JComboBox<String> comboBox){
+        String a = (String) comboBox.getSelectedItem();
+        String [] aSplit = a.split("-");
+        return Integer.parseInt(aSplit[0]);
+    }
+    
 }

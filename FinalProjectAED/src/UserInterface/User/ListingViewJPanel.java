@@ -33,9 +33,9 @@ public class ListingViewJPanel extends javax.swing.JPanel {
      * Creates new form ListingViewJPanel
      */
     WorkAreaContPanel workAreaPanel;
-    ApartmentDirectory aptList= new ApartmentDirectory();;
-    PropertyDirectory propList= new PropertyDirectory();
-    UserRequestDirectory reqList = new UserRequestDirectory();
+    ApartmentDirectory aptList;
+    PropertyDirectory propList;
+    UserRequestDirectory reqList;
     
     public static void main(String[] args) {
         
@@ -125,7 +125,7 @@ public class ListingViewJPanel extends javax.swing.JPanel {
                 {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Request ID", "Building name", "Apartment No.", "Management company", "Request type", "Request status", "Last updated"
+                "Request ID", "Building No.", "Apartment No.", "Management company", "Request type", "Request status", "Last updated"
             }
         ) {
             Class[] types = new Class [] {

@@ -11,6 +11,12 @@ import Business.Property.Property;
 import Business.Property.PropertyDirectory;
 import Business.Request.UserRequest;
 import Business.Request.UserRequestDirectory;
+import Business.UtilityCompany.ElectricityCompany;
+import Business.UtilityCompany.ElectricityCompanyDirectory;
+import Business.UtilityCompany.GasCompany;
+import Business.UtilityCompany.GasCompanyDirectory;
+import Business.UtilityCompany.WaterCompany;
+import Business.UtilityCompany.WaterCompanyDirectory;
 import Business.Users.Person;
 import java.sql.Connection;
 import java.sql.Date;
@@ -208,6 +214,29 @@ public class DatabaseUtils {
         }
     }
     
+//    public static ManagementCompanyDirectory getMgmtListFromDB(){
+//        
+//        try{
+//            ManagementCompanyDirectory mgmtListFromDB = new ManagementCompanyDirectory();
+//            Connection conn= Helper.getConnection();
+//            Statement st = conn.createStatement();
+//            ResultSet mgmtRs = st.executeQuery("SELECT * FROM aedfinalproject.management_companies");
+//            
+//            while (mgmtRs.next()){
+//                ManagementCompany mgmt = MgmtListFromDB.addNewProfile();
+//                mgmt.setMgmtId(mgmtRs.getInt(1));
+//                mgmt.setMgmtName(mgmtRs.getString(2));
+//                mgmt.setCity(mgmtRs.getString(7));
+//                mgmt.setState(mgmtRs.getString(8));
+//            }
+//            return mgmtListFromDB;
+//        }
+//        catch(Exception e){
+//            System.out.println(e);
+//            return null;
+//        }
+//    }
+    
     public static UserRequestDirectory getRequestListFromDB(){
         
         try{
@@ -237,4 +266,66 @@ public class DatabaseUtils {
         }
     }
     
+    public static GasCompanyDirectory getGasListFromDB(){
+        
+        try{
+            GasCompanyDirectory gasListFromDB = new GasCompanyDirectory();
+            Connection conn= Helper.getConnection();
+            Statement st = conn.createStatement();
+            ResultSet gasRs = st.executeQuery("SELECT * FROM aedfinalproject.gas_companies");
+            
+            while (gasRs.next()){
+                GasCompany gas= gasListFromDB.addNewProfile();
+                gas.setGasId(gasRs.getInt(1));
+                gas.setGasName(gasRs.getString(2));
+            }
+            return gasListFromDB;
+        }
+        catch(Exception e){
+            System.out.println(e);
+            return null;
+        }
+    } 
+    
+    public static WaterCompanyDirectory getWaterListFromDB(){
+        
+        try{
+            WaterCompanyDirectory waterListFromDB = new WaterCompanyDirectory();
+            Connection conn= Helper.getConnection();
+            Statement st = conn.createStatement();
+            ResultSet waterRs = st.executeQuery("SELECT * FROM aedfinalproject.water_companies");
+            
+            while (waterRs.next()){
+                WaterCompany water= waterListFromDB.addNewProfile();
+                water.setWaterId(waterRs.getInt(1));
+                water.setWaterName(waterRs.getString(2));
+            }
+            return waterListFromDB;
+        }
+        catch(Exception e){
+            System.out.println(e);
+            return null;
+        }
+    }
+    
+    public static ElectricityCompanyDirectory getElecListFromDB(){
+        
+        try{
+            ElectricityCompanyDirectory elecListFromDB = new ElectricityCompanyDirectory();
+            Connection conn= Helper.getConnection();
+            Statement st = conn.createStatement();
+            ResultSet elecRs = st.executeQuery("SELECT * FROM aedfinalproject.electricity_companies");
+            
+            while (elecRs.next()){
+                ElectricityCompany elec= elecListFromDB.addNewProfile();
+                elec.setElectricityId(elecRs.getInt(1));
+                elec.setElectricityName(elecRs.getString(2));
+            }
+            return elecListFromDB;
+        }
+        catch(Exception e){
+            System.out.println(e);
+            return null;
+        }
+    }
 }

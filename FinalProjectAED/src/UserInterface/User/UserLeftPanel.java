@@ -105,12 +105,15 @@ public class UserLeftPanel extends javax.swing.JPanel {
     private void ViewjButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewjButton1ActionPerformed
         // TODO add your handling code here:
         
-        workAreaPanel.setRightPanel(new CreateListingJPanel(workAreaPanel));
+        workAreaPanel.setRightPanel(new CreateListingRequestJPanel(workAreaPanel));
         
     }//GEN-LAST:event_ViewjButton1ActionPerformed
 
     private void LogoutjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogoutjButtonActionPerformed
         // TODO add your handling code here:
+        
+        workAreaPanel.setRightPanel(new UserDefaultJPanel(workAreaPanel));
+        
     }//GEN-LAST:event_LogoutjButtonActionPerformed
 
 

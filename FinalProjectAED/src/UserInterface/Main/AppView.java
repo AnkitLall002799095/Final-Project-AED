@@ -23,7 +23,7 @@ public class AppView extends javax.swing.JFrame {
      */
     public AppView() {
         new AppSystem(this);
-        createGUI();        
+        createGUI();
     }
 
     /**
