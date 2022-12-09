@@ -64,18 +64,18 @@ public class DatabaseUtils {
         }
     }
     
-    public static ArrayList<ContractApplication> getContractApplications(int id) {
+    public static ArrayList<ContractApplication> getContractApplications(int id, String col) {
         ArrayList<ContractApplication> contracts = new ArrayList<>();
         try {
             Connection dbConn = (Connection) DriverManager.getConnection("jdbc:mysql://aeddatabase.cvxm5l9d0hm0.us-east-1.rds.amazonaws.com:3306/aedfinalproject", "admin", "password");
             Statement stmt = dbConn.createStatement();
-            String query = "SELECT * FROM aedfinalproject.contract_application where mgt_comp_id="+id;
+            String query = "SELECT * FROM aedfinalproject.contract_application where "+col+"="+id;
             ResultSet res = stmt.executeQuery(query);            
             while(res.next()) {
                 ContractApplication contract = new ContractApplication(
                     res.getInt("apt_num"), 
                     res.getString("prop_name"), 
-                    Helper.getDate(res.getString("start_date")), 
+                    res.getDate("start_date").toLocalDate(), 
                     res.getString("street"), 
                     res.getString("community"), 
                     res.getString("city"), 
@@ -85,7 +85,7 @@ public class DatabaseUtils {
                     res.getInt("bath_count"),
                     Helper.convertStringToArr(res.getString("features")),
                     res.getDouble("sqft"),
-                    Helper.getDate(res.getString("avl_date")),
+                    res.getDate("avl_date").toLocalDate(),
                     Helper.convertStringToArr(res.getString("utilities")), 
                     Helper.convertStringToArr(res.getString("prop_images")),
                     res.getString("mgt_comp"),
@@ -94,7 +94,11 @@ public class DatabaseUtils {
                     res.getInt("mgt_comp_id"),
                     res.getString("app_status"),
                     res.getString("app_owner"),
-                    res.getInt("app_id")
+                        res.getString("app_owner_type"),
+                    res.getInt("app_id"),
+                    res.getInt("elec_comp_id"),
+                    res.getInt("water_comp_id"),
+                    res.getInt("gas_comp_id")
                 );
                  
                  contracts.add(contract);
@@ -201,6 +205,40 @@ public class DatabaseUtils {
             System.out.println(e);
             return null;
         }
+    }
+    
+    public static HashMap<String, Integer> getUtilityCompIds(int propId) {
+        HashMap<String, Integer> result = new HashMap<>();
+        try {
+            Connection dbConn = (Connection) DriverManager.getConnection("jdbc:mysql://aeddatabase.cvxm5l9d0hm0.us-east-1.rds.amazonaws.com:3306/aedfinalproject", "admin", "password");
+            Statement stmt = dbConn.createStatement();
+            String query ="SELECT * FROM aedfinalproject.property_details where prop_id="+propId;
+            ResultSet res = stmt.executeQuery(query);
+            result.put("elecCompId", res.getInt("elec_comp_id"));
+            result.put("waterCompId", res.getInt("water_comp_id"));
+            result.put("gasCompId", res.getInt("gas_comp_id"));
+        }catch(Exception e) {
+            System.out.println(e);
+        }
+        
+        return result;
+    }
+    
+    public static HashMap<String, Integer> getPropInfo(int mgtId) {
+        HashMap<String, Integer> result = new HashMap<>();
+        try {
+            Connection dbConn = (Connection) DriverManager.getConnection("jdbc:mysql://aeddatabase.cvxm5l9d0hm0.us-east-1.rds.amazonaws.com:3306/aedfinalproject", "admin", "password");
+            Statement stmt = dbConn.createStatement();
+            String query ="SELECT * FROM aedfinalproject.property_details where mgt_comp_id="+mgtId;
+            ResultSet res = stmt.executeQuery(query);
+            while(res.next()) {
+                result.put(res.getString("prop_names"),res.getInt("prop_id"));
+            }
+        }catch(Exception e) {
+            System.out.println(e);
+        }
+        
+        return result;
     }
     
 }

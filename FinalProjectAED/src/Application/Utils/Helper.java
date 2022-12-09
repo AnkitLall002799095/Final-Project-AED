@@ -28,7 +28,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.Arrays;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.Date;
+import java.util.Locale;
+import java.util.stream.IntStream;
 
 /**
  *
@@ -37,6 +40,39 @@ import java.util.Date;
 public class Helper {
     
     public static String[] fileTypesAllowed = {"png", "jpg"};
+    public static String[] monthsList = {"January", "Feburary", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
+    
+    	//Generates years list based on start year value.	
+    public static Integer[] getYearsList(int startYear) {
+    	
+    	LocalDate start = LocalDate.of(startYear, 1, 1);
+    	LocalDate end = LocalDate.now();
+    	int years = (int) start.until(end, ChronoUnit.YEARS);
+    	Integer[] yearsList = new Integer[years+1];
+    	yearsList[0] = startYear;
+    	for(int i=0;i < years;i++) {
+    		yearsList[i+1] = yearsList[i]+1;
+    	}
+    	
+    	return yearsList;
+    }
+    	
+	//Generate days list based on month and year.	 
+    public static Integer[] getDays(int year, int month) {
+    	LocalDate date = LocalDate.of(year, month, 1);
+    	return IntStream.range(1, date.lengthOfMonth()+1).boxed().toArray(Integer[]::new);
+    }
+    
+    //Generate current years valid months list.
+    public static String[] getCurrentMonthsList() {    	
+    	int currentMonth = LocalDate.now().getMonthValue();
+    	String[] adjustedMonthList = new String[currentMonth];
+    	for(int i=0;i<currentMonth;i++) {
+    		adjustedMonthList[i] = monthsList[i];
+    	}
+
+    	return adjustedMonthList;
+    }
     
 //    public static void copyFile(File sourceFile, File destFile) {
     public static String copyFile(String filePath) {
@@ -149,7 +185,6 @@ public class Helper {
     				msg="This field must only contain digits (0-9).";
     				break;
     			}
-                case "propName":
                 case "street":
                 case "state":
                 case "city":
@@ -178,13 +213,14 @@ public class Helper {
     }
     
         // Function to convert day, month, year values to Date Object.
-    public static Date getDate(String date) {
+//    public static LocalDate getDate(String date) {
+    public static LocalDate getDate(String day, String month, String year) {
     	
-//    	String dateInString = day+"-"+month+"-"+year;
-//    	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d-MMMM-yyyy", Locale.ENGLISH);
-//    	LocalDate date = LocalDate.parse(dateInString, formatter);
+    	String dateInString = day+"-"+month+"-"+year;
+    	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d-MMMM-yyyy", Locale.ENGLISH);
+    	LocalDate date = LocalDate.parse(dateInString, formatter);
 //    	String d = getFormattedDate(date);
-    	return new Date();
+    	return date;
     }
     
         // Convert date object to formatted string. 
