@@ -14,6 +14,7 @@ import java.util.List;
  */
 public class ContractApplication {
     
+    int appId;
     int aptId;
     int aptNum;
     int propId;
@@ -53,11 +54,15 @@ public class ContractApplication {
             String managementCompany,
             int aptId,
             int propId,
-            int managementCompanyId) 
+            int managementCompanyId,
+            String appStatus,
+            String appOwner,
+            int appId) 
     {
         this.aptId = aptId;
         this.propId = propId;
         this.managementCompanyId = managementCompanyId;
+        this.appId = appId;
         this.aptNum = aptNum;
         this.appStatus = appStatus;
         this.availability = availability;
@@ -77,5 +82,89 @@ public class ContractApplication {
         this.managementCompany = managementCompany;
         
         this.appStatus = "utilityComp";
+    }
+    
+    public int getAppId() {
+        return appId;
+    }
+    
+    public int getAptId() {
+        return aptId;
+    }
+    
+    public int getAptNum() {
+        return aptNum;
+    }
+    
+    public int getPropId() {
+        return propId;
+    }
+    
+    public String getPropName() {
+        return propName;
+    }
+    
+    public Date getDate() {
+        return date;
+    }
+    
+    public String getStreet() {
+        return street;
+    }
+    
+    public String getCommunity() {
+        return community;
+    }
+    
+    public String getCity() {
+        return city;
+    }
+    
+    public String getState() {
+        return state;
+    }
+    
+    public String getType() {
+        return type;
+    }
+    
+    public int getRoomCount() {
+        return roomCount;
+    }
+    
+    public int getBathCount() {
+        return bathCount;
+    }
+    
+    public List<String> getFeatures() {
+        return features;
+    }
+    
+    public Double getSqft() {
+        return sqft;
+    }
+    
+    public Date getAvailability() {
+        return availability;
+    }
+    
+    public List<String> getUtilities() {
+        return utilities;
+    }
+    
+    public String getAppStatus() {
+        return appStatus;
+    }
+    
+    public int getManagementCompanyId() {
+        return managementCompanyId;
+    }
+    
+    public String getManagementCompany() {
+        return managementCompany;
+    }
+    
+    public List<String> getImages() {
+        return images;
     }
 }
