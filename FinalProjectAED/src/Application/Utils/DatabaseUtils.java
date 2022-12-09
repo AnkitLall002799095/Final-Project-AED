@@ -11,6 +11,13 @@ import Business.Property.Property;
 import Business.Property.PropertyDirectory;
 import Business.Request.UserRequest;
 import Business.Request.UserRequestDirectory;
+import Business.UtilityCompany.ElectricityCompany;
+import Business.UtilityCompany.ElectricityCompanyDirectory;
+import Business.UtilityCompany.GasCompany;
+import Business.UtilityCompany.GasCompanyDirectory;
+import Business.UtilityCompany.WaterCompany;
+import Business.UtilityCompany.WaterCompanyDirectory;
+import Business.Users.Person;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.DriverManager;
@@ -29,6 +36,39 @@ import java.util.List;
  * @author ankitlall
  */
 public class DatabaseUtils {
+    
+    public static Connection getConnection(){
+        try{
+            Connection conn;
+            conn = (Connection) DriverManager.getConnection("jdbc:mysql://aeddatabase.cvxm5l9d0hm0.us-east-1.rds.amazonaws.com:3306/aedfinalproject", "admin", "password");
+            return conn;
+        }
+        catch (Exception e) {
+            System.out.println(e);
+            return null;
+        }
+    }
+    
+    
+    public static void createNewUser(Person person){
+    
+    try{
+
+            Connection conn= getConnection();
+            Statement st = conn.createStatement();
+            st.executeUpdate("INSERT INTO `aedfinalproject`.`user_table` (`Uid`, `UserRole`, `Name`, `DOB`, `Gender`, `Email`, `PhoneNumber`, `Password` , `Street` , `Community` , `City` , `State`) "
+                    + "VALUES ('" + person.getUid() + "','" + person.getUserRole() + "','" + person.getName() + "','" + person.getDob() + "','" + person.getGender() + "','" + person.getEmail() + "','" + person.getPhoneNumber() + "','" + person.getPassword()+ "','" + person.getStreet()+ "','" + person.getCommunity()+ "','" + person.getCity()+ "','" + person.getState()+ "')");
+
+        }
+            catch(Exception e){
+                System.out.println(e);
+            }
+    
+    
+    
+    
+    
+    }
     
     public static void createNewContract(HashMap<String, Object> contract) {
         try {
@@ -114,7 +154,7 @@ public class DatabaseUtils {
         
         try{
             PropertyDirectory propListFromDB = new PropertyDirectory();
-            Connection conn= Helper.getConnection();
+            Connection conn= getConnection();
             Statement st = conn.createStatement();
             ResultSet propRs = st.executeQuery("SELECT * FROM aedfinalproject.property_details");
             
@@ -142,7 +182,7 @@ public class DatabaseUtils {
         
         try{
             ApartmentDirectory aptListFromDB = new ApartmentDirectory();
-            Connection conn= Helper.getConnection();
+            Connection conn= getConnection();
             Statement st = conn.createStatement();
             ResultSet aptRs = st.executeQuery("SELECT * FROM aedfinalproject.apartment_details");
             
@@ -178,11 +218,34 @@ public class DatabaseUtils {
         }
     }
     
+//    public static ManagementCompanyDirectory getMgmtListFromDB(){
+//        
+//        try{
+//            ManagementCompanyDirectory mgmtListFromDB = new ManagementCompanyDirectory();
+//            Connection conn= Helper.getConnection();
+//            Statement st = conn.createStatement();
+//            ResultSet mgmtRs = st.executeQuery("SELECT * FROM aedfinalproject.management_companies");
+//            
+//            while (mgmtRs.next()){
+//                ManagementCompany mgmt = MgmtListFromDB.addNewProfile();
+//                mgmt.setMgmtId(mgmtRs.getInt(1));
+//                mgmt.setMgmtName(mgmtRs.getString(2));
+//                mgmt.setCity(mgmtRs.getString(7));
+//                mgmt.setState(mgmtRs.getString(8));
+//            }
+//            return mgmtListFromDB;
+//        }
+//        catch(Exception e){
+//            System.out.println(e);
+//            return null;
+//        }
+//    }
+    
     public static UserRequestDirectory getRequestListFromDB(){
         
         try{
             UserRequestDirectory reqListFromDB = new UserRequestDirectory();
-            Connection conn= Helper.getConnection();
+            Connection conn= getConnection();
             Statement st = conn.createStatement();
             ResultSet reqRs = st.executeQuery("SELECT * FROM aedfinalproject.user_application_request");
             
@@ -241,4 +304,66 @@ public class DatabaseUtils {
         return result;
     }
     
+    public static GasCompanyDirectory getGasListFromDB(){
+        
+        try{
+            GasCompanyDirectory gasListFromDB = new GasCompanyDirectory();
+            Connection conn= Helper.getConnection();
+            Statement st = conn.createStatement();
+            ResultSet gasRs = st.executeQuery("SELECT * FROM aedfinalproject.gas_companies");
+            
+            while (gasRs.next()){
+                GasCompany gas= gasListFromDB.addNewProfile();
+                gas.setGasId(gasRs.getInt(1));
+                gas.setGasName(gasRs.getString(2));
+            }
+            return gasListFromDB;
+        }
+        catch(Exception e){
+            System.out.println(e);
+            return null;
+        }
+    } 
+    
+    public static WaterCompanyDirectory getWaterListFromDB(){
+        
+        try{
+            WaterCompanyDirectory waterListFromDB = new WaterCompanyDirectory();
+            Connection conn= Helper.getConnection();
+            Statement st = conn.createStatement();
+            ResultSet waterRs = st.executeQuery("SELECT * FROM aedfinalproject.water_companies");
+            
+            while (waterRs.next()){
+                WaterCompany water= waterListFromDB.addNewProfile();
+                water.setWaterId(waterRs.getInt(1));
+                water.setWaterName(waterRs.getString(2));
+            }
+            return waterListFromDB;
+        }
+        catch(Exception e){
+            System.out.println(e);
+            return null;
+        }
+    }
+    
+    public static ElectricityCompanyDirectory getElecListFromDB(){
+        
+        try{
+            ElectricityCompanyDirectory elecListFromDB = new ElectricityCompanyDirectory();
+            Connection conn= Helper.getConnection();
+            Statement st = conn.createStatement();
+            ResultSet elecRs = st.executeQuery("SELECT * FROM aedfinalproject.electricity_companies");
+            
+            while (elecRs.next()){
+                ElectricityCompany elec= elecListFromDB.addNewProfile();
+                elec.setElectricityId(elecRs.getInt(1));
+                elec.setElectricityName(elecRs.getString(2));
+            }
+            return elecListFromDB;
+        }
+        catch(Exception e){
+            System.out.println(e);
+            return null;
+        }
+    }
 }

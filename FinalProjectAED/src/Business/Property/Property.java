@@ -4,6 +4,10 @@
  */
 package Business.Property;
 
+import Business.UtilityCompany.ElectricityCompany;
+import Business.UtilityCompany.GasCompany;
+import Business.UtilityCompany.WaterCompany;
+
 /**
  *
  * @author hmitt
@@ -18,6 +22,9 @@ public class Property {
     private String city;
     private String state;
     private String propName;
+    public ElectricityCompany electricity;
+    public GasCompany gas;
+    public WaterCompany water;
 
     public int getPropId() {
         return propId;
@@ -89,6 +96,30 @@ public class Property {
 
     public void setPropName(String propName) {
         this.propName = propName;
+    }
+
+    public ElectricityCompany getElectricity() {
+        return electricity;
+    }
+
+    public void setElectricity(ElectricityCompany electricity) {
+        this.electricity = electricity;
+    }
+
+    public GasCompany getGas() {
+        return gas;
+    }
+
+    public void setGas(GasCompany gas) {
+        this.gas = gas;
+    }
+
+    public WaterCompany getWater() {
+        return water;
+    }
+
+    public void setWater(WaterCompany water) {
+        this.water = water;
     }
     
 }

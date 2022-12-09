@@ -15,7 +15,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.channels.FileChannel;
-import org.apache.commons.io.FileUtils;
+//import org.apache.commons.io.FileUtils;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -32,6 +32,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import java.util.Locale;
 import java.util.stream.IntStream;
+import org.apache.commons.io.FileUtils;
 
 /**
  *
@@ -74,7 +75,7 @@ public class Helper {
     	return adjustedMonthList;
     }
     
-//    public static void copyFile(File sourceFile, File destFile) {
+   // public static void copyFile(File sourceFile, File destFile) {
     public static String copyFile(String filePath) {
         String relFilePath = "";
         try{
@@ -95,24 +96,14 @@ public class Helper {
 
             System.out.println("copying of file from Java program is completed"); 
             relFilePath = target.concat(sourceFile.getName());
-        } catch(IOException e) {
+       } catch(IOException e) {
             System.out.println(e);
         }
         
         return relFilePath;
     }
     
-    public static Connection getConnection(){
-        try{
-            Connection conn;
-            conn = (Connection) DriverManager.getConnection("jdbc:mysql://aeddatabase.cvxm5l9d0hm0.us-east-1.rds.amazonaws.com:3306/aedfinalproject", "admin", "password");
-            return conn;
-        }
-        catch (Exception e) {
-            System.out.println(e);
-            return null;
-        }
-    }
+    
      
     public static String validateInput(String value, String type) {   
         String msg = "";
@@ -121,9 +112,7 @@ public class Helper {
     		case "name":
     			if(value.length() < 3 || value.length() > 30) {
     				msg="This field must contain 3-30 letters.";
-    			}
-    			
-    			if(!value.matches("^[a-zA-Z \\-\\.\\']*$")) {
+    			} else if(!value.matches("^[a-zA-Z \\-\\.\\']*$")) {
     				msg="This field must only contain letters (a-z).";
     			}
     			
@@ -133,9 +122,7 @@ public class Helper {
     			if(!value.matches("[0-9]+")) {
     				msg="This field must only contain digits (0-9).";
     				break;
-    			}
-    			
-    			if(value.length() > 3 || (Integer.parseInt(value) < 18 || Integer.parseInt(value) > 80)) {
+    			} else if(value.length() > 3 || (Integer.parseInt(value) < 18 || Integer.parseInt(value) > 80)) {
     				msg="Age must be in the range of 18-80.";
     			}
     			break;
@@ -143,9 +130,7 @@ public class Helper {
     		case "phNum":
     			if(!value.matches("[0-9]+")) {
     				msg="Phone Number field must only contain digits (0-9).";
-    			}
-    			
-    			if(value.length() != 10) {
+    			} else if(value.length() != 10) {
     				msg="Phone Number must have 10 digits.";
     			}
     			break;
@@ -164,9 +149,7 @@ public class Helper {
     		case "password":   
     			if(value.length() < 8 && value.length() > 30) {
     				msg="Password must be 8 characters long.";
-    			}
-    			
-    			if(!value.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&-+=()])(?=\\S+$).{8,30}$")) {
+    			} else if(!value.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&-+=()])(?=\\S+$).{8,30}$")) {
     				msg="Password field must only contain at least 1 digit, atleast one upper case letter and atleast one special character.";
     			}
     			
@@ -174,8 +157,7 @@ public class Helper {
     		case "image":
     			if(value == "No file selected") {
     				msg="Profile picture not selected.";
-    			}
-    			if(!Arrays.asList(fileTypesAllowed).contains(new File(value).toString().substring(new File(value).toString().lastIndexOf('.') + 1))) {
+    			} else if(!Arrays.asList(fileTypesAllowed).contains(new File(value).toString().substring(new File(value).toString().lastIndexOf('.') + 1))) {
     				msg="Profile picture must be png, jpg format.";	
     			}
                 case "aptNum":
@@ -192,9 +174,7 @@ public class Helper {
                 case "aptType":
                         if(value.length() < 3 || value.length() > 40) {
     				msg="Street field must contain 10-30 letters.";
-    			}
-    			
-    			if(!value.matches("^[a-zA-Z[0-9] \\-\\.\\,\\']*$")) {
+    			}else if(!value.matches("^[a-zA-Z[0-9] \\-\\.\\,\\']*$")) {
     				msg="Street field must only contain letters (a-z) & some special characters.";
     			}
                         break;
@@ -226,6 +206,12 @@ public class Helper {
         // Convert date object to formatted string. 
     public static String getFormattedDate(LocalDate date) {
     	return date.format(DateTimeFormatter.ofPattern("d-MMMM-yy"));
+    }
+    
+    public static int getCompIDfromCombo(javax.swing.JComboBox<String> comboBox){
+        String a = (String) comboBox.getSelectedItem();
+        String [] aSplit = a.split("-");
+        return Integer.parseInt(aSplit[0]);
     }
     
 }

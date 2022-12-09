@@ -4,6 +4,9 @@
  */
 package UserInterface.User;
 
+import Business.Request.UserRequestDirectory;
+import UserInterface.Main.WorkAreaContPanel;
+
 /**
  *
  * @author hmitt
@@ -13,11 +16,14 @@ public class UserDefaultJPanel extends javax.swing.JPanel {
     /**
      * Creates new form UserDefaultJPanel
      */
-    
+    WorkAreaContPanel workAreaPanel;
     public static int requestCounter;
+    UserRequestDirectory reqList;
     
-    public UserDefaultJPanel() {
+    public UserDefaultJPanel(WorkAreaContPanel workAreaPanel) {
+        this.workAreaPanel= workAreaPanel;
         requestCounter=1;
+        reqList = new UserRequestDirectory();
         initComponents();
     }
 
