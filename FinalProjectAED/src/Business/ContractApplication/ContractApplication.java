@@ -17,11 +17,12 @@ public class ContractApplication {
     
     int appId;
     int aptId;
-    int aptNum;
     int propId;
     int elecCompId;
     int waterCompId;
     int gasCompId;
+    int legalCompId;
+    int finCompId;
     String appOwner;
     String appOwnerType;
     String propName;
@@ -46,8 +47,23 @@ public class ContractApplication {
     LocalDate elecBillingDate;
     long elecContactNum;
     
+    long waterAccNum;
+    LocalDate waterBillingDate;
+    long waterContactNum;
+    
+    long gasAccNum;
+    LocalDate gasBillingDate;
+    long gasContactNum;
+    
+    int leaseCost;
+    LocalDate aptBillingDate;
+    int maintanenceCost;
+    int utilitiesCost;
+    int deposit;
+    
+    LocalDate leaseEndDate;
             
-    public ContractApplication(int aptNum,             
+    public ContractApplication(             
             String propName, 
             LocalDate date, 
             String street, 
@@ -72,13 +88,14 @@ public class ContractApplication {
             int appId,
             int elecCompId,
             int waterCompId,
-            int gasCompId) 
+            int gasCompId,
+            int finCompId,
+            int legalCompId) 
     {
         this.aptId = aptId;
         this.propId = propId;
         this.managementCompanyId = managementCompanyId;
         this.appId = appId;
-        this.aptNum = aptNum;
         this.appStatus = appStatus;
         this.availability = availability;
         this.bathCount = bathCount;
@@ -100,8 +117,59 @@ public class ContractApplication {
         this.elecCompId=elecCompId;
         this.waterCompId=waterCompId;
         this.gasCompId=gasCompId;
+        this.finCompId=finCompId;
+        this.legalCompId=legalCompId;
     }
     
+    public void setLeaseEndDate(LocalDate leaseEndDate) {
+        this.leaseEndDate = leaseEndDate;
+    }
+        
+    public LocalDate getLeaseEndDate() {
+        return leaseEndDate;
+    }
+    
+    public void setLeaseCost(int leaseCost) {
+        this.leaseCost = leaseCost;
+    }
+    
+    public void setAptBillingDate(LocalDate aptBillingDate) {
+        this.aptBillingDate = aptBillingDate;
+    }
+        
+    public void setMaintanenceCost(int maintanenceCost) {
+        this.maintanenceCost=maintanenceCost;
+    }
+    
+    public void setUtilitiesCost(int utilitiesCost) {
+        this.utilitiesCost=utilitiesCost;
+    }
+    
+    public void setDeposit(int deposit) {
+        this.deposit=deposit;
+    }
+    
+    public int getLeaseCost() {
+       return leaseCost;
+    }
+    
+    public LocalDate getAptBillingDate() {
+        return aptBillingDate;
+    }
+        
+    public int getMaintanenceCost() {
+        return maintanenceCost;
+    }
+    
+    public int getUtilitiesCost() {
+        return utilitiesCost;
+    }
+    
+    public int getDeposit() {
+        return deposit;
+    }
+    
+    //------------Electricity-----------------
     public void setElecAccNum(long elecAccNum) {
         this.elecAccNum = elecAccNum;
     }
@@ -126,16 +194,80 @@ public class ContractApplication {
         return elecContactNum;
     }
     
+    //------------Gas-----------------
+    
+    public void setGasAccNum(long gasAccNum) {
+        this.gasAccNum = gasAccNum;
+    }
+    
+    public void setGasBillingDate(LocalDate gasBillingDate) {
+        this.gasBillingDate = gasBillingDate;
+    }
+        
+    public void setGasContactNum(long gasContactNum) {
+        this.gasContactNum=gasContactNum;
+    }
+    
+    public long getGasAccNum() {
+       return gasAccNum;
+    }
+    
+    public LocalDate getGasBillingDate() {
+        return gasBillingDate;
+    }
+        
+    public long getGasContactNum() {
+        return gasContactNum;
+    }
+    
+    //------------Water---------------
+    
+    public void setWaterAccNum(long waterAccNum) {
+        this.waterAccNum = waterAccNum;
+    }
+    
+    public void setWaterBillingDate(LocalDate waterBillingDate) {
+        this.waterBillingDate = waterBillingDate;
+    }
+        
+    public void setWaterContactNum(long waterContactNum) {
+        this.waterContactNum=waterContactNum;
+    }
+    
+//    public void setLegalCompId(int legalCompId) {
+//        this.legalCompId=legalCompId;
+//    }
+//    
+//    public void setFinCompId(int finCompId) {
+//        this.finCompId=finCompId;
+//    }
+    
+    public int getLegalCompId() {
+        return legalCompId;
+    }
+    
+    public int getFinCompId() {
+        return finCompId;
+    }
+    
+    public long getWaterAccNum() {
+       return waterAccNum;
+    }
+    
+    public LocalDate getWaterBillingDate() {
+        return waterBillingDate;
+    }
+        
+    public long getWaterContactNum() {
+        return waterContactNum;
+    }
+    
     public int getAppId() {
         return appId;
     }
     
     public int getAptId() {
         return aptId;
-    }
-    
-    public int getAptNum() {
-        return aptNum;
     }
     
     public int getPropId() {

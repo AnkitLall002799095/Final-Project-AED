@@ -2,11 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package UserInterface.ManagementCompany;
+package UserInterface.LegalCompany;
 
 import Application.Utils.AppSystem;
 import Business.ContractApplication.ContractApplication;
-import Business.ContractApplication.ContractApplicationCatalog;
 import UserInterface.Main.WorkAreaContPanel;
 import java.util.ArrayList;
 
@@ -14,15 +13,15 @@ import java.util.ArrayList;
  *
  * @author ankitlall
  */
-public class ApplicationsListingMgtComp extends javax.swing.JPanel {
-
+public class LegalCompRequestPanel extends javax.swing.JPanel {
+    
     public WorkAreaContPanel workAreaPanel;
     ArrayList<ContractApplication> contractApplicationCatalog;
-    
+
     /**
-     * Creates new form ApplicationsListing
+     * Creates new form LegalCompRequestPanel
      */
-    public ApplicationsListingMgtComp() {
+    public LegalCompRequestPanel() {
         this.workAreaPanel = AppSystem.workAreaPanel;
         setBounds(0, 0, 810, 700);
         initComponents();
@@ -30,7 +29,9 @@ public class ApplicationsListingMgtComp extends javax.swing.JPanel {
     }
     
     public void generateTableData() {
-        AppSystem.contractApplicationCatalog.getContracts(1, "mgt_comp_id");
+        jTable1.setCellSelectionEnabled(false);
+        jTable1.setRowSelectionAllowed(true);
+        AppSystem.contractApplicationCatalog.getContracts(1, "legal_comp_id");
         contractApplicationCatalog = AppSystem.contractApplicationCatalog.getContractApplicationCatalog();
         populateTable();
     }
@@ -73,6 +74,8 @@ public class ApplicationsListingMgtComp extends javax.swing.JPanel {
         jTextField1 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
 
+        setBounds(new java.awt.Rectangle(0, 0, 810, 675));
+
         jLabel1.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Applications");
@@ -98,6 +101,8 @@ public class ApplicationsListingMgtComp extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
+        jTable1.setColumnSelectionAllowed(true);
+        jTable1.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(jTable1);
 
         jLabel2.setText("Search As:");
@@ -108,7 +113,7 @@ public class ApplicationsListingMgtComp extends javax.swing.JPanel {
 
         jTextField1.setText("jTextField1");
 
-        jButton1.setText("New");
+        jButton1.setText("View");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -146,7 +151,7 @@ public class ApplicationsListingMgtComp extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(33, 33, 33)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 82, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -162,7 +167,7 @@ public class ApplicationsListingMgtComp extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        workAreaPanel.setRightPanel(new ManagementCompanyContractForm(workAreaPanel));
+        AppSystem.workAreaPanel.setRightPanel(new LegalContractFormCont((int)jTable1.getValueAt(jTable1.getSelectedRow(), 0)));
     }//GEN-LAST:event_jButton1ActionPerformed
 
 
