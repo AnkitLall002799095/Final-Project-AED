@@ -224,18 +224,8 @@ public class DatabaseUtils {
                 Apartment apt= aptListFromDB.addNewProfile();
                 apt.setAptId(aptRs.getInt(1));
                 apt.setTenantId(aptRs.getInt(2));
-                apt.setSize(aptRs.getInt(3));
-                apt.setBedroom(aptRs.getInt(4));
-                apt.setBathroom(aptRs.getInt(5));
-                apt.setType(aptRs.getString(6));
-                apt.setAvlblDate(aptRs.getDate(7));
-                apt.setRent(aptRs.getInt(8));
-                apt.setDetails(aptRs.getString(9));
-                apt.setLattitude(aptRs.getString(10));
-                apt.setLongitude(aptRs.getString(11));
-                apt.setIsLeased(aptRs.getBoolean(12));
-                apt.setAptPropId(aptRs.getInt(13));
-                apt.setImages(Helper.convertStringToArr(aptRs.getString(14)));
+                apt.setIsLeased(aptRs.getBoolean(3));
+                apt.setAptPropId(aptRs.getInt(4));
                                 
                 for (Property p : propList.getPropList()){
                     if (p.getPropId()==apt.getAptPropId())
