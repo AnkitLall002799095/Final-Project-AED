@@ -4,6 +4,16 @@
  */
 package UserInterface.ManagementCompany;
 
+import Application.Utils.DatabaseUtils;
+import Business.ManagementCompany.ManagementCompany;
+import Business.ManagementCompany.ManagementCompanyDirectory;
+import Business.Request.UserRequest;
+import Business.Request.UserRequestDirectory;
+import UserInterface.Main.WorkAreaContPanel;
+import java.sql.Connection;
+import java.sql.Statement;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author hmitt
@@ -13,8 +23,16 @@ public class MgmtUserRequestJPanel extends javax.swing.JPanel {
     /**
      * Creates new form MgmtUserRequestJPanel
      */
-    public MgmtUserRequestJPanel() {
+    ManagementCompanyDirectory mgmtList;
+    UserRequestDirectory reqList;
+    WorkAreaContPanel workAreaPanel;
+    
+    public MgmtUserRequestJPanel(WorkAreaContPanel workAreaPanel) {
         initComponents();
+        this.workAreaPanel = workAreaPanel;
+        this.mgmtList= DatabaseUtils.getMgmtListFromDB();
+        this.reqList= DatabaseUtils.getRequestListFromDB();
+        populateRequestTable();
     }
 
     /**
@@ -28,16 +46,16 @@ public class MgmtUserRequestJPanel extends javax.swing.JPanel {
 
         WelcomejLabel = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        UserRequestjTable = new javax.swing.JTable();
+        RequestListjTable = new javax.swing.JTable();
         RequestListjLabel = new javax.swing.JLabel();
         ApprovejButton = new javax.swing.JButton();
-        RejectjButton1 = new javax.swing.JButton();
+        RejectjButton = new javax.swing.JButton();
 
         WelcomejLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         WelcomejLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         WelcomejLabel.setText("Welcome to Apartment requests wizard!");
 
-        UserRequestjTable.setModel(new javax.swing.table.DefaultTableModel(
+        RequestListjTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null},
@@ -63,7 +81,7 @@ public class MgmtUserRequestJPanel extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(UserRequestjTable);
+        jScrollPane2.setViewportView(RequestListjTable);
 
         RequestListjLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         RequestListjLabel.setText("Requests list:-");
@@ -75,10 +93,10 @@ public class MgmtUserRequestJPanel extends javax.swing.JPanel {
             }
         });
 
-        RejectjButton1.setText("Reject request");
-        RejectjButton1.addActionListener(new java.awt.event.ActionListener() {
+        RejectjButton.setText("Reject request");
+        RejectjButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                RejectjButton1ActionPerformed(evt);
+                RejectjButtonActionPerformed(evt);
             }
         });
 
@@ -93,10 +111,10 @@ public class MgmtUserRequestJPanel extends javax.swing.JPanel {
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 661, Short.MAX_VALUE))
                 .addGap(96, 96, 96))
             .addGroup(layout.createSequentialGroup()
-                .addGap(257, 257, 257)
+                .addGap(277, 277, 277)
                 .addComponent(ApprovejButton, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(RejectjButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(RejectjButton, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
@@ -114,7 +132,7 @@ public class MgmtUserRequestJPanel extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(ApprovejButton, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(RejectjButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(RejectjButton, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(331, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
@@ -126,19 +144,170 @@ public class MgmtUserRequestJPanel extends javax.swing.JPanel {
 
     private void ApprovejButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ApprovejButtonActionPerformed
         // TODO add your handling code here:
+        
+        int agentId;
+        int selectedRow[] = RequestListjTable.getSelectedRows();
+        String requestType = new String();
+        int reqToUpdate;
+        int propToUpdate;
+        int aptToUpdate;
+        int tenantId;
+        String status= new String();
+        
+        if (selectedRow.length == 0) {
+            JOptionPane.showMessageDialog(ApprovejButton, "Please select a row to approve!");
+            return;
+        }
+
+        else if (selectedRow.length>1) {
+            JOptionPane.showMessageDialog(ApprovejButton, "Please select only 1 row to approve!");
+            return;
+        }
+
+        else {
+             
+            javax.swing.table.DefaultTableModel model = (javax.swing.table.DefaultTableModel) RequestListjTable.getModel();
+
+            for (int i=0;i<selectedRow.length;i++){
+                reqToUpdate = (Integer) model.getValueAt(selectedRow[i], 0);
+                tenantId = (Integer) model.getValueAt(selectedRow[i], 1);
+                propToUpdate = (Integer) model.getValueAt(selectedRow[i], 2);
+                aptToUpdate = (Integer) model.getValueAt(selectedRow[i], 3);
+                requestType = (String) model.getValueAt(selectedRow[i], 4);
+                status = (String) model.getValueAt(selectedRow[i], 5);
+                
+                if (status.equals("Pending")){
+                    for (UserRequest u : reqList.getReqList()){
+                    if (u.getRequestId()==reqToUpdate)
+                        u.setStatus("Approved");
+                    }
+
+                    try{
+
+                        Connection conn= DatabaseUtils.getConnection();
+                        Statement st1 = conn.createStatement();
+                        st1.executeUpdate("UPDATE `aedfinalproject`.`user_application_request` SET Status = \"Approved\" WHERE Request_Id = " + reqToUpdate + "");
+
+                        populateRequestTable();
+                        if (requestType.equals("To-Lease")){
+                            agentId= Integer.parseInt(JOptionPane.showInputDialog("Assign agent to the property!"));
+                            Statement st2 = conn.createStatement();
+                            st2.executeUpdate("UPDATE `aedfinalproject`.`property_details` SET mgt_broker_id = " + agentId + " WHERE prop_id = " + propToUpdate +"");
+                        }
+                        else if (requestType.equals("Lease")){
+                            Statement st3 = conn.createStatement();
+                            st3.executeUpdate("UPDATE `aedfinalproject`.`apartment_details` SET is_Leased = " + 1 + " , Tenant_Id = " + tenantId + " WHERE Apt_id = " + aptToUpdate +"");
+                        }
+
+                    }
+                    catch(Exception e){
+                        System.out.println(e);
+                    }
+                    JOptionPane.showMessageDialog(ApprovejButton, "Request approved!");
+                }
+                
+                else{
+                    JOptionPane.showMessageDialog(ApprovejButton, "Request already closed!");
+                }
+                
+            }
+            
+        }
+        
     }//GEN-LAST:event_ApprovejButtonActionPerformed
 
-    private void RejectjButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RejectjButton1ActionPerformed
+    private void RejectjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RejectjButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_RejectjButton1ActionPerformed
+        
+        int selectedRow[] = RequestListjTable.getSelectedRows();
+        int reqToUpdate;
+        int propToUpdate;
+        String requestType = new String();
+        String status = new String();
+        
+        if (selectedRow.length == 0) {
+            JOptionPane.showMessageDialog(RejectjButton, "Please select a row to reject!");
+            return;
+        }
+
+        else if (selectedRow.length>1) {
+            JOptionPane.showMessageDialog(RejectjButton, "Please select only 1 row to reject!");
+            return;
+        }
+
+        else {
+            
+            javax.swing.table.DefaultTableModel model = (javax.swing.table.DefaultTableModel) RequestListjTable.getModel();
+
+            for (int i=0;i<selectedRow.length;i++){
+                reqToUpdate = (Integer) model.getValueAt(selectedRow[i], 0);
+                propToUpdate = (Integer) model.getValueAt(selectedRow[i], 2);
+                requestType = (String) model.getValueAt(selectedRow[i], 4);
+                status = (String) model.getValueAt(selectedRow[i], 5);
+                
+                if (status.equals("Pending")){
+                    for (UserRequest u : reqList.getReqList()){
+                    if (u.getRequestId()==reqToUpdate)
+                        u.setStatus("Rejected");
+                    }
+
+                    try{
+
+                        Connection conn= DatabaseUtils.getConnection();
+                        Statement st1 = conn.createStatement();
+                        st1.executeUpdate("UPDATE `aedfinalproject`.`user_application_request` SET Status = \"Rejected\" WHERE Request_Id = " + reqToUpdate + "");
+
+                        populateRequestTable();
+                        if (requestType.equals("To-Lease")){
+                            Statement st2 = conn.createStatement();
+                            st2.executeUpdate("DELETE FROM `aedfinalproject`.`property_details` WHERE prop_id = " + propToUpdate +"");
+                        }
+
+                    }
+                    catch(Exception e){
+                        System.out.println(e);
+                    }
+                    JOptionPane.showMessageDialog(RejectjButton, "Request rejected!");
+                }
+                else{
+                    JOptionPane.showMessageDialog(RejectjButton, "Request already closed!");
+                }
+                
+            }
+            
+        }
+        
+    }//GEN-LAST:event_RejectjButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton ApprovejButton;
-    private javax.swing.JButton RejectjButton1;
+    private javax.swing.JButton RejectjButton;
     private javax.swing.JLabel RequestListjLabel;
-    private javax.swing.JTable UserRequestjTable;
+    private javax.swing.JTable RequestListjTable;
     private javax.swing.JLabel WelcomejLabel;
     private javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables
+    
+    public void populateRequestTable(){
+        javax.swing.table.DefaultTableModel model = (javax.swing.table.DefaultTableModel) RequestListjTable.getModel();
+        model.setRowCount(0);
+        
+        for (UserRequest u : reqList.getReqList()){
+            if (u.getMgmtId()==2){
+                Object[] row = new Object[7];
+                row[0] = u.getRequestId();
+                row[1] = u.getUserId();
+                row[2] = u.getPropId();
+                row[3] = u.getAptId();
+                row[4] = u.getRequestType();
+                row[5] = u.getStatus();
+                row[6] = u.getLastMdfdDate();
+
+                model.addRow(row);
+            }
+        }
+    }
+
+
 }

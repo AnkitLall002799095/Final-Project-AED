@@ -5,7 +5,9 @@
 package Business.Apartment;
 
 import Business.Property.Property;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  *
@@ -26,7 +28,12 @@ public class Apartment {
     private String longitude;
     private boolean isLeased;
     private int aptPropId;
+    private ArrayList<String> images;
     public Property prop;
+    
+    public Apartment(){
+        this.images = new ArrayList<String>(); 
+    }
 
     public int getAptId() {
         return aptId;
@@ -130,6 +137,14 @@ public class Apartment {
 
     public void setAptPropId(int aptPropId) {
         this.aptPropId = aptPropId;
+    }
+
+    public ArrayList<String> getImages() {
+        return images;
+    }
+
+    public void setImages(ArrayList<String> images) {
+        this.images = images;
     }
     
     public Property getProp() {

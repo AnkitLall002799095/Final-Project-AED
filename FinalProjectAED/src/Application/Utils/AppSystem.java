@@ -6,6 +6,7 @@ package Application.Utils;
 
 import Business.ContractApplication.ContractApplicationCatalog;
 import UserInterface.Main.AppView;
+import UserInterface.Main.LoginView;
 import UserInterface.Main.WorkAreaContPanel;
 
 /**
@@ -18,8 +19,26 @@ public class AppSystem {
     public static ContractApplicationCatalog contractApplicationCatalog;
     public static WorkAreaContPanel workAreaPanel;
     
+    
+    
     public AppSystem(AppView appViewObj) {
         this.appViewObj = appViewObj;
         this.contractApplicationCatalog = new ContractApplicationCatalog();
+        
+        
     }
+    
+    public static String currentUserRole;
+    public static String currentUid;
+    
+    public static void setCurrentUserRole(String UserRole) {
+		currentUserRole = UserRole;
+                
+	}
+    public static void setCurrentUid(String Uid){
+         currentUid = Uid;
+    
+    }
+    
 }
+

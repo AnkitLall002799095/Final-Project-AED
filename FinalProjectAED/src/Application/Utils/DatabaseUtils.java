@@ -7,6 +7,8 @@ package Application.Utils;
 import Business.Apartment.Apartment;
 import Business.Apartment.ApartmentDirectory;
 import Business.ContractApplication.ContractApplication;
+import Business.ManagementCompany.ManagementCompany;
+import Business.ManagementCompany.ManagementCompanyDirectory;
 import Business.Property.Property;
 import Business.Property.PropertyDirectory;
 import Business.Request.UserRequest;
@@ -58,7 +60,9 @@ public class DatabaseUtils {
             Connection conn= getConnection();
             Statement st = conn.createStatement();
             st.executeUpdate("INSERT INTO `aedfinalproject`.`user_table` (`Uid`, `UserRole`, `Name`, `DOB`, `Gender`, `Email`, `PhoneNumber`, `Password` , `Street` , `Community` , `City` , `State`) "
-                    + "VALUES ('" + person.getUid() + "','" + person.getUserRole() + "','" + person.getName() + "','" + person.getDob() + "','" + person.getGender() + "','" + person.getEmail() + "','" + person.getPhoneNumber() + "','" + person.getPassword()+ "','" + person.getStreet()+ "','" + person.getCommunity()+ "','" + person.getCity()+ "','" + person.getState()+ "')");
+                    + "VALUES ('" + person.getUid() + "','" + person.getUserRole() + "','" + person.getName() + "','" + person.getDob() + "','" + person.getGender() + "','" + person.getEmail() + "','" 
+                    + person.getPhoneNumber()
+                    + "','" + person.getPassword()+ "','" + person.getStreet()+ "','" + person.getCommunity()+ "','" + person.getCity()+ "','" + person.getState()+ "')");
 
         }
             catch(Exception e){
@@ -70,6 +74,32 @@ public class DatabaseUtils {
     
     
     }
+    public static void loginUser(String name, String password){
+        try{
+            Connection connection = DriverManager.getConnection("jdbc:mysql://aeddatabase.cvxm5l9d0hm0.us-east-1.rds.amazonaws.com:3306/aedfinalproject", "admin", "password");
+            
+             Statement sta = connection.createStatement();
+             String query = "select * from user_table where Name='"+name+"'and Password = '"+password+"'";
+             ResultSet rs = sta.executeQuery(query);
+             if(rs.next()){
+               // dispose(); // when credentials are correct close login page
+             
+               
+             }else{
+                // JOptionPane.showMessageDialog(this,"username or password is wrong");
+                // txt_name.setText("");
+                // txt_password.setText("");
+             }
+             connection.close();
+            
+        }catch(Exception e){
+            
+        }
+    }
+    
+    
+    
+    
     
     public static void createNewContract(HashMap<String, Object> contract) {
         try {
@@ -205,13 +235,14 @@ public class DatabaseUtils {
     
     public static ApartmentDirectory getAptListFromDB(){
         
+        
         try{
             ApartmentDirectory aptListFromDB = new ApartmentDirectory();
             Connection conn= getConnection();
             Statement st = conn.createStatement();
             ResultSet aptRs = st.executeQuery("SELECT * FROM aedfinalproject.apartment_details");
             
-            PropertyDirectory propList = DatabaseUtils.getPropListFromDB();
+            PropertyDirectory propList = getPropListFromDB();
             
             while (aptRs.next()){
                 Apartment apt= aptListFromDB.addNewProfile();
@@ -228,10 +259,12 @@ public class DatabaseUtils {
                 apt.setLongitude(aptRs.getString(11));
                 apt.setIsLeased(aptRs.getBoolean(12));
                 apt.setAptPropId(aptRs.getInt(13));
-                
+                apt.setImages(Helper.convertStringToArr(aptRs.getString(14)));
+                                
                 for (Property p : propList.getPropList()){
                     if (p.getPropId()==apt.getAptPropId())
                         apt.setProp(p);
+                    
                 }
                 
             }
@@ -243,28 +276,28 @@ public class DatabaseUtils {
         }
     }
     
-//    public static ManagementCompanyDirectory getMgmtListFromDB(){
-//        
-//        try{
-//            ManagementCompanyDirectory mgmtListFromDB = new ManagementCompanyDirectory();
-//            Connection conn= Helper.getConnection();
-//            Statement st = conn.createStatement();
-//            ResultSet mgmtRs = st.executeQuery("SELECT * FROM aedfinalproject.management_companies");
-//            
-//            while (mgmtRs.next()){
-//                ManagementCompany mgmt = MgmtListFromDB.addNewProfile();
-//                mgmt.setMgmtId(mgmtRs.getInt(1));
-//                mgmt.setMgmtName(mgmtRs.getString(2));
-//                mgmt.setCity(mgmtRs.getString(7));
-//                mgmt.setState(mgmtRs.getString(8));
-//            }
-//            return mgmtListFromDB;
-//        }
-//        catch(Exception e){
-//            System.out.println(e);
-//            return null;
-//        }
-//    }
+    public static ManagementCompanyDirectory getMgmtListFromDB(){
+        
+        try{
+            ManagementCompanyDirectory mgmtListFromDB = new ManagementCompanyDirectory();
+            Connection conn= getConnection();
+            Statement st = conn.createStatement();
+            ResultSet mgmtRs = st.executeQuery("SELECT * FROM aedfinalproject.management_companies");
+            
+            while (mgmtRs.next()){
+                ManagementCompany mgmt = mgmtListFromDB.addNewProfile();
+                mgmt.setMgmtId(mgmtRs.getInt(1));
+                mgmt.setMgmtName(mgmtRs.getString(2));
+                mgmt.setCity(mgmtRs.getString(3));
+                mgmt.setState(mgmtRs.getString(4));
+            }
+            return mgmtListFromDB;
+        }
+        catch(Exception e){
+            System.out.println(e);
+            return null;
+        }
+    }
     
     public static UserRequestDirectory getRequestListFromDB(){
         
@@ -285,7 +318,7 @@ public class DatabaseUtils {
                 req.setRequestType(reqRs.getString(5));
                 req.setStatus(reqRs.getString(6));
                 req.setLastMdfdDate(dFormatView.format(reqRs.getDate(7)));
-                
+                req.setUserId(reqRs.getInt(8));
             }
             return reqListFromDB;
         }
