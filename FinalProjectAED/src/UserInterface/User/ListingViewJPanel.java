@@ -43,13 +43,12 @@ public class ListingViewJPanel extends javax.swing.JPanel {
     }
     
     public ListingViewJPanel(WorkAreaContPanel workAreaPanel) {
-        
-        this.workAreaPanel=workAreaPanel;
+        initComponents();
         aptList = DatabaseUtils.getAptListFromDB();
         propList = DatabaseUtils.getPropListFromDB();
-        reqList = DatabaseUtils.getRequestListFromDB();
+        reqList = DatabaseUtils.getRequestListFromDB();  
         
-        initComponents();        
+        this.workAreaPanel=workAreaPanel;     
         populateListingTable();
         populateRequestTable();
     }

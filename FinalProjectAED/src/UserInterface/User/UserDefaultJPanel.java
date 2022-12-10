@@ -4,6 +4,7 @@
  */
 package UserInterface.User;
 
+import Application.Utils.AppSystem;
 import Business.Request.UserRequestDirectory;
 import UserInterface.Main.WorkAreaContPanel;
 
@@ -16,12 +17,12 @@ public class UserDefaultJPanel extends javax.swing.JPanel {
     /**
      * Creates new form UserDefaultJPanel
      */
-    WorkAreaContPanel workAreaPanel;
     public static int requestCounter;
     UserRequestDirectory reqList;
+    WorkAreaContPanel workAreaPanel;
     
-    public UserDefaultJPanel(WorkAreaContPanel workAreaPanel) {
-        this.workAreaPanel= workAreaPanel;
+    public UserDefaultJPanel() {
+        this.workAreaPanel = AppSystem.workAreaPanel;
         requestCounter=1;
         reqList = new UserRequestDirectory();
         initComponents();

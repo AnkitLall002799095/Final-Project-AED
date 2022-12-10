@@ -304,8 +304,7 @@ public class AptDetailsJPanel extends javax.swing.JPanel {
             }
         
         JOptionPane.showMessageDialog(BookAptjButton, "Apartment booking request placed!");
-        //Send booking request to management company.
-        
+        workAreaPanel.setRightPanel(new ListingViewJPanel(workAreaPanel));
     }//GEN-LAST:event_BookAptjButtonActionPerformed
 
     private void GoBackjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GoBackjButtonActionPerformed
