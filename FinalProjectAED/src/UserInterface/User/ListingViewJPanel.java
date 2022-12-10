@@ -43,13 +43,12 @@ public class ListingViewJPanel extends javax.swing.JPanel {
     }
     
     public ListingViewJPanel(WorkAreaContPanel workAreaPanel) {
-        
-        this.workAreaPanel=workAreaPanel;
+        initComponents();
         aptList = DatabaseUtils.getAptListFromDB();
         propList = DatabaseUtils.getPropListFromDB();
-        reqList = DatabaseUtils.getRequestListFromDB();
+        reqList = DatabaseUtils.getRequestListFromDB();  
         
-        initComponents();        
+        this.workAreaPanel=workAreaPanel;     
         populateListingTable();
         populateRequestTable();
     }
@@ -294,18 +293,21 @@ public class ListingViewJPanel extends javax.swing.JPanel {
         
         for (Apartment a : aptList.getAptList()) {
             
-            Object[] row = new Object[9];
-            row[0] = a;
-            row[1] = a.prop.getPropName();
-            row[2] = a.getType();
-            row[3] = a.prop.getMgtComp();
-            row[4] = a.getSize();
-            row[5] = a.getAvlblDate();
-            row[6] = a.prop.getStreet();
-            row[7] = a.prop.getCommunity();
-            row[8] = a.prop.getCity();
+            if (a.isIsLeased()==false){
+                Object[] row = new Object[9];
             
-            model.addRow(row);
+                row[0] = a;
+                row[1] = a.prop.getPropName();
+                row[2] = a.getType();
+                row[3] = a.prop.getMgtComp();
+                row[4] = a.getSize();
+                row[5] = a.getAvlblDate();
+                row[6] = a.prop.getStreet();
+                row[7] = a.prop.getCommunity();
+                row[8] = a.prop.getCity();
+
+                model.addRow(row);
+            }
         }
             
     }

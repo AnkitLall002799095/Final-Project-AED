@@ -454,7 +454,7 @@ public class RegisterView extends javax.swing.JPanel {
        }
                 
         person.setEmail(txt_email.getText());
-        person.setPhoneNumber(txt_phone.getText());
+       // person.setPhoneNumber(txt_phone.getText());
         person.setPassword(txt_password.getText());
         person.setStreet(txt_street.getText());
         person.setCommunity(txt_community.getText());

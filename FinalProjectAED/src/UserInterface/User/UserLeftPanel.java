@@ -6,6 +6,10 @@ package UserInterface.User;
 
 import Application.Utils.AppSystem;
 import UserInterface.Main.WorkAreaContPanel;
+import UserInterface.ManagementCompany.CompanyEmployeeLeftPanel;
+import UserInterface.ManagementCompany.MgmtAdminLeftPanel;
+import UserInterface.ManagementCompany.MgmtDefaultJPanel;
+import UserInterface.ManagementCompany.MgmtUserRequestJPanel;
 
 /**
  *
@@ -38,6 +42,7 @@ public class UserLeftPanel extends javax.swing.JPanel {
         ViewjButton = new javax.swing.JButton();
         ViewjButton1 = new javax.swing.JButton();
         LogoutjButton = new javax.swing.JButton();
+        ManagementjButton = new javax.swing.JButton();
 
         WelcomejLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         WelcomejLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -67,17 +72,26 @@ public class UserLeftPanel extends javax.swing.JPanel {
             }
         });
 
+        ManagementjButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        ManagementjButton.setText("Go to management");
+        ManagementjButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ManagementjButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(20, Short.MAX_VALUE)
+                .addContainerGap(11, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(WelcomejLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(ViewjButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(ViewjButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(LogoutjButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(LogoutjButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(ManagementjButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(24, 24, 24))
         );
         layout.setVerticalGroup(
@@ -91,7 +105,9 @@ public class UserLeftPanel extends javax.swing.JPanel {
                 .addComponent(ViewjButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(31, 31, 31)
                 .addComponent(LogoutjButton, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(347, Short.MAX_VALUE))
+                .addGap(27, 27, 27)
+                .addComponent(ManagementjButton, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(289, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -112,13 +128,21 @@ public class UserLeftPanel extends javax.swing.JPanel {
     private void LogoutjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogoutjButtonActionPerformed
         // TODO add your handling code here:
         
-        workAreaPanel.setRightPanel(new UserDefaultJPanel(workAreaPanel));
+        workAreaPanel.setRightPanel(new UserDefaultJPanel());
         
     }//GEN-LAST:event_LogoutjButtonActionPerformed
+
+    private void ManagementjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ManagementjButtonActionPerformed
+        // TODO add your handling code here:
+        
+        workAreaPanel.setLeftPanel(new MgmtAdminLeftPanel(workAreaPanel));
+        workAreaPanel.setRightPanel(new MgmtDefaultJPanel(workAreaPanel));
+    }//GEN-LAST:event_ManagementjButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton LogoutjButton;
+    private javax.swing.JButton ManagementjButton;
     private javax.swing.JButton ViewjButton;
     private javax.swing.JButton ViewjButton1;
     private javax.swing.JLabel WelcomejLabel;

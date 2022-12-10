@@ -2,30 +2,25 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package UserInterface.User;
+package UserInterface.ManagementCompany;
 
-import Application.Utils.AppSystem;
-import Business.Request.UserRequestDirectory;
 import UserInterface.Main.WorkAreaContPanel;
 
 /**
  *
  * @author hmitt
  */
-public class UserDefaultJPanel extends javax.swing.JPanel {
+public class MgmtDefaultJPanel extends javax.swing.JPanel {
 
     /**
-     * Creates new form UserDefaultJPanel
+     * Creates new form MgmtDefaultJPanel
      */
-    public static int requestCounter;
-    UserRequestDirectory reqList;
+    
     WorkAreaContPanel workAreaPanel;
     
-    public UserDefaultJPanel() {
-        this.workAreaPanel = AppSystem.workAreaPanel;
-        requestCounter=1;
-        reqList = new UserRequestDirectory();
+    public MgmtDefaultJPanel(WorkAreaContPanel workAreaPanel) {
         initComponents();
+        this.workAreaPanel=workAreaPanel;
     }
 
     /**
@@ -42,7 +37,7 @@ public class UserDefaultJPanel extends javax.swing.JPanel {
 
         WelcomejLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         WelcomejLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        WelcomejLabel.setText("Welcome to Apartment management portal!");
+        WelcomejLabel.setText("Welcome to Management company portal!");
 
         SubHeadingjLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         SubHeadingjLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -57,7 +52,7 @@ public class UserDefaultJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(WelcomejLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 464, Short.MAX_VALUE)
                     .addComponent(SubHeadingjLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(161, Short.MAX_VALUE))
+                .addContainerGap(211, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

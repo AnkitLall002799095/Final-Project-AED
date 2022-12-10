@@ -7,6 +7,8 @@ package Application.Utils;
 import Business.Apartment.Apartment;
 import Business.Apartment.ApartmentDirectory;
 import Business.ContractApplication.ContractApplication;
+import Business.ManagementCompany.ManagementCompany;
+import Business.ManagementCompany.ManagementCompanyDirectory;
 import Business.Property.Property;
 import Business.Property.PropertyDirectory;
 import Business.Request.UserRequest;
@@ -209,13 +211,14 @@ public class DatabaseUtils {
     
     public static ApartmentDirectory getAptListFromDB(){
         
+        
         try{
             ApartmentDirectory aptListFromDB = new ApartmentDirectory();
             Connection conn= getConnection();
             Statement st = conn.createStatement();
             ResultSet aptRs = st.executeQuery("SELECT * FROM aedfinalproject.apartment_details");
             
-            PropertyDirectory propList = DatabaseUtils.getPropListFromDB();
+            PropertyDirectory propList = getPropListFromDB();
             
             while (aptRs.next()){
                 Apartment apt= aptListFromDB.addNewProfile();
@@ -232,10 +235,12 @@ public class DatabaseUtils {
                 apt.setLongitude(aptRs.getString(11));
                 apt.setIsLeased(aptRs.getBoolean(12));
                 apt.setAptPropId(aptRs.getInt(13));
-                
+                apt.setImages(Helper.convertStringToArr(aptRs.getString(14)));
+                                
                 for (Property p : propList.getPropList()){
                     if (p.getPropId()==apt.getAptPropId())
                         apt.setProp(p);
+                    
                 }
                 
             }
@@ -247,28 +252,28 @@ public class DatabaseUtils {
         }
     }
     
-//    public static ManagementCompanyDirectory getMgmtListFromDB(){
-//        
-//        try{
-//            ManagementCompanyDirectory mgmtListFromDB = new ManagementCompanyDirectory();
-//            Connection conn= Helper.getConnection();
-//            Statement st = conn.createStatement();
-//            ResultSet mgmtRs = st.executeQuery("SELECT * FROM aedfinalproject.management_companies");
-//            
-//            while (mgmtRs.next()){
-//                ManagementCompany mgmt = MgmtListFromDB.addNewProfile();
-//                mgmt.setMgmtId(mgmtRs.getInt(1));
-//                mgmt.setMgmtName(mgmtRs.getString(2));
-//                mgmt.setCity(mgmtRs.getString(7));
-//                mgmt.setState(mgmtRs.getString(8));
-//            }
-//            return mgmtListFromDB;
-//        }
-//        catch(Exception e){
-//            System.out.println(e);
-//            return null;
-//        }
-//    }
+    public static ManagementCompanyDirectory getMgmtListFromDB(){
+        
+        try{
+            ManagementCompanyDirectory mgmtListFromDB = new ManagementCompanyDirectory();
+            Connection conn= getConnection();
+            Statement st = conn.createStatement();
+            ResultSet mgmtRs = st.executeQuery("SELECT * FROM aedfinalproject.management_companies");
+            
+            while (mgmtRs.next()){
+                ManagementCompany mgmt = mgmtListFromDB.addNewProfile();
+                mgmt.setMgmtId(mgmtRs.getInt(1));
+                mgmt.setMgmtName(mgmtRs.getString(2));
+                mgmt.setCity(mgmtRs.getString(3));
+                mgmt.setState(mgmtRs.getString(4));
+            }
+            return mgmtListFromDB;
+        }
+        catch(Exception e){
+            System.out.println(e);
+            return null;
+        }
+    }
     
     public static UserRequestDirectory getRequestListFromDB(){
         
@@ -289,7 +294,7 @@ public class DatabaseUtils {
                 req.setRequestType(reqRs.getString(5));
                 req.setStatus(reqRs.getString(6));
                 req.setLastMdfdDate(dFormatView.format(reqRs.getDate(7)));
-                
+                req.setUserId(reqRs.getInt(8));
             }
             return reqListFromDB;
         }
