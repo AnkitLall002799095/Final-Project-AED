@@ -57,7 +57,9 @@ public class DatabaseUtils {
             Connection conn= getConnection();
             Statement st = conn.createStatement();
             st.executeUpdate("INSERT INTO `aedfinalproject`.`user_table` (`Uid`, `UserRole`, `Name`, `DOB`, `Gender`, `Email`, `PhoneNumber`, `Password` , `Street` , `Community` , `City` , `State`) "
-                    + "VALUES ('" + person.getUid() + "','" + person.getUserRole() + "','" + person.getName() + "','" + person.getDob() + "','" + person.getGender() + "','" + person.getEmail() + "','" + person.getPhoneNumber() + "','" + person.getPassword()+ "','" + person.getStreet()+ "','" + person.getCommunity()+ "','" + person.getCity()+ "','" + person.getState()+ "')");
+                    + "VALUES ('" + person.getUid() + "','" + person.getUserRole() + "','" + person.getName() + "','" + person.getDob() + "','" + person.getGender() + "','" + person.getEmail() + "','" 
+                    + person.getPhoneNumber()
+                    + "','" + person.getPassword()+ "','" + person.getStreet()+ "','" + person.getCommunity()+ "','" + person.getCity()+ "','" + person.getState()+ "')");
 
         }
             catch(Exception e){
@@ -69,6 +71,32 @@ public class DatabaseUtils {
     
     
     }
+    public static void loginUser(String name, String password){
+        try{
+            Connection connection = DriverManager.getConnection("jdbc:mysql://aeddatabase.cvxm5l9d0hm0.us-east-1.rds.amazonaws.com:3306/aedfinalproject", "admin", "password");
+            
+             Statement sta = connection.createStatement();
+             String query = "select * from user_table where Name='"+name+"'and Password = '"+password+"'";
+             ResultSet rs = sta.executeQuery(query);
+             if(rs.next()){
+               // dispose(); // when credentials are correct close login page
+             
+               
+             }else{
+                // JOptionPane.showMessageDialog(this,"username or password is wrong");
+                // txt_name.setText("");
+                // txt_password.setText("");
+             }
+             connection.close();
+            
+        }catch(Exception e){
+            
+        }
+    }
+    
+    
+    
+    
     
     public static void createNewContract(HashMap<String, Object> contract) {
         try {
@@ -270,7 +298,7 @@ public class DatabaseUtils {
         
         try{
             GasCompanyDirectory gasListFromDB = new GasCompanyDirectory();
-            Connection conn= Helper.getConnection();
+            Connection conn= getConnection();
             Statement st = conn.createStatement();
             ResultSet gasRs = st.executeQuery("SELECT * FROM aedfinalproject.gas_companies");
             
@@ -291,7 +319,7 @@ public class DatabaseUtils {
         
         try{
             WaterCompanyDirectory waterListFromDB = new WaterCompanyDirectory();
-            Connection conn= Helper.getConnection();
+            Connection conn= getConnection();
             Statement st = conn.createStatement();
             ResultSet waterRs = st.executeQuery("SELECT * FROM aedfinalproject.water_companies");
             
@@ -312,7 +340,7 @@ public class DatabaseUtils {
         
         try{
             ElectricityCompanyDirectory elecListFromDB = new ElectricityCompanyDirectory();
-            Connection conn= Helper.getConnection();
+            Connection conn= getConnection();
             Statement st = conn.createStatement();
             ResultSet elecRs = st.executeQuery("SELECT * FROM aedfinalproject.electricity_companies");
             

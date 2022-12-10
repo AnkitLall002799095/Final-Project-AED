@@ -55,7 +55,7 @@ public class WorkAreaContPanel extends javax.swing.JPanel {
 
     private void setDefaultPanelViews() {
         jSplitPane1.setLeftComponent(new UserLeftPanel());
-        jSplitPane1.setRightComponent(new UserDefaultJPanel());
+        //jSplitPane1.setRightComponent(new UserDefaultJPanel());
         //jSplitPane1.setLeftComponent(new CompanyEmployeeLeftPanel());
         //jSplitPane1.setRightComponent(new ApplicationsListingMgtComp());
     }
