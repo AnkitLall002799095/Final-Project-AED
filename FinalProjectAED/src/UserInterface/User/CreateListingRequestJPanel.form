@@ -130,40 +130,46 @@
                   <Component id="MgmtCompjLabel" min="-2" pref="25" max="-2" attributes="0"/>
                   <Group type="102" attributes="0">
                       <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="MgmtCompjComboBox" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
-                          <Group type="103" alignment="3" groupAlignment="3" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="103" alignment="0" groupAlignment="3" attributes="0">
                               <Component id="StreetjLabel" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                               <Component id="StreetjTextField" alignment="3" max="32767" attributes="0"/>
                           </Group>
+                          <Component id="MgmtCompjComboBox" min="-2" pref="24" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="GasCompjLabel" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
-                  <Component id="GasCompjComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Group type="103" alignment="3" groupAlignment="3" attributes="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="103" alignment="0" groupAlignment="3" attributes="0">
                       <Component id="CommunityjLabel" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                       <Component id="CommunityjTextField" alignment="3" max="32767" attributes="0"/>
                   </Group>
-              </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="ElecCompjLabel" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
-                  <Component id="ElecCompjComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Group type="103" alignment="3" groupAlignment="3" attributes="0">
-                      <Component id="CityjLabel" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
-                      <Component id="CityjTextField" alignment="3" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="GasCompjLabel" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                      <Component id="GasCompjComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="WaterCompjLabel" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
-                  <Component id="WaterCompjComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Group type="103" alignment="3" groupAlignment="3" attributes="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                      <Component id="CityjLabel" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                      <Component id="CityjTextField" alignment="3" max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="ElecCompjLabel" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                      <Component id="ElecCompjComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="103" alignment="0" groupAlignment="3" attributes="0">
                       <Component id="StatejLabel" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                       <Component id="StatejTextField" alignment="3" max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="WaterCompjLabel" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                      <Component id="WaterCompjComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
