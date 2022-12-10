@@ -111,7 +111,7 @@ public class MgmtUserRequestJPanel extends javax.swing.JPanel {
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 661, Short.MAX_VALUE))
                 .addGap(96, 96, 96))
             .addGroup(layout.createSequentialGroup()
-                .addGap(257, 257, 257)
+                .addGap(277, 277, 277)
                 .addComponent(ApprovejButton, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(RejectjButton, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -145,7 +145,14 @@ public class MgmtUserRequestJPanel extends javax.swing.JPanel {
     private void ApprovejButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ApprovejButtonActionPerformed
         // TODO add your handling code here:
         
+        int agentId;
         int selectedRow[] = RequestListjTable.getSelectedRows();
+        String requestType = new String();
+        int reqToUpdate;
+        int propToUpdate;
+        int aptToUpdate;
+        int tenantId;
+        String status= new String();
         
         if (selectedRow.length == 0) {
             JOptionPane.showMessageDialog(ApprovejButton, "Please select a row to approve!");
@@ -158,14 +165,53 @@ public class MgmtUserRequestJPanel extends javax.swing.JPanel {
         }
 
         else {
-            
-//            javax.swing.table.DefaultTableModel model = (javax.swing.table.DefaultTableModel) UserRequestjTable.getModel();
-//            
-//            for (int i=0;i<selectedRow.length;i++){
-//                Apartment apt = (Apartment) model.getValueAt(selectedRow[i], 0);
-//                workAreaPanel.setRightPanel(new AptDetailsJPanel(workAreaPanel, apt, reqList));
-//            }
+             
+            javax.swing.table.DefaultTableModel model = (javax.swing.table.DefaultTableModel) RequestListjTable.getModel();
 
+            for (int i=0;i<selectedRow.length;i++){
+                reqToUpdate = (Integer) model.getValueAt(selectedRow[i], 0);
+                tenantId = (Integer) model.getValueAt(selectedRow[i], 1);
+                propToUpdate = (Integer) model.getValueAt(selectedRow[i], 2);
+                aptToUpdate = (Integer) model.getValueAt(selectedRow[i], 3);
+                requestType = (String) model.getValueAt(selectedRow[i], 4);
+                status = (String) model.getValueAt(selectedRow[i], 5);
+                
+                if (status.equals("Pending")){
+                    for (UserRequest u : reqList.getReqList()){
+                    if (u.getRequestId()==reqToUpdate)
+                        u.setStatus("Approved");
+                    }
+
+                    try{
+
+                        Connection conn= DatabaseUtils.getConnection();
+                        Statement st1 = conn.createStatement();
+                        st1.executeUpdate("UPDATE `aedfinalproject`.`user_application_request` SET Status = \"Approved\" WHERE Request_Id = " + reqToUpdate + "");
+
+                        populateRequestTable();
+                        if (requestType.equals("To-Lease")){
+                            agentId= Integer.parseInt(JOptionPane.showInputDialog("Assign agent to the property!"));
+                            Statement st2 = conn.createStatement();
+                            st2.executeUpdate("UPDATE `aedfinalproject`.`property_details` SET mgt_broker_id = " + agentId + " WHERE prop_id = " + propToUpdate +"");
+                        }
+                        else if (requestType.equals("Lease")){
+                            Statement st3 = conn.createStatement();
+                            st3.executeUpdate("UPDATE `aedfinalproject`.`apartment_details` SET is_Leased = " + 1 + " , Tenant_Id = " + tenantId + " WHERE Apt_id = " + aptToUpdate +"");
+                        }
+
+                    }
+                    catch(Exception e){
+                        System.out.println(e);
+                    }
+                    JOptionPane.showMessageDialog(ApprovejButton, "Request approved!");
+                }
+                
+                else{
+                    JOptionPane.showMessageDialog(ApprovejButton, "Request already closed!");
+                }
+                
+            }
+            
         }
         
     }//GEN-LAST:event_ApprovejButtonActionPerformed
@@ -176,6 +222,8 @@ public class MgmtUserRequestJPanel extends javax.swing.JPanel {
         int selectedRow[] = RequestListjTable.getSelectedRows();
         int reqToUpdate;
         int propToUpdate;
+        String requestType = new String();
+        String status = new String();
         
         if (selectedRow.length == 0) {
             JOptionPane.showMessageDialog(RejectjButton, "Please select a row to reject!");
@@ -194,26 +242,35 @@ public class MgmtUserRequestJPanel extends javax.swing.JPanel {
             for (int i=0;i<selectedRow.length;i++){
                 reqToUpdate = (Integer) model.getValueAt(selectedRow[i], 0);
                 propToUpdate = (Integer) model.getValueAt(selectedRow[i], 2);
+                requestType = (String) model.getValueAt(selectedRow[i], 4);
+                status = (String) model.getValueAt(selectedRow[i], 5);
                 
-                for (UserRequest u : reqList.getReqList()){
+                if (status.equals("Pending")){
+                    for (UserRequest u : reqList.getReqList()){
                     if (u.getRequestId()==reqToUpdate)
                         u.setStatus("Rejected");
-                }
-                
-                try{
-                
-                    Connection conn= DatabaseUtils.getConnection();
-                    Statement st1 = conn.createStatement();
-                    st1.executeUpdate("UPDATE `aedfinalproject`.`user_application_request` SET Status = \"Rejected\" WHERE Request_Id = " + reqToUpdate + "");
+                    }
 
-                    populateRequestTable();
-                    
-                    Statement st2 = conn.createStatement();
-                    st2.executeUpdate("DELETE FROM `aedfinalproject`.`property_details` WHERE prop_id = " + propToUpdate +"");
+                    try{
 
+                        Connection conn= DatabaseUtils.getConnection();
+                        Statement st1 = conn.createStatement();
+                        st1.executeUpdate("UPDATE `aedfinalproject`.`user_application_request` SET Status = \"Rejected\" WHERE Request_Id = " + reqToUpdate + "");
+
+                        populateRequestTable();
+                        if (requestType.equals("To-Lease")){
+                            Statement st2 = conn.createStatement();
+                            st2.executeUpdate("DELETE FROM `aedfinalproject`.`property_details` WHERE prop_id = " + propToUpdate +"");
+                        }
+
+                    }
+                    catch(Exception e){
+                        System.out.println(e);
+                    }
+                    JOptionPane.showMessageDialog(RejectjButton, "Request rejected!");
                 }
-                catch(Exception e){
-                    System.out.println(e);
+                else{
+                    JOptionPane.showMessageDialog(RejectjButton, "Request already closed!");
                 }
                 
             }

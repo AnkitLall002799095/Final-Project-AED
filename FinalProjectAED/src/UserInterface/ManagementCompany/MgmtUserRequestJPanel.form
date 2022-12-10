@@ -25,7 +25,7 @@
               <EmptySpace min="-2" pref="96" max="-2" attributes="0"/>
           </Group>
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="257" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="277" max="-2" attributes="0"/>
               <Component id="ApprovejButton" min="-2" pref="149" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="RejectjButton" min="-2" pref="149" max="-2" attributes="0"/>
