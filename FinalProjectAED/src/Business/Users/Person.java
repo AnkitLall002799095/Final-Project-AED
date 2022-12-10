@@ -2,6 +2,7 @@ package Business.Users;
 
 
 import java.time.LocalDate;
+import java.util.HashMap;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -13,20 +14,21 @@ import java.time.LocalDate;
  * @author Bhawna Bassarmalani <your.name at your.org>
  */
 public class Person {
-    public  int uid;
+    public  String uid;
     public  String userRole;
     public  String name;
     public  String dob;
     public  String gender;
     public String email;
-    public int phoneNumber;
+    public String phoneNumber;
     public String password;
     public String street;
     public String community;
     public String  city;
     public String state;
 
-    public int getUid() {
+    
+    public String getUid() {
         return uid;
     }
 
@@ -34,7 +36,7 @@ public class Person {
         return userRole;
     }
 
-    public void setUid(int uid) {
+    public void setUid(String uid) {
         this.uid = uid;
     }
 
@@ -58,7 +60,7 @@ public class Person {
         this.email = email;
     }
 
-    public void setPhoneNumber(int phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
@@ -98,7 +100,7 @@ public class Person {
         return email;
     }
 
-    public int getPhoneNumber() {
+   public String getPhoneNumber() {
         return phoneNumber;
     }
 
