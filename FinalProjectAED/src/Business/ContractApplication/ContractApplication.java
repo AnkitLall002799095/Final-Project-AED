@@ -4,6 +4,7 @@
  */
 package Business.ContractApplication;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -18,8 +19,13 @@ public class ContractApplication {
     int aptId;
     int aptNum;
     int propId;
+    int elecCompId;
+    int waterCompId;
+    int gasCompId;
+    String appOwner;
+    String appOwnerType;
     String propName;
-    Date date;
+    LocalDate date;
     String street;
     String community;
     String city;
@@ -29,16 +35,21 @@ public class ContractApplication {
     int bathCount;
     List<String> features;
     Double sqft;
-    Date availability;
+    LocalDate availability;
     List<String> utilities;
     String appStatus;
     int managementCompanyId;
     String managementCompany;
     List<String> images;
+    
+    long elecAccNum;
+    LocalDate elecBillingDate;
+    long elecContactNum;
+    
             
     public ContractApplication(int aptNum,             
             String propName, 
-            Date date, 
+            LocalDate date, 
             String street, 
             String community, 
             String city, 
@@ -48,7 +59,7 @@ public class ContractApplication {
             int bathCount,
             ArrayList<String> features,
             Double sqft,
-            Date availability,
+            LocalDate availability,
             ArrayList<String> utilities,
             ArrayList<String> images,            
             String managementCompany,
@@ -57,7 +68,11 @@ public class ContractApplication {
             int managementCompanyId,
             String appStatus,
             String appOwner,
-            int appId) 
+            String appOwnerType,
+            int appId,
+            int elecCompId,
+            int waterCompId,
+            int gasCompId) 
     {
         this.aptId = aptId;
         this.propId = propId;
@@ -80,8 +95,35 @@ public class ContractApplication {
         this.propName = propName;
         this.images = images;
         this.managementCompany = managementCompany;
+        this.appOwner = appOwner;
+        this.appOwnerType = appOwnerType;
+        this.elecCompId=elecCompId;
+        this.waterCompId=waterCompId;
+        this.gasCompId=gasCompId;
+    }
+    
+    public void setElecAccNum(long elecAccNum) {
+        this.elecAccNum = elecAccNum;
+    }
+    
+    public void setElecBillingDate(LocalDate elecBillingDate) {
+        this.elecBillingDate = elecBillingDate;
+    }
         
-        this.appStatus = "utilityComp";
+    public void setElecContactNum(long elecContactNum) {
+        this.elecContactNum=elecContactNum;
+    }
+    
+    public long getElecAccNum() {
+       return elecAccNum;
+    }
+    
+    public LocalDate getElecBillingDate() {
+        return elecBillingDate;
+    }
+        
+    public long getElecContactNum() {
+        return elecContactNum;
     }
     
     public int getAppId() {
@@ -100,11 +142,31 @@ public class ContractApplication {
         return propId;
     }
     
+    public int getElecCompId() {
+        return elecCompId;
+    }
+    
+    public int getWaterCompId() {
+        return waterCompId;
+    }
+    
+    public int getGasCompId() {
+        return gasCompId;
+    }
+    
     public String getPropName() {
         return propName;
     }
     
-    public Date getDate() {
+    public String getAppOwner() {
+        return appOwner;
+    }
+    
+    public String getAppOwnerType() {
+        return appOwnerType;
+    }
+    
+    public LocalDate getDate() {
         return date;
     }
     
@@ -144,7 +206,7 @@ public class ContractApplication {
         return sqft;
     }
     
-    public Date getAvailability() {
+    public LocalDate getAvailability() {
         return availability;
     }
     
