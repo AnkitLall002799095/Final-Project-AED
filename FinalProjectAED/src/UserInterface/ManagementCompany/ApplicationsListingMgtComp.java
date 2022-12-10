@@ -30,7 +30,7 @@ public class ApplicationsListingMgtComp extends javax.swing.JPanel {
     }
     
     public void generateTableData() {
-        AppSystem.contractApplicationCatalog.getContracts(1);
+        AppSystem.contractApplicationCatalog.getContracts(1, "mgt_comp_id");
         contractApplicationCatalog = AppSystem.contractApplicationCatalog.getContractApplicationCatalog();
         populateTable();
     }
@@ -42,12 +42,13 @@ public class ApplicationsListingMgtComp extends javax.swing.JPanel {
         
         for (ContractApplication contract : contractApplicationCatalog) {
             
-            Object[] row = new Object[5];
+            Object[] row = new Object[6];
             row[0] = contract.getAppId();
             row[1] = contract.getAptNum();
             row[2] = contract.getCommunity();
             row[3] = contract.getCity();
             row[4] = contract.getAppStatus();
+            row[5] = contract.getAppOwner();
             
             model.addRow(row);
         }
@@ -80,17 +81,17 @@ public class ApplicationsListingMgtComp extends javax.swing.JPanel {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Application Id", "Apartment Number", "Community", "City", "Status"
+                "Application Id", "Apartment Number", "Community", "City", "Status", "Owner"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
