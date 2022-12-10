@@ -25,7 +25,6 @@ public class ContractApplicationCatalog {
     public void newContract(ContractApplication contract) {
         HashMap<String, Object> contractObj = new HashMap<>(){
             {
-                put("aptNum", contract.aptNum);
                 put("propName", contract.propName);
                 put("date", contract.date);
                 put("street", contract.street);

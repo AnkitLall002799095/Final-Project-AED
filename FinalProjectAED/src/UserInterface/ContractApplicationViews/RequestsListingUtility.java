@@ -2,27 +2,32 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package UserInterface.ManagementCompany;
+package UserInterface.ContractApplicationViews;
 
 import Application.Utils.AppSystem;
 import Business.ContractApplication.ContractApplication;
-import Business.ContractApplication.ContractApplicationCatalog;
+import UserInterface.EclectricityUtility.ElectricityContractFormCont;
+import UserInterface.GasUtility.GasContractFormCont;
 import UserInterface.Main.WorkAreaContPanel;
+import UserInterface.WaterUtility.WaterContractFormCont;
 import java.util.ArrayList;
+import javax.swing.JPanel;
 
 /**
  *
  * @author ankitlall
  */
-public class ApplicationsListingMgtComp extends javax.swing.JPanel {
-
+public class RequestsListingUtility extends javax.swing.JPanel {
+    
     public WorkAreaContPanel workAreaPanel;
     ArrayList<ContractApplication> contractApplicationCatalog;
-    
+    String type;
+
     /**
-     * Creates new form ApplicationsListing
+     * Creates new form RequestsListingElecUtility
      */
-    public ApplicationsListingMgtComp() {
+    public RequestsListingUtility(String type) {
+        this.type = type;
         this.workAreaPanel = AppSystem.workAreaPanel;
         setBounds(0, 0, 810, 700);
         initComponents();
@@ -30,10 +35,47 @@ public class ApplicationsListingMgtComp extends javax.swing.JPanel {
     }
     
     public void generateTableData() {
-        AppSystem.contractApplicationCatalog.getContracts(1, "mgt_comp_id");
+        jTable1.setCellSelectionEnabled(false);
+        jTable1.setRowSelectionAllowed(true);
+        AppSystem.contractApplicationCatalog.getContracts(1, getDbColName(this.type));
         contractApplicationCatalog = AppSystem.contractApplicationCatalog.getContractApplicationCatalog();
         populateTable();
     }
+    
+    public String getDbColName(String type) {
+        String colName="";
+        switch(type) {
+            case "electricity":
+                colName = "elec_comp_id";
+                break;
+            case "water":
+                colName = "water_comp_id";
+                break;
+            case "gas":
+                colName = "gas_comp_id";
+                break;
+        }
+        
+        return colName;
+    }
+    
+    public JPanel getRightpanel(String type) {
+        JPanel rightPanel = new JPanel();
+        switch(type) {
+            case "electricity":
+                rightPanel = new ElectricityContractFormCont((int)jTable1.getValueAt(jTable1.getSelectedRow(), 0));
+                break;
+            case "water":
+                rightPanel = new WaterContractFormCont((int)jTable1.getValueAt(jTable1.getSelectedRow(), 0));
+                break;
+            case "gas":
+                rightPanel = new GasContractFormCont((int)jTable1.getValueAt(jTable1.getSelectedRow(), 0));
+                break;
+        }
+        
+        return rightPanel;
+    }
+    
     
     public void populateTable(){
         
@@ -73,6 +115,8 @@ public class ApplicationsListingMgtComp extends javax.swing.JPanel {
         jTextField1 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
 
+        setPreferredSize(new java.awt.Dimension(810, 675));
+
         jLabel1.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Applications");
@@ -98,7 +142,10 @@ public class ApplicationsListingMgtComp extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
+        jTable1.setColumnSelectionAllowed(true);
+        jTable1.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(jTable1);
+        jTable1.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
         jLabel2.setText("Search As:");
 
@@ -108,7 +155,7 @@ public class ApplicationsListingMgtComp extends javax.swing.JPanel {
 
         jTextField1.setText("jTextField1");
 
-        jButton1.setText("New");
+        jButton1.setText("View");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -162,7 +209,7 @@ public class ApplicationsListingMgtComp extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        workAreaPanel.setRightPanel(new ManagementCompanyContractForm(workAreaPanel));
+        AppSystem.workAreaPanel.setRightPanel(getRightpanel(type));
     }//GEN-LAST:event_jButton1ActionPerformed
 
 
