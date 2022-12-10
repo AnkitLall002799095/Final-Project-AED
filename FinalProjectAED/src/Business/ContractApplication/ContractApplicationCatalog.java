@@ -48,8 +48,8 @@ public class ContractApplicationCatalog {
         DatabaseUtils.createNewContract(contractObj);
     }
     
-    public void getContracts(int id) {
-        contractApplicationCatalog = DatabaseUtils.getContractApplications(id);
+    public void getContracts(int id, String col) {
+        contractApplicationCatalog = DatabaseUtils.getContractApplications(id, col);
     }
     
     public ArrayList<ContractApplication> getContractApplicationCatalog() {

@@ -4,6 +4,11 @@
  */
 package UserInterface.ManagementCompany;
 
+import static Application.Utils.AppSystem.workAreaPanel;
+import UserInterface.Main.WorkAreaContPanel;
+import UserInterface.User.UserDefaultJPanel;
+import UserInterface.User.UserLeftPanel;
+
 /**
  *
  * @author ankitlall
@@ -13,7 +18,9 @@ public class CompanyEmployeeLeftPanel extends javax.swing.JPanel {
     /**
      * Creates new form CompanyEmployeeLeftPanel
      */
-    public CompanyEmployeeLeftPanel() {
+    WorkAreaContPanel workAreaPanel;
+    public CompanyEmployeeLeftPanel(WorkAreaContPanel workAreaPanel) {
+        this.workAreaPanel=workAreaPanel;
         setBounds(0, 0, 190, 700);
         initComponents();
     }
@@ -31,6 +38,7 @@ public class CompanyEmployeeLeftPanel extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
+        LogoutjButton = new javax.swing.JButton();
 
         setMinimumSize(new java.awt.Dimension(180, 700));
 
@@ -46,7 +54,6 @@ public class CompanyEmployeeLeftPanel extends javax.swing.JPanel {
 
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Name");
-        jLabel2.setBounds(new java.awt.Rectangle(0, 0, 190, 700));
         jLabel2.setVerifyInputWhenFocusTarget(false);
 
         jButton2.setText("Applications");
@@ -56,20 +63,32 @@ public class CompanyEmployeeLeftPanel extends javax.swing.JPanel {
             }
         });
 
+        LogoutjButton.setText("Logout");
+        LogoutjButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LogoutjButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(35, 35, 35)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(39, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(LogoutjButton, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addGap(35, 35, 35)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(0, 33, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -83,7 +102,9 @@ public class CompanyEmployeeLeftPanel extends javax.swing.JPanel {
                 .addComponent(jButton1)
                 .addGap(18, 18, 18)
                 .addComponent(jButton2)
-                .addContainerGap(550, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(LogoutjButton)
+                .addContainerGap(511, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -93,10 +114,21 @@ public class CompanyEmployeeLeftPanel extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        
+        //workAreaPanel.setRightPanel(new MgmtUserRequestJPanel(workAreaPanel));
+        
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void LogoutjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogoutjButtonActionPerformed
+        // TODO add your handling code here:
+        
+        workAreaPanel.setLeftPanel(new UserLeftPanel());
+        workAreaPanel.setRightPanel(new UserDefaultJPanel());
+    }//GEN-LAST:event_LogoutjButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton LogoutjButton;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;

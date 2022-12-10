@@ -29,6 +29,7 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -59,7 +60,9 @@ public class DatabaseUtils {
             Connection conn= getConnection();
             Statement st = conn.createStatement();
             st.executeUpdate("INSERT INTO `aedfinalproject`.`user_table` (`Uid`, `UserRole`, `Name`, `DOB`, `Gender`, `Email`, `PhoneNumber`, `Password` , `Street` , `Community` , `City` , `State`) "
-                    + "VALUES ('" + person.getUid() + "','" + person.getUserRole() + "','" + person.getName() + "','" + person.getDob() + "','" + person.getGender() + "','" + person.getEmail() + "','" + person.getPhoneNumber() + "','" + person.getPassword()+ "','" + person.getStreet()+ "','" + person.getCommunity()+ "','" + person.getCity()+ "','" + person.getState()+ "')");
+                    + "VALUES ('" + person.getUid() + "','" + person.getUserRole() + "','" + person.getName() + "','" + person.getDob() + "','" + person.getGender() + "','" + person.getEmail() + "','" 
+                    + person.getPhoneNumber()
+                    + "','" + person.getPassword()+ "','" + person.getStreet()+ "','" + person.getCommunity()+ "','" + person.getCity()+ "','" + person.getState()+ "')");
 
         }
             catch(Exception e){
@@ -71,10 +74,36 @@ public class DatabaseUtils {
     
     
     }
+    public static void loginUser(String name, String password){
+        try{
+            Connection connection = DriverManager.getConnection("jdbc:mysql://aeddatabase.cvxm5l9d0hm0.us-east-1.rds.amazonaws.com:3306/aedfinalproject", "admin", "password");
+            
+             Statement sta = connection.createStatement();
+             String query = "select * from user_table where Name='"+name+"'and Password = '"+password+"'";
+             ResultSet rs = sta.executeQuery(query);
+             if(rs.next()){
+               // dispose(); // when credentials are correct close login page
+             
+               
+             }else{
+                // JOptionPane.showMessageDialog(this,"username or password is wrong");
+                // txt_name.setText("");
+                // txt_password.setText("");
+             }
+             connection.close();
+            
+        }catch(Exception e){
+            
+        }
+    }
+    
+    
+    
+    
     
     public static void createNewContract(HashMap<String, Object> contract) {
         try {
-            Connection dbConn = (Connection) DriverManager.getConnection("jdbc:mysql://aeddatabase.cvxm5l9d0hm0.us-east-1.rds.amazonaws.com:3306/aedfinalproject", "admin", "password");
+            Connection dbConn = getConnection();
             Statement stmt = dbConn.createStatement();
             
             String query = "INSERT INTO contract_application values(Null," + contract.get("aptNum") + 
@@ -100,24 +129,24 @@ public class DatabaseUtils {
             } else {
                 JOptionPane.showMessageDialog(new JButton(),"New contract application created");
             }
-            dbConn.close();
+//            dbConn.close();
         } catch(Exception exception) {
             System.out.println(exception);
         }
     }
     
-    public static ArrayList<ContractApplication> getContractApplications(int id) {
+    public static ArrayList<ContractApplication> getContractApplications(int id, String col) {
         ArrayList<ContractApplication> contracts = new ArrayList<>();
         try {
-            Connection dbConn = (Connection) DriverManager.getConnection("jdbc:mysql://aeddatabase.cvxm5l9d0hm0.us-east-1.rds.amazonaws.com:3306/aedfinalproject", "admin", "password");
+            Connection dbConn = getConnection();
             Statement stmt = dbConn.createStatement();
-            String query = "SELECT * FROM aedfinalproject.contract_application where mgt_comp_id="+id;
+            String query = "SELECT * FROM aedfinalproject.contract_application where "+col+"="+id;
             ResultSet res = stmt.executeQuery(query);            
             while(res.next()) {
                 ContractApplication contract = new ContractApplication(
                     res.getInt("apt_num"), 
                     res.getString("prop_name"), 
-                    Helper.getDate(res.getString("start_date")), 
+                    res.getDate("start_date").toLocalDate(), 
                     res.getString("street"), 
                     res.getString("community"), 
                     res.getString("city"), 
@@ -127,7 +156,7 @@ public class DatabaseUtils {
                     res.getInt("bath_count"),
                     Helper.convertStringToArr(res.getString("features")),
                     res.getDouble("sqft"),
-                    Helper.getDate(res.getString("avl_date")),
+                    res.getDate("avl_date").toLocalDate(),
                     Helper.convertStringToArr(res.getString("utilities")), 
                     Helper.convertStringToArr(res.getString("prop_images")),
                     res.getString("mgt_comp"),
@@ -136,7 +165,11 @@ public class DatabaseUtils {
                     res.getInt("mgt_comp_id"),
                     res.getString("app_status"),
                     res.getString("app_owner"),
-                    res.getInt("app_id")
+                        res.getString("app_owner_type"),
+                    res.getInt("app_id"),
+                    res.getInt("elec_comp_id"),
+                    res.getInt("water_comp_id"),
+                    res.getInt("gas_comp_id")
                 );
                  
                  contracts.add(contract);
@@ -148,7 +181,7 @@ public class DatabaseUtils {
         return contracts;
     }
     
-        public static PropertyDirectory getPropListFromDB(){
+    public static PropertyDirectory getPropListFromDB(){
         
         try{
             PropertyDirectory propListFromDB = new PropertyDirectory();
@@ -202,6 +235,7 @@ public class DatabaseUtils {
                 apt.setLongitude(aptRs.getString(11));
                 apt.setIsLeased(aptRs.getBoolean(12));
                 apt.setAptPropId(aptRs.getInt(13));
+                apt.setImages(Helper.convertStringToArr(aptRs.getString(14)));
                                 
                 for (Property p : propList.getPropList()){
                     if (p.getPropId()==apt.getAptPropId())
@@ -270,11 +304,45 @@ public class DatabaseUtils {
         }
     }
     
+    public static HashMap<String, Integer> getUtilityCompIds(int propId) {
+        HashMap<String, Integer> result = new HashMap<>();
+        try {
+            Connection dbConn =getConnection();
+            Statement stmt = dbConn.createStatement();
+            String query ="SELECT * FROM aedfinalproject.property_details where prop_id="+propId;
+            ResultSet res = stmt.executeQuery(query);
+            result.put("elecCompId", res.getInt("elec_comp_id"));
+            result.put("waterCompId", res.getInt("water_comp_id"));
+            result.put("gasCompId", res.getInt("gas_comp_id"));
+        }catch(Exception e) {
+            System.out.println(e);
+        }
+        
+        return result;
+    }
+    
+    public static HashMap<String, Integer> getPropInfo(int mgtId) {
+        HashMap<String, Integer> result = new HashMap<>();
+        try {
+            Connection dbConn = getConnection();
+            Statement stmt = dbConn.createStatement();
+            String query ="SELECT * FROM aedfinalproject.property_details where mgt_comp_id="+mgtId;
+            ResultSet res = stmt.executeQuery(query);
+            while(res.next()) {
+                result.put(res.getString("prop_names"),res.getInt("prop_id"));
+            }
+        }catch(Exception e) {
+            System.out.println(e);
+        }
+        
+        return result;
+    }
+    
     public static GasCompanyDirectory getGasListFromDB(){
         
         try{
             GasCompanyDirectory gasListFromDB = new GasCompanyDirectory();
-            Connection conn= DatabaseUtils.getConnection();
+            Connection conn= getConnection();
             Statement st = conn.createStatement();
             ResultSet gasRs = st.executeQuery("SELECT * FROM aedfinalproject.gas_companies");
             
@@ -295,7 +363,7 @@ public class DatabaseUtils {
         
         try{
             WaterCompanyDirectory waterListFromDB = new WaterCompanyDirectory();
-            Connection conn= DatabaseUtils.getConnection();
+            Connection conn= getConnection();
             Statement st = conn.createStatement();
             ResultSet waterRs = st.executeQuery("SELECT * FROM aedfinalproject.water_companies");
             
@@ -316,7 +384,7 @@ public class DatabaseUtils {
         
         try{
             ElectricityCompanyDirectory elecListFromDB = new ElectricityCompanyDirectory();
-            Connection conn= DatabaseUtils.getConnection();
+            Connection conn= getConnection();
             Statement st = conn.createStatement();
             ResultSet elecRs = st.executeQuery("SELECT * FROM aedfinalproject.electricity_companies");
             
@@ -330,6 +398,21 @@ public class DatabaseUtils {
         catch(Exception e){
             System.out.println(e);
             return null;
+        }
+    }
+    
+    public static void updateContractElec(ContractApplication contract) {
+        try{
+            Connection conn= getConnection();
+            Statement st = conn.createStatement();
+            int x = st.executeUpdate("UPDATE aedfinalproject.contract_application SET elec_acc_num= "+ "'"+contract.getElecAccNum()+"'" + " elec_bill_date="+ "'"+contract.getElecBillingDate()+"'" + " elec_contact="+ "'"+contract.getElecContactNum()+"'" + "WHERE app_id="+contract.getAppId());
+            if (x == 0) {
+                JOptionPane.showMessageDialog(new JButton(), "Incorrect Id");
+            } else {
+                JOptionPane.showMessageDialog(new JButton(),"Contract details saved successfully!!");
+            }
+        }catch(Exception e){
+            System.out.println(e);
         }
     }
 }

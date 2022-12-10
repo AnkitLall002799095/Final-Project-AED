@@ -5,6 +5,7 @@
 package UserInterface.ManagementCompany;
 
 import Application.Utils.AppSystem;
+import Application.Utils.DatabaseUtils;
 import Application.Utils.Helper;
 import Business.ContractApplication.ContractApplication;
 import UserInterface.Main.WorkAreaContPanel;
@@ -16,8 +17,10 @@ import java.io.File;
 import java.util.List;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import javax.swing.JComboBox;
 import org.apache.commons.io.IOUtils;
 
@@ -38,6 +41,8 @@ public class ManagementCompanyContractForm extends javax.swing.JPanel implements
     private String community;
     
     private Boolean isValid;
+    
+    private HashMap<String, Integer> propList;
 
     /**
      * Creates new form ManagementCompanyContractForm
@@ -49,6 +54,16 @@ public class ManagementCompanyContractForm extends javax.swing.JPanel implements
         utilities= new ArrayList<String>();
         setBounds(0, 0, 810, 750);
         initComponents();
+    }
+    
+    private void generatePropertyList() {
+        // Insert actual mgtId.
+        propList = DatabaseUtils.getPropInfo(1);
+        List<String> propNamesList = new ArrayList<String>(propList.keySet());
+        
+        for(String key : propNamesList) {
+            propNameCombo.addItem(key);
+        }
     }
 
     /**
@@ -80,7 +95,6 @@ public class ManagementCompanyContractForm extends javax.swing.JPanel implements
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         aptNumField = new javax.swing.JTextField();
-        propNameField = new javax.swing.JTextField();
         streetField = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         addImage = new javax.swing.JButton();
@@ -99,7 +113,6 @@ public class ManagementCompanyContractForm extends javax.swing.JPanel implements
         cityField = new javax.swing.JTextField();
         commField = new javax.swing.JTextField();
         aptNumErr = new javax.swing.JLabel();
-        propNumErr = new javax.swing.JLabel();
         streetErr = new javax.swing.JLabel();
         commErr = new javax.swing.JLabel();
         cityErr = new javax.swing.JLabel();
@@ -109,6 +122,13 @@ public class ManagementCompanyContractForm extends javax.swing.JPanel implements
         roomCountErr = new javax.swing.JLabel();
         bathCountErr = new javax.swing.JLabel();
         sqftErr = new javax.swing.JLabel();
+        propNameCombo = new javax.swing.JComboBox<>();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jComboBox2 = new javax.swing.JComboBox<>();
+        jComboBox3 = new javax.swing.JComboBox<>();
+        jComboBox4 = new javax.swing.JComboBox<>();
+        jComboBox5 = new javax.swing.JComboBox<>();
+        jComboBox6 = new javax.swing.JComboBox<>();
 
         setSize(new java.awt.Dimension(810, 700));
 
@@ -212,6 +232,20 @@ public class ManagementCompanyContractForm extends javax.swing.JPanel implements
 
         sqftErr.setText("jLabel18");
 
+        propNameCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jComboBox5.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jComboBox6.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -264,26 +298,40 @@ public class ManagementCompanyContractForm extends javax.swing.JPanel implements
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(utilitiesTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 76, Short.MAX_VALUE)
-                                .addComponent(addUtilities))
-                            .addComponent(featuresTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cityField)
-                            .addComponent(commField)
-                            .addComponent(streetField)
-                            .addComponent(propNameField)
-                            .addComponent(aptNumField)
-                            .addComponent(stateField)
-                            .addComponent(sqftField))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(aptNumErr, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(propNumErr)
-                            .addComponent(streetErr)
-                            .addComponent(commErr)
-                            .addComponent(cityErr)
-                            .addComponent(stateErr)
-                            .addComponent(sqftErr))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jComboBox3, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(propNameCombo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(utilitiesTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 76, Short.MAX_VALUE)
+                                        .addComponent(addUtilities))
+                                    .addComponent(featuresTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(cityField)
+                                    .addComponent(commField)
+                                    .addComponent(streetField)
+                                    .addComponent(aptNumField)
+                                    .addComponent(stateField)
+                                    .addComponent(sqftField))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(aptNumErr, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(streetErr)
+                                    .addComponent(commErr)
+                                    .addComponent(cityErr)
+                                    .addComponent(stateErr)
+                                    .addComponent(sqftErr)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jComboBox5, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jComboBox6, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(125, 125, 125)))
                         .addGap(0, 0, Short.MAX_VALUE))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -305,12 +353,14 @@ public class ManagementCompanyContractForm extends javax.swing.JPanel implements
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(aptNumField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(aptNumErr))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(propNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(propNumErr))))
-                .addGap(18, 18, 18)
-                .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(propNameCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(21, 21, 21)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel5)
                 .addGap(18, 18, 18)
@@ -369,7 +419,11 @@ public class ManagementCompanyContractForm extends javax.swing.JPanel implements
                     .addComponent(sqftField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(sqftErr))
                 .addGap(18, 18, 18)
-                .addComponent(jLabel16)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel16)
+                    .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBox5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBox6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel17)
@@ -399,9 +453,8 @@ public class ManagementCompanyContractForm extends javax.swing.JPanel implements
             .addGroup(layout.createSequentialGroup()
                 .addGap(42, 42, 42)
                 .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGap(24, 24, 24)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -414,7 +467,8 @@ public class ManagementCompanyContractForm extends javax.swing.JPanel implements
         // TODO add your handling code here:
 //        System.out.println(AppSystem.contractApplicationCatalog);
         int aptNUm = Integer.parseInt(aptNumField.getText());
-        String propName = propNameField.getText();
+        String propName = String.valueOf(propNameCombo.getSelectedItem());
+        int propId = propList.get(String.valueOf(propNameCombo.getSelectedItem()));
         String street = streetField.getText();
         String city = cityField.getText();
         String community = commField.getText();
@@ -424,8 +478,15 @@ public class ManagementCompanyContractForm extends javax.swing.JPanel implements
         int bathCount = Integer.parseInt(bathCountField.getText());
         Double sqft = Double.parseDouble(sqftField.getText());
         
-        Date conDate = new Date();
-        Date availability = new Date();
+        LocalDate conDate = LocalDate.now();
+        LocalDate availability = LocalDate.now();
+        
+        // Insert actual property id.
+        HashMap<String, Integer> result = DatabaseUtils.getUtilityCompIds(1);
+                
+        int elecCompId = result.get("elecCompId");
+        int waterCompId = result.get("waterCompId");
+        int gasCompId = result.get("gasCompId");
         
         ContractApplication contract = new ContractApplication(
                 aptNUm, 
@@ -445,11 +506,15 @@ public class ManagementCompanyContractForm extends javax.swing.JPanel implements
                 filePaths,
                 "management company",
                 0,
+                propId,
                 0,
+                "pending",
+                "electricity",
+                "utility",
                 0,
-                "",
-                "",
-                0
+                elecCompId,
+                waterCompId,
+                gasCompId
         );
         
         AppSystem.contractApplicationCatalog.newContract(contract);
@@ -549,6 +614,12 @@ public class ManagementCompanyContractForm extends javax.swing.JPanel implements
     private javax.swing.JLabel imageErr;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton5;
+    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JComboBox<String> jComboBox3;
+    private javax.swing.JComboBox<String> jComboBox4;
+    private javax.swing.JComboBox<String> jComboBox5;
+    private javax.swing.JComboBox<String> jComboBox6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -568,8 +639,7 @@ public class ManagementCompanyContractForm extends javax.swing.JPanel implements
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField propNameField;
-    private javax.swing.JLabel propNumErr;
+    private javax.swing.JComboBox<String> propNameCombo;
     private javax.swing.JLabel roomCountErr;
     private javax.swing.JTextField roomCountField;
     private javax.swing.JButton saveButton;
