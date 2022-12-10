@@ -31,6 +31,7 @@ public class RegisterView extends javax.swing.JPanel {
     UserDirectory userDirectory;
     public RegisterView() {
         this.setBounds(0, 0, 1040, 700);
+        this.userDirectory = new UserDirectory();
         initComponents();
         
     }
@@ -95,6 +96,9 @@ public class RegisterView extends javax.swing.JPanel {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txt_nameKeyPressed(evt);
             }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txt_nameKeyReleased(evt);
+            }
         });
 
         btn_submit.setText("Submit");
@@ -140,6 +144,9 @@ public class RegisterView extends javax.swing.JPanel {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txt_emailKeyPressed(evt);
             }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txt_emailKeyReleased(evt);
+            }
         });
 
         lbl_phonenumber.setText("Phone Number:");
@@ -148,6 +155,9 @@ public class RegisterView extends javax.swing.JPanel {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txt_phoneKeyPressed(evt);
             }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txt_phoneKeyReleased(evt);
+            }
         });
 
         lbl_password.setText("Password: ");
@@ -155,6 +165,9 @@ public class RegisterView extends javax.swing.JPanel {
         txt_password.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txt_passwordKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txt_passwordKeyReleased(evt);
             }
         });
 
@@ -168,11 +181,17 @@ public class RegisterView extends javax.swing.JPanel {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txt_streetKeyPressed(evt);
             }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txt_streetKeyReleased(evt);
+            }
         });
 
         txt_community.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txt_communityKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txt_communityKeyReleased(evt);
             }
         });
 
@@ -182,6 +201,9 @@ public class RegisterView extends javax.swing.JPanel {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txt_cityKeyPressed(evt);
             }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txt_cityKeyReleased(evt);
+            }
         });
 
         jLabel1.setText("State: ");
@@ -189,6 +211,9 @@ public class RegisterView extends javax.swing.JPanel {
         txt_state.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txt_stateKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txt_stateKeyReleased(evt);
             }
         });
 
@@ -217,14 +242,9 @@ public class RegisterView extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(75, 75, 75)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lbl_address)
-                        .addGap(641, 736, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lbl_street)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(streetErrLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(87, 87, 87))))
+                    .addComponent(lbl_address)
+                    .addComponent(lbl_street))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(43, 43, 43)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -244,20 +264,17 @@ public class RegisterView extends javax.swing.JPanel {
                                             .addComponent(txt_email, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addGroup(layout.createSequentialGroup()
                                             .addGap(5, 5, 5)
-                                            .addComponent(txt_name, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                .addComponent(txt_name, javax.swing.GroupLayout.DEFAULT_SIZE, 208, Short.MAX_VALUE)
+                                                .addComponent(txt_dob))))
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE))
                                 .addGroup(layout.createSequentialGroup()
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addGap(2, 2, 2)
-                                            .addComponent(btnMale)
-                                            .addGap(29, 29, 29)
-                                            .addComponent(btnFemale)
-                                            .addGap(27, 27, 27)
-                                            .addComponent(btnOthers))
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addGap(42, 42, 42)
-                                            .addComponent(txt_dob, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGap(2, 2, 2)
+                                    .addComponent(btnMale)
+                                    .addGap(29, 29, 29)
+                                    .addComponent(btnFemale)
+                                    .addGap(27, 27, 27)
+                                    .addComponent(btnOthers)
                                     .addGap(0, 0, Short.MAX_VALUE))))
                         .addGroup(layout.createSequentialGroup()
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -297,37 +314,34 @@ public class RegisterView extends javax.swing.JPanel {
                     .addComponent(lbl_registrationform, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
+                        .addGap(18, 101, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addComponent(nameErrLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(110, 110, 110))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addComponent(dobErrLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(78, 78, 78))))
-                            .addComponent(passwordErrLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(nameErrLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(dobErrLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(78, 78, 78))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(47, 47, 47)
-                                .addComponent(genderErrLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
                                 .addGap(79, 79, 79)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(phoneNumberErrLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(emailErrLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(124, 124, 124)
-                                .addComponent(cityErrLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(emailErrLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(genderErrLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(82, 82, 82)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(stateErrLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(communityErrLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(cityErrLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(stateErrLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(communityErrLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(streetErrLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(passwordErrLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(phoneNumberErrLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addContainerGap())))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -335,11 +349,10 @@ public class RegisterView extends javax.swing.JPanel {
                 .addGap(21, 21, 21)
                 .addComponent(lbl_registrationform)
                 .addGap(28, 28, 28)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(nameErrLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(lbl_name, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(txt_name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbl_name, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(nameErrLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(86, 86, 86)
@@ -349,66 +362,74 @@ public class RegisterView extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lbl_dob)
                             .addComponent(txt_dob, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(dobErrLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(btnFemale)
-                                .addComponent(btnMale)
-                                .addComponent(btnOthers))
+                            .addComponent(dobErrLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(genderErrLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(2, 2, 2)))))
+                                .addGap(40, 40, 40)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(btnFemale)
+                                    .addComponent(btnMale)
+                                    .addComponent(btnOthers)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(30, 30, 30)
+                                .addComponent(genderErrLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addGap(92, 92, 92)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lbl_email)
                             .addComponent(txt_email, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(31, 31, 31)
+                        .addGap(60, 60, 60)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lbl_phonenumber)
                             .addComponent(txt_phone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(phoneNumberErrLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(emailErrLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(58, 58, 58)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lbl_password)
-                    .addComponent(txt_password, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(passwordErrLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(phoneNumberErrLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(58, 58, 58)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(lbl_password)
+                            .addComponent(txt_password)
+                            .addComponent(passwordErrLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(emailErrLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(29, 29, 29)
                 .addComponent(lbl_address)
                 .addGap(24, 24, 24)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbl_street)
-                    .addComponent(txt_street, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(streetErrLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(25, 25, 25)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lbl_community)
-                            .addComponent(txt_community, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(17, 17, 17))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(communityErrLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lbl_street)
+                            .addComponent(txt_street, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(25, 25, 25)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(lbl_community)
+                                    .addComponent(txt_community, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(17, 17, 17))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(communityErrLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbl_city)
-                            .addComponent(cityErrLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txt_state, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(stateErrLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btn_submit)
-                            .addComponent(btn_reset)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(lbl_city)
+                                        .addGap(36, 36, 36))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(cityErrLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGap(30, 30, 30)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(txt_state, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(stateErrLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(btn_submit)
+                                    .addComponent(btn_reset)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(txt_city, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(txt_city, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(streetErrLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -417,18 +438,28 @@ public class RegisterView extends javax.swing.JPanel {
     private void btn_submitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_submitActionPerformed
         // TODO add your handling code here:
         Person person = userDirectory.addNewUser();
-        person.setUid(1);
+        //person.setUid(3);
         person.setUserRole("Consumer");
-        person.setName(person.getName());
-        person.setDob(person.getDob());
-        person.setGender(person.getGender());
-        person.setEmail(person.getEmail());
-        person.setPhoneNumber(person.getPhoneNumber());
-        person.setPassword(person.getPassword());
-        person.setStreet(person.getStreet());
-        person.setCommunity(person.getCommunity());
-        person.setCity(person.getCity());
-        person.setState(person.getState());
+        person.setName(txt_name.getText());
+        person.setDob(txt_dob.getText());
+       if(btnMale.isSelected()){
+            person.setGender("Male");
+        }
+       if(btnFemale.isSelected()){
+           person.setGender("Female");
+       }
+       else
+       {
+           person.setGender("Others");
+       }
+                
+        person.setEmail(txt_email.getText());
+        person.setPhoneNumber(txt_phone.getText());
+        person.setPassword(txt_password.getText());
+        person.setStreet(txt_street.getText());
+        person.setCommunity(txt_community.getText());
+        person.setCity(txt_city.getText());
+        person.setState(txt_state.getText());
         
         DatabaseUtils.createNewUser(person);
         
@@ -478,9 +509,7 @@ public class RegisterView extends javax.swing.JPanel {
     }//GEN-LAST:event_btnFemaleActionPerformed
 
     private void txt_nameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_nameKeyPressed
-        String name = txt_name.getText();
-        String err = Helper.validateInput(name, "name");
-        nameErrLabel.setText(err);    
+       
     }//GEN-LAST:event_txt_nameKeyPressed
 
     private void txt_dobKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_dobKeyPressed
@@ -490,30 +519,24 @@ public class RegisterView extends javax.swing.JPanel {
 
     private void txt_emailKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_emailKeyPressed
         // TODO add your handling code here:
-        String email = txt_email.getText();
-        String err = Helper.validateInput(email, "email");
-        emailErrLabel.setText(err);
+        
     }//GEN-LAST:event_txt_emailKeyPressed
 
     private void txt_phoneKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_phoneKeyPressed
         // TODO add your handling code here:
-        String phoneNumber = txt_phone.getText();
-        String err = Helper.validateInput(phoneNumber, "phNum");
-        phoneNumberErrLabel.setText(err);
+       // String phoneNumber = txt_phone.getText();
+       // String err = Helper.validateInput(phoneNumber, "phNum");
+       // phoneNumberErrLabel.setText(err);
     }//GEN-LAST:event_txt_phoneKeyPressed
 
     private void txt_passwordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_passwordKeyPressed
         // TODO add your handling code here:
-        String password = txt_password.getText();
-        String err = Helper.validateInput(password, "password");
-        passwordErrLabel.setText(err);
+       
     }//GEN-LAST:event_txt_passwordKeyPressed
 
     private void txt_streetKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_streetKeyPressed
         // TODO add your handling code here:
-        String street = txt_street.getText();
-        String err = Helper.validateInput(street, "street");
-        streetErrLabel.setText(err);
+        
     }//GEN-LAST:event_txt_streetKeyPressed
 
     private void communityErrLabelKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_communityErrLabelKeyPressed
@@ -528,26 +551,76 @@ public class RegisterView extends javax.swing.JPanel {
 
     private void txt_stateKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_stateKeyPressed
         // TODO add your handling code here:
-        String state = txt_state.getText();
-        String err = Helper.validateInput(state, "state");
-        stateErrLabel.setText(err);
+       
         
         
     }//GEN-LAST:event_txt_stateKeyPressed
 
     private void txt_communityKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_communityKeyPressed
         // TODO add your handling code here:
-        String community = txt_community.getText();
-        String err = Helper.validateInput(community, "community");
-        communityErrLabel.setText(err);
+       
     }//GEN-LAST:event_txt_communityKeyPressed
 
     private void txt_cityKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_cityKeyPressed
         // TODO add your handling code here:
-        String city = txt_city.getText();
+       
+    }//GEN-LAST:event_txt_cityKeyPressed
+
+    private void txt_phoneKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_phoneKeyReleased
+        // TODO add your handling code here:
+         String phoneNumber = txt_phone.getText();
+        String err = Helper.validateInput(phoneNumber, "phNum");
+        phoneNumberErrLabel.setText(err);
+    }//GEN-LAST:event_txt_phoneKeyReleased
+
+    private void txt_nameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_nameKeyReleased
+        // TODO add your handling code here:
+          String name = txt_name.getText();
+        String err = Helper.validateInput(name, "name");
+        nameErrLabel.setText(err);   
+    }//GEN-LAST:event_txt_nameKeyReleased
+
+    private void txt_emailKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_emailKeyReleased
+        // TODO add your handling code here:
+        String email = txt_email.getText();
+        String err = Helper.validateInput(email, "email");
+        emailErrLabel.setText(err);
+    }//GEN-LAST:event_txt_emailKeyReleased
+
+    private void txt_passwordKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_passwordKeyReleased
+        // TODO add your handling code here:
+         String password = txt_password.getText();
+        String err = Helper.validateInput(password, "password");
+        passwordErrLabel.setText(err);
+    }//GEN-LAST:event_txt_passwordKeyReleased
+
+    private void txt_streetKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_streetKeyReleased
+        // TODO add your handling code here:
+        String street = txt_street.getText();
+        String err = Helper.validateInput(street, "street");
+        streetErrLabel.setText(err);
+    }//GEN-LAST:event_txt_streetKeyReleased
+
+    private void txt_communityKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_communityKeyReleased
+        // TODO add your handling code here:
+         String community = txt_community.getText();
+        String err = Helper.validateInput(community, "community");
+        communityErrLabel.setText(err);
+    }//GEN-LAST:event_txt_communityKeyReleased
+
+    private void txt_cityKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_cityKeyReleased
+        // TODO add your handling code here:
+         String city = txt_city.getText();
         String err = Helper.validateInput(city, "city");
         cityErrLabel.setText(err);
-    }//GEN-LAST:event_txt_cityKeyPressed
+    }//GEN-LAST:event_txt_cityKeyReleased
+
+    private void txt_stateKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_stateKeyReleased
+        // TODO add your handling code here:
+         String state = txt_state.getText();
+        String err = Helper.validateInput(state, "state");
+        stateErrLabel.setText(err);
+    }//GEN-LAST:event_txt_stateKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
