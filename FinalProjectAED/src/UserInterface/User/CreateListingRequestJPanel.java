@@ -351,7 +351,7 @@ public class CreateListingRequestJPanel extends javax.swing.JPanel {
         
         try{
 
-            Connection conn= Helper.getConnection();
+            Connection conn= DatabaseUtils.getConnection();
             Statement st1 = conn.createStatement();
             st1.executeUpdate("INSERT INTO `aedfinalproject`.`property_details` (`prop_id`, `user_id`, `mgt_comp_id`, `street`, `community`, `city`, `state`, `prop_names`, `elec_comp_id`, `water_comp_id`, `gas_comp_id`) VALUES ('" + createProp.getPropId() + "','" + createProp.getOwnerId() + "','" + createProp.getMgtComp() + "','" + createProp.getStreet() + "','" + createProp.getCommunity() + "','" + createProp.getCity() + "','" + createProp.getState() + "','" + createProp.getPropName() + "','" + createProp.electricity.getElectricityId() + "','" + createProp.water.getWaterId() + "','" + createProp.gas.getGasId() + "')");
             
@@ -427,7 +427,7 @@ public class CreateListingRequestJPanel extends javax.swing.JPanel {
             
             ArrayList<String> mgmtCompList = new ArrayList<String>();
             
-            Connection conn= Helper.getConnection();
+            Connection conn= DatabaseUtils.getConnection();
             Statement st = conn.createStatement();
             ResultSet mgmtRs = st.executeQuery("SELECT * FROM aedfinalproject.management_companies");
             while (mgmtRs.next()){
@@ -452,7 +452,7 @@ public class CreateListingRequestJPanel extends javax.swing.JPanel {
             
             ArrayList<String> gasCompList = new ArrayList<String>();
             
-            Connection conn= Helper.getConnection();
+            Connection conn= DatabaseUtils.getConnection();
             Statement st = conn.createStatement();
             ResultSet gasRs = st.executeQuery("SELECT * FROM aedfinalproject.gas_companies");
             while (gasRs.next()){
@@ -477,7 +477,7 @@ public class CreateListingRequestJPanel extends javax.swing.JPanel {
             
             ArrayList<String> elecCompList = new ArrayList<String>();
             
-            Connection conn= Helper.getConnection();
+            Connection conn= DatabaseUtils.getConnection();
             Statement st = conn.createStatement();
             ResultSet elecRs = st.executeQuery("SELECT * FROM aedfinalproject.electricity_companies");
             while (elecRs.next()){
@@ -502,7 +502,7 @@ public class CreateListingRequestJPanel extends javax.swing.JPanel {
             
             ArrayList<String> waterCompList = new ArrayList<String>();
             
-            Connection conn= Helper.getConnection();
+            Connection conn= DatabaseUtils.getConnection();
             Statement st = conn.createStatement();
             ResultSet waterRs = st.executeQuery("SELECT * FROM aedfinalproject.water_companies");
             while (waterRs.next()){

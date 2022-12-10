@@ -86,9 +86,4 @@ public class UserRequest {
         this.userId = userId;
     }
     
-    @Override
-    public String toString(){
-        return Integer.toString(requestId);
-    }
-
 }

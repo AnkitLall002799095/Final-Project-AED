@@ -28,11 +28,11 @@ public class MgmtUserRequestJPanel extends javax.swing.JPanel {
     WorkAreaContPanel workAreaPanel;
     
     public MgmtUserRequestJPanel(WorkAreaContPanel workAreaPanel) {
+        initComponents();
         this.workAreaPanel = workAreaPanel;
         this.mgmtList= DatabaseUtils.getMgmtListFromDB();
         this.reqList= DatabaseUtils.getRequestListFromDB();
         populateRequestTable();
-        initComponents();
     }
 
     /**
@@ -46,7 +46,7 @@ public class MgmtUserRequestJPanel extends javax.swing.JPanel {
 
         WelcomejLabel = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        UserRequestjTable = new javax.swing.JTable();
+        RequestListjTable = new javax.swing.JTable();
         RequestListjLabel = new javax.swing.JLabel();
         ApprovejButton = new javax.swing.JButton();
         RejectjButton = new javax.swing.JButton();
@@ -55,7 +55,7 @@ public class MgmtUserRequestJPanel extends javax.swing.JPanel {
         WelcomejLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         WelcomejLabel.setText("Welcome to Apartment requests wizard!");
 
-        UserRequestjTable.setModel(new javax.swing.table.DefaultTableModel(
+        RequestListjTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null},
@@ -81,7 +81,7 @@ public class MgmtUserRequestJPanel extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(UserRequestjTable);
+        jScrollPane2.setViewportView(RequestListjTable);
 
         RequestListjLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         RequestListjLabel.setText("Requests list:-");
@@ -145,7 +145,7 @@ public class MgmtUserRequestJPanel extends javax.swing.JPanel {
     private void ApprovejButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ApprovejButtonActionPerformed
         // TODO add your handling code here:
         
-        int selectedRow[] = UserRequestjTable.getSelectedRows();
+        int selectedRow[] = RequestListjTable.getSelectedRows();
         
         if (selectedRow.length == 0) {
             JOptionPane.showMessageDialog(ApprovejButton, "Please select a row to approve!");
@@ -173,7 +173,9 @@ public class MgmtUserRequestJPanel extends javax.swing.JPanel {
     private void RejectjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RejectjButtonActionPerformed
         // TODO add your handling code here:
         
-        int selectedRow[] = UserRequestjTable.getSelectedRows();
+        int selectedRow[] = RequestListjTable.getSelectedRows();
+        int reqToUpdate;
+        int propToUpdate;
         
         if (selectedRow.length == 0) {
             JOptionPane.showMessageDialog(RejectjButton, "Please select a row to reject!");
@@ -187,13 +189,14 @@ public class MgmtUserRequestJPanel extends javax.swing.JPanel {
 
         else {
             
-            javax.swing.table.DefaultTableModel model = (javax.swing.table.DefaultTableModel) UserRequestjTable.getModel();
-            
+            javax.swing.table.DefaultTableModel model = (javax.swing.table.DefaultTableModel) RequestListjTable.getModel();
+
             for (int i=0;i<selectedRow.length;i++){
-                UserRequest userReq = (UserRequest) model.getValueAt(selectedRow[i], 0);
+                reqToUpdate = (Integer) model.getValueAt(selectedRow[i], 0);
+                propToUpdate = (Integer) model.getValueAt(selectedRow[i], 2);
                 
                 for (UserRequest u : reqList.getReqList()){
-                    if (u.getRequestId()==userReq.getRequestId())
+                    if (u.getRequestId()==reqToUpdate)
                         u.setStatus("Rejected");
                 }
                 
@@ -201,12 +204,12 @@ public class MgmtUserRequestJPanel extends javax.swing.JPanel {
                 
                     Connection conn= DatabaseUtils.getConnection();
                     Statement st1 = conn.createStatement();
-                    st1.executeUpdate("UPDATE `aedfinalproject`.`user_application_request` SET Status = \"Rejected\" WHERE Request_Id = " + userReq.getRequestId() + "");
+                    st1.executeUpdate("UPDATE `aedfinalproject`.`user_application_request` SET Status = \"Rejected\" WHERE Request_Id = " + reqToUpdate + "");
 
                     populateRequestTable();
                     
                     Statement st2 = conn.createStatement();
-                    st2.executeUpdate("DELETE FROM `aedfinalproject`.`property_details` WHERE prop_id = " + userReq.getPropId() +"");
+                    st2.executeUpdate("DELETE FROM `aedfinalproject`.`property_details` WHERE prop_id = " + propToUpdate +"");
 
                 }
                 catch(Exception e){
@@ -224,13 +227,13 @@ public class MgmtUserRequestJPanel extends javax.swing.JPanel {
     private javax.swing.JButton ApprovejButton;
     private javax.swing.JButton RejectjButton;
     private javax.swing.JLabel RequestListjLabel;
-    private javax.swing.JTable UserRequestjTable;
+    private javax.swing.JTable RequestListjTable;
     private javax.swing.JLabel WelcomejLabel;
     private javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables
     
     public void populateRequestTable(){
-        javax.swing.table.DefaultTableModel model = (javax.swing.table.DefaultTableModel) UserRequestjTable.getModel();
+        javax.swing.table.DefaultTableModel model = (javax.swing.table.DefaultTableModel) RequestListjTable.getModel();
         model.setRowCount(0);
         
         for (UserRequest u : reqList.getReqList()){
