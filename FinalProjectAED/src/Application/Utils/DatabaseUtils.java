@@ -141,10 +141,10 @@ public class DatabaseUtils {
             Connection dbConn = getConnection();
             Statement stmt = dbConn.createStatement();
             String query = "SELECT * FROM aedfinalproject.contract_application where "+col+"="+id;
+            System.out.println(query);
             ResultSet res = stmt.executeQuery(query);            
             while(res.next()) {
                 ContractApplication contract = new ContractApplication(
-                    res.getInt("apt_num"), 
                     res.getString("prop_name"), 
                     res.getDate("start_date").toLocalDate(), 
                     res.getString("street"), 
@@ -160,7 +160,7 @@ public class DatabaseUtils {
                     Helper.convertStringToArr(res.getString("utilities")), 
                     Helper.convertStringToArr(res.getString("prop_images")),
                     res.getString("mgt_comp"),
-                    res.getInt("app_id"),
+                    res.getInt("apt_num"),
                     res.getInt("prop_id"),
                     res.getInt("mgt_comp_id"),
                     res.getString("app_status"),
@@ -169,10 +169,34 @@ public class DatabaseUtils {
                     res.getInt("app_id"),
                     res.getInt("elec_comp_id"),
                     res.getInt("water_comp_id"),
-                    res.getInt("gas_comp_id")
+                    res.getInt("gas_comp_id"),
+                    res.getInt("fin_comp_id"),
+                    res.getInt("legal_comp_id")
                 );
-                 
-                 contracts.add(contract);
+                
+                contract.setElecAccNum(res.getLong("elec_acc_num"));
+                LocalDate elecBillingDate = (res.getDate("elec_bill_date") != null)?res.getDate("elec_bill_date").toLocalDate(): null;
+                contract.setElecBillingDate(elecBillingDate);
+                contract.setElecContactNum(res.getLong("elec_contact"));
+                
+                contract.setWaterAccNum(res.getLong("water_acc_num"));
+                LocalDate waterBillingDate = (res.getDate("water_bill_date") != null)?res.getDate("water_bill_date").toLocalDate(): null;
+                contract.setWaterBillingDate(waterBillingDate);
+                contract.setWaterContactNum(res.getLong("water_contact"));
+                
+                contract.setGasAccNum(res.getLong("gas_acc_num"));
+                LocalDate gasBillingDate = (res.getDate("gas_bill_date") != null)?res.getDate("gas_bill_date").toLocalDate(): null;
+                contract.setGasBillingDate(gasBillingDate);
+                contract.setGasContactNum(res.getLong("gas_contact"));
+                
+                contract.setLeaseCost(res.getInt("fin_lease_cost"));
+                LocalDate aptBillingDate = (res.getDate("fin_bill_date") != null)?res.getDate("fin_bill_date").toLocalDate(): null;
+                contract.setAptBillingDate(gasBillingDate);
+                contract.setMaintanenceCost(res.getInt("fin_maint_cost"));
+                contract.setUtilitiesCost(res.getInt("fin_utility_cost"));
+                contract.setDeposit(res.getInt("fin_comp_deposit"));
+                
+                contracts.add(contract);
             }              
         }catch(Exception exception) {
             System.out.println(exception);
@@ -395,7 +419,10 @@ public class DatabaseUtils {
         try{
             Connection conn= getConnection();
             Statement st = conn.createStatement();
-            int x = st.executeUpdate("UPDATE aedfinalproject.contract_application SET elec_acc_num= "+ "'"+contract.getElecAccNum()+"'" + " elec_bill_date="+ "'"+contract.getElecBillingDate()+"'" + " elec_contact="+ "'"+contract.getElecContactNum()+"'" + "WHERE app_id="+contract.getAppId());
+            String query="UPDATE aedfinalproject.contract_application SET elec_acc_num= "+contract.getElecAccNum() +
+                                                    " ,elec_bill_date="+ "'"+contract.getElecBillingDate()+"'" + 
+                                                    " ,elec_contact="+ contract.getElecContactNum()+ ",app_owner='water' WHERE app_id="+contract.getAppId();
+            int x = st.executeUpdate(query);
             if (x == 0) {
                 JOptionPane.showMessageDialog(new JButton(), "Incorrect Id");
             } else {
@@ -404,5 +431,113 @@ public class DatabaseUtils {
         }catch(Exception e){
             System.out.println(e);
         }
+    }
+    
+    public static void updateContractWater(ContractApplication contract) {
+        try{
+            Connection conn= getConnection();
+            Statement st = conn.createStatement();
+            String query="UPDATE aedfinalproject.contract_application SET water_acc_num= "+contract.getWaterAccNum()+
+                                                    " ,water_bill_date="+ "'"+contract.getWaterBillingDate()+"'" + 
+                                                    " ,water_contact="+ contract.getWaterContactNum()+ ",app_owner='gas' WHERE app_id="+contract.getAppId();
+            int x = st.executeUpdate(query);
+            if (x == 0) {
+                JOptionPane.showMessageDialog(new JButton(), "Incorrect Id");
+            } else {
+                JOptionPane.showMessageDialog(new JButton(),"Contract details saved successfully!!");
+            }
+        }catch(Exception e){
+            System.out.println(e);
+        }
+    }
+    
+    public static void updateContractGas(ContractApplication contract) {
+        try{
+            Connection conn= getConnection();
+            Statement st = conn.createStatement();
+            String query="UPDATE aedfinalproject.contract_application SET gas_acc_num= "+contract.getGasAccNum()+
+                                                    " ,gas_bill_date="+ "'"+contract.getGasBillingDate()+"'" + 
+                                                    " ,gas_contact="+ contract.getGasContactNum()+ ",app_owner='finance' WHERE app_id="+contract.getAppId();
+            int x = st.executeUpdate(query);
+            if (x == 0) {
+                JOptionPane.showMessageDialog(new JButton(), "Incorrect Id");
+            } else {
+                JOptionPane.showMessageDialog(new JButton(),"Contract details saved successfully!!");
+            }
+        }catch(Exception e){
+            System.out.println(e);
+        }
+    }
+    
+    public static void updateContractFinance(ContractApplication contract) {
+        try{
+            Connection conn= getConnection();
+            Statement st = conn.createStatement();
+            String query="UPDATE aedfinalproject.contract_application SET fin_lease_cost= "+contract.getLeaseCost()+
+                                                    " ,fin_bill_date="+ "'"+contract.getAptBillingDate()+"'" + 
+                                                    " ,fin_utility_cost="+ "'"+contract.getUtilitiesCost()+"'" +
+                                                    " ,fin_comp_deposit="+ "'"+contract.getDeposit()+"'" +
+                                                    " ,fin_maint_cost="+ contract.getMaintanenceCost()+ ",app_owner='legal' WHERE app_id="+contract.getAppId();
+            int x = st.executeUpdate(query);
+            if (x == 0) {
+                JOptionPane.showMessageDialog(new JButton(), "Incorrect Id");
+            } else {
+                JOptionPane.showMessageDialog(new JButton(),"Contract details saved successfully!!");
+            }
+        }catch(Exception e){
+            System.out.println(e);
+        }
+    }
+    
+    public static void updateContractLegal(ContractApplication contract) {
+        try{
+            Connection conn= getConnection();
+            Statement st = conn.createStatement();
+            String query="UPDATE aedfinalproject.contract_application SET fin_lease_cost= "+contract.getLeaseCost()+
+                                                    " ,lease_end_date="+ "'"+contract.getLeaseEndDate()+"'" + 
+                                                    ",app_status='approved' WHERE app_id="+contract.getAppId();
+            int x = st.executeUpdate(query);
+            if (x == 0) {
+                JOptionPane.showMessageDialog(new JButton(), "Incorrect Id");
+            } else {
+                JOptionPane.showMessageDialog(new JButton(),"Contract details saved successfully!!");
+            }
+        }catch(Exception e){
+            System.out.println(e);
+        }
+    }
+    
+    public static HashMap<String, Integer> getFinComps() {
+        HashMap<String, Integer> result = new HashMap<>();
+        try {
+            Connection dbConn = getConnection();
+            Statement stmt = dbConn.createStatement();
+            String query ="SELECT * FROM aedfinalproject.fin_companies";
+            ResultSet res = stmt.executeQuery(query);
+            while(res.next()) {
+                result.put(res.getString("fin_name"),res.getInt("fin_id"));
+            }
+        }catch(Exception e) {
+            System.out.println(e);
+        }
+        
+        return result;
+    }
+    
+    public static HashMap<String, Integer> getLegalComps() {
+        HashMap<String, Integer> result = new HashMap<>();
+        try {
+            Connection dbConn = getConnection();
+            Statement stmt = dbConn.createStatement();
+            String query ="SELECT * FROM aedfinalproject.legal_companies";
+            ResultSet res = stmt.executeQuery(query);
+            while(res.next()) {
+                result.put(res.getString("legal_comp_name"),res.getInt("legal_comp_id"));
+            }
+        }catch(Exception e) {
+            System.out.println(e);
+        }
+        
+        return result;
     }
 }
