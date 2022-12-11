@@ -369,6 +369,8 @@ public class DatabaseUtils {
                 GasCompany gas= gasListFromDB.addNewProfile();
                 gas.setGasId(gasRs.getInt(1));
                 gas.setGasName(gasRs.getString(2));
+                gas.setGasCity(gasRs.getString(3));
+                gas.setGasState(gasRs.getString(4));
             }
             return gasListFromDB;
         }
@@ -390,6 +392,8 @@ public class DatabaseUtils {
                 WaterCompany water= waterListFromDB.addNewProfile();
                 water.setWaterId(waterRs.getInt(1));
                 water.setWaterName(waterRs.getString(2));
+                water.setWaterCity(waterRs.getString(3));
+                water.setWaterState(waterRs.getString(4));
             }
             return waterListFromDB;
         }
@@ -411,6 +415,8 @@ public class DatabaseUtils {
                 ElectricityCompany elec= elecListFromDB.addNewProfile();
                 elec.setElectricityId(elecRs.getInt(1));
                 elec.setElectricityName(elecRs.getString(2));
+                elec.setElectricityCity(elecRs.getString(3));
+                elec.setElectricityState(elecRs.getString(4));
             }
             return elecListFromDB;
         }

@@ -11,6 +11,8 @@ package Business.UtilityCompany;
 public class WaterCompany {
     private int waterId;
     private String waterName;
+    private String waterCity;
+    private String waterState;
 
     public int getWaterId() {
         return waterId;
@@ -26,6 +28,22 @@ public class WaterCompany {
 
     public void setWaterName(String waterName) {
         this.waterName = waterName;
+    }
+
+    public String getWaterCity() {
+        return waterCity;
+    }
+
+    public void setWaterCity(String waterCity) {
+        this.waterCity = waterCity;
+    }
+
+    public String getWaterState() {
+        return waterState;
+    }
+
+    public void setWaterState(String waterState) {
+        this.waterState = waterState;
     }
     
 }

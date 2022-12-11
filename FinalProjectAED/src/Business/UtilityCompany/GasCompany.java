@@ -11,6 +11,8 @@ package Business.UtilityCompany;
 public class GasCompany {
     private int gasId;
     private String gasName;
+    private String gasCity;
+    private String gasState;
 
     public int getGasId() {
         return gasId;
@@ -26,6 +28,22 @@ public class GasCompany {
 
     public void setGasName(String gasName) {
         this.gasName = gasName;
+    }
+
+    public String getGasCity() {
+        return gasCity;
+    }
+
+    public void setGasCity(String gasCity) {
+        this.gasCity = gasCity;
+    }
+
+    public String getGasState() {
+        return gasState;
+    }
+
+    public void setGasState(String gasState) {
+        this.gasState = gasState;
     }
     
 }
