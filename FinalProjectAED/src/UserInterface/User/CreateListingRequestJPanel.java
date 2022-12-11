@@ -339,18 +339,6 @@ public class CreateListingRequestJPanel extends javax.swing.JPanel {
         newReq.setStatus("Pending");
         newReq.setLastMdfdDate(statusDate);
         newReq.setUserId(123);
-
-        createProp.getPropId();
-        createProp.getOwnerId();
-        createProp.getMgtComp();
-        createProp.getStreet();
-        createProp.getCommunity();
-        createProp.getCity();
-        createProp.getState();
-        createProp.getPropName();
-        createProp.electricity.getElectricityId();
-        createProp.water.getWaterId();
-        createProp.gas.getGasId();
         
         try{
 

@@ -5,8 +5,8 @@
 package UserInterface.ManagementCompany;
 
 import Application.Utils.DatabaseUtils;
-import Business.ManagementCompany.ManagementCompany;
-import Business.ManagementCompany.ManagementCompanyDirectory;
+import Business.ManagementCompanyPackage.ManagementCompany;
+import Business.ManagementCompanyPackage.ManagementCompanyDirectory;
 import Business.Request.UserRequest;
 import Business.Request.UserRequestDirectory;
 import Email.Utils.EmailUtil;

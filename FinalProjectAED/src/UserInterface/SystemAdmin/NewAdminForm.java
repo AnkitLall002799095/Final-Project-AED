@@ -6,8 +6,8 @@ package UserInterface.SystemAdmin;
 
 import Application.Utils.DatabaseUtils;
 import Application.Utils.Helper;
-import Business.ManagementCompany.ManagementCompanyDirectory;
-import Business.ManagementCompany.ManagementCompany;
+import Business.ManagementCompanyPackage.ManagementCompanyDirectory;
+import Business.ManagementCompanyPackage.ManagementCompany;
 import Business.Users.Person;
 import Business.UtilityCompany.ElectricityCompany;
 import Business.UtilityCompany.ElectricityCompanyDirectory;

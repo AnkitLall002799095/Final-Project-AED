@@ -9,8 +9,8 @@ import Business.FinanceCompany.FinanceCompany;
 import Business.FinanceCompany.FinanceCompanyDirectory;
 import Business.LegalCompany.LegalCompany;
 import Business.LegalCompany.LegalCompanyDirectory;
-import Business.ManagementCompany.ManagementCompany;
-import Business.ManagementCompany.ManagementCompanyDirectory;
+import Business.ManagementCompanyPackage.ManagementCompany;
+import Business.ManagementCompanyPackage.ManagementCompanyDirectory;
 import Business.UtilityCompany.ElectricityCompany;
 import Business.UtilityCompany.ElectricityCompanyDirectory;
 import Business.UtilityCompany.GasCompany;
@@ -131,7 +131,7 @@ public class NewCompaniesAddJPanel extends javax.swing.JPanel {
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, true, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -205,7 +205,9 @@ public class NewCompaniesAddJPanel extends javax.swing.JPanel {
                             .addComponent(FinancejButton, javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE)
                             .addComponent(GasjButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(WaterjButton, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(WaterjButton, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(LegaljButton, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(6, 6, 6)
                         .addComponent(SubmitjButton, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -228,11 +230,9 @@ public class NewCompaniesAddJPanel extends javax.swing.JPanel {
                             .addComponent(CompanycityjTextField)
                             .addComponent(CompanyStatejTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(TableHeadingjLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 356, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(LegaljButton, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(WelcomejLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 378, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(WelcomejLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 378, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -302,7 +302,7 @@ public class NewCompaniesAddJPanel extends javax.swing.JPanel {
 
                     Connection conn= DatabaseUtils.getConnection();
                     Statement st = conn.createStatement();
-                    st.executeUpdate("INSERT INTO `aedfinalproject`.`management_companies` (`mgt_comp_id`, `mgt_comp_name`) VALUES ('" + mgtComp.getMgmtId() + "','" + mgtComp.getMgmtName() + "','" + mgtComp.getCity() + "','" + mgtComp.getState() + "')");
+                    st.executeUpdate("INSERT INTO `aedfinalproject`.`management_companies` (`mgt_comp_id`, `mgt_comp_name`, `mgt_city`, `mgt_state`) VALUES ('" + mgtComp.getMgmtId() + "','" + mgtComp.getMgmtName() + "','" + mgtComp.getCity() + "','" + mgtComp.getState() + "')");
 
                 }
                 catch(Exception e){

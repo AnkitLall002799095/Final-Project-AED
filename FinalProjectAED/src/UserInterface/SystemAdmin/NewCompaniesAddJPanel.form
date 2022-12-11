@@ -31,7 +31,10 @@
                           <Component id="GasjButton" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="WaterjButton" min="-2" pref="141" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="WaterjButton" min="-2" pref="141" max="-2" attributes="0"/>
+                          <Component id="LegaljButton" min="-2" pref="141" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
                   <Group type="102" attributes="0">
                       <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
@@ -59,12 +62,9 @@
                       </Group>
                   </Group>
                   <Component id="TableHeadingjLabel" alignment="0" min="-2" pref="356" max="-2" attributes="0"/>
-                  <Group type="103" alignment="0" groupAlignment="1" attributes="0">
-                      <Component id="LegaljButton" alignment="1" min="-2" pref="141" max="-2" attributes="0"/>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace pref="108" max="-2" attributes="0"/>
-                          <Component id="WelcomejLabel" min="-2" pref="378" max="-2" attributes="0"/>
-                      </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace pref="108" max="-2" attributes="0"/>
+                      <Component id="WelcomejLabel" min="-2" pref="378" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace min="243" max="32767" attributes="0"/>
@@ -241,8 +241,8 @@
                 <Column editable="false" title="Type" type="java.lang.Object"/>
                 <Column editable="false" title="Company ID" type="java.lang.Object"/>
                 <Column editable="false" title="Company Name" type="java.lang.Object"/>
-                <Column editable="false" title="City" type="java.lang.Object"/>
-                <Column editable="false" title="State" type="java.lang.Object"/>
+                <Column editable="true" title="City" type="java.lang.Object"/>
+                <Column editable="true" title="State" type="java.lang.Object"/>
               </Table>
             </Property>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
