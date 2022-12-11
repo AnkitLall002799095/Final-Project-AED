@@ -13,6 +13,14 @@ public class LegalCompany {
     private String legalName;
     private String legalCity;
     private String legalState;
+    String companyName;
+    
+    public LegalCompany() {
+    }
+    
+    public LegalCompany(String name) {
+        this.companyName = name;
+    }
 
     public int getLegalId() {
         return legalId;
@@ -44,6 +52,16 @@ public class LegalCompany {
 
     public void setLegalState(String legalState) {
         this.legalState = legalState;
+    }
+    
+    
+    
+    public void setCompanyName(String companyName) {
+        this.companyName=companyName;
+    }
+    
+    public String getCompanyName() {
+        return this.companyName;
     }
     
 }

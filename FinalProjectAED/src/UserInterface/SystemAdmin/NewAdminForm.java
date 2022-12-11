@@ -16,8 +16,6 @@ import Business.FinanceCompanyPackage.FinanceCompanyDirectory;
 import Business.FinanceCompanyPackage.FinanceCompany;
 import Business.LegalCompany.LegalCompanyDirectory;
 import Business.LegalCompany.LegalCompany;
-import Business.ManagementCompany.ManagementCompanyDirectory;
-import Business.ManagementCompany.ManagementCompany;
 import Business.Users.ElectricityCompanyAdmin;
 import Business.Users.ElectricityCompanyAdminDirectory;
 import Business.Users.FinanceCompanyAdmin;

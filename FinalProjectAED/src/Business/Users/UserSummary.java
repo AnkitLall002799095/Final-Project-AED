@@ -13,14 +13,14 @@ import Business.Apartment.ApartmentDirectory;
  */
 public class UserSummary {
     
-    ApartmentDirectory aptList;
-    
-    public UserSummary(){
-        aptList= DatabaseUtils.getAptListFromDB();
-    }
-    
-    public static int totalApartments(){
-        
-    }
-    
+//    ApartmentDirectory aptList;
+//    
+//    public UserSummary(){
+//        aptList= DatabaseUtils.getAptListFromDB();
+//    }
+//    
+//    public static int totalApartments(){
+//        
+//    }
+//    
 }

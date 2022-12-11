@@ -6,6 +6,7 @@ package Business.LegalCompany;
 
 import Business.FinanceCompanyPackage.FinanceCompany;
 import java.util.ArrayList;
+import java.util.ArrayList;
 
 /**
  *
@@ -13,28 +14,36 @@ import java.util.ArrayList;
  */
 public class LegalCompanyDirectory {
     
-    private ArrayList<LegalCompany> legalList;
+    private ArrayList<LegalCompany> legalCompanyList;
     
     public LegalCompanyDirectory(){
-        this.legalList = new ArrayList<LegalCompany>();
+        this.legalCompanyList = new ArrayList<LegalCompany>();
     }
 
     public ArrayList<LegalCompany> getLegalList() {
-        return legalList;
+        return legalCompanyList;
     }
 
     public void setLegalList(ArrayList<LegalCompany> legalList) {
-        this.legalList = legalList;
+        this.legalCompanyList = legalList;
     }
     
     public LegalCompany addNewProfile() {
         LegalCompany newProfile = new LegalCompany();
-        legalList.add(newProfile);
+        legalCompanyList.add(newProfile);
         return newProfile;
     }
 
     public void deleteProfile(LegalCompany legal) {
-	legalList.remove(legal);
+	legalCompanyList.remove(legal);
+    }
+    
+    public void addNewCompanyToList(LegalCompany company) {
+        legalCompanyList.add(company);
+    }
+    
+    public ArrayList<LegalCompany> getLegalCompanyList() {
+        return this.legalCompanyList;
     }
 
 }

@@ -4,22 +4,36 @@
  */
 package Business.FinanceCompanyPackage;
 
-import Business.ManagementCompany.ManagementCompany;
 import java.util.ArrayList;
 
 /**
  *
- * @author ankitlall
+ * @author hmitt
  */
 public class FinanceCompanyDirectory {
+    
     private ArrayList<FinanceCompany> financeCompanyList;
     
-    public FinanceCompanyDirectory() {
+    public FinanceCompanyDirectory(){
         this.financeCompanyList= new ArrayList<FinanceCompany>();
     }
+
+    public ArrayList<FinanceCompany> getFinanceList() {
+        return financeCompanyList;
+    }
+
+    public void setFinanceList(ArrayList<FinanceCompany> financeList) {
+        this.financeCompanyList = financeList;
+    }
     
-    public void createNewCompany() {
-        
+    public FinanceCompany addNewProfile() {
+        FinanceCompany newProfile = new FinanceCompany();
+        financeCompanyList.add(newProfile);
+        return newProfile;
+    }
+
+    public void deleteProfile(FinanceCompany finance) {
+	financeCompanyList.remove(finance);
     }
     
     public void addNewCompanyToList(FinanceCompany company) {
@@ -29,4 +43,5 @@ public class FinanceCompanyDirectory {
     public ArrayList<FinanceCompany> getFinanceCompanyList() {
         return this.financeCompanyList;
     }
+    
 }

@@ -17,7 +17,7 @@ public class OwnerReportJPanel extends javax.swing.JPanel {
      */
     public OwnerReportJPanel() {
         initComponents();
-        UserSummary();
+        //UserSummary();
     }
 
     /**

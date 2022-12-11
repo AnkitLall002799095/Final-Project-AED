@@ -59,15 +59,12 @@
               <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="jButton1" min="-2" max="-2" attributes="0"/>
-<<<<<<< HEAD
               <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
               <Component id="CompanyjButton" min="-2" max="-2" attributes="0"/>
               <EmptySpace pref="531" max="32767" attributes="0"/>
-=======
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="jButton2" min="-2" max="-2" attributes="0"/>
               <EmptySpace pref="545" max="32767" attributes="0"/>
->>>>>>> e864938310f406f29ef9cb0807ec1d87bf96282f
           </Group>
       </Group>
     </DimensionLayout>
@@ -91,7 +88,6 @@
         <Property name="text" type="java.lang.String" value="Name"/>
       </Properties>
     </Component>
-<<<<<<< HEAD
     <Component class="javax.swing.JButton" name="CompanyjButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="Companies Listing"/>
@@ -99,12 +95,11 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="CompanyjButtonActionPerformed"/>
       </Events>
-=======
+	</Component>
     <Component class="javax.swing.JButton" name="jButton2">
       <Properties>
         <Property name="text" type="java.lang.String" value="Company Listing"/>
       </Properties>
->>>>>>> e864938310f406f29ef9cb0807ec1d87bf96282f
     </Component>
   </SubComponents>
 </Form>

@@ -5,8 +5,8 @@
 package UserInterface.SystemAdmin;
 
 import Application.Utils.DatabaseUtils;
-import Business.FinanceCompany.FinanceCompany;
-import Business.FinanceCompany.FinanceCompanyDirectory;
+import Business.FinanceCompanyPackage.FinanceCompany;
+import Business.FinanceCompanyPackage.FinanceCompanyDirectory;
 import Business.LegalCompany.LegalCompany;
 import Business.LegalCompany.LegalCompanyDirectory;
 import Business.ManagementCompanyPackage.ManagementCompany;
