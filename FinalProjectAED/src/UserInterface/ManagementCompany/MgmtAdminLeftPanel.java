@@ -4,9 +4,12 @@
  */
 package UserInterface.ManagementCompany;
 
+import Application.Utils.AppSystem;
+import UserInterface.Main.LoginView;
 import UserInterface.Main.WorkAreaContPanel;
 import UserInterface.User.UserDefaultJPanel;
 import UserInterface.User.UserLeftPanel;
+import javax.swing.SwingUtilities;
 
 /**
  *
@@ -17,11 +20,9 @@ public class MgmtAdminLeftPanel extends javax.swing.JPanel {
     /**
      * Creates new form MgmtAdminLeftPanel
      */
-    WorkAreaContPanel workAreaPanel;
     
-    public MgmtAdminLeftPanel(WorkAreaContPanel workAreaPanel) {
+    public MgmtAdminLeftPanel() {
         initComponents();
-        this.workAreaPanel=workAreaPanel;
     }
 
     /**
@@ -96,15 +97,14 @@ public class MgmtAdminLeftPanel extends javax.swing.JPanel {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
 
-        workAreaPanel.setRightPanel(new MgmtUserRequestJPanel(workAreaPanel));
+        AppSystem.workAreaPanel.setRightPanel(new MgmtUserRequestJPanel());
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void LogoutjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogoutjButtonActionPerformed
         // TODO add your handling code here:
+        SwingUtilities.invokeLater(() -> AppSystem.appViewObj.setView(new LoginView())); 
 
-        workAreaPanel.setLeftPanel(new UserLeftPanel());
-        workAreaPanel.setRightPanel(new UserDefaultJPanel());
     }//GEN-LAST:event_LogoutjButtonActionPerformed
 
 
