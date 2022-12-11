@@ -33,22 +33,35 @@ public class SystemAdminLeftJPanel extends javax.swing.JPanel {
         jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+<<<<<<< HEAD
         CompanyjButton = new javax.swing.JButton();
+=======
+        jButton2 = new javax.swing.JButton();
+>>>>>>> e864938310f406f29ef9cb0807ec1d87bf96282f
 
         setPreferredSize(new java.awt.Dimension(810, 700));
 
         jButton1.setText("Admin Listing");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Welcome");
 
         jLabel2.setText("Name");
 
+<<<<<<< HEAD
         CompanyjButton.setText("Companies Listing");
         CompanyjButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CompanyjButtonActionPerformed(evt);
             }
         });
+=======
+        jButton2.setText("Company Listing");
+>>>>>>> e864938310f406f29ef9cb0807ec1d87bf96282f
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -68,8 +81,16 @@ public class SystemAdminLeftJPanel extends javax.swing.JPanel {
                             .addComponent(jLabel1)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(6, 6, 6)
+<<<<<<< HEAD
                                 .addComponent(jLabel2)))))
                 .addContainerGap(630, Short.MAX_VALUE))
+=======
+                                .addComponent(jLabel2))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(22, Short.MAX_VALUE))
+>>>>>>> e864938310f406f29ef9cb0807ec1d87bf96282f
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -80,6 +101,7 @@ public class SystemAdminLeftJPanel extends javax.swing.JPanel {
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton1)
+<<<<<<< HEAD
                 .addGap(28, 28, 28)
                 .addComponent(CompanyjButton)
                 .addContainerGap(531, Short.MAX_VALUE))
@@ -92,11 +114,22 @@ public class SystemAdminLeftJPanel extends javax.swing.JPanel {
         AppSystem.workAreaPanel.setRightPanel(new NewCompaniesAddJPanel());
         
     }//GEN-LAST:event_CompanyjButtonActionPerformed
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton2)
+                .addContainerGap(545, Short.MAX_VALUE))
+        );
+    }// </editor-fold>                        
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        AppSystem.workAreaPanel.setRightPanel(new SystemAdminMgmtJPanel());
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton CompanyjButton;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables

@@ -4,6 +4,8 @@
  */
 package Business.Users;
 
+import java.time.LocalDate;
+
 /**
  *
  * @author Bhawna Bassarmalani <your.name at your.org>
@@ -12,9 +14,8 @@ public class ManagementCompanyEmployee extends Person  {
     int companyId;
     String companyName;
     
-   ManagementCompanyEmployee(int uid ,String userRole, String name, String dob, String gender, String email,String phoneNumber , String password, String street, String community, String city, String state ){
+   public ManagementCompanyEmployee(String name, LocalDate dob, String gender, String email,long phoneNumber , String password, String street, String community, String city, String state ){
       super();
-      setUid(uid);
       setUserRole("Management User Employee");
       setName(name);
       setDob(dob);
@@ -25,10 +26,7 @@ public class ManagementCompanyEmployee extends Person  {
       setStreet(street);
       setCommunity(community);
       setCity(city);
-      setState(state);
-      setCompanyId(companyId);
-      setCompanyName(companyName);
-      
+      setState(state);      
      }
     public int getCompanyId() {
         return companyId;
@@ -36,23 +34,5 @@ public class ManagementCompanyEmployee extends Person  {
 
     public void setCompanyId(int CompanyId) {
         this.companyId = CompanyId;
-    }
-
-    public String getCompanyName() {
-        return companyName;
-    }
-
-    public void setCompanyName(String CompanyName) {
-        this.companyName = CompanyName;
-    }
-    
-   
-    
-    
-    
-    
-    
-    
-    
-    
+    }    
 }

@@ -4,6 +4,7 @@
  */
 package Business.LegalCompany;
 
+import Business.FinanceCompanyPackage.FinanceCompany;
 import java.util.ArrayList;
 
 /**
@@ -35,5 +36,5 @@ public class LegalCompanyDirectory {
     public void deleteProfile(LegalCompany legal) {
 	legalList.remove(legal);
     }
-    
+
 }
