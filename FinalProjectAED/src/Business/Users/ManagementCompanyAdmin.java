@@ -47,13 +47,6 @@ public class ManagementCompanyAdmin extends Person {
 
     public void setCompanyName(String CompanyName) {
         this.companyName = CompanyName;
-    }
-    
-   
-    
-    
-    
-    
-    
+    }   
     
 }
