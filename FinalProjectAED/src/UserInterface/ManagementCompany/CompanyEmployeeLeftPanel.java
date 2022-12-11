@@ -4,6 +4,7 @@
  */
 package UserInterface.ManagementCompany;
 
+import Application.Utils.AppSystem;
 import static Application.Utils.AppSystem.workAreaPanel;
 import UserInterface.Main.WorkAreaContPanel;
 import UserInterface.User.UserDefaultJPanel;
@@ -18,9 +19,7 @@ public class CompanyEmployeeLeftPanel extends javax.swing.JPanel {
     /**
      * Creates new form CompanyEmployeeLeftPanel
      */
-    WorkAreaContPanel workAreaPanel;
-    public CompanyEmployeeLeftPanel(WorkAreaContPanel workAreaPanel) {
-        this.workAreaPanel=workAreaPanel;
+    public CompanyEmployeeLeftPanel() {
         setBounds(0, 0, 190, 700);
         initComponents();
     }
@@ -122,8 +121,8 @@ public class CompanyEmployeeLeftPanel extends javax.swing.JPanel {
     private void LogoutjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogoutjButtonActionPerformed
         // TODO add your handling code here:
         
-        workAreaPanel.setLeftPanel(new UserLeftPanel());
-        workAreaPanel.setRightPanel(new UserDefaultJPanel());
+        AppSystem.workAreaPanel.setLeftPanel(new UserLeftPanel());
+        AppSystem.workAreaPanel.setRightPanel(new UserDefaultJPanel());
     }//GEN-LAST:event_LogoutjButtonActionPerformed
 
 

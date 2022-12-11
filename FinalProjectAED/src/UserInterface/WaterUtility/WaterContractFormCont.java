@@ -5,8 +5,8 @@
 package UserInterface.WaterUtility;
 
 import UserInterface.ManagementCompany.MgtCompFormDetails;
-import UserInterface.ContractApplicationViews.UtilityCompFormDetails;
-import UserInterface.ContractApplicationViews.UtilityContractForm;
+import UserInterface.UtilityCompanies.UtilityCompFormDetails;
+import UserInterface.UtilityCompanies.UtilityContractForm;
 import javax.swing.DefaultComboBoxModel;
 
 /**

@@ -4,7 +4,7 @@
  */
 package UserInterface.LegalCompany;
 
-import UserInterface.ContractApplicationViews.UtilityCompFormDetails;
+import UserInterface.UtilityCompanies.UtilityCompFormDetails;
 import UserInterface.FinanceCompany.FinanceCompForm;
 import UserInterface.FinanceCompany.FinanceCompFormDetails;
 import UserInterface.ManagementCompany.MgtCompFormDetails;
@@ -25,13 +25,13 @@ public class LegalContractFormCont extends javax.swing.JPanel {
         this.appId=appId;
         initComponents();
         populateCombobox();
-        contentPanel.add(new FinanceCompForm(appId));
+        contentPanel.add(new LegalCompForm(appId));
     }
     
     private void populateCombobox() {
         DefaultComboBoxModel<String> cmbModel = new DefaultComboBoxModel<>(getDropdownValues());
         formType.setModel(cmbModel);
-        formType.setSelectedItem("Finance Company Form");
+        formType.setSelectedItem("Legal Company Form");
     }
     
     private String[] getDropdownValues() {

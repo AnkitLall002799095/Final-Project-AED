@@ -24,18 +24,16 @@ public class AppSystem {
     public AppSystem(AppView appViewObj) {
         this.appViewObj = appViewObj;
         this.contractApplicationCatalog = new ContractApplicationCatalog();
-        
-        
     }
     
     public static String currentUserRole;
-    public static String currentUid;
+    public static int currentUid;
     
     public static void setCurrentUserRole(String UserRole) {
-		currentUserRole = UserRole;
+        currentUserRole = UserRole;
                 
-	}
-    public static void setCurrentUid(String Uid){
+    }
+    public static void setCurrentUid(int Uid){
          currentUid = Uid;
     
     }

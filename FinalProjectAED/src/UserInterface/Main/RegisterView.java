@@ -440,7 +440,7 @@ public class RegisterView extends javax.swing.JPanel {
         // TODO add your handling code here:
         Person person = userDirectory.addNewUser();
         //person.setUid(3);
-        person.setUserRole("Consumer");
+        person.setUserRole("consumer");
         person.setName(txt_name.getText());
         person.setDob(txt_dob.getText());
        if(btnMale.isSelected()){

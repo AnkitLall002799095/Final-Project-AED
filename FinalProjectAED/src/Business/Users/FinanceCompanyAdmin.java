@@ -28,7 +28,7 @@ public class FinanceCompanyAdmin extends Person {
     public void setCompanyName(String companyName) {
         this.companyName = companyName;
     }
-    FinanceCompanyAdmin(String uid ,String userRole, String name, String dob, String gender, String email,String phoneNumber , String password, String street, String community, String city, String state ){
+    FinanceCompanyAdmin(int uid ,String userRole, String name, String dob, String gender, String email,String phoneNumber , String password, String street, String community, String city, String state ){
       super();
       setUid(uid);
       setUserRole("Finance Company Admin");

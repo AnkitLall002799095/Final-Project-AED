@@ -12,7 +12,7 @@ public class ManagementCompanyEmployee extends Person  {
     int companyId;
     String companyName;
     
-   ManagementCompanyEmployee(String uid ,String userRole, String name, String dob, String gender, String email,String phoneNumber , String password, String street, String community, String city, String state ){
+   ManagementCompanyEmployee(int uid ,String userRole, String name, String dob, String gender, String email,String phoneNumber , String password, String street, String community, String city, String state ){
       super();
       setUid(uid);
       setUserRole("Management User Employee");

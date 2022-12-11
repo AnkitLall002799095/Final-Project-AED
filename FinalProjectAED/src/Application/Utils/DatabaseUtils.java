@@ -74,26 +74,31 @@ public class DatabaseUtils {
     
     
     }
-    public static void loginUser(String name, String password){
+    public static boolean loginUser(String email, String password){
+        
         try{
             Connection connection = DriverManager.getConnection("jdbc:mysql://aeddatabase.cvxm5l9d0hm0.us-east-1.rds.amazonaws.com:3306/aedfinalproject", "admin", "password");
             
              Statement sta = connection.createStatement();
-             String query = "select * from user_table where Name='"+name+"'and Password = '"+password+"'";
+             String query = "select * from user_table where Email='"+email+"'and Password = '"+password+"'";
              ResultSet rs = sta.executeQuery(query);
              if(rs.next()){
                // dispose(); // when credentials are correct close login page
-             
+               AppSystem.setCurrentUserRole(rs.getString("UserRole"));
+               AppSystem.setCurrentUid(rs.getInt("Uid"));
+               return true;
                
              }else{
                 // JOptionPane.showMessageDialog(this,"username or password is wrong");
                 // txt_name.setText("");
                 // txt_password.setText("");
+                return false;
              }
-             connection.close();
+//             connection.close();
             
         }catch(Exception e){
-            
+            System.out.println(e);
+            return false;
         }
     }
     
@@ -511,6 +516,25 @@ public class DatabaseUtils {
                 JOptionPane.showMessageDialog(new JButton(), "Incorrect Id");
             } else {
                 JOptionPane.showMessageDialog(new JButton(),"Contract details saved successfully!!");
+            }
+        }catch(Exception e){
+            System.out.println(e);
+        }
+    }
+    
+    public static void createNewApartment(int aptId, int propId) {
+        try{
+            Connection conn= getConnection();
+            Statement st = conn.createStatement();
+            String query = "INSERT INTO apartment_details values(" + aptId + 
+                    ",null" +   
+                    "','" + 0 + 
+                    "','" + propId + "')";
+            int x = st.executeUpdate(query);
+            if (x == 0) {
+                JOptionPane.showMessageDialog(new JButton(), "This contract application alredy exist");
+            } else {
+                JOptionPane.showMessageDialog(new JButton(),"New contract application created");
             }
         }catch(Exception e){
             System.out.println(e);
