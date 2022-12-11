@@ -16,6 +16,7 @@ import Business.UtilityCompany.GasCompany;
 import Business.UtilityCompany.GasCompanyDirectory;
 import Business.UtilityCompany.WaterCompany;
 import Business.UtilityCompany.WaterCompanyDirectory;
+import Email.Utils.EmailUtil;
 import UserInterface.Main.WorkAreaContPanel;
 import static UserInterface.User.UserDefaultJPanel.requestCounter;
 import java.awt.Image;
@@ -472,6 +473,7 @@ public class AptDetailsJPanel extends javax.swing.JPanel {
             }
         
         JOptionPane.showMessageDialog(BookAptjButton, "Apartment booking request placed!");
+        EmailUtil.triggerUserToManagementMail("abcx98414@gmail.com", "managementcomptestacc@gmail.com");
         workAreaPanel.setRightPanel(new ListingViewJPanel(workAreaPanel));
     }//GEN-LAST:event_BookAptjButtonActionPerformed
 
