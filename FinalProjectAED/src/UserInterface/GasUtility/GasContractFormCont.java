@@ -4,8 +4,8 @@
  */
 package UserInterface.GasUtility;
 
-import UserInterface.ContractApplicationViews.UtilityCompFormDetails;
-import UserInterface.ContractApplicationViews.UtilityContractForm;
+import UserInterface.UtilityCompanies.UtilityCompFormDetails;
+import UserInterface.UtilityCompanies.UtilityContractForm;
 import UserInterface.ManagementCompany.MgtCompFormDetails;
 import java.util.Arrays;
 import javax.swing.DefaultComboBoxModel;

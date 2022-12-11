@@ -27,7 +27,7 @@ public class LegalCompanyAdmin extends Person{
     public void setCompanyName(String companyName) {
         this.companyName = companyName;
     }
-    LegalCompanyAdmin(String uid ,String userRole, String name, String dob, String gender, String email,String phoneNumber , String password, String street, String community, String city, String state ){
+    LegalCompanyAdmin(int uid ,String userRole, String name, String dob, String gender, String email,String phoneNumber , String password, String street, String community, String city, String state ){
       super();
       setUid(uid);
       setUserRole("Legal Company Admin");

@@ -7,8 +7,8 @@ package UserInterface.User;
 import Application.Utils.AppSystem;
 import UserInterface.Main.WorkAreaContPanel;
 import UserInterface.ManagementCompany.CompanyEmployeeLeftPanel;
-import UserInterface.ManagementCompany.MgmtAdminLeftPanel;
-import UserInterface.ManagementCompany.MgmtDefaultJPanel;
+//import UserInterface.ManagementCompany.MgmtAdminLeftPanel;
+import UserInterface.Main.LandingPage;
 import UserInterface.ManagementCompany.MgmtUserRequestJPanel;
 
 /**
@@ -135,8 +135,8 @@ public class UserLeftPanel extends javax.swing.JPanel {
     private void ManagementjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ManagementjButtonActionPerformed
         // TODO add your handling code here:
         
-        workAreaPanel.setLeftPanel(new MgmtAdminLeftPanel(workAreaPanel));
-        workAreaPanel.setRightPanel(new MgmtDefaultJPanel(workAreaPanel));
+//        workAreaPanel.setLeftPanel(new MgmtAdminLeftPanel(workAreaPanel));
+        workAreaPanel.setRightPanel(new LandingPage());
     }//GEN-LAST:event_ManagementjButtonActionPerformed
 
 

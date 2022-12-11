@@ -13,7 +13,7 @@ import java.util.HashMap;
  */
 public class Users extends Person {
     
-  Users(String uid ,String userRole, String name, String dob, String gender, String email,String phoneNumber , String password, String street, String community, String city, String state ){
+  Users(int uid ,String userRole, String name, String dob, String gender, String email,String phoneNumber , String password, String street, String community, String city, String state ){
       super();
       setUid(uid);
       setUserRole(userRole);

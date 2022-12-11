@@ -15,7 +15,7 @@ public class ManagementCompanyAdmin extends Person {
     int companyId;
     String companyName;
     
-   ManagementCompanyAdmin(String uid ,String userRole, String name, String dob, String gender, String email,String phoneNumber , String password, String street, String community, String city, String state ){
+   ManagementCompanyAdmin(int uid ,String userRole, String name, String dob, String gender, String email,String phoneNumber , String password, String street, String community, String city, String state ){
       super();
       setUid(uid);
       setUserRole("Management Company Admin");
@@ -47,13 +47,6 @@ public class ManagementCompanyAdmin extends Person {
 
     public void setCompanyName(String CompanyName) {
         this.companyName = CompanyName;
-    }
-    
-   
-    
-    
-    
-    
-    
+    }   
     
 }

@@ -94,14 +94,15 @@ public class AppView extends javax.swing.JFrame {
             setContentPane(viewPanel);
             repaint();
     }
-    	/**
-	 * Create Application Frame.
-	 */
-	private void createGUI() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(0, 0, 1040, 750);
-		setView(new WorkAreaContPanel());
-	}
+    
+    /**
+     * Create Application Frame.
+     */
+    private void createGUI() {
+            setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            setBounds(0, 0, 1040, 750);
+            setView(new LoginView());
+    }
         
     /**
      * To show different error and informational messages in the application.
