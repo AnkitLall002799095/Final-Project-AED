@@ -6,8 +6,18 @@ package UserInterface.SystemAdmin;
 
 import Application.Utils.DatabaseUtils;
 import Application.Utils.Helper;
+import Business.ManagementCompanyPackage.ManagementCompanyDirectory;
+import Business.ManagementCompanyPackage.ManagementCompany;
 import Business.Users.Person;
+import Business.UtilityCompany.ElectricityCompany;
+import Business.UtilityCompany.ElectricityCompanyDirectory;
+import Business.UtilityCompany.GasCompany;
+import Business.UtilityCompany.GasCompanyDirectory;
+import Business.UtilityCompany.WaterCompany;
+import Business.UtilityCompany.WaterCompanyDirectory;
 import UserInterface.Main.WorkAreaContPanel;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.showMessageDialog;
   
@@ -20,6 +30,8 @@ public class NewAdminForm extends javax.swing.JPanel {
     
      String type;
      
+     
+     
 
     /**
      * Creates new form NewAdminForm
@@ -29,32 +41,51 @@ public class NewAdminForm extends javax.swing.JPanel {
           setBounds(0, 0, 810, 750);
           typeSet();
         initComponents();
-        
-       
-        
-    }
+        }
+    
+
+    
+
+   
     
     private void typeSet(){
         
         switch(type) {
-            case "management":
-                  compNameLabel.setText("Management Company");
-                  break;
-            case "legal":
-                  compNameLabel.setText("Legal Company");
-                  break;
-            case "electricity":
-                  compNameLabel.setText("Electricity Company");
-                  break;
-            case "finance":
-                  compNameLabel.setText("Finance Company");
-                  break;
-            case "gas":
-                  compNameLabel.setText("Gas Company");
-                  break;
-            case  "water":
-                  compNameLabel.setText("Water Company");
-                  break;
+                      case "management":
+                      compNameLabel.setText("Management Company");
+                      ManagementCompanyDirectory mgmtListFromDB = DatabaseUtils.getMgmtListFromDB();
+                      for(ManagementCompany com : mgmtListFromDB.getMgmtList()){
+                      compList.addItem(com.getMgmtName());
+                      }
+                      break;
+                      case "gas":
+                      compNameLabel.setText("Gas Company");
+                      GasCompanyDirectory gasListFromDB = DatabaseUtils.getGasListFromDB();
+                      for(GasCompany com : gasListFromDB.getGasList()){
+                      compList.addItem(com.getGasName());
+                      }
+                      break;
+                      case "electricity":
+                       compNameLabel.setText("Electricity Company");
+                       ElectricityCompanyDirectory electricityListFromDB = DatabaseUtils.getElecListFromDB();
+                      for(ElectricityCompany com : electricityListFromDB.getElecList()){
+                      compList.addItem(com.getElectricityName());
+                      }
+                      break;
+                     case "water": 
+                      WaterCompanyDirectory waterListFromDB = DatabaseUtils.getWaterListFromDB();
+                      for(WaterCompany com : waterListFromDB.getWaterList()){
+                      compList.addItem(com.getWaterName());
+                      }
+                      break;
+                 
+//                  break;
+//            case "gas":
+//                  compNameLabel.setText("Gas Company");
+//                  break;
+//            case  "water":
+//                  compNameLabel.setText("Water Company");
+//                  break;
         }
     }
     /**
