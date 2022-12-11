@@ -9,7 +9,10 @@ import UserInterface.Main.WorkAreaContPanel;
 import UserInterface.ManagementCompany.CompanyEmployeeLeftPanel;
 //import UserInterface.ManagementCompany.MgmtAdminLeftPanel;
 import UserInterface.Main.LandingPage;
+import UserInterface.Main.RegisterView;
 import UserInterface.ManagementCompany.MgmtUserRequestJPanel;
+import javax.swing.SwingUtilities;
+import UserInterface.Main.LoginView;
 
 /**
  *
@@ -42,7 +45,7 @@ public class UserLeftPanel extends javax.swing.JPanel {
         ViewjButton = new javax.swing.JButton();
         ViewjButton1 = new javax.swing.JButton();
         LogoutjButton = new javax.swing.JButton();
-        ManagementjButton = new javax.swing.JButton();
+        OwnerReportjButton = new javax.swing.JButton();
 
         WelcomejLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         WelcomejLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -72,11 +75,11 @@ public class UserLeftPanel extends javax.swing.JPanel {
             }
         });
 
-        ManagementjButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        ManagementjButton.setText("Go to management");
-        ManagementjButton.addActionListener(new java.awt.event.ActionListener() {
+        OwnerReportjButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        OwnerReportjButton.setText("Owner Report");
+        OwnerReportjButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ManagementjButtonActionPerformed(evt);
+                OwnerReportjButtonActionPerformed(evt);
             }
         });
 
@@ -86,12 +89,13 @@ public class UserLeftPanel extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(11, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(WelcomejLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(ViewjButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(ViewjButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(LogoutjButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(ManagementjButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(OwnerReportjButton, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(WelcomejLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(ViewjButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(ViewjButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE)
+                        .addComponent(LogoutjButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGap(24, 24, 24))
         );
         layout.setVerticalGroup(
@@ -104,10 +108,10 @@ public class UserLeftPanel extends javax.swing.JPanel {
                 .addGap(32, 32, 32)
                 .addComponent(ViewjButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(31, 31, 31)
+                .addComponent(OwnerReportjButton, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29)
                 .addComponent(LogoutjButton, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
-                .addComponent(ManagementjButton, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(289, Short.MAX_VALUE))
+                .addContainerGap(286, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -127,22 +131,17 @@ public class UserLeftPanel extends javax.swing.JPanel {
 
     private void LogoutjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogoutjButtonActionPerformed
         // TODO add your handling code here:
-        
-        workAreaPanel.setRightPanel(new UserDefaultJPanel());
-        
+        SwingUtilities.invokeLater(() -> AppSystem.appViewObj.setView(new LoginView()));        
     }//GEN-LAST:event_LogoutjButtonActionPerformed
 
-    private void ManagementjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ManagementjButtonActionPerformed
+    private void OwnerReportjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OwnerReportjButtonActionPerformed
         // TODO add your handling code here:
-        
-//        workAreaPanel.setLeftPanel(new MgmtAdminLeftPanel(workAreaPanel));
-        workAreaPanel.setRightPanel(new LandingPage());
-    }//GEN-LAST:event_ManagementjButtonActionPerformed
+    }//GEN-LAST:event_OwnerReportjButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton LogoutjButton;
-    private javax.swing.JButton ManagementjButton;
+    private javax.swing.JButton OwnerReportjButton;
     private javax.swing.JButton ViewjButton;
     private javax.swing.JButton ViewjButton1;
     private javax.swing.JLabel WelcomejLabel;

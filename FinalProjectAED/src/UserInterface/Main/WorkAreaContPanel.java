@@ -14,6 +14,8 @@ import UserInterface.LegalCompany.LegalCompRequestPanel;
 //import UserInterface.EclectricityUtility.RequestsListingElecUtility;
 import UserInterface.ManagementCompany.ApplicationsListingMgtComp;
 import UserInterface.ManagementCompany.CompanyEmployeeLeftPanel;
+import UserInterface.ManagementCompany.MgmtAdminLeftPanel;
+import UserInterface.ManagementCompany.MgmtUserRequestJPanel;
 import UserInterface.SystemAdmin.SystemAdminLeftJPanel;
 
 import UserInterface.SystemAdmin.SystemAdminMgmtJPanel;
@@ -65,6 +67,8 @@ public class WorkAreaContPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void setDefaultPanelViews() {
+  jSplitPane1.setLeftComponent(new UserLeftPanel());
+        jSplitPane1.setRightComponent(new UserDefaultJPanel());
 //        jSplitPane1.setLeftComponent(new SystemAdminLeftJPanel());
 //        jSplitPane1.setRightComponent(new SystemAdminMgmtJPanel());        
         
@@ -83,7 +87,8 @@ public class WorkAreaContPanel extends javax.swing.JPanel {
                 jSplitPane1.setLeftComponent(new CompanyEmployeeLeftPanel());
                 break;
             case "mgtCompAdmin":
-//                jSplitPane1.setLeftComponent(new UserLeftPanel());
+                jSplitPane1.setLeftComponent(new MgmtAdminLeftPanel());
+                jSplitPane1.setRightComponent(new MgmtUserRequestJPanel());
                 break;
             case "sysAdmin":
                 jSplitPane1.setLeftComponent(new SystemAdminLeftJPanel());

@@ -6,20 +6,36 @@ package Business.LegalCompany;
 
 import Business.FinanceCompanyPackage.FinanceCompany;
 import java.util.ArrayList;
+import java.util.ArrayList;
 
 /**
  *
- * @author ankitlall
+ * @author hmitt
  */
 public class LegalCompanyDirectory {
+    
     private ArrayList<LegalCompany> legalCompanyList;
     
-    public LegalCompanyDirectory() {
-        this.legalCompanyList= new ArrayList<LegalCompany>();
+    public LegalCompanyDirectory(){
+        this.legalCompanyList = new ArrayList<LegalCompany>();
+    }
+
+    public ArrayList<LegalCompany> getLegalList() {
+        return legalCompanyList;
+    }
+
+    public void setLegalList(ArrayList<LegalCompany> legalList) {
+        this.legalCompanyList = legalList;
     }
     
-    public void createNewCompany() {
-        
+    public LegalCompany addNewProfile() {
+        LegalCompany newProfile = new LegalCompany();
+        legalCompanyList.add(newProfile);
+        return newProfile;
+    }
+
+    public void deleteProfile(LegalCompany legal) {
+	legalCompanyList.remove(legal);
     }
     
     public void addNewCompanyToList(LegalCompany company) {
@@ -29,4 +45,5 @@ public class LegalCompanyDirectory {
     public ArrayList<LegalCompany> getLegalCompanyList() {
         return this.legalCompanyList;
     }
+
 }

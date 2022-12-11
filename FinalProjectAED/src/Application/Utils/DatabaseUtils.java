@@ -7,12 +7,16 @@ package Application.Utils;
 import Business.Apartment.Apartment;
 import Business.Apartment.ApartmentDirectory;
 import Business.ContractApplication.ContractApplication;
+import Business.FinanceCompanyPackage.FinanceCompany;
+import Business.FinanceCompanyPackage.FinanceCompanyDirectory;
+import Business.LegalCompany.LegalCompany;
+import Business.LegalCompany.LegalCompanyDirectory;
+import Business.ManagementCompanyPackage.ManagementCompany;
+import Business.ManagementCompanyPackage.ManagementCompanyDirectory;
 import Business.FinanceCompanyPackage.FinanceCompanyDirectory;
 import Business.FinanceCompanyPackage.FinanceCompany;
 import Business.LegalCompany.LegalCompany;
 import Business.LegalCompany.LegalCompanyDirectory;
-import Business.ManagementCompany.ManagementCompany;
-import Business.ManagementCompany.ManagementCompanyDirectory;
 import Business.Property.Property;
 import Business.Property.PropertyDirectory;
 import Business.Request.UserRequest;
@@ -182,7 +186,7 @@ public class DatabaseUtils {
                     Helper.convertStringToArr(res.getString("utilities")), 
                     Helper.convertStringToArr(res.getString("prop_images")),
                     res.getString("mgt_comp"),
-                    res.getInt("apt_num"),
+                    res.getInt("apt_Id"),
                     res.getInt("prop_id"),
                     res.getInt("mgt_comp_id"),
                     res.getString("app_status"),
@@ -270,18 +274,8 @@ public class DatabaseUtils {
                 Apartment apt= aptListFromDB.addNewProfile();
                 apt.setAptId(aptRs.getInt(1));
                 apt.setTenantId(aptRs.getInt(2));
-                apt.setSize(aptRs.getInt(3));
-                apt.setBedroom(aptRs.getInt(4));
-                apt.setBathroom(aptRs.getInt(5));
-                apt.setType(aptRs.getString(6));
-                apt.setAvlblDate(aptRs.getDate(7));
-                apt.setRent(aptRs.getInt(8));
-                apt.setDetails(aptRs.getString(9));
-                apt.setLattitude(aptRs.getString(10));
-                apt.setLongitude(aptRs.getString(11));
-                apt.setIsLeased(aptRs.getBoolean(12));
-                apt.setAptPropId(aptRs.getInt(13));
-                apt.setImages(Helper.convertStringToArr(aptRs.getString(14)));
+                apt.setIsLeased(aptRs.getBoolean(3));
+                apt.setAptPropId(aptRs.getInt(4));
                                 
                 for (Property p : propList.getPropList()){
                     if (p.getPropId()==apt.getAptPropId())
@@ -396,6 +390,8 @@ public class DatabaseUtils {
                 GasCompany gas= gasListFromDB.addNewProfile();
                 gas.setGasId(gasRs.getInt(1));
                 gas.setGasName(gasRs.getString(2));
+                gas.setGasCity(gasRs.getString(3));
+                gas.setGasState(gasRs.getString(4));
             }
             return gasListFromDB;
         }
@@ -417,6 +413,8 @@ public class DatabaseUtils {
                 WaterCompany water= waterListFromDB.addNewProfile();
                 water.setWaterId(waterRs.getInt(1));
                 water.setWaterName(waterRs.getString(2));
+                water.setWaterCity(waterRs.getString(3));
+                water.setWaterState(waterRs.getString(4));
             }
             return waterListFromDB;
         }
@@ -438,8 +436,56 @@ public class DatabaseUtils {
                 ElectricityCompany elec= elecListFromDB.addNewProfile();
                 elec.setElectricityId(elecRs.getInt(1));
                 elec.setElectricityName(elecRs.getString(2));
+                elec.setElectricityCity(elecRs.getString(3));
+                elec.setElectricityState(elecRs.getString(4));
             }
             return elecListFromDB;
+        }
+        catch(Exception e){
+            System.out.println(e);
+            return null;
+        }
+    }
+    
+    public static FinanceCompanyDirectory getFinanceListFromDB(){
+        
+        try{
+            FinanceCompanyDirectory financeListFromDB = new FinanceCompanyDirectory();
+            Connection conn= getConnection();
+            Statement st = conn.createStatement();
+            ResultSet finRs = st.executeQuery("SELECT * FROM aedfinalproject.fin_companies");
+            
+            while (finRs.next()){
+                FinanceCompany finance = financeListFromDB.addNewProfile();
+                finance.setFinanceId(finRs.getInt(1));
+                finance.setFinanceName(finRs.getString(2));
+                finance.setFinanceCity(finRs.getString(3));
+                finance.setFinanceState(finRs.getString(4));
+            }
+            return financeListFromDB;
+        }
+        catch(Exception e){
+            System.out.println(e);
+            return null;
+        }
+    }
+    
+    public static LegalCompanyDirectory getLegalListFromDB(){
+        
+        try{
+            LegalCompanyDirectory legalListFromDB = new LegalCompanyDirectory();
+            Connection conn= getConnection();
+            Statement st = conn.createStatement();
+            ResultSet legalRs = st.executeQuery("SELECT * FROM aedfinalproject.legal_companies");
+            
+            while (legalRs.next()){
+                LegalCompany legal= legalListFromDB.addNewProfile();
+                legal.setLegalId(legalRs.getInt(1));
+                legal.setLegalName(legalRs.getString(2));
+                legal.setLegalCity(legalRs.getString(3));
+                legal.setLegalState(legalRs.getString(4));
+            }
+            return legalListFromDB;
         }
         catch(Exception e){
             System.out.println(e);

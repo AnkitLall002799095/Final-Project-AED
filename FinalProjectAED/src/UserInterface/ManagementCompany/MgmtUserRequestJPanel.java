@@ -5,10 +5,11 @@
 package UserInterface.ManagementCompany;
 
 import Application.Utils.DatabaseUtils;
-import Business.ManagementCompany.ManagementCompany;
-import Business.ManagementCompany.ManagementCompanyDirectory;
+import Business.ManagementCompanyPackage.ManagementCompany;
+import Business.ManagementCompanyPackage.ManagementCompanyDirectory;
 import Business.Request.UserRequest;
 import Business.Request.UserRequestDirectory;
+import Email.Utils.EmailUtil;
 import UserInterface.Main.WorkAreaContPanel;
 import java.sql.Connection;
 import java.sql.Statement;
@@ -27,9 +28,8 @@ public class MgmtUserRequestJPanel extends javax.swing.JPanel {
     UserRequestDirectory reqList;
     WorkAreaContPanel workAreaPanel;
     
-    public MgmtUserRequestJPanel(WorkAreaContPanel workAreaPanel) {
+    public MgmtUserRequestJPanel() {
         initComponents();
-        this.workAreaPanel = workAreaPanel;
         this.mgmtList= DatabaseUtils.getMgmtListFromDB();
         this.reqList= DatabaseUtils.getRequestListFromDB();
         populateRequestTable();
@@ -204,6 +204,9 @@ public class MgmtUserRequestJPanel extends javax.swing.JPanel {
                         System.out.println(e);
                     }
                     JOptionPane.showMessageDialog(ApprovejButton, "Request approved!");
+                    
+                    EmailUtil.triggerManagementToUserMail("managementcomptestacc@gmail.com", "abcx98414@gmail.com");
+                    
                 }
                 
                 else{
@@ -268,6 +271,9 @@ public class MgmtUserRequestJPanel extends javax.swing.JPanel {
                         System.out.println(e);
                     }
                     JOptionPane.showMessageDialog(RejectjButton, "Request rejected!");
+                    
+                    EmailUtil.triggerManagementToUserMail("managementcomptestacc@gmail.com", "abcx98414@gmail.com");
+                    
                 }
                 else{
                     JOptionPane.showMessageDialog(RejectjButton, "Request already closed!");

@@ -14,6 +14,7 @@ import Business.Property.Property;
 import Business.Property.PropertyDirectory;
 import Business.Request.UserRequest;
 import Business.Request.UserRequestDirectory;
+import Email.Utils.EmailUtil;
 import UserInterface.Main.WorkAreaContPanel;
 import static UserInterface.User.UserDefaultJPanel.requestCounter;
 import java.text.SimpleDateFormat;
@@ -253,6 +254,9 @@ public class ListingViewJPanel extends javax.swing.JPanel {
             }
             
             JOptionPane.showMessageDialog(BookAptjButton, "Apartment booking request placed!");
+            
+            EmailUtil.triggerUserToManagementMail("abcx98414@gmail.com", "managementcomptestacc@gmail.com");
+            
             return;
         }
         
