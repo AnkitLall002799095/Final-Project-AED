@@ -7,11 +7,16 @@ package UserInterface.Main;
 import UserInterface.User.UserLeftPanel;
 import UserInterface.User.ListingViewJPanel;
 import Application.Utils.AppSystem;
+import UserInterface.FinanceCompany.FinanceCompLeftPanel;
+import UserInterface.LegalCompany.LegalCompLeftPanel;
+import UserInterface.LegalCompany.LegalCompRequestPanel;
 //import UserInterface.EclectricityUtility.ElectricityCompLeftPanel;
 //import UserInterface.EclectricityUtility.RequestsListingElecUtility;
 import UserInterface.ManagementCompany.ApplicationsListingMgtComp;
 import UserInterface.ManagementCompany.CompanyEmployeeLeftPanel;
+import UserInterface.SystemAdmin.SystemAdminLeftJPanel;
 import UserInterface.User.UserDefaultJPanel;
+import UserInterface.UtilityCompanies.UtilityCompLeftPanel;
 import javax.swing.JPanel;
 
 /**
@@ -56,10 +61,41 @@ public class WorkAreaContPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void setDefaultPanelViews() {
-        jSplitPane1.setLeftComponent(new UserLeftPanel());
-        jSplitPane1.setRightComponent(new UserDefaultJPanel());
-       // jSplitPane1.setLeftComponent(new ElectricityCompLeftPanel());
-       // jSplitPane1.setRightComponent(new RequestsListingElecUtility());
+//        jSplitPane1.setLeftComponent(new UserLeftPanel());
+//        jSplitPane1.setRightComponent(new UserDefaultJPanel());
+        
+        String currentUserRole = AppSystem.currentUserRole;
+        
+        if(currentUserRole != "consumer") {
+            AppSystem.workAreaPanel.setRightPanel(new LandingPage());
+        }
+        
+        switch(currentUserRole) {
+            case "consumer":
+                jSplitPane1.setLeftComponent(new UserLeftPanel());
+                jSplitPane1.setRightComponent(new UserDefaultJPanel());
+                break;
+            case "mgtCompEmp":
+                jSplitPane1.setLeftComponent(new CompanyEmployeeLeftPanel());
+                break;
+            case "mgtCompAdmin":
+//                jSplitPane1.setLeftComponent(new UserLeftPanel());
+                break;
+            case "sysAdmin":
+                jSplitPane1.setLeftComponent(new SystemAdminLeftJPanel());
+                break;
+            case "elecUtility":
+            case "waterUtility":
+            case "gasUtility":
+                jSplitPane1.setLeftComponent(new UtilityCompLeftPanel());
+                break;
+            case "legalComp":
+                jSplitPane1.setLeftComponent(new LegalCompLeftPanel());
+                break;
+            case "finComp":
+                jSplitPane1.setLeftComponent(new FinanceCompLeftPanel());
+                break;
+        }
     }
     
     public void setLeftPanel(JPanel panel) {

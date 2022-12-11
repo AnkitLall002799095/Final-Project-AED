@@ -5,7 +5,7 @@
 package UserInterface.FinanceCompany;
 
 import Application.Utils.AppSystem;
-import UserInterface.ContractApplicationViews.RequestsListingUtility;
+import UserInterface.UtilityCompanies.RequestsListingUtility;
 
 /**
  *

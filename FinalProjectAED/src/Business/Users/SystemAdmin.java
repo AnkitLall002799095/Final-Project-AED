@@ -9,7 +9,7 @@ package Business.Users;
  * @author Bhawna Bassarmalani <your.name at your.org>
  */
 public class SystemAdmin extends Person {
-    SystemAdmin(String uid ,String userRole, String name, String dob, String gender, String email,String phoneNumber , String password, String street, String community, String city, String state ){
+    SystemAdmin(int uid ,String userRole, String name, String dob, String gender, String email,String phoneNumber , String password, String street, String community, String city, String state ){
       super();
       setUid(uid);
       setUserRole(userRole);

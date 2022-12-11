@@ -4,8 +4,8 @@
  */
 package UserInterface.EclectricityUtility;
 
-import UserInterface.ContractApplicationViews.UtilityContractForm;
-import UserInterface.ContractApplicationViews.UtilityCompFormDetails;
+import UserInterface.UtilityCompanies.UtilityContractForm;
+import UserInterface.UtilityCompanies.UtilityCompFormDetails;
 import UserInterface.ManagementCompany.MgtCompFormDetails;
 import javax.swing.DefaultComboBoxModel;
 
