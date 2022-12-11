@@ -4,6 +4,7 @@
  */
 package Business.Users;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -11,12 +12,11 @@ import java.util.HashMap;
  *
  * @author Bhawna Bassarmalani <your.name at your.org>
  */
-public class Users extends Person {
+public class User extends Person {
     
-  Users(int uid ,String userRole, String name, String dob, String gender, String email,String phoneNumber , String password, String street, String community, String city, String state ){
+  public User(String name, LocalDate dob, String gender, String email,long phoneNumber , String password, String street, String community, String city, String state ){
       super();
-      setUid(uid);
-      setUserRole(userRole);
+      setUserRole("consumer");
       setName(name);
       setDob(dob);
       setGender(gender);
@@ -27,10 +27,7 @@ public class Users extends Person {
       setCommunity(community);
       setCity(city);
       setState(state);
-      
-      
-      
-     }
+    }
 
     
     

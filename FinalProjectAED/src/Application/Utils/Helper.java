@@ -30,8 +30,11 @@ import java.util.Arrays;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
+import java.util.Enumeration;
 import java.util.Locale;
 import java.util.stream.IntStream;
+import javax.swing.AbstractButton;
+import javax.swing.ButtonGroup;
 import org.apache.commons.io.FileUtils;
 
 /**
@@ -110,11 +113,7 @@ public class Helper {
     	switch(type) {
     		// First & last Name
     		case "name":
-                            if(value.length() == 0)
-                            {
-                                msg="The field cannot be empty";
-                            }
-                    else if(value.length() < 3 || value.length() > 30) {
+                        if(value.length() < 3 || value.length() > 30) {
     				msg="This field must contain 3-30 letters.";
     			} else if(!value.matches("^[a-zA-Z \\-\\.\\']*$")) {
     				msg="This field must only contain letters (a-z).";
@@ -123,10 +122,7 @@ public class Helper {
     			break;
     		//  Age
     		case "age":
-                           if(value.length() == 0)
-                           { msg="The field cannot be empty";
-                           }
-                    else if(!value.matches("[0-9]+")) {
+                        if(!value.matches("[0-9]+")) {
     				msg="This field must only contain digits (0-9).";
     				break;
     			} else if(value.length() > 3 || (Integer.parseInt(value) < 18 || Integer.parseInt(value) > 80)) {
@@ -135,11 +131,7 @@ public class Helper {
     			break;
     		// Phone number
     		case "phNum":
-                      if(value.length()==0)
-                          { msg="The field cannot be empty";
-                           }
-                     
-                    else if(!value.matches("\\d+")) {
+                        if(!value.matches("\\d+")) {
     				msg="Phone Number field must only contain digits (0-9).";
     			} else if(value.length() != 10) {
     				msg="Phone Number must have 10 digits.";
@@ -147,9 +139,6 @@ public class Helper {
     			break;
     		// Email
     		case "email": 
-                     if(value.length()==0)
-                          { msg="The field cannot be empty";
-                           }
     			String regex = "^(.+)@(.+)$";
     			 
     			Pattern pattern = Pattern.compile(regex);
@@ -161,20 +150,14 @@ public class Helper {
     			break;
     		// Password
     		case "password": 
-                     if(value.length()==0)
-                          { msg="The field cannot be empty";
-                           }
     			if(value.length() < 8 && value.length() > 30) {
     				msg="Password must be 8 characters long.";
     			} else if(!value.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&-+=()])(?=\\S+$).{8,30}$")) {
-    				msg="Password field must only contain at least 1 digit, atleast one upper case letter and atleast one special character.";
+    				msg="<HTML>Password field must only contain at least 1 digit, atleast one upper case letter and atleast one special character.</HTML>";
     			}
     			
     			break;
     		case "image":
-                     if(value.length()==0)
-                          { msg="The field cannot be empty";
-                           }
     			if(value == "No file selected") {
     				msg="Profile picture not selected.";
     			} else if(!Arrays.asList(fileTypesAllowed).contains(new File(value).toString().substring(new File(value).toString().lastIndexOf('.') + 1))) {
@@ -183,21 +166,19 @@ public class Helper {
                 case "aptNum":
                 case "roomCount":
                 case "bathCount":
-                     if(value.length()==0)
-                          { msg="The field cannot be empty";
-                           }
                         if(!value.matches("[0-9]+")) {
     				msg="This field must only contain digits (0-9).";
     				break;
     			}
-                case "street":
                 case "state":
+                    if(!value.matches("^[a-zA-Z[0-9] \\-\\.\\,\\']*$")) {
+                        msg="This field must only contain letters (a-z) & some special characters.";
+                    }
+                    break;
+                case "street":                
                 case "city":
                 case "community":  
                 case "aptType":
-                     if(value.length()==0)
-                          { msg="The field cannot be empty";
-                           }
                         if(value.length() < 3 || value.length() > 40) {
     				msg="   This field must contain 3-40 letters.";
     			}else if(!value.matches("^[a-zA-Z[0-9] \\-\\.\\,\\']*$")) {
@@ -238,6 +219,20 @@ public class Helper {
         String a = (String) comboBox.getSelectedItem();
         String [] aSplit = a.split("-");
         return Integer.parseInt(aSplit[0]);
+    }
+    
+    // Fetch selected radio button in a radio button group.
+    public static String getRadioButtonsValue(ButtonGroup buttonGroup) {
+    	String value = "";   	    
+    	
+    	for(Enumeration<AbstractButton> radioButtons = buttonGroup.getElements(); radioButtons.hasMoreElements();) {
+    		AbstractButton radioButton = radioButtons.nextElement();
+    		if(radioButton.isSelected()) {
+    			value = radioButton.getText();
+    		}
+    	}
+    	
+    	return value;
     }
     
 }
