@@ -49,7 +49,7 @@ public class LoginView extends javax.swing.JPanel {
 
         jLabel1.setText("jLabel1");
 
-        lbl_uname.setText("Username:");
+        lbl_uname.setText("Email:");
 
         lbl_password.setText("Password: ");
 
@@ -109,27 +109,23 @@ public class LoginView extends javax.swing.JPanel {
     private void btn_loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_loginActionPerformed
         // TODO add your handling code here:
         Person person  = new Person();
-        String name = txt_name.getText();
-             String password = txt_password.getText();
-        DatabaseUtils.loginUser(name, password);
-         JOptionPane.showMessageDialog(btn_login, "Logged in Successfully");
-         if(person!= null && person.getPassword().equals(password) && person.getName().equals(name))
+        String email = txt_name.getText();
+        String password = txt_password.getText();
+        boolean check = DatabaseUtils.loginUser(email, password);     
+//         if(person!= null && person.getPassword().equals(password) && person.getName().equals(name))
+        if(check)
              
-         {
-             
-          //AppSystem.setCurrentUid(person.getUid());
-          AppSystem.setCurrentUserRole(person.getUserRole());
-         }     
+        {
+           //AppSystem.setCurrentUid(person.getUid());
+           JOptionPane.showMessageDialog(btn_login, "Logged in Successfully");
+           SwingUtilities.invokeLater(() -> AppSystem.appViewObj.setView(new WorkAreaContPanel()));           
+        }     
      
     }//GEN-LAST:event_btn_loginActionPerformed
 
     private void btn_registerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_registerActionPerformed
         // TODO add your handling code here:
-       // RegisterView rg = new RegisterView();
-//        rg.setVisible(true);
         SwingUtilities.invokeLater(() -> AppSystem.appViewObj.setView(new RegisterView()));
-        
-        
     }//GEN-LAST:event_btn_registerActionPerformed
 
 

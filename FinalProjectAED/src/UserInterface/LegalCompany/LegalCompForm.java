@@ -186,6 +186,7 @@ public class LegalCompForm extends javax.swing.JPanel {
 
         contract.setLeaseEndDate(Helper.getDate(day, month, year));
         DatabaseUtils.updateContractLegal(contract);
+        DatabaseUtils.createNewApartment(contract.getAptId(), contract.getPropId());
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void yearsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_yearsActionPerformed

@@ -29,7 +29,7 @@ public class ElectricityCompanyAdmin extends Person {
         this.companyName = companyName;
     }
     
-    ElectricityCompanyAdmin(String uid ,String userRole, String name, String dob, String gender, String email,String phoneNumber , String password, String street, String community, String city, String state ){
+    ElectricityCompanyAdmin(int uid ,String userRole, String name, String dob, String gender, String email,String phoneNumber , String password, String street, String community, String city, String state ){
       super();
       setUid(uid);
       setUserRole("Electricity Company Admin");

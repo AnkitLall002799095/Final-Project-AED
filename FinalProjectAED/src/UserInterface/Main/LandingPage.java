@@ -2,25 +2,23 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package UserInterface.ManagementCompany;
+package UserInterface.Main;
 
+import UserInterface.Main.WorkAreaContPanel;
 import UserInterface.Main.WorkAreaContPanel;
 
 /**
  *
  * @author hmitt
  */
-public class MgmtDefaultJPanel extends javax.swing.JPanel {
+public class LandingPage extends javax.swing.JPanel {
 
     /**
      * Creates new form MgmtDefaultJPanel
      */
     
-    WorkAreaContPanel workAreaPanel;
-    
-    public MgmtDefaultJPanel(WorkAreaContPanel workAreaPanel) {
+    public LandingPage() {
         initComponents();
-        this.workAreaPanel=workAreaPanel;
     }
 
     /**
@@ -37,7 +35,7 @@ public class MgmtDefaultJPanel extends javax.swing.JPanel {
 
         WelcomejLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         WelcomejLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        WelcomejLabel.setText("Welcome to Management company portal!");
+        WelcomejLabel.setText("Welcome to Property Leasing portal!");
 
         SubHeadingjLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         SubHeadingjLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);

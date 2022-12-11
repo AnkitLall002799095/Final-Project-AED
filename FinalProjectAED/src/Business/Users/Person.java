@@ -14,7 +14,7 @@ import java.util.HashMap;
  * @author Bhawna Bassarmalani <your.name at your.org>
  */
 public class Person {
-    public  String uid;
+    public  int uid;
     public  String userRole;
     public  String name;
     public  String dob;
@@ -28,7 +28,7 @@ public class Person {
     public String state;
 
     
-    public String getUid() {
+    public int getUid() {
         return uid;
     }
 
@@ -36,7 +36,7 @@ public class Person {
         return userRole;
     }
 
-    public void setUid(String uid) {
+    public void setUid(int uid) {
         this.uid = uid;
     }
 
