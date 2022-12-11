@@ -5,6 +5,7 @@
 package Business.Users;
 
 import Application.Utils.DatabaseUtils;
+import Business.LegalCompany.LegalCompany;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -13,9 +14,17 @@ import java.util.ArrayList;
  * @author ankitlall
  */
 public class ManagementCompanyEmployeeDirectory {
-    ArrayList<ManagementCompanyEmployee> mgtEmpCompAdmin = new ArrayList<>();
+    ArrayList<ManagementCompanyEmployee> mgtEmpCompList = new ArrayList<>();
     
     public ManagementCompanyEmployeeDirectory() {}
+    
+    public void addNewEmpToList(ManagementCompanyEmployee emp) {
+        mgtEmpCompList.add(emp);
+    }
+    
+    public ArrayList<ManagementCompanyEmployee> getMgtEmpList() {
+        return this.mgtEmpCompList;
+    }
     
     public void createNewUser(ManagementCompanyEmployee compAdmin) {
         String userRole = compAdmin.getUserRole();

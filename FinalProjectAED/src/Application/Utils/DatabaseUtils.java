@@ -21,6 +21,8 @@ import Business.Property.Property;
 import Business.Property.PropertyDirectory;
 import Business.Request.UserRequest;
 import Business.Request.UserRequestDirectory;
+import Business.Users.ManagementCompanyEmployeeDirectory;
+import Business.Users.ManagementCompanyEmployee;
 import Business.UtilityCompany.ElectricityCompany;
 import Business.UtilityCompany.ElectricityCompanyDirectory;
 import Business.UtilityCompany.GasCompany;
@@ -656,6 +658,45 @@ public class DatabaseUtils {
                 obj.put("role", res.getString("UserRole"));
                 
                 result.add(obj);
+            }
+        }catch(Exception e) {
+            System.out.println(e);
+        }
+        
+        return result;
+    }
+    
+    public static ArrayList<HashMap<String, Object>> getMgtEmps() {
+        ArrayList<HashMap<String, Object>> result = new ArrayList<HashMap<String, Object>>();
+        try {
+            Connection dbConn = getConnection();
+            Statement stmt = dbConn.createStatement();
+            String query ="SELECT * FROM aedfinalproject.user_table where UserRole = 'mgtEmployee'";
+            ResultSet res = stmt.executeQuery(query);
+            while(res.next()) {
+                HashMap<String, Object> obj = new HashMap<String, Object>();
+                obj.put("userId", res.getInt("Uid"));
+                obj.put("name", res.getString("Name"));
+                
+                result.add(obj);
+            }
+        }catch(Exception e) {
+            System.out.println(e);
+        }
+        
+        return result;
+    }
+    
+    public static int getCompanyId(int id) {
+        int result = 0;
+        try {
+            Connection dbConn = getConnection();
+            Statement stmt = dbConn.createStatement();
+            String query ="SELECT * FROM aedfinalproject.user_table where Uid="+id;
+            ResultSet res = stmt.executeQuery(query);
+            while(res.next()) {
+                
+                result=res.getInt("company_id");
             }
         }catch(Exception e) {
             System.out.println(e);

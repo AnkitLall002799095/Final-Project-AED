@@ -12,22 +12,22 @@ import java.time.LocalDate;
  */
 public class ManagementCompanyEmployee extends Person  {
     int companyId;
-    String companyName;
     
-   public ManagementCompanyEmployee(String name, LocalDate dob, String gender, String email,long phoneNumber , String password, String street, String community, String city, String state ){
-      super();
-      setUserRole("Management User Employee");
-      setName(name);
-      setDob(dob);
-      setGender(gender);
-      setEmail(email);
-      setPhoneNumber(phoneNumber);
-      setPassword(password);
-      setStreet(street);
-      setCommunity(community);
-      setCity(city);
-      setState(state);      
-     }
+    public ManagementCompanyEmployee(String name, LocalDate dob, String gender, String email,long phoneNumber , String password, String street, String community, String city, String state ){
+        super();
+        setUserRole("mgtEmployee");
+        setName(name);
+        setDob(dob);
+        setGender(gender);
+        setEmail(email);
+        setPhoneNumber(phoneNumber);
+        setPassword(password);
+        setStreet(street);
+        setCommunity(community);
+        setCity(city);
+        setState(state);      
+    }
+   
     public int getCompanyId() {
         return companyId;
     }

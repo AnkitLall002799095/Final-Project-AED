@@ -36,7 +36,7 @@ public class SystemAdminMgmtJPanel extends javax.swing.JPanel {
         
         for (HashMap<String, Object> obj : result) {
             
-            Object[] row = new Object[6];
+            Object[] row = new Object[3];
             row[0] = obj.get("userId");
             row[1] = obj.get("name");
             row[2] = obj.get("role");
