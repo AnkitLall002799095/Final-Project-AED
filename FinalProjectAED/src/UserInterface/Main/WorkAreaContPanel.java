@@ -15,6 +15,10 @@ import UserInterface.LegalCompany.LegalCompRequestPanel;
 import UserInterface.ManagementCompany.ApplicationsListingMgtComp;
 import UserInterface.ManagementCompany.CompanyEmployeeLeftPanel;
 import UserInterface.SystemAdmin.SystemAdminLeftJPanel;
+
+import UserInterface.SystemAdmin.SystemAdminMgmtJPanel;
+
+
 import UserInterface.User.UserDefaultJPanel;
 import UserInterface.UtilityCompanies.UtilityCompLeftPanel;
 import javax.swing.JPanel;
@@ -61,7 +65,7 @@ public class WorkAreaContPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void setDefaultPanelViews() {
-//        jSplitPane1.setLeftComponent(new UserLeftPanel());
+  jSplitPane1.setLeftComponent(new UserLeftPanel());
 //        jSplitPane1.setRightComponent(new UserDefaultJPanel());
         
         String currentUserRole = AppSystem.currentUserRole;
@@ -96,6 +100,7 @@ public class WorkAreaContPanel extends javax.swing.JPanel {
                 jSplitPane1.setLeftComponent(new FinanceCompLeftPanel());
                 break;
         }
+
     }
     
     public void setLeftPanel(JPanel panel) {
