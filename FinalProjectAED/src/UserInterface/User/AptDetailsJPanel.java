@@ -7,14 +7,24 @@ package UserInterface.User;
 import Application.Utils.DatabaseUtils;
 import Application.Utils.Helper;
 import Business.Apartment.Apartment;
+import Business.ContractApplication.ContractApplication;
 import Business.Request.UserRequest;
 import Business.Request.UserRequestDirectory;
+import Business.UtilityCompany.ElectricityCompany;
+import Business.UtilityCompany.ElectricityCompanyDirectory;
+import Business.UtilityCompany.GasCompany;
+import Business.UtilityCompany.GasCompanyDirectory;
+import Business.UtilityCompany.WaterCompany;
+import Business.UtilityCompany.WaterCompanyDirectory;
 import UserInterface.Main.WorkAreaContPanel;
 import static UserInterface.User.UserDefaultJPanel.requestCounter;
 import java.awt.Image;
 import java.sql.Connection;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -33,15 +43,25 @@ public class AptDetailsJPanel extends javax.swing.JPanel {
     Apartment apt;
     UserRequestDirectory reqList;
     int i;
+    ArrayList<ContractApplication> contractAppList;
+    ElectricityCompanyDirectory electricityList;
+    GasCompanyDirectory gasList;
+    WaterCompanyDirectory waterList;
     
     public AptDetailsJPanel(WorkAreaContPanel workAreaPanel, Apartment apt, UserRequestDirectory reqList) {
         this.workAreaPanel=workAreaPanel;
         this.apt=apt;
         this.reqList=reqList;
         initComponents();
-        displayAptDetails();
         i=0;
+        System.out.println(apt.getAptId());
+        this.contractAppList = DatabaseUtils.getContractApplications(apt.getAptId(), "apt_id");
+        electricityList= DatabaseUtils.getElecListFromDB();
+        gasList= DatabaseUtils.getGasListFromDB();
+        waterList= DatabaseUtils.getWaterListFromDB();
+        displayAptDetails();
         displayAptImages(i);
+
     }
 
     /**
@@ -55,38 +75,53 @@ public class AptDetailsJPanel extends javax.swing.JPanel {
 
         javax.swing.JLabel WelcomjLabel = new javax.swing.JLabel();
         AptDetailsHeadingjLabel = new javax.swing.JLabel();
-        AptBuildingjLabel = new javax.swing.JLabel();
-        AptSizejLabel = new javax.swing.JLabel();
-        AptBedroomsjLabel = new javax.swing.JLabel();
-        AptBathroomsjLabel = new javax.swing.JLabel();
-        AptTypejLabel = new javax.swing.JLabel();
-        AptAvlblDatejLabel = new javax.swing.JLabel();
-        AptRentjLabel = new javax.swing.JLabel();
-        AptNojLabel = new javax.swing.JLabel();
-        AptAddressjLabel = new javax.swing.JLabel();
-        AptDetailsjLabel = new javax.swing.JLabel();
-        AptStreetjLabel1 = new javax.swing.JLabel();
-        AptCommjLabel2 = new javax.swing.JLabel();
-        AptCityjLabel3 = new javax.swing.JLabel();
-        AptStatejLabel4 = new javax.swing.JLabel();
-        AptBuildingTextField = new javax.swing.JTextField();
-        AptSizeTextField = new javax.swing.JTextField();
-        AptBedroomsTextField = new javax.swing.JTextField();
-        AptBathroomsTextField = new javax.swing.JTextField();
-        AptTypeTextField = new javax.swing.JTextField();
-        AptAvlblDateTextField = new javax.swing.JTextField();
-        AptRentTextField = new javax.swing.JTextField();
-        AptDetailsTextField = new javax.swing.JTextField();
-        AptStreetTextField = new javax.swing.JTextField();
-        AptCommTextField = new javax.swing.JTextField();
-        AptCityTextField = new javax.swing.JTextField();
-        AptStateTextField = new javax.swing.JTextField();
-        AptNoTextField = new javax.swing.JTextField();
         BookAptjButton = new javax.swing.JButton();
         GoBackjButton = new javax.swing.JButton();
         AptImagejLabel = new javax.swing.JLabel();
         NextImagejButton = new javax.swing.JButton();
         PreviousImagejButton1 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jPanel1 = new javax.swing.JPanel();
+        AptSizejLabel = new javax.swing.JLabel();
+        AptStatejLabel4 = new javax.swing.JLabel();
+        AptCityTextField = new javax.swing.JTextField();
+        AptBathroomsTextField = new javax.swing.JTextField();
+        AptSizeTextField = new javax.swing.JTextField();
+        AptCityjLabel3 = new javax.swing.JLabel();
+        AptStateTextField = new javax.swing.JTextField();
+        AptBedroomsjLabel = new javax.swing.JLabel();
+        AptTypejLabel = new javax.swing.JLabel();
+        AptAvlblDatejLabel = new javax.swing.JLabel();
+        AptTypeTextField = new javax.swing.JTextField();
+        AptUtilitiesTextField = new javax.swing.JTextField();
+        AptStreetTextField = new javax.swing.JTextField();
+        AptCommTextField = new javax.swing.JTextField();
+        AptBuildingTextField = new javax.swing.JTextField();
+        AptBathroomsjLabel = new javax.swing.JLabel();
+        AptStreetjLabel1 = new javax.swing.JLabel();
+        AptBuildingjLabel = new javax.swing.JLabel();
+        UtilitiesjLabel = new javax.swing.JLabel();
+        AptCommjLabel2 = new javax.swing.JLabel();
+        AptNojLabel = new javax.swing.JLabel();
+        AptBedroomsTextField = new javax.swing.JTextField();
+        AptAddressjLabel = new javax.swing.JLabel();
+        AptAvlblDateTextField = new javax.swing.JTextField();
+        AptFeaturesjLabel = new javax.swing.JLabel();
+        AptFeaturesTextField = new javax.swing.JTextField();
+        MgmtCompjLabel = new javax.swing.JLabel();
+        MgmtCompTextField = new javax.swing.JTextField();
+        ElectricityjLabel = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        ElectricityjTextArea = new javax.swing.JTextArea();
+        GasjLabel = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        GasjTextArea = new javax.swing.JTextArea();
+        WaterjLabel = new javax.swing.JLabel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        WaterjTextArea = new javax.swing.JTextArea();
+        RentjLabel = new javax.swing.JLabel();
+        RentTextField = new javax.swing.JTextField();
+        AptIdTextField = new javax.swing.JTextField();
 
         WelcomjLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         WelcomjLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -94,48 +129,6 @@ public class AptDetailsJPanel extends javax.swing.JPanel {
 
         AptDetailsHeadingjLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         AptDetailsHeadingjLabel.setText("Apartment details:-");
-
-        AptBuildingjLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        AptBuildingjLabel.setText("Building");
-
-        AptSizejLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        AptSizejLabel.setText("Apartment size");
-
-        AptBedroomsjLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        AptBedroomsjLabel.setText("No. of bedrooms");
-
-        AptBathroomsjLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        AptBathroomsjLabel.setText("No. of bathrooms");
-
-        AptTypejLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        AptTypejLabel.setText("Apartment type");
-
-        AptAvlblDatejLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        AptAvlblDatejLabel.setText("Available date");
-
-        AptRentjLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        AptRentjLabel.setText("Apartment rent");
-
-        AptNojLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        AptNojLabel.setText("Apartment no.");
-
-        AptAddressjLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        AptAddressjLabel.setText("Address:");
-
-        AptDetailsjLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        AptDetailsjLabel.setText("Details");
-
-        AptStreetjLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        AptStreetjLabel1.setText("Street");
-
-        AptCommjLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        AptCommjLabel2.setText("Community");
-
-        AptCityjLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        AptCityjLabel3.setText("City");
-
-        AptStatejLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        AptStatejLabel4.setText("State");
 
         BookAptjButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         BookAptjButton.setText("Book");
@@ -170,148 +163,283 @@ public class AptDetailsJPanel extends javax.swing.JPanel {
             }
         });
 
+        AptSizejLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        AptSizejLabel.setText("Apartment size");
+
+        AptStatejLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        AptStatejLabel4.setText("State");
+
+        AptCityjLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        AptCityjLabel3.setText("City");
+
+        AptBedroomsjLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        AptBedroomsjLabel.setText("No. of bedrooms");
+
+        AptTypejLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        AptTypejLabel.setText("Apartment type");
+
+        AptAvlblDatejLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        AptAvlblDatejLabel.setText("Available date");
+
+        AptBathroomsjLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        AptBathroomsjLabel.setText("No. of bathrooms");
+
+        AptStreetjLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        AptStreetjLabel1.setText("Street");
+
+        AptBuildingjLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        AptBuildingjLabel.setText("Building");
+
+        UtilitiesjLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        UtilitiesjLabel.setText("Utilities");
+
+        AptCommjLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        AptCommjLabel2.setText("Community");
+
+        AptNojLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        AptNojLabel.setText("Apartment no.");
+
+        AptAddressjLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        AptAddressjLabel.setText("Address:");
+
+        AptFeaturesjLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        AptFeaturesjLabel.setText("Extra features");
+
+        MgmtCompjLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        MgmtCompjLabel.setText("Management Company");
+
+        ElectricityjLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        ElectricityjLabel.setText("Electricity service details");
+
+        ElectricityjTextArea.setColumns(20);
+        ElectricityjTextArea.setRows(5);
+        jScrollPane2.setViewportView(ElectricityjTextArea);
+
+        GasjLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        GasjLabel.setText("Gas service details");
+
+        GasjTextArea.setColumns(20);
+        GasjTextArea.setRows(5);
+        jScrollPane3.setViewportView(GasjTextArea);
+
+        WaterjLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        WaterjLabel.setText("Water service details");
+
+        WaterjTextArea.setColumns(20);
+        WaterjTextArea.setRows(5);
+        jScrollPane4.setViewportView(WaterjTextArea);
+
+        RentjLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        RentjLabel.setText("Final rent");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(WaterjLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(AptNojLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(AptBuildingjLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(AptBedroomsjLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(AptSizejLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(AptBathroomsjLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(AptTypejLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(AptAvlblDatejLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(UtilitiesjLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(AptFeaturesjLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(MgmtCompjLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(AptUtilitiesTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(AptAvlblDateTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(AptTypeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(AptBathroomsTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(AptSizeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(AptBedroomsTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(AptBuildingTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(AptFeaturesTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(MgmtCompTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(AptIdTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(ElectricityjLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(GasjLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(AptAddressjLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(AptStreetjLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(AptCommjLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(AptCityjLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(AptStatejLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(AptCityTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(AptStateTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(AptCommTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(AptStreetTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(RentjLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(RentTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(32, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(11, 11, 11)
+                        .addComponent(AptNojLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(11, 11, 11)
+                        .addComponent(AptBuildingjLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(11, 11, 11)
+                        .addComponent(AptSizejLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(11, 11, 11)
+                        .addComponent(AptBedroomsjLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(AptBathroomsjLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(AptTypejLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(12, 12, 12)
+                        .addComponent(AptAvlblDatejLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(AptIdTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                        .addComponent(AptBuildingTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(AptSizeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(AptBedroomsTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(72, 72, 72))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                        .addComponent(AptBathroomsTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(AptTypeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(36, 36, 36))
+                            .addComponent(AptAvlblDateTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(UtilitiesjLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(12, 12, 12)
+                        .addComponent(AptFeaturesjLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(12, 12, 12)
+                        .addComponent(MgmtCompjLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(AptUtilitiesTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(AptFeaturesTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(MgmtCompTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(ElectricityjLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(GasjLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(WaterjLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(1, 1, 1)
+                        .addComponent(RentjLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(RentTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(AptAddressjLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(AptStreetjLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(12, 12, 12)
+                        .addComponent(AptCommjLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(12, 12, 12)
+                        .addComponent(AptCityjLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(6, 6, 6)
+                        .addComponent(AptStatejLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(AptStreetTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(36, 36, 36))
+                                    .addComponent(AptCommTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(36, 36, 36))
+                            .addComponent(AptCityTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(AptStateTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(234, Short.MAX_VALUE))
+        );
+
+        jScrollPane1.setViewportView(jPanel1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(225, Short.MAX_VALUE)
                 .addComponent(WelcomjLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 404, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(221, 221, 221))
             .addGroup(layout.createSequentialGroup()
-                .addGap(101, 101, 101)
+                .addGap(82, 82, 82)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(AptDetailsHeadingjLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(AptNojLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(AptBuildingjLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(AptBedroomsjLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(AptSizejLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(AptBathroomsjLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(AptTypejLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(AptAvlblDatejLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(AptRentjLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(AptDetailsjLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(AptAddressjLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(AptStreetjLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(AptCommjLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(AptCityjLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(AptStatejLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(AptCityTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(AptStateTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(AptCommTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(AptStreetTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(AptDetailsTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(AptRentTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(AptAvlblDateTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(AptTypeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(AptBathroomsTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(AptSizeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(AptBedroomsTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(AptBuildingTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(AptNoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(PreviousImagejButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(157, 157, 157)
-                        .addComponent(NextImagejButton, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(BookAptjButton, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(GoBackjButton, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(AptImagejLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(88, 88, 88))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 397, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(45, 45, 45)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(PreviousImagejButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(157, 157, 157)
+                                .addComponent(NextImagejButton, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(GoBackjButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(AptImagejLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(BookAptjButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(59, 59, 59)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addComponent(WelcomjLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(13, 13, 13)
+                .addComponent(AptDetailsHeadingjLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(WelcomjLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(AptDetailsHeadingjLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(13, 13, 13)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                    .addComponent(AptNojLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(AptNoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                                                    .addComponent(AptBuildingjLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                                    .addComponent(AptBuildingTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                                                    .addComponent(AptSizejLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                                    .addComponent(AptSizeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                                                    .addComponent(AptBedroomsjLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                                    .addComponent(AptBedroomsTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                                                .addComponent(AptBathroomsjLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                                                .addComponent(AptTypejLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                                .addGap(6, 6, 6))
-                                                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                                                                .addComponent(AptBathroomsTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                                                .addComponent(AptTypeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                                        .addComponent(AptAvlblDatejLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                        .addGap(6, 6, 6))
-                                                                    .addComponent(AptAvlblDateTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                                .addComponent(AptRentjLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                .addGap(6, 6, 6))
-                                                            .addComponent(AptRentTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                        .addComponent(AptDetailsjLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addGap(6, 6, 6))
-                                                    .addComponent(AptDetailsTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(AptImagejLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                                    .addComponent(NextImagejButton, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(PreviousImagejButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(AptAddressjLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(12, 12, 12)
-                                        .addComponent(AptStreetjLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(6, 6, 6))
-                                    .addComponent(AptStreetTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(AptCommjLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(6, 6, 6))
-                            .addComponent(AptCommTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(AptImagejLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(AptCityjLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(6, 6, 6))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(AptCityTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(BookAptjButton, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(AptStateTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(NextImagejButton, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(PreviousImagejButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(199, 199, 199)
+                        .addComponent(BookAptjButton, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addComponent(GoBackjButton, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(AptStatejLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(109, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addContainerGap(46, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -356,7 +484,7 @@ public class AptDetailsJPanel extends javax.swing.JPanel {
     
     private void NextImagejButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NextImagejButtonActionPerformed
         // TODO add your handling code here:
-        if ((i+1)<apt.getImages().size()){
+        if ((i+1)<contractAppList.get(0).getImages().size()){
             displayAptImages(++i);
         }
     }//GEN-LAST:event_NextImagejButtonActionPerformed
@@ -385,13 +513,11 @@ public class AptDetailsJPanel extends javax.swing.JPanel {
     private javax.swing.JTextField AptCommTextField;
     private javax.swing.JLabel AptCommjLabel2;
     private javax.swing.JLabel AptDetailsHeadingjLabel;
-    private javax.swing.JTextField AptDetailsTextField;
-    private javax.swing.JLabel AptDetailsjLabel;
+    private javax.swing.JTextField AptFeaturesTextField;
+    private javax.swing.JLabel AptFeaturesjLabel;
+    private javax.swing.JTextField AptIdTextField;
     private javax.swing.JLabel AptImagejLabel;
-    private javax.swing.JTextField AptNoTextField;
     private javax.swing.JLabel AptNojLabel;
-    private javax.swing.JTextField AptRentTextField;
-    private javax.swing.JLabel AptRentjLabel;
     private javax.swing.JTextField AptSizeTextField;
     private javax.swing.JLabel AptSizejLabel;
     private javax.swing.JTextField AptStateTextField;
@@ -400,39 +526,114 @@ public class AptDetailsJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel AptStreetjLabel1;
     private javax.swing.JTextField AptTypeTextField;
     private javax.swing.JLabel AptTypejLabel;
+    private javax.swing.JTextField AptUtilitiesTextField;
     private javax.swing.JButton BookAptjButton;
+    private javax.swing.JLabel ElectricityjLabel;
+    private javax.swing.JTextArea ElectricityjTextArea;
+    private javax.swing.JLabel GasjLabel;
+    private javax.swing.JTextArea GasjTextArea;
     private javax.swing.JButton GoBackjButton;
+    private javax.swing.JTextField MgmtCompTextField;
+    private javax.swing.JLabel MgmtCompjLabel;
     private javax.swing.JButton NextImagejButton;
     private javax.swing.JButton PreviousImagejButton1;
+    private javax.swing.JTextField RentTextField;
+    private javax.swing.JLabel RentjLabel;
+    private javax.swing.JLabel UtilitiesjLabel;
+    private javax.swing.JLabel WaterjLabel;
+    private javax.swing.JTextArea WaterjTextArea;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     // End of variables declaration//GEN-END:variables
     
     public void displayAptDetails(){
         
-        SimpleDateFormat dFormatView = new SimpleDateFormat("MM/dd/yyyy");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+        ContractApplication c=  contractAppList.get(0);
+
+        AptIdTextField.setText(Integer.toString(c.getAptId()));
+        AptBuildingTextField.setText(c.getPropName());
+        AptSizeTextField.setText(Double.toString(c.getSqft()));
+        AptBedroomsTextField.setText(Integer.toString(c.getRoomCount()));
+        AptBathroomsTextField.setText(Integer.toString(c.getBathCount()));
+        AptTypeTextField.setText(c.getType());
+        AptAvlblDateTextField.setText(c.getAvailability().format(formatter));
         
-        AptNoTextField.setText (Integer.toString(apt.getAptId()));
-        AptBuildingTextField.setText(apt.prop.getPropName());
-        AptSizeTextField.setText(Integer.toString(apt.getSize()));
-        AptBedroomsTextField.setText(Integer.toString(apt.getBedroom()));
-        AptBathroomsTextField.setText(Integer.toString(apt.getBathroom()));
-        AptTypeTextField.setText(apt.getType());
-        AptAvlblDateTextField.setText(dFormatView.format(apt.getAvlblDate()));
-        AptRentTextField.setText(Integer.toString(apt.getRent()));
-        AptDetailsTextField.setText(apt.getDetails());
+        String aptUtilities= new String();
+        for (int i=0;i<c.getUtilities().size();i++){
+            aptUtilities+=c.getUtilities().get(i)+",";
+        }
+        
+        AptUtilitiesTextField.setText(aptUtilities);
+        
+        String aptFeatures= new String();
+        for (int i=0;i<c.getFeatures().size();i++){
+            aptFeatures+=c.getFeatures().get(i)+",";
+        }
+        
+        AptFeaturesTextField.setText(aptFeatures);
+        
+        MgmtCompTextField.setText(c.getManagementCompany());
+        
+        String aptElectricityName= new String();
+        
+        for (ElectricityCompany e : electricityList.getElecList()){
+            if (e.getElectricityId()==c.getElecCompId())
+                aptElectricityName=e.getElectricityName();
+        }
+        
+        String aptElectricityDetails= new String();
+        aptElectricityDetails= "Electricity Company name: "+aptElectricityName+"\nBilling account no.: "+c.getElecAccNum()+"\nBilling date: "+c.getElecBillingDate()+"\nContact: "+c.getElecAccNum();
+        
+        ElectricityjTextArea.setText(aptElectricityDetails);        
+        
+        String aptGasName= new String();
+        
+        for (GasCompany g : gasList.getGasList()){
+            if (g.getGasId()==c.getGasCompId())
+                aptGasName=g.getGasName();
+        }
+        
+        String aptGasDetails= new String();
+        aptGasDetails= "Gas Company name: "+aptGasName+"\nBilling account no.: "+c.getGasAccNum()+"\nBilling date: "+c.getGasBillingDate()+"\nContact: "+c.getGasContactNum();
+        
+        GasjTextArea.setText(aptGasDetails);
+        
+        String aptWaterName= new String();
+        
+        for (WaterCompany w : waterList.getWaterList()){
+            if (w.getWaterId()==c.getWaterCompId())
+                aptWaterName=w.getWaterName();
+        }
+        
+        String aptWaterDetails= new String();
+        aptWaterDetails= "Water Company name: "+aptWaterName+"\nBilling account no.: "+c.getWaterAccNum()+"\nBilling date: "+c.getWaterBillingDate()+"\nContact: "+c.getWaterContactNum();
+        
+        WaterjTextArea.setText(aptWaterDetails);
+        
+        RentTextField.setText(Integer.toString(c.getLeaseCost()+c.getMaintanenceCost()+c.getUtilitiesCost()+c.getDeposit()));
         AptStreetTextField.setText(apt.prop.getStreet());
         AptCommTextField.setText(apt.prop.getCommunity());
         AptCityTextField.setText(apt.prop.getCity());
         AptStateTextField.setText(apt.prop.getState());
-        
-        AptNoTextField.setEditable(false);
+
+        AptIdTextField.setEditable(false);
         AptBuildingTextField.setEditable(false);
         AptSizeTextField.setEditable(false);
         AptBedroomsTextField.setEditable(false);
         AptBathroomsTextField.setEditable(false);
         AptTypeTextField.setEditable(false);
         AptAvlblDateTextField.setEditable(false);
-        AptRentTextField.setEditable(false);
-        AptDetailsTextField.setEditable(false);
+        AptUtilitiesTextField.setEditable(false);
+        AptFeaturesTextField.setEditable(false);
+        MgmtCompTextField.setEditable(false);
+        ElectricityjTextArea.setEditable(false);
+        GasjTextArea.setEditable(false);
+        WaterjTextArea.setEditable(false);
+        RentTextField.setEditable(false);
         AptStreetTextField.setEditable(false);
         AptCommTextField.setEditable(false);
         AptCityTextField.setEditable(false);
@@ -441,7 +642,7 @@ public class AptDetailsJPanel extends javax.swing.JPanel {
     }
     
     public void displayAptImages(int i){        
-        ImageIcon aptPicture = new ImageIcon(apt.getImages().get(i));
+        ImageIcon aptPicture = new ImageIcon(contractAppList.get(0).getImages().get(i));
         Image I = aptPicture.getImage();
         Image I2 = I.getScaledInstance(245,192,Image.SCALE_DEFAULT);
         ImageIcon resizedI = new ImageIcon(I2);

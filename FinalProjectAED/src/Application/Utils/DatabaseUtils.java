@@ -160,7 +160,7 @@ public class DatabaseUtils {
                     Helper.convertStringToArr(res.getString("utilities")), 
                     Helper.convertStringToArr(res.getString("prop_images")),
                     res.getString("mgt_comp"),
-                    res.getInt("apt_num"),
+                    res.getInt("apt_Id"),
                     res.getInt("prop_id"),
                     res.getInt("mgt_comp_id"),
                     res.getString("app_status"),
