@@ -7,6 +7,10 @@ package Application.Utils;
 import Business.Apartment.Apartment;
 import Business.Apartment.ApartmentDirectory;
 import Business.ContractApplication.ContractApplication;
+import Business.FinanceCompany.FinanceCompany;
+import Business.FinanceCompany.FinanceCompanyDirectory;
+import Business.LegalCompany.LegalCompany;
+import Business.LegalCompany.LegalCompanyDirectory;
 import Business.ManagementCompany.ManagementCompany;
 import Business.ManagementCompany.ManagementCompanyDirectory;
 import Business.Property.Property;
@@ -419,6 +423,52 @@ public class DatabaseUtils {
                 elec.setElectricityState(elecRs.getString(4));
             }
             return elecListFromDB;
+        }
+        catch(Exception e){
+            System.out.println(e);
+            return null;
+        }
+    }
+    
+    public static FinanceCompanyDirectory getFinanceListFromDB(){
+        
+        try{
+            FinanceCompanyDirectory financeListFromDB = new FinanceCompanyDirectory();
+            Connection conn= getConnection();
+            Statement st = conn.createStatement();
+            ResultSet finRs = st.executeQuery("SELECT * FROM aedfinalproject.fin_companies");
+            
+            while (finRs.next()){
+                FinanceCompany finance = financeListFromDB.addNewProfile();
+                finance.setFinanceId(finRs.getInt(1));
+                finance.setFinanceName(finRs.getString(2));
+                finance.setFinanceCity(finRs.getString(3));
+                finance.setFinanceState(finRs.getString(4));
+            }
+            return financeListFromDB;
+        }
+        catch(Exception e){
+            System.out.println(e);
+            return null;
+        }
+    }
+    
+    public static LegalCompanyDirectory getLegalListFromDB(){
+        
+        try{
+            LegalCompanyDirectory legalListFromDB = new LegalCompanyDirectory();
+            Connection conn= getConnection();
+            Statement st = conn.createStatement();
+            ResultSet legalRs = st.executeQuery("SELECT * FROM aedfinalproject.legal_companies");
+            
+            while (legalRs.next()){
+                LegalCompany legal= legalListFromDB.addNewProfile();
+                legal.setLegalId(legalRs.getInt(1));
+                legal.setLegalName(legalRs.getString(2));
+                legal.setLegalCity(legalRs.getString(3));
+                legal.setLegalState(legalRs.getString(4));
+            }
+            return legalListFromDB;
         }
         catch(Exception e){
             System.out.println(e);
