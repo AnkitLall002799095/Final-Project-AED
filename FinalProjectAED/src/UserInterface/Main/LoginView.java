@@ -117,7 +117,7 @@ public class LoginView extends javax.swing.JPanel {
              
          {
              
-          AppSystem.setCurrentUid(person.getUid());
+          //AppSystem.setCurrentUid(person.getUid());
           AppSystem.setCurrentUserRole(person.getUserRole());
          }     
      

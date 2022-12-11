@@ -44,7 +44,7 @@ public class ApplicationsListingMgtComp extends javax.swing.JPanel {
             
             Object[] row = new Object[6];
             row[0] = contract.getAppId();
-            row[1] = contract.getAptNum();
+            row[1] = contract.getAptId();
             row[2] = contract.getCommunity();
             row[3] = contract.getCity();
             row[4] = contract.getAppStatus();
