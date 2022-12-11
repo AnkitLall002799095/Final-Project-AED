@@ -17,10 +17,10 @@ public class Person {
     public  int uid;
     public  String userRole;
     public  String name;
-    public  String dob;
+    public  LocalDate dob;
     public  String gender;
     public String email;
-    public String phoneNumber;
+    public long phoneNumber;
     public String password;
     public String street;
     public String community;
@@ -48,7 +48,7 @@ public class Person {
         this.name = name;
     }
 
-    public void setDob(String dob) {
+    public void setDob(LocalDate dob) {
         this.dob = dob;
     }
 
@@ -60,7 +60,7 @@ public class Person {
         this.email = email;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
+    public void setPhoneNumber(long phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
@@ -88,7 +88,7 @@ public class Person {
         return name;
     }
 
-    public String getDob() {
+    public LocalDate getDob() {
         return dob;
     }
 
@@ -100,7 +100,7 @@ public class Person {
         return email;
     }
 
-   public String getPhoneNumber() {
+   public long getPhoneNumber() {
         return phoneNumber;
     }
 

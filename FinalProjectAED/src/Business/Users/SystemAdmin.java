@@ -4,12 +4,14 @@
  */
 package Business.Users;
 
+import java.time.LocalDate;
+
 /**
  *
  * @author Bhawna Bassarmalani <your.name at your.org>
  */
 public class SystemAdmin extends Person {
-    SystemAdmin(int uid ,String userRole, String name, String dob, String gender, String email,String phoneNumber , String password, String street, String community, String city, String state ){
+    public SystemAdmin(String name, LocalDate dob, String gender, String email,long phoneNumber , String password, String street, String community, String city, String state ){
       super();
       setUid(uid);
       setUserRole("System Admin");

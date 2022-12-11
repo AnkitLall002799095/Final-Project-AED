@@ -7,6 +7,10 @@ package Application.Utils;
 import Business.Apartment.Apartment;
 import Business.Apartment.ApartmentDirectory;
 import Business.ContractApplication.ContractApplication;
+import Business.FinanceCompanyPackage.FinanceCompanyDirectory;
+import Business.FinanceCompanyPackage.FinanceCompany;
+import Business.LegalCompany.LegalCompany;
+import Business.LegalCompany.LegalCompanyDirectory;
 import Business.ManagementCompany.ManagementCompany;
 import Business.ManagementCompany.ManagementCompanyDirectory;
 import Business.Property.Property;
@@ -53,27 +57,46 @@ public class DatabaseUtils {
     }
     
     
-    public static void createNewUser(Person person){
-    
-    try{
+    public static int createNewUser(String userRole, String name, LocalDate date, String gender, String email, long phNum, String password, String street, String comm, String city, String state){
+        int id=0;
+        try{
 
             Connection conn= getConnection();
             Statement st = conn.createStatement();
-            st.executeUpdate("INSERT INTO `aedfinalproject`.`user_table` (`Uid`, `UserRole`, `Name`, `DOB`, `Gender`, `Email`, `PhoneNumber`, `Password` , `Street` , `Community` , `City` , `State`) "
-                    + "VALUES ('" + person.getUid() + "','" + person.getUserRole() + "','" + person.getName() + "','" + person.getDob() + "','" + person.getGender() + "','" + person.getEmail() + "','" 
-                    + person.getPhoneNumber()
-                    + "','" + person.getPassword()+ "','" + person.getStreet()+ "','" + person.getCommunity()+ "','" + person.getCity()+ "','" + person.getState()+ "')");
+            st.executeUpdate("INSERT INTO `aedfinalproject`.`user_table` (`UserRole`, `Name`, `DOB`, `Gender`, `Email`, `PhoneNumber`, `Password` , `Street` , `Community` , `City` , `State`) "
+                    + "VALUES ('" + userRole + "','" + name + "','" + date + "','" + gender + "','" + email + "','" 
+                    + phNum
+                    + "','" + password+ "','" + street+ "','" + comm+ "','" + city+ "','" + state+ "')", st.RETURN_GENERATED_KEYS);
+            
+            ResultSet rs=st.getGeneratedKeys();
+            if(rs.next()){
+                id=rs.getInt(1);
+            }
+        }
+        catch(Exception e){
+            System.out.println(e);
+        }
+        
+        return id;
+    }
+    
+    public static void addCompanyUsers(int companyId, String companyType, int uId) {                    
+        try{
+
+            Connection conn= getConnection();
+            Statement st = conn.createStatement();
+            String query="UPDATE aedfinalproject.user_table SET "+
+                                                    " company_id="+ companyId + 
+                                                    " ,company_type="+"'"+companyType+"'"+ " WHERE Uid="+uId;
+            st.executeUpdate(query);
 
         }
-            catch(Exception e){
-                System.out.println(e);
-            }
-    
-    
-    
-    
-    
+        catch(Exception e){
+            System.out.println(e);
+        }
     }
+    
+    
     public static boolean loginUser(String email, String password){
         
         try{
@@ -83,18 +106,12 @@ public class DatabaseUtils {
              String query = "select * from user_table where Email='"+email+"'and Password = '"+password+"'";
              ResultSet rs = sta.executeQuery(query);
              if(rs.next()){
-               // dispose(); // when credentials are correct close login page
                AppSystem.setCurrentUserRole(rs.getString("UserRole"));
                AppSystem.setCurrentUid(rs.getInt("Uid"));
                return true;
-               
              }else{
-                // JOptionPane.showMessageDialog(this,"username or password is wrong");
-                // txt_name.setText("");
-                // txt_password.setText("");
                 return false;
              }
-//             connection.close();
             
         }catch(Exception e){
             System.out.println(e);
@@ -541,32 +558,58 @@ public class DatabaseUtils {
         }
     }
     
-    public static HashMap<String, Integer> getFinComps() {
-        HashMap<String, Integer> result = new HashMap<>();
+    public static FinanceCompanyDirectory getFinComps() {
+        FinanceCompanyDirectory finDir = new FinanceCompanyDirectory();
         try {
             Connection dbConn = getConnection();
             Statement stmt = dbConn.createStatement();
             String query ="SELECT * FROM aedfinalproject.fin_companies";
             ResultSet res = stmt.executeQuery(query);
             while(res.next()) {
-                result.put(res.getString("fin_name"),res.getInt("fin_id"));
+                FinanceCompany finComp = new FinanceCompany(res.getString("fin_name"));
+                finComp.setFinId(res.getInt("fin_id"));
+                finDir.addNewCompanyToList(finComp);
             }
         }catch(Exception e) {
             System.out.println(e);
         }
         
-        return result;
+        return finDir;
     }
     
-    public static HashMap<String, Integer> getLegalComps() {
-        HashMap<String, Integer> result = new HashMap<>();
+    public static LegalCompanyDirectory getLegalComps() {
+        LegalCompanyDirectory legalDir = new LegalCompanyDirectory();
         try {
             Connection dbConn = getConnection();
             Statement stmt = dbConn.createStatement();
             String query ="SELECT * FROM aedfinalproject.legal_companies";
             ResultSet res = stmt.executeQuery(query);
             while(res.next()) {
-                result.put(res.getString("legal_comp_name"),res.getInt("legal_comp_id"));
+                LegalCompany legalComp = new LegalCompany(res.getString("legal_comp_name"));
+                legalComp.setLegalId(res.getInt("legal_comp_id"));
+                legalDir.addNewCompanyToList(legalComp);
+            }
+        }catch(Exception e) {
+            System.out.println(e);
+        }
+        
+        return legalDir;
+    }
+    
+    public static ArrayList<HashMap<String, Object>> getAdminUsers() {
+        ArrayList<HashMap<String, Object>> result = new ArrayList<HashMap<String, Object>>();
+        try {
+            Connection dbConn = getConnection();
+            Statement stmt = dbConn.createStatement();
+            String query ="SELECT * FROM aedfinalproject.user_table where UserRole <> 'consumer'";
+            ResultSet res = stmt.executeQuery(query);
+            while(res.next()) {
+                HashMap<String, Object> obj = new HashMap<String, Object>();
+                obj.put("userId", res.getInt("Uid"));
+                obj.put("name", res.getString("Name"));
+                obj.put("role", res.getString("UserRole"));
+                
+                result.add(obj);
             }
         }catch(Exception e) {
             System.out.println(e);

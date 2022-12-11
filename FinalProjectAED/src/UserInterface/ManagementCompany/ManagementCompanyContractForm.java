@@ -8,6 +8,10 @@ import Application.Utils.AppSystem;
 import Application.Utils.DatabaseUtils;
 import Application.Utils.Helper;
 import Business.ContractApplication.ContractApplication;
+import Business.FinanceCompanyPackage.FinanceCompanyDirectory;
+import Business.FinanceCompanyPackage.FinanceCompany;
+import Business.LegalCompany.LegalCompany;
+import Business.LegalCompany.LegalCompanyDirectory;
 import UserInterface.Main.WorkAreaContPanel;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
@@ -43,8 +47,8 @@ public class ManagementCompanyContractForm extends javax.swing.JPanel implements
     private Boolean isValid;
     
     private HashMap<String, Integer> propList;
-    private HashMap<String, Integer> finList;
-     private HashMap<String, Integer> legalList;
+    private HashMap<String, Integer> finList=new HashMap<>();
+    private HashMap<String, Integer> legalList=new HashMap<>();
 
     /**
      * Creates new form ManagementCompanyContractForm
@@ -72,22 +76,20 @@ public class ManagementCompanyContractForm extends javax.swing.JPanel implements
     }
     
     private void generateFinCompList() {
-        // Insert actual mgtId.
-        finList = DatabaseUtils.getFinComps();
-        List<String> finNamesList = new ArrayList<String>(finList.keySet());
+        FinanceCompanyDirectory finDir = DatabaseUtils.getFinComps();
         
-        for(String key : finNamesList) {
-            finCompList.addItem(key);
+        for(FinanceCompany comp : finDir.getFinanceCompanyList()) {
+            finCompList.addItem(comp.getCompanyName());
+            finList.put(comp.getCompanyName(), comp.getFinId());
         }
     }
     
     private void generateLegalCompList() {
-        // Insert actual mgtId.
-        legalList = DatabaseUtils.getLegalComps();
-        List<String> legalNamesList = new ArrayList<String>(legalList.keySet());
+        LegalCompanyDirectory legalDir = DatabaseUtils.getLegalComps();
         
-        for(String key : legalNamesList) {
-            legalCompList.addItem(key);
+        for(LegalCompany comp : legalDir.getLegalCompanyList()) {
+            legalCompList.addItem(comp.getCompanyName());
+            legalList.put(comp.getCompanyName(), comp.getLegalId());
         }
     }
 
@@ -328,39 +330,41 @@ public class ManagementCompanyContractForm extends javax.swing.JPanel implements
                                 .addGap(18, 18, 18)
                                 .addComponent(addImage)))
                         .addGap(67, 67, 67))
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(jComboBox3, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addComponent(propNameCombo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(utilitiesTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(addUtilities))
-                                .addComponent(featuresTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(cityField)
-                                .addComponent(commField)
-                                .addComponent(streetField)
-                                .addComponent(aptNumField)
-                                .addComponent(stateField)
-                                .addComponent(sqftField, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGap(18, 18, 18)
-                            .addComponent(sqftErr))
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(18, 18, 18)
-                            .addComponent(jComboBox5, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(18, 18, 18)
-                            .addComponent(jComboBox6, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGap(68, 68, 68)))
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(legalCompList, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(finCompList, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jComboBox5, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jComboBox6, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(68, 68, 68))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(legalCompList, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(finCompList, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(propNameCombo, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                        .addComponent(utilitiesTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(addUtilities))
+                                    .addComponent(featuresTextField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(cityField, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(commField, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(streetField, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(aptNumField, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(stateField, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(sqftField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addComponent(sqftErr)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

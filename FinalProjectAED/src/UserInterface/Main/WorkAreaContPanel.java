@@ -65,8 +65,8 @@ public class WorkAreaContPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void setDefaultPanelViews() {
-  jSplitPane1.setLeftComponent(new UserLeftPanel());
-//        jSplitPane1.setRightComponent(new UserDefaultJPanel());
+//        jSplitPane1.setLeftComponent(new SystemAdminLeftJPanel());
+//        jSplitPane1.setRightComponent(new SystemAdminMgmtJPanel());        
         
         String currentUserRole = AppSystem.currentUserRole;
         
