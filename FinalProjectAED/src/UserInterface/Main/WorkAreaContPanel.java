@@ -7,8 +7,8 @@ package UserInterface.Main;
 import UserInterface.User.UserLeftPanel;
 import UserInterface.User.ListingViewJPanel;
 import Application.Utils.AppSystem;
-import UserInterface.EclectricityUtility.ElectricityCompLeftPanel;
-import UserInterface.EclectricityUtility.RequestsListingElecUtility;
+//import UserInterface.EclectricityUtility.ElectricityCompLeftPanel;
+//import UserInterface.EclectricityUtility.RequestsListingElecUtility;
 import UserInterface.ManagementCompany.ApplicationsListingMgtComp;
 import UserInterface.ManagementCompany.CompanyEmployeeLeftPanel;
 import UserInterface.User.UserDefaultJPanel;
@@ -58,8 +58,10 @@ public class WorkAreaContPanel extends javax.swing.JPanel {
     private void setDefaultPanelViews() {
 //        jSplitPane1.setLeftComponent(new UserLeftPanel());
 //        jSplitPane1.setRightComponent(new UserDefaultJPanel());
-        jSplitPane1.setLeftComponent(new ElectricityCompLeftPanel());
-        jSplitPane1.setRightComponent(new RequestsListingElecUtility());
+//        jSplitPane1.setLeftComponent(new ElectricityCompLeftPanel());
+//        jSplitPane1.setRightComponent(new RequestsListingElecUtility());
+//        jSplitPanel.setLeftComponent(new SystemAdminLeftJPanel());
+//        jSplitPanel.setRightComponent(new SystemAdminMgmtJPanel());
     }
     
     public void setLeftPanel(JPanel panel) {
