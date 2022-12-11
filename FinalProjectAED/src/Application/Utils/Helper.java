@@ -10,6 +10,8 @@ import Business.Property.Property;
 import Business.Property.PropertyDirectory;
 import Business.Request.UserRequest;
 import Business.Request.UserRequestDirectory;
+import UserInterface.Main.LoginView;
+import UserInterface.Main.RegisterView;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -35,6 +37,7 @@ import java.util.Locale;
 import java.util.stream.IntStream;
 import javax.swing.AbstractButton;
 import javax.swing.ButtonGroup;
+import javax.swing.SwingUtilities;
 import org.apache.commons.io.FileUtils;
 
 /**
@@ -233,6 +236,12 @@ public class Helper {
     	}
     	
     	return value;
+    }
+    
+    public static void logoutUser() {
+        AppSystem.currentUid = 0;
+        AppSystem.currentUserRole = "";
+        SwingUtilities.invokeLater(() -> AppSystem.appViewObj.setView(new LoginView()));
     }
     
 }
