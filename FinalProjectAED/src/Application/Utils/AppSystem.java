@@ -18,7 +18,7 @@ public class AppSystem {
     public static AppView appViewObj;
     public static ContractApplicationCatalog contractApplicationCatalog;
     public static WorkAreaContPanel workAreaPanel;
-    
+    public static int requestCounter=1;
     
     
     public AppSystem(AppView appViewObj) {

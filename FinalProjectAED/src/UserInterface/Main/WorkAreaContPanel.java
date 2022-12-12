@@ -88,7 +88,6 @@ public class WorkAreaContPanel extends javax.swing.JPanel {
                 break;
             case "mgtCompAdmin":
                 jSplitPane1.setLeftComponent(new MgmtAdminLeftPanel());
-//                jSplitPane1.setRightComponent(new MgmtUserRequestJPanel());
                 break;
             case "sysAdmin":
                 jSplitPane1.setLeftComponent(new SystemAdminLeftJPanel());

@@ -4,6 +4,10 @@
  */
 package UserInterface.User;
 
+import Application.Utils.AppSystem;
+import static Application.Utils.AppSystem.currentUid;
+import static Application.Utils.AppSystem.requestCounter;
+import static Application.Utils.AppSystem.workAreaPanel;
 import Application.Utils.DatabaseUtils;
 import Application.Utils.Helper;
 import Business.Apartment.Apartment;
@@ -20,7 +24,6 @@ import Business.UtilityCompany.WaterCompany;
 import Business.UtilityCompany.WaterCompanyDirectory;
 import Email.Utils.EmailUtil;
 import UserInterface.Main.WorkAreaContPanel;
-import static UserInterface.User.UserDefaultJPanel.requestCounter;
 import java.awt.Image;
 import java.sql.Connection;
 import java.sql.Statement;
@@ -42,7 +45,6 @@ public class AptDetailsJPanel extends javax.swing.JPanel {
      * Creates new form AptDetailsJPanel
      */
     
-    WorkAreaContPanel workAreaPanel;
     Apartment apt;
     UserRequestDirectory reqList;
     int i;
@@ -52,8 +54,7 @@ public class AptDetailsJPanel extends javax.swing.JPanel {
     ManagementCompanyDirectory mgtList;
     WaterCompanyDirectory waterList;
     
-    public AptDetailsJPanel(WorkAreaContPanel workAreaPanel, Apartment apt, UserRequestDirectory reqList) {
-        this.workAreaPanel=workAreaPanel;
+    public AptDetailsJPanel(Apartment apt, UserRequestDirectory reqList) {
         this.apt=apt;
         this.reqList=reqList;
         initComponents();
@@ -463,7 +464,7 @@ public class AptDetailsJPanel extends javax.swing.JPanel {
         newReq.setRequestType("Lease");
         newReq.setStatus("Pending");
         newReq.setLastMdfdDate(statusDate);
-        newReq.setUserId(123);
+        newReq.setUserId(currentUid);
 
         try{
 
@@ -478,13 +479,13 @@ public class AptDetailsJPanel extends javax.swing.JPanel {
         
         JOptionPane.showMessageDialog(BookAptjButton, "Apartment booking request placed!");
         EmailUtil.triggerUserToManagementMail("abcx98414@gmail.com", "managementcomptestacc@gmail.com");
-        workAreaPanel.setRightPanel(new ListingViewJPanel(workAreaPanel));
+        workAreaPanel.setRightPanel(new ListingViewJPanel());
     }//GEN-LAST:event_BookAptjButtonActionPerformed
 
     private void GoBackjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GoBackjButtonActionPerformed
         // TODO add your handling code here:
         
-        workAreaPanel.setRightPanel(new ListingViewJPanel(workAreaPanel));
+        workAreaPanel.setRightPanel(new ListingViewJPanel());
         
     }//GEN-LAST:event_GoBackjButtonActionPerformed
     

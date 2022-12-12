@@ -374,7 +374,10 @@ public class NewCompaniesAddJPanel extends javax.swing.JPanel {
             } 
             clearSelection();
             formType = "";
-        }else {
+        }else if ((CompanyIdjTextField.getText().equals("")) || (CompanyNamejTextField.getText().equals("")) || (CompanycityjTextField.getText().equals("")) || (CompanyStatejTextField.getText().equals("")) ){
+            JOptionPane.showMessageDialog(SubmitjButton, "Please provide value for all fields!");
+        }
+        else{
             String companyType= new String();
             companyType= (String) CompanyTypejComboBox.getSelectedItem();
 

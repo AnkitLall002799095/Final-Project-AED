@@ -20,12 +20,10 @@
               <EmptySpace pref="11" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="1" max="-2" attributes="0">
                   <Component id="OwnerReportjButton" pref="169" max="32767" attributes="0"/>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="WelcomejLabel" max="32767" attributes="0"/>
-                      <Component id="ViewjButton" max="32767" attributes="0"/>
-                      <Component id="ViewjButton1" alignment="0" pref="169" max="32767" attributes="0"/>
-                      <Component id="LogoutjButton" alignment="0" max="32767" attributes="0"/>
-                  </Group>
+                  <Component id="WelcomejLabel" alignment="0" max="32767" attributes="0"/>
+                  <Component id="ViewjButton" alignment="0" max="32767" attributes="0"/>
+                  <Component id="ViewjButton1" alignment="0" pref="169" max="32767" attributes="0"/>
+                  <Component id="LogoutjButton" alignment="0" max="32767" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
           </Group>
