@@ -5,6 +5,7 @@
 package UserInterface.FinanceCompany;
 
 import Application.Utils.AppSystem;
+import Application.Utils.DatabaseUtils;
 import Business.ContractApplication.ContractApplication;
 import UserInterface.GasUtility.GasContractFormCont;
 import UserInterface.Main.WorkAreaContPanel;
@@ -32,7 +33,7 @@ public class FinanceCompRequestPanel extends javax.swing.JPanel {
     public void generateTableData() {
         jTable1.setCellSelectionEnabled(false);
         jTable1.setRowSelectionAllowed(true);
-        AppSystem.contractApplicationCatalog.getContracts(1, "fin_comp_id");
+        AppSystem.contractApplicationCatalog.getContracts(DatabaseUtils.getCompanyId(AppSystem.currentUid), "fin_comp_id");
         contractApplicationCatalog = AppSystem.contractApplicationCatalog.getContractApplicationCatalog();
         populateTable();
     }
