@@ -134,7 +134,14 @@ public class DatabaseUtils {
             Connection dbConn = getConnection();
             Statement stmt = dbConn.createStatement();
             
-            String query = "INSERT INTO contract_application values(Null," + contract.get("aptNum") + 
+            String query = "INSERT INTO contract_application (apt_id, prop_id, elec_comp_id, water_comp_id, gas_comp_id, fin_comp_id, legal_comp_id, prop_name, start_date, street, community, city, state, prop_images, apt_type, room_count, bath_count, features, avl_date, utilities, mgt_comp_id, app_status, sqft, app_owner_type, app_owner)"
+                    + " values(" + contract.get("aptId") + 
+                    "," + contract.get("propId") + 
+                    "," + contract.get("elecCompId") + 
+                    "," + contract.get("waterCompId") + 
+                    "," + contract.get("gasCompId") + 
+                    "," + contract.get("finId") + 
+                    "," + contract.get("legalId") + 
                     ",'" + contract.get("propName") + 
                     "','" + contract.get("date") + 
                     "','" + contract.get("street") + 
@@ -148,8 +155,10 @@ public class DatabaseUtils {
                     ",'" + contract.get("features") + 
                     "','" + contract.get("availability") + 
                     "','" + contract.get("utilities") + 
-                    "','" + contract.get("managementCompany") + 
-                    "','" + contract.get("status") + 
+                    "','" + contract.get("mgtCompanyId") + 
+                    "','" + contract.get("status") +
+                    "','" + contract.get("sqft") +
+                    "','" + contract.get("appOwnerType") +
                     "','" + contract.get("appOwner") + "')";
             int x = stmt.executeUpdate(query);
             if (x == 0) {
@@ -187,7 +196,6 @@ public class DatabaseUtils {
                     res.getDate("avl_date").toLocalDate(),
                     Helper.convertStringToArr(res.getString("utilities")), 
                     Helper.convertStringToArr(res.getString("prop_images")),
-                    res.getString("mgt_comp"),
                     res.getInt("apt_Id"),
                     res.getInt("prop_id"),
                     res.getInt("mgt_comp_id"),
@@ -203,22 +211,22 @@ public class DatabaseUtils {
                 );
                 
                 contract.setElecAccNum(res.getLong("elec_acc_num"));
-                LocalDate elecBillingDate = (res.getDate("elec_bill_date") != null)?res.getDate("elec_bill_date").toLocalDate(): null;
+                String elecBillingDate = res.getString("elec_bill_date");
                 contract.setElecBillingDate(elecBillingDate);
                 contract.setElecContactNum(res.getLong("elec_contact"));
                 
                 contract.setWaterAccNum(res.getLong("water_acc_num"));
-                LocalDate waterBillingDate = (res.getDate("water_bill_date") != null)?res.getDate("water_bill_date").toLocalDate(): null;
+                String waterBillingDate = res.getString("water_bill_date");
                 contract.setWaterBillingDate(waterBillingDate);
                 contract.setWaterContactNum(res.getLong("water_contact"));
                 
                 contract.setGasAccNum(res.getLong("gas_acc_num"));
-                LocalDate gasBillingDate = (res.getDate("gas_bill_date") != null)?res.getDate("gas_bill_date").toLocalDate(): null;
+                String gasBillingDate =res.getString("gas_bill_date");
                 contract.setGasBillingDate(gasBillingDate);
                 contract.setGasContactNum(res.getLong("gas_contact"));
                 
                 contract.setLeaseCost(res.getInt("fin_lease_cost"));
-                LocalDate aptBillingDate = (res.getDate("fin_bill_date") != null)?res.getDate("fin_bill_date").toLocalDate(): null;
+                String aptBillingDate = res.getString("fin_bill_date");
                 contract.setAptBillingDate(gasBillingDate);
                 contract.setMaintanenceCost(res.getInt("fin_maint_cost"));
                 contract.setUtilitiesCost(res.getInt("fin_utility_cost"));
@@ -353,9 +361,11 @@ public class DatabaseUtils {
             Statement stmt = dbConn.createStatement();
             String query ="SELECT * FROM aedfinalproject.property_details where prop_id="+propId;
             ResultSet res = stmt.executeQuery(query);
-            result.put("elecCompId", res.getInt("elec_comp_id"));
-            result.put("waterCompId", res.getInt("water_comp_id"));
-            result.put("gasCompId", res.getInt("gas_comp_id"));
+            while(res.next()) {
+                result.put("elecCompId", res.getInt("elec_comp_id"));
+                result.put("waterCompId", res.getInt("water_comp_id"));
+                result.put("gasCompId", res.getInt("gas_comp_id"));
+            }
         }catch(Exception e) {
             System.out.println(e);
         }
@@ -363,12 +373,12 @@ public class DatabaseUtils {
         return result;
     }
     
-    public static HashMap<String, Integer> getPropInfo(int mgtId) {
+    public static HashMap<String, Integer> getPropInfo(int mgtEmpId) {
         HashMap<String, Integer> result = new HashMap<>();
         try {
             Connection dbConn = getConnection();
             Statement stmt = dbConn.createStatement();
-            String query ="SELECT * FROM aedfinalproject.property_details where mgt_comp_id="+mgtId;
+            String query ="SELECT * FROM aedfinalproject.property_details where mgt_broker_id="+mgtEmpId;
             ResultSet res = stmt.executeQuery(query);
             while(res.next()) {
                 result.put(res.getString("prop_names"),res.getInt("prop_id"));
@@ -505,8 +515,6 @@ public class DatabaseUtils {
             int x = st.executeUpdate(query);
             if (x == 0) {
                 JOptionPane.showMessageDialog(new JButton(), "Incorrect Id");
-            } else {
-                JOptionPane.showMessageDialog(new JButton(),"Contract details saved successfully!!");
             }
         }catch(Exception e){
             System.out.println(e);
@@ -523,8 +531,6 @@ public class DatabaseUtils {
             int x = st.executeUpdate(query);
             if (x == 0) {
                 JOptionPane.showMessageDialog(new JButton(), "Incorrect Id");
-            } else {
-                JOptionPane.showMessageDialog(new JButton(),"Contract details saved successfully!!");
             }
         }catch(Exception e){
             System.out.println(e);
@@ -541,9 +547,7 @@ public class DatabaseUtils {
             int x = st.executeUpdate(query);
             if (x == 0) {
                 JOptionPane.showMessageDialog(new JButton(), "Incorrect Id");
-            } else {
-                JOptionPane.showMessageDialog(new JButton(),"Contract details saved successfully!!");
-            }
+            } 
         }catch(Exception e){
             System.out.println(e);
         }
@@ -561,8 +565,6 @@ public class DatabaseUtils {
             int x = st.executeUpdate(query);
             if (x == 0) {
                 JOptionPane.showMessageDialog(new JButton(), "Incorrect Id");
-            } else {
-                JOptionPane.showMessageDialog(new JButton(),"Contract details saved successfully!!");
             }
         }catch(Exception e){
             System.out.println(e);
@@ -575,12 +577,10 @@ public class DatabaseUtils {
             Statement st = conn.createStatement();
             String query="UPDATE aedfinalproject.contract_application SET fin_lease_cost= "+contract.getLeaseCost()+
                                                     " ,lease_end_date="+ "'"+contract.getLeaseEndDate()+"'" + 
-                                                    ",app_status='approved' WHERE app_id="+contract.getAppId();
+                                                    ",app_status='approved', app_owner='management' WHERE app_id="+contract.getAppId();
             int x = st.executeUpdate(query);
             if (x == 0) {
                 JOptionPane.showMessageDialog(new JButton(), "Incorrect Id");
-            } else {
-                JOptionPane.showMessageDialog(new JButton(),"Contract details saved successfully!!");
             }
         }catch(Exception e){
             System.out.println(e);
@@ -593,8 +593,8 @@ public class DatabaseUtils {
             Statement st = conn.createStatement();
             String query = "INSERT INTO apartment_details values(" + aptId + 
                     ",null" +   
-                    "','" + 0 + 
-                    "','" + propId + "')";
+                    "," + 0 + 
+                    "," + propId + ")";
             int x = st.executeUpdate(query);
             if (x == 0) {
                 JOptionPane.showMessageDialog(new JButton(), "This contract application alredy exist");
@@ -703,5 +703,38 @@ public class DatabaseUtils {
         }
         
         return result;
+    }
+    
+    public static void updateCompany(String tableName, int id, String name, String city, String state, String idLabel, String nameLabel,String cityLabel,String stateLabel) {                    
+        try{
+
+            Connection conn= getConnection();
+            Statement st = conn.createStatement();
+            String query="UPDATE aedfinalproject."+tableName+ " SET "+
+                                                    idLabel+"="+ id + 
+                                                    " ,"+nameLabel+"="+"'"+name+"'"+
+                                                    " ,"+cityLabel+"="+"'"+city+"'"+
+                                                    " ,"+stateLabel+"="+"'"+state+"'"+
+                                                    " WHERE "+idLabel+"="+id;
+            st.executeUpdate(query);
+
+        }
+        catch(Exception e){
+            System.out.println(e);
+        }
+    }
+    
+    public static void deleteCompany(String tableName, int id,  String idLabel) {                    
+        try{
+
+            Connection conn= getConnection();
+            Statement st = conn.createStatement();
+            String query="DELETE from aedfinalproject."+tableName+" WHERE "+idLabel+"="+id;
+            st.executeUpdate(query);
+
+        }
+        catch(Exception e){
+            System.out.println(e);
+        }
     }
 }

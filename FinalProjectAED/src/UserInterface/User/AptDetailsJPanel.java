@@ -8,6 +8,8 @@ import Application.Utils.DatabaseUtils;
 import Application.Utils.Helper;
 import Business.Apartment.Apartment;
 import Business.ContractApplication.ContractApplication;
+import Business.ManagementCompanyPackage.ManagementCompanyDirectory;
+import Business.ManagementCompanyPackage.ManagementCompany;
 import Business.Request.UserRequest;
 import Business.Request.UserRequestDirectory;
 import Business.UtilityCompany.ElectricityCompany;
@@ -47,6 +49,7 @@ public class AptDetailsJPanel extends javax.swing.JPanel {
     ArrayList<ContractApplication> contractAppList;
     ElectricityCompanyDirectory electricityList;
     GasCompanyDirectory gasList;
+    ManagementCompanyDirectory mgtList;
     WaterCompanyDirectory waterList;
     
     public AptDetailsJPanel(WorkAreaContPanel workAreaPanel, Apartment apt, UserRequestDirectory reqList) {
@@ -60,6 +63,7 @@ public class AptDetailsJPanel extends javax.swing.JPanel {
         electricityList= DatabaseUtils.getElecListFromDB();
         gasList= DatabaseUtils.getGasListFromDB();
         waterList= DatabaseUtils.getWaterListFromDB();
+        mgtList=DatabaseUtils.getMgmtListFromDB();
         displayAptDetails();
         displayAptImages(i);
 
@@ -578,7 +582,14 @@ public class AptDetailsJPanel extends javax.swing.JPanel {
         
         AptFeaturesTextField.setText(aptFeatures);
         
-        MgmtCompTextField.setText(c.getManagementCompany());
+        String mgtName= new String();
+        
+        for (ManagementCompany m : mgtList.getMgmtList()){
+            if (m.getMgmtId()==c.getManagementCompanyId())
+                mgtName=m.getMgmtName();
+        }
+        
+        MgmtCompTextField.setText(mgtName);
         
         String aptElectricityName= new String();
         

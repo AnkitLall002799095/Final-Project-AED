@@ -4,6 +4,9 @@
  */
 package Business.FinanceCompanyPackage;
 
+import Application.Utils.DatabaseUtils;
+import Business.ManagementCompanyPackage.ManagementCompany;
+import Business.ManagementCompanyPackage.ManagementCompanyDirectory;
 import java.util.ArrayList;
 
 /**
@@ -42,6 +45,26 @@ public class FinanceCompanyDirectory {
     
     public ArrayList<FinanceCompany> getFinanceCompanyList() {
         return this.financeCompanyList;
+    }
+    
+    public FinanceCompany getCompanyDetails(int id) {
+        FinanceCompanyDirectory dir = DatabaseUtils.getFinanceListFromDB();
+        FinanceCompany resComp = null;
+        for(FinanceCompany comp : dir.getFinanceList()) {
+            if(comp.getFinanceId()== id) {
+                resComp = comp;
+            }
+        }
+        
+        return resComp;
+    }
+    
+    public void updateCompanyInfo(FinanceCompany comp) {
+        DatabaseUtils.updateCompany("fin_companies", comp.getFinId(), comp.getFinanceName(), comp.getFinanceCity(), comp.getFinanceState(), "fin_id", "fin_name", "fin_city", "fin_state");
+    }
+    
+    public void deleteCompany(int id) {
+        DatabaseUtils.deleteCompany("management_companies", id, "fin_id");
     }
     
 }

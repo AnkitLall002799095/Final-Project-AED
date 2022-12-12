@@ -39,10 +39,9 @@ public class FinanceCompForm extends javax.swing.JPanel {
         propName.setText(contract.getPropName());
         
         
-        years.setModel(new DefaultComboBoxModel(Helper.getYearsList(2000)));
-        months.setModel(new DefaultComboBoxModel(((int) years.getSelectedItem() == LocalDate.now().getYear())?setMonthsList():Helper.monthsList)); 
+        months.setModel(new DefaultComboBoxModel(Helper.monthsList)); 
         days.setModel(new DefaultComboBoxModel<>(Helper.getDays(
-				years.getItemAt(years.getSelectedIndex()), 
+				LocalDate.now().getYear(), 
 				Arrays.asList(Helper.monthsList).indexOf(months.getSelectedItem())+1
 		)));       
     }
@@ -60,7 +59,7 @@ public class FinanceCompForm extends javax.swing.JPanel {
     private void updateDaysList() {
     	Integer selectedDay = (Integer) days.getSelectedItem();
   		Integer[] updatedDaysList = Helper.getDays(
-				years.getItemAt(years.getSelectedIndex()), 
+				LocalDate.now().getYear(), 
 				Arrays.asList(Helper.monthsList).indexOf(months.getSelectedItem())+1
 		);
   		DefaultComboBoxModel<Integer> cmbModel = new DefaultComboBoxModel<>(updatedDaysList);
@@ -93,7 +92,6 @@ public class FinanceCompForm extends javax.swing.JPanel {
         jLabel7 = new javax.swing.JLabel();
         days = new javax.swing.JComboBox<>();
         months = new javax.swing.JComboBox<>();
-        years = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
         depositField = new javax.swing.JTextField();
 
@@ -130,12 +128,6 @@ public class FinanceCompForm extends javax.swing.JPanel {
             }
         });
 
-        years.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                yearsActionPerformed(evt);
-            }
-        });
-
         jButton1.setText("Submit");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -148,35 +140,34 @@ public class FinanceCompForm extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(204, 204, 204)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel7))
-                .addGap(48, 48, 48)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(leaseCostTextField)
-                    .addComponent(maintanenceCostField)
-                    .addComponent(aptNum, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(propName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(days, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(months, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(years, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(utilityCostField)
-                    .addComponent(depositField))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(204, 204, 204)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel7))
+                        .addGap(48, 48, 48)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(leaseCostTextField)
+                            .addComponent(maintanenceCostField)
+                            .addComponent(aptNum, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(propName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(days, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(months, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 90, Short.MAX_VALUE))
+                            .addComponent(utilityCostField)
+                            .addComponent(depositField))))
                 .addGap(147, 147, 147))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(105, 105, 105))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -193,8 +184,7 @@ public class FinanceCompForm extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(days, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(months, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(years, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(months, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -211,9 +201,9 @@ public class FinanceCompForm extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(depositField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(119, 119, 119)
+                .addGap(52, 52, 52)
                 .addComponent(jButton1)
-                .addContainerGap(79, Short.MAX_VALUE))
+                .addContainerGap(146, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -226,18 +216,6 @@ public class FinanceCompForm extends javax.swing.JPanel {
         updateDaysList();
     }//GEN-LAST:event_monthsActionPerformed
 
-    private void yearsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_yearsActionPerformed
-        // TODO add your handling code here:
-        if((int) years.getSelectedItem() == LocalDate.now().getYear()) {    	  			
-            DefaultComboBoxModel<String> cmbModel = new DefaultComboBoxModel<>(Helper.getCurrentMonthsList());
-            months.setModel(cmbModel);
-        }else {
-            DefaultComboBoxModel<String> cmbModel = new DefaultComboBoxModel<>(Helper.monthsList);
-            months.setModel(cmbModel);
-        }
-        updateDaysList();
-    }//GEN-LAST:event_yearsActionPerformed
-
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         int leaseCost = Integer.parseInt(leaseCostTextField.getText());
@@ -247,11 +225,10 @@ public class FinanceCompForm extends javax.swing.JPanel {
 
         String day=String.valueOf(days.getSelectedItem());
         String month=String.valueOf(months.getSelectedItem());
-        String year=String.valueOf(years.getSelectedItem());
         
         contract.setLeaseCost(leaseCost);
         contract.setMaintanenceCost(maintanenceCost);
-        contract.setAptBillingDate(Helper.getDate(day, month, year));
+        contract.setAptBillingDate(String.valueOf(day)+"-"+String.valueOf(month));
         contract.setUtilitiesCost(utilitiesCost);
         contract.setDeposit(deposit);
         DatabaseUtils.updateContractFinance(contract);
@@ -275,6 +252,5 @@ public class FinanceCompForm extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> months;
     private javax.swing.JLabel propName;
     private javax.swing.JTextField utilityCostField;
-    private javax.swing.JComboBox<Integer> years;
     // End of variables declaration//GEN-END:variables
 }
