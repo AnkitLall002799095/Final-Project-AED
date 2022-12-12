@@ -12,6 +12,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
 import java.util.Arrays;
+import javax.swing.JButton;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -267,6 +269,7 @@ public class UtilityContractForm extends javax.swing.JPanel {
                 DatabaseUtils.updateContractGas(contract);
                 break;
         }        
+        JOptionPane.showMessageDialog(new JButton(), "Contract Updated.");
     }//GEN-LAST:event_jButton1ActionPerformed
 
 
