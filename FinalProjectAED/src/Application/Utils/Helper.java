@@ -199,7 +199,8 @@ public class Helper {
     public static ArrayList<String> convertStringToArr(String str) {
         String str1 = str.replace("[","");
         String str2 = str1.replace("]","");
-        return new ArrayList<String>(Arrays.asList(str2.split(",")));
+        String str3 = str2.replace(" ", "");
+        return new ArrayList<String>(Arrays.asList(str3.split(",")));
     }
     
         // Function to convert day, month, year values to Date Object.
