@@ -4,6 +4,7 @@
  */
 package Application.Utils;
 
+import static Application.Utils.AppSystem.currentUid;
 import Business.Apartment.Apartment;
 import Business.Apartment.ApartmentDirectory;
 import Business.ContractApplication.ContractApplication;
@@ -331,7 +332,7 @@ public class DatabaseUtils {
             UserRequestDirectory reqListFromDB = new UserRequestDirectory();
             Connection conn= getConnection();
             Statement st = conn.createStatement();
-            ResultSet reqRs = st.executeQuery("SELECT * FROM aedfinalproject.user_application_request");
+            ResultSet reqRs = st.executeQuery("SELECT * FROM aedfinalproject.user_application_request WHERE User_Id = " + currentUid );
             
             SimpleDateFormat dFormatView = new SimpleDateFormat("yyyy-MM-dd");
             
@@ -347,6 +348,36 @@ public class DatabaseUtils {
                 req.setUserId(reqRs.getInt(8));
             }
             return reqListFromDB;
+        }
+        catch(Exception e){
+            System.out.println(e);
+            return null;
+        }
+    }
+    
+    public static UserRequestDirectory getMgmtRequestListFromDB(){
+        
+        try{
+            UserRequestDirectory reqMgmtListFromDB = new UserRequestDirectory();
+            Connection conn= getConnection();
+            Statement st = conn.createStatement();
+            int mgmtID= getCompanyId(currentUid);
+            ResultSet reqRs = st.executeQuery("SELECT * FROM aedfinalproject.user_application_request WHERE Mgmt_Comp_Id = " + mgmtID );
+            
+            SimpleDateFormat dFormatView = new SimpleDateFormat("yyyy-MM-dd");
+            
+            while (reqRs.next()){
+                UserRequest req = reqMgmtListFromDB.addNewProfile();
+                req.setRequestId(reqRs.getInt(1));
+                req.setPropId(reqRs.getInt(2));
+                req.setAptId(reqRs.getInt(3));
+                req.setMgmtId(reqRs.getInt(4));
+                req.setRequestType(reqRs.getString(5));
+                req.setStatus(reqRs.getString(6));
+                req.setLastMdfdDate(dFormatView.format(reqRs.getDate(7)));
+                req.setUserId(reqRs.getInt(8));
+            }
+            return reqMgmtListFromDB;
         }
         catch(Exception e){
             System.out.println(e);
