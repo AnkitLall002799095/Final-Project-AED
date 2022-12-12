@@ -32,7 +32,7 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace pref="283" max="32767" attributes="0"/>
+              <EmptySpace pref="252" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="lbl_dob" min="-2" max="-2" attributes="0"/>
                   <Component id="lbl_gender" min="-2" max="-2" attributes="0"/>
@@ -53,41 +53,35 @@
               </Group>
               <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="103" alignment="0" groupAlignment="1" attributes="0">
-                      <Component id="nameErrLabel" min="-2" pref="203" max="-2" attributes="0"/>
-                      <Group type="102" alignment="1" attributes="0">
-                          <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="btn_submit" min="-2" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="txt_email" pref="277" max="32767" attributes="0"/>
-                                  <Component id="txt_phone" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="txt_password" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="txt_street" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="txt_community" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="txt_city" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="txt_state" alignment="0" max="32767" attributes="0"/>
-                              </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="btn_submit" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="txt_email" pref="277" max="32767" attributes="0"/>
+                              <Component id="txt_phone" alignment="0" max="32767" attributes="0"/>
+                              <Component id="txt_password" alignment="0" max="32767" attributes="0"/>
+                              <Component id="txt_street" alignment="0" max="32767" attributes="0"/>
+                              <Component id="txt_community" alignment="0" max="32767" attributes="0"/>
+                              <Component id="txt_city" alignment="0" max="32767" attributes="0"/>
+                              <Component id="txt_state" alignment="0" max="32767" attributes="0"/>
                           </Group>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" attributes="0">
-                                  <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="stateErrLabel" min="-2" pref="196" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Group type="103" alignment="1" groupAlignment="0" attributes="0">
-                                              <Component id="phoneNumberErrLabel" min="-2" pref="173" max="-2" attributes="0"/>
-                                              <Component id="emailErrLabel" min="-2" pref="196" max="-2" attributes="0"/>
-                                              <Component id="passwordErrLabel" alignment="0" min="-2" pref="196" max="-2" attributes="0"/>
-                                              <Component id="streetErrLabel" alignment="0" min="-2" pref="196" max="-2" attributes="0"/>
-                                              <Component id="communityErrLabel" alignment="0" min="-2" pref="196" max="-2" attributes="0"/>
-                                          </Group>
-                                          <Component id="cityErrLabel" alignment="1" min="-2" pref="196" max="-2" attributes="0"/>
-                                      </Group>
-                                  </Group>
-                              </Group>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="btn_reset" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="btn_reset" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="passwordErrLabel" alignment="0" min="-2" pref="196" max="-2" attributes="0"/>
+                                  <Component id="streetErrLabel" alignment="0" pref="265" max="32767" attributes="0"/>
+                                  <Component id="communityErrLabel" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="cityErrLabel" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="stateErrLabel" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="phoneNumberErrLabel" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="emailErrLabel" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="nameErrLabel" alignment="0" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -115,7 +109,7 @@
                       </Group>
                   </Group>
               </Group>
-              <EmptySpace min="0" pref="97" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="66" max="32767" attributes="0"/>
           </Group>
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace pref="520" max="32767" attributes="0"/>
@@ -137,23 +131,25 @@
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="txt_name" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="nameErrLabel" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="days" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="months" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="years" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
                               <Component id="lbl_name" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
                               <Component id="lbl_dob" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="nameErrLabel" min="-2" pref="47" max="-2" attributes="0"/>
+                                  <Group type="102" attributes="0">
+                                      <Component id="txt_name" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="days" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="months" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="years" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                              </Group>
                           </Group>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -165,18 +161,27 @@
                   </Group>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="txt_email" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="lbl_email" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="emailErrLabel" alignment="3" min="-2" pref="23" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="txt_email" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbl_email" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Component id="emailErrLabel" min="-2" pref="35" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="txt_phone" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="lbl_phonenumber" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="phoneNumberErrLabel" alignment="3" min="-2" pref="26" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="txt_phone" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lbl_phonenumber" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <Component id="phoneNumberErrLabel" min="-2" pref="38" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                  </Group>
               </Group>
-              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -217,7 +222,7 @@
                   <Component id="btn_submit" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btn_reset" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="130" max="32767" attributes="0"/>
+              <EmptySpace pref="115" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -384,16 +389,19 @@
     <Component class="javax.swing.JLabel" name="nameErrLabel">
       <Properties>
         <Property name="text" type="java.lang.String" value="Field must not be empty."/>
+        <Property name="verticalAlignment" type="int" value="1"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="emailErrLabel">
       <Properties>
         <Property name="text" type="java.lang.String" value="Field must not be empty."/>
+        <Property name="verticalAlignment" type="int" value="1"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="phoneNumberErrLabel">
       <Properties>
         <Property name="text" type="java.lang.String" value="Field must not be empty."/>
+        <Property name="verticalAlignment" type="int" value="1"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="passwordErrLabel">
@@ -405,11 +413,13 @@
     <Component class="javax.swing.JLabel" name="streetErrLabel">
       <Properties>
         <Property name="text" type="java.lang.String" value="Field must not be empty."/>
+        <Property name="verticalAlignment" type="int" value="1"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="communityErrLabel">
       <Properties>
         <Property name="text" type="java.lang.String" value="Field must not be empty."/>
+        <Property name="verticalAlignment" type="int" value="1"/>
       </Properties>
       <Events>
         <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="communityErrLabelKeyPressed"/>
@@ -418,6 +428,7 @@
     <Component class="javax.swing.JLabel" name="cityErrLabel">
       <Properties>
         <Property name="text" type="java.lang.String" value="Field must not be empty."/>
+        <Property name="verticalAlignment" type="int" value="1"/>
       </Properties>
       <Events>
         <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="cityErrLabelKeyPressed"/>
@@ -426,6 +437,7 @@
     <Component class="javax.swing.JLabel" name="stateErrLabel">
       <Properties>
         <Property name="text" type="java.lang.String" value="Field must not be empty."/>
+        <Property name="verticalAlignment" type="int" value="1"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JComboBox" name="years">

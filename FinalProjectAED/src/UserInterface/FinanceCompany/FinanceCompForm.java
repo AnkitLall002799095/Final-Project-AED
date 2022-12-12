@@ -12,6 +12,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JButton;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -232,6 +234,7 @@ public class FinanceCompForm extends javax.swing.JPanel {
         contract.setUtilitiesCost(utilitiesCost);
         contract.setDeposit(deposit);
         DatabaseUtils.updateContractFinance(contract);
+        JOptionPane.showMessageDialog(new JButton(), "Contract Updated.");
     }//GEN-LAST:event_jButton1ActionPerformed
 
 
