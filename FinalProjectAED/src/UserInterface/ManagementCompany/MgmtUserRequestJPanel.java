@@ -25,13 +25,13 @@ public class MgmtUserRequestJPanel extends javax.swing.JPanel {
      * Creates new form MgmtUserRequestJPanel
      */
     ManagementCompanyDirectory mgmtList;
-    UserRequestDirectory reqList;
+    UserRequestDirectory reqMgmtReqList;
     WorkAreaContPanel workAreaPanel;
     
     public MgmtUserRequestJPanel() {
         initComponents();
         this.mgmtList= DatabaseUtils.getMgmtListFromDB();
-        this.reqList= DatabaseUtils.getRequestListFromDB();
+        this.reqMgmtReqList= DatabaseUtils.getMgmtRequestListFromDB();
         populateRequestTable();
     }
 
@@ -177,7 +177,7 @@ public class MgmtUserRequestJPanel extends javax.swing.JPanel {
                 status = (String) model.getValueAt(selectedRow[i], 5);
                 
                 if (status.equals("Pending")){
-                    for (UserRequest u : reqList.getReqList()){
+                    for (UserRequest u : reqMgmtReqList.getReqList()){
                     if (u.getRequestId()==reqToUpdate)
                         u.setStatus("Approved");
                     }
@@ -249,7 +249,7 @@ public class MgmtUserRequestJPanel extends javax.swing.JPanel {
                 status = (String) model.getValueAt(selectedRow[i], 5);
                 
                 if (status.equals("Pending")){
-                    for (UserRequest u : reqList.getReqList()){
+                    for (UserRequest u : reqMgmtReqList.getReqList()){
                     if (u.getRequestId()==reqToUpdate)
                         u.setStatus("Rejected");
                     }
@@ -299,19 +299,19 @@ public class MgmtUserRequestJPanel extends javax.swing.JPanel {
         javax.swing.table.DefaultTableModel model = (javax.swing.table.DefaultTableModel) RequestListjTable.getModel();
         model.setRowCount(0);
         
-        for (UserRequest u : reqList.getReqList()){
-            if (u.getMgmtId()==2){
-                Object[] row = new Object[7];
-                row[0] = u.getRequestId();
-                row[1] = u.getUserId();
-                row[2] = u.getPropId();
-                row[3] = u.getAptId();
-                row[4] = u.getRequestType();
-                row[5] = u.getStatus();
-                row[6] = u.getLastMdfdDate();
+        for (UserRequest u : reqMgmtReqList.getReqList()){
+            
+            Object[] row = new Object[7];
+            row[0] = u.getRequestId();
+            row[1] = u.getUserId();
+            row[2] = u.getPropId();
+            row[3] = u.getAptId();
+            row[4] = u.getRequestType();
+            row[5] = u.getStatus();
+            row[6] = u.getLastMdfdDate();
 
-                model.addRow(row);
-            }
+            model.addRow(row);
+            
         }
     }
 
