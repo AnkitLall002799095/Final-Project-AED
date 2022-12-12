@@ -40,23 +40,22 @@ public class ContractApplication {
     List<String> utilities;
     String appStatus;
     int managementCompanyId;
-    String managementCompany;
     List<String> images;
     
     long elecAccNum;
-    LocalDate elecBillingDate;
+    String elecBillingDate;
     long elecContactNum;
     
     long waterAccNum;
-    LocalDate waterBillingDate;
+    String waterBillingDate;
     long waterContactNum;
     
     long gasAccNum;
-    LocalDate gasBillingDate;
+    String gasBillingDate;
     long gasContactNum;
     
     int leaseCost;
-    LocalDate aptBillingDate;
+    String aptBillingDate;
     int maintanenceCost;
     int utilitiesCost;
     int deposit;
@@ -77,8 +76,7 @@ public class ContractApplication {
             Double sqft,
             LocalDate availability,
             ArrayList<String> utilities,
-            ArrayList<String> images,            
-            String managementCompany,
+            ArrayList<String> images,  
             int aptId,
             int propId,
             int managementCompanyId,
@@ -111,7 +109,6 @@ public class ContractApplication {
         this.utilities = utilities;
         this.propName = propName;
         this.images = images;
-        this.managementCompany = managementCompany;
         this.appOwner = appOwner;
         this.appOwnerType = appOwnerType;
         this.elecCompId=elecCompId;
@@ -133,7 +130,7 @@ public class ContractApplication {
         this.leaseCost = leaseCost;
     }
     
-    public void setAptBillingDate(LocalDate aptBillingDate) {
+    public void setAptBillingDate(String aptBillingDate) {
         this.aptBillingDate = aptBillingDate;
     }
         
@@ -153,7 +150,7 @@ public class ContractApplication {
        return leaseCost;
     }
     
-    public LocalDate getAptBillingDate() {
+    public String getAptBillingDate() {
         return aptBillingDate;
     }
         
@@ -174,7 +171,7 @@ public class ContractApplication {
         this.elecAccNum = elecAccNum;
     }
     
-    public void setElecBillingDate(LocalDate elecBillingDate) {
+    public void setElecBillingDate(String elecBillingDate) {
         this.elecBillingDate = elecBillingDate;
     }
         
@@ -186,7 +183,7 @@ public class ContractApplication {
        return elecAccNum;
     }
     
-    public LocalDate getElecBillingDate() {
+    public String getElecBillingDate() {
         return elecBillingDate;
     }
         
@@ -200,7 +197,7 @@ public class ContractApplication {
         this.gasAccNum = gasAccNum;
     }
     
-    public void setGasBillingDate(LocalDate gasBillingDate) {
+    public void setGasBillingDate(String gasBillingDate) {
         this.gasBillingDate = gasBillingDate;
     }
         
@@ -212,7 +209,7 @@ public class ContractApplication {
        return gasAccNum;
     }
     
-    public LocalDate getGasBillingDate() {
+    public String getGasBillingDate() {
         return gasBillingDate;
     }
         
@@ -226,7 +223,7 @@ public class ContractApplication {
         this.waterAccNum = waterAccNum;
     }
     
-    public void setWaterBillingDate(LocalDate waterBillingDate) {
+    public void setWaterBillingDate(String waterBillingDate) {
         this.waterBillingDate = waterBillingDate;
     }
         
@@ -254,7 +251,7 @@ public class ContractApplication {
        return waterAccNum;
     }
     
-    public LocalDate getWaterBillingDate() {
+    public String getWaterBillingDate() {
         return waterBillingDate;
     }
         
@@ -352,10 +349,6 @@ public class ContractApplication {
     
     public int getManagementCompanyId() {
         return managementCompanyId;
-    }
-    
-    public String getManagementCompany() {
-        return managementCompany;
     }
     
     public List<String> getImages() {

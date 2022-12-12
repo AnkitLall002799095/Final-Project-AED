@@ -17,61 +17,32 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace pref="225" max="32767" attributes="0"/>
               <Component id="WelcomjLabel" min="-2" pref="404" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="221" max="-2" attributes="0"/>
           </Group>
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="101" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="82" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="AptDetailsHeadingjLabel" alignment="0" min="-2" pref="172" max="-2" attributes="0"/>
-                  <Component id="AptNojLabel" alignment="0" min="-2" pref="115" max="-2" attributes="0"/>
-                  <Component id="AptBuildingjLabel" alignment="0" min="-2" pref="115" max="-2" attributes="0"/>
-                  <Component id="AptBedroomsjLabel" alignment="0" min="-2" pref="115" max="-2" attributes="0"/>
-                  <Component id="AptSizejLabel" alignment="0" min="-2" pref="115" max="-2" attributes="0"/>
-                  <Component id="AptBathroomsjLabel" alignment="0" min="-2" pref="115" max="-2" attributes="0"/>
-                  <Component id="AptTypejLabel" alignment="0" min="-2" pref="115" max="-2" attributes="0"/>
-                  <Component id="AptAvlblDatejLabel" alignment="0" min="-2" pref="115" max="-2" attributes="0"/>
-                  <Component id="AptRentjLabel" alignment="0" min="-2" pref="115" max="-2" attributes="0"/>
-                  <Component id="AptDetailsjLabel" alignment="0" min="-2" pref="115" max="-2" attributes="0"/>
-                  <Component id="AptAddressjLabel" alignment="0" min="-2" pref="115" max="-2" attributes="0"/>
-                  <Component id="AptStreetjLabel1" alignment="0" min="-2" pref="115" max="-2" attributes="0"/>
-                  <Component id="AptCommjLabel2" alignment="0" min="-2" pref="115" max="-2" attributes="0"/>
-                  <Component id="AptCityjLabel3" alignment="0" min="-2" pref="115" max="-2" attributes="0"/>
-                  <Component id="AptStatejLabel4" alignment="0" min="-2" pref="115" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="AptCityTextField" alignment="0" min="-2" pref="184" max="-2" attributes="0"/>
-                  <Component id="AptStateTextField" min="-2" pref="184" max="-2" attributes="0"/>
-                  <Component id="AptCommTextField" min="-2" pref="184" max="-2" attributes="0"/>
-                  <Component id="AptStreetTextField" min="-2" pref="184" max="-2" attributes="0"/>
-                  <Component id="AptDetailsTextField" min="-2" pref="184" max="-2" attributes="0"/>
-                  <Component id="AptRentTextField" min="-2" pref="184" max="-2" attributes="0"/>
-                  <Component id="AptAvlblDateTextField" min="-2" pref="184" max="-2" attributes="0"/>
-                  <Component id="AptTypeTextField" min="-2" pref="184" max="-2" attributes="0"/>
-                  <Component id="AptBathroomsTextField" min="-2" pref="184" max="-2" attributes="0"/>
-                  <Component id="AptSizeTextField" min="-2" pref="184" max="-2" attributes="0"/>
-                  <Component id="AptBedroomsTextField" min="-2" pref="184" max="-2" attributes="0"/>
-                  <Component id="AptBuildingTextField" min="-2" pref="184" max="-2" attributes="0"/>
-                  <Component id="AptNoTextField" min="-2" pref="184" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace pref="54" max="32767" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="AptDetailsHeadingjLabel" min="-2" pref="172" max="-2" attributes="0"/>
                   <Group type="102" attributes="0">
-                      <Component id="PreviousImagejButton1" min="-2" pref="44" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="157" max="-2" attributes="0"/>
-                      <Component id="NextImagejButton" min="-2" pref="44" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="103" alignment="1" groupAlignment="0" attributes="0">
-                          <Component id="BookAptjButton" min="-2" pref="111" max="-2" attributes="0"/>
-                          <Component id="GoBackjButton" min="-2" pref="111" max="-2" attributes="0"/>
+                      <Component id="jScrollPane1" min="-2" pref="397" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="PreviousImagejButton1" min="-2" pref="44" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="157" max="-2" attributes="0"/>
+                              <Component id="NextImagejButton" min="-2" pref="44" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="103" alignment="0" groupAlignment="0" attributes="0">
+                              <Component id="GoBackjButton" alignment="1" min="-2" pref="111" max="-2" attributes="0"/>
+                              <Component id="AptImagejLabel" alignment="1" min="-2" pref="245" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="BookAptjButton" alignment="1" min="-2" pref="111" max="-2" attributes="0"/>
                       </Group>
-                      <Component id="AptImagejLabel" alignment="1" min="-2" pref="245" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace min="-2" pref="88" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -79,116 +50,26 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="1" attributes="0">
+              <Component id="WelcomjLabel" min="-2" pref="29" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
+              <Component id="AptDetailsHeadingjLabel" min="-2" pref="29" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="1" attributes="0">
-                                  <Group type="102" attributes="0">
-                                      <Component id="WelcomjLabel" min="-2" pref="29" max="-2" attributes="0"/>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="AptDetailsHeadingjLabel" min="-2" pref="29" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Group type="102" attributes="0">
-                                              <Group type="103" groupAlignment="1" attributes="0">
-                                                  <Component id="AptNojLabel" min="-2" pref="24" max="-2" attributes="0"/>
-                                                  <Component id="AptNoTextField" min="-2" pref="29" max="-2" attributes="0"/>
-                                              </Group>
-                                              <EmptySpace max="-2" attributes="0"/>
-                                              <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Group type="102" alignment="1" attributes="0">
-                                                      <Group type="103" groupAlignment="0" attributes="0">
-                                                          <Group type="102" alignment="1" attributes="0">
-                                                              <Group type="103" groupAlignment="0" attributes="0">
-                                                                  <Group type="102" alignment="1" attributes="0">
-                                                                      <Group type="103" groupAlignment="0" attributes="0">
-                                                                          <Group type="102" alignment="1" attributes="0">
-                                                                              <Group type="103" groupAlignment="1" attributes="0">
-                                                                                  <Component id="AptBuildingjLabel" min="-2" pref="24" max="-2" attributes="0"/>
-                                                                                  <Component id="AptBuildingTextField" min="-2" pref="29" max="-2" attributes="0"/>
-                                                                              </Group>
-                                                                              <EmptySpace max="-2" attributes="0"/>
-                                                                              <Group type="103" groupAlignment="1" attributes="0">
-                                                                                  <Component id="AptSizejLabel" min="-2" pref="24" max="-2" attributes="0"/>
-                                                                                  <Component id="AptSizeTextField" min="-2" pref="29" max="-2" attributes="0"/>
-                                                                              </Group>
-                                                                              <EmptySpace max="-2" attributes="0"/>
-                                                                              <Group type="103" groupAlignment="1" attributes="0">
-                                                                                  <Component id="AptBedroomsjLabel" min="-2" pref="24" max="-2" attributes="0"/>
-                                                                                  <Component id="AptBedroomsTextField" min="-2" pref="29" max="-2" attributes="0"/>
-                                                                              </Group>
-                                                                              <EmptySpace max="-2" attributes="0"/>
-                                                                              <Component id="AptBathroomsjLabel" min="-2" pref="24" max="-2" attributes="0"/>
-                                                                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                                                              <Component id="AptTypejLabel" min="-2" pref="24" max="-2" attributes="0"/>
-                                                                              <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
-                                                                          </Group>
-                                                                          <Group type="102" alignment="1" attributes="0">
-                                                                              <Component id="AptBathroomsTextField" min="-2" pref="29" max="-2" attributes="0"/>
-                                                                              <EmptySpace max="-2" attributes="0"/>
-                                                                              <Component id="AptTypeTextField" min="-2" pref="29" max="-2" attributes="0"/>
-                                                                          </Group>
-                                                                      </Group>
-                                                                      <EmptySpace max="-2" attributes="0"/>
-                                                                      <Component id="AptAvlblDatejLabel" min="-2" pref="24" max="-2" attributes="0"/>
-                                                                      <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
-                                                                  </Group>
-                                                                  <Component id="AptAvlblDateTextField" alignment="1" min="-2" pref="29" max="-2" attributes="0"/>
-                                                              </Group>
-                                                              <EmptySpace max="-2" attributes="0"/>
-                                                              <Component id="AptRentjLabel" min="-2" pref="24" max="-2" attributes="0"/>
-                                                              <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
-                                                          </Group>
-                                                          <Component id="AptRentTextField" alignment="1" min="-2" pref="29" max="-2" attributes="0"/>
-                                                      </Group>
-                                                      <EmptySpace max="-2" attributes="0"/>
-                                                      <Component id="AptDetailsjLabel" min="-2" pref="24" max="-2" attributes="0"/>
-                                                      <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
-                                                  </Group>
-                                                  <Component id="AptDetailsTextField" alignment="1" min="-2" pref="29" max="-2" attributes="0"/>
-                                              </Group>
-                                          </Group>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Component id="AptImagejLabel" min="-2" pref="192" max="-2" attributes="0"/>
-                                              <EmptySpace max="-2" attributes="0"/>
-                                              <Group type="103" groupAlignment="3" attributes="0">
-                                                  <Component id="NextImagejButton" alignment="3" min="-2" pref="29" max="-2" attributes="0"/>
-                                                  <Component id="PreviousImagejButton1" alignment="3" min="-2" pref="29" max="-2" attributes="0"/>
-                                              </Group>
-                                          </Group>
-                                      </Group>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="AptAddressjLabel" min="-2" pref="24" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
-                                      <Component id="AptStreetjLabel1" min="-2" pref="24" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Component id="AptStreetTextField" min="-2" pref="29" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="AptCommjLabel2" min="-2" pref="24" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
-                          </Group>
-                          <Component id="AptCommTextField" min="-2" pref="29" max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="AptImagejLabel" min="-2" pref="192" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="AptCityjLabel3" min="-2" pref="24" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="NextImagejButton" alignment="3" min="-2" pref="29" max="-2" attributes="0"/>
+                          <Component id="PreviousImagejButton1" alignment="3" min="-2" pref="29" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="199" max="-2" attributes="0"/>
+                      <Component id="BookAptjButton" min="-2" pref="31" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="GoBackjButton" min="-2" pref="31" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="AptCityTextField" alignment="3" min="-2" pref="29" max="-2" attributes="0"/>
-                      <Component id="BookAptjButton" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="jScrollPane1" pref="0" max="32767" attributes="0"/>
               </Group>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="AptStateTextField" alignment="3" min="-2" pref="29" max="-2" attributes="0"/>
-                      <Component id="GoBackjButton" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
-                  </Group>
-                  <Component id="AptStatejLabel4" alignment="0" min="-2" pref="24" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace pref="109" max="32767" attributes="0"/>
+              <EmptySpace pref="46" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -214,144 +95,6 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Apartment details:-"/>
       </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="AptBuildingjLabel">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Segoe UI" size="14" style="0"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="Building"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="AptSizejLabel">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Segoe UI" size="14" style="0"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="Apartment size"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="AptBedroomsjLabel">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Segoe UI" size="14" style="0"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="No. of bedrooms"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="AptBathroomsjLabel">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Segoe UI" size="14" style="0"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="No. of bathrooms"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="AptTypejLabel">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Segoe UI" size="14" style="0"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="Apartment type"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="AptAvlblDatejLabel">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Segoe UI" size="14" style="0"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="Available date"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="AptRentjLabel">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Segoe UI" size="14" style="0"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="Apartment rent"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="AptNojLabel">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Segoe UI" size="14" style="0"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="Apartment no."/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="AptAddressjLabel">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Segoe UI" size="14" style="0"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="Address:"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="AptDetailsjLabel">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Segoe UI" size="14" style="0"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="Details"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="AptStreetjLabel1">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Segoe UI" size="14" style="0"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="Street"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="AptCommjLabel2">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Segoe UI" size="14" style="0"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="Community"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="AptCityjLabel3">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Segoe UI" size="14" style="0"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="City"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="AptStatejLabel4">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Segoe UI" size="14" style="0"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="State"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="AptBuildingTextField">
-    </Component>
-    <Component class="javax.swing.JTextField" name="AptSizeTextField">
-    </Component>
-    <Component class="javax.swing.JTextField" name="AptBedroomsTextField">
-    </Component>
-    <Component class="javax.swing.JTextField" name="AptBathroomsTextField">
-    </Component>
-    <Component class="javax.swing.JTextField" name="AptTypeTextField">
-    </Component>
-    <Component class="javax.swing.JTextField" name="AptAvlblDateTextField">
-    </Component>
-    <Component class="javax.swing.JTextField" name="AptRentTextField">
-    </Component>
-    <Component class="javax.swing.JTextField" name="AptDetailsTextField">
-    </Component>
-    <Component class="javax.swing.JTextField" name="AptStreetTextField">
-    </Component>
-    <Component class="javax.swing.JTextField" name="AptCommTextField">
-    </Component>
-    <Component class="javax.swing.JTextField" name="AptCityTextField">
-    </Component>
-    <Component class="javax.swing.JTextField" name="AptStateTextField">
-    </Component>
-    <Component class="javax.swing.JTextField" name="AptNoTextField">
     </Component>
     <Component class="javax.swing.JButton" name="BookAptjButton">
       <Properties>
@@ -397,5 +140,439 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="PreviousImagejButton1ActionPerformed"/>
       </Events>
     </Component>
+    <Container class="javax.swing.JScrollPane" name="jScrollPane1">
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Container class="javax.swing.JPanel" name="jPanel1">
+
+          <Layout>
+            <DimensionLayout dim="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="WaterjLabel" min="-2" pref="161" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="jScrollPane4" pref="0" max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="AptNojLabel" alignment="0" min="-2" pref="115" max="-2" attributes="0"/>
+                                  <Component id="AptBuildingjLabel" alignment="0" min="-2" pref="115" max="-2" attributes="0"/>
+                                  <Component id="AptBedroomsjLabel" alignment="0" min="-2" pref="115" max="-2" attributes="0"/>
+                                  <Component id="AptSizejLabel" alignment="0" min="-2" pref="115" max="-2" attributes="0"/>
+                                  <Component id="AptBathroomsjLabel" alignment="0" min="-2" pref="115" max="-2" attributes="0"/>
+                                  <Component id="AptTypejLabel" alignment="0" min="-2" pref="115" max="-2" attributes="0"/>
+                                  <Component id="AptAvlblDatejLabel" alignment="0" min="-2" pref="115" max="-2" attributes="0"/>
+                                  <Component id="UtilitiesjLabel" alignment="0" min="-2" pref="115" max="-2" attributes="0"/>
+                                  <Component id="AptFeaturesjLabel" alignment="0" min="-2" pref="115" max="-2" attributes="0"/>
+                                  <Component id="MgmtCompjLabel" alignment="0" min="-2" pref="161" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="AptUtilitiesTextField" min="-2" pref="184" max="-2" attributes="0"/>
+                                  <Component id="AptAvlblDateTextField" min="-2" pref="184" max="-2" attributes="0"/>
+                                  <Component id="AptTypeTextField" min="-2" pref="184" max="-2" attributes="0"/>
+                                  <Component id="AptBathroomsTextField" min="-2" pref="184" max="-2" attributes="0"/>
+                                  <Component id="AptSizeTextField" min="-2" pref="184" max="-2" attributes="0"/>
+                                  <Component id="AptBedroomsTextField" min="-2" pref="184" max="-2" attributes="0"/>
+                                  <Component id="AptBuildingTextField" min="-2" pref="184" max="-2" attributes="0"/>
+                                  <Component id="AptFeaturesTextField" alignment="0" min="-2" pref="184" max="-2" attributes="0"/>
+                                  <Component id="MgmtCompTextField" alignment="0" min="-2" pref="184" max="-2" attributes="0"/>
+                                  <Component id="AptIdTextField" min="-2" pref="184" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="ElectricityjLabel" min="-2" pref="161" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="jScrollPane2" pref="0" max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="GasjLabel" min="-2" pref="161" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="jScrollPane3" pref="0" max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="AptAddressjLabel" alignment="0" min="-2" pref="115" max="-2" attributes="0"/>
+                                  <Component id="AptStreetjLabel1" alignment="0" min="-2" pref="115" max="-2" attributes="0"/>
+                                  <Component id="AptCommjLabel2" alignment="0" min="-2" pref="115" max="-2" attributes="0"/>
+                                  <Component id="AptCityjLabel3" alignment="0" min="-2" pref="115" max="-2" attributes="0"/>
+                                  <Component id="AptStatejLabel4" alignment="0" min="-2" pref="115" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="AptCityTextField" alignment="0" min="-2" pref="184" max="-2" attributes="0"/>
+                                  <Component id="AptStateTextField" min="-2" pref="184" max="-2" attributes="0"/>
+                                  <Component id="AptCommTextField" min="-2" pref="184" max="-2" attributes="0"/>
+                                  <Component id="AptStreetTextField" min="-2" pref="184" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="RentjLabel" min="-2" pref="161" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="RentTextField" min="-2" pref="184" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <EmptySpace pref="32" max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+            <DimensionLayout dim="1">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
+                              <Component id="AptNojLabel" min="-2" pref="24" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
+                              <Component id="AptBuildingjLabel" min="-2" pref="24" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
+                              <Component id="AptSizejLabel" min="-2" pref="24" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
+                              <Component id="AptBedroomsjLabel" min="-2" pref="24" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="AptBathroomsjLabel" min="-2" pref="24" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="AptTypejLabel" min="-2" pref="24" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+                              <Component id="AptAvlblDatejLabel" min="-2" pref="24" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="AptIdTextField" min="-2" pref="29" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Group type="102" alignment="1" attributes="0">
+                                              <Component id="AptBuildingTextField" min="-2" pref="29" max="-2" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="AptSizeTextField" min="-2" pref="29" max="-2" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="AptBedroomsTextField" min="-2" pref="29" max="-2" attributes="0"/>
+                                              <EmptySpace min="72" pref="72" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Group type="102" alignment="1" attributes="0">
+                                              <Component id="AptBathroomsTextField" min="-2" pref="29" max="-2" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="AptTypeTextField" min="-2" pref="29" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                      <EmptySpace min="36" pref="36" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Component id="AptAvlblDateTextField" alignment="1" min="-2" pref="29" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                      </Group>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="UtilitiesjLabel" min="-2" pref="24" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+                              <Component id="AptFeaturesjLabel" min="-2" pref="24" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+                              <Component id="MgmtCompjLabel" min="-2" pref="24" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="AptUtilitiesTextField" min="-2" pref="29" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="AptFeaturesTextField" min="-2" pref="29" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="MgmtCompTextField" min="-2" pref="29" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="ElectricityjLabel" min="-2" pref="24" max="-2" attributes="0"/>
+                          <Component id="jScrollPane2" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="GasjLabel" alignment="0" min="-2" pref="24" max="-2" attributes="0"/>
+                          <Component id="jScrollPane3" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="WaterjLabel" alignment="0" min="-2" pref="24" max="-2" attributes="0"/>
+                          <Component id="jScrollPane4" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
+                              <Component id="RentjLabel" min="-2" pref="24" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="RentTextField" alignment="0" min="-2" pref="29" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="AptAddressjLabel" min="-2" pref="24" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="AptStreetjLabel1" min="-2" pref="24" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+                              <Component id="AptCommjLabel2" min="-2" pref="24" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+                              <Component id="AptCityjLabel3" min="-2" pref="24" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
+                              <Component id="AptStatejLabel4" min="-2" pref="24" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <Group type="103" groupAlignment="1" attributes="0">
+                                          <Group type="102" alignment="1" attributes="0">
+                                              <Component id="AptStreetTextField" min="-2" pref="29" max="-2" attributes="0"/>
+                                              <EmptySpace min="36" pref="36" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Component id="AptCommTextField" min="-2" pref="29" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="36" pref="36" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Component id="AptCityTextField" alignment="1" min="-2" pref="29" max="-2" attributes="0"/>
+                              </Group>
+                              <Component id="AptStateTextField" min="-2" pref="29" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <EmptySpace pref="234" max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+          </Layout>
+          <SubComponents>
+            <Component class="javax.swing.JLabel" name="AptSizejLabel">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Segoe UI" size="14" style="0"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Apartment size"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="AptStatejLabel4">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Segoe UI" size="14" style="0"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="State"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="AptCityTextField">
+            </Component>
+            <Component class="javax.swing.JTextField" name="AptBathroomsTextField">
+            </Component>
+            <Component class="javax.swing.JTextField" name="AptSizeTextField">
+            </Component>
+            <Component class="javax.swing.JLabel" name="AptCityjLabel3">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Segoe UI" size="14" style="0"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="City"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="AptStateTextField">
+            </Component>
+            <Component class="javax.swing.JLabel" name="AptBedroomsjLabel">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Segoe UI" size="14" style="0"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="No. of bedrooms"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="AptTypejLabel">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Segoe UI" size="14" style="0"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Apartment type"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="AptAvlblDatejLabel">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Segoe UI" size="14" style="0"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Available date"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="AptTypeTextField">
+            </Component>
+            <Component class="javax.swing.JTextField" name="AptUtilitiesTextField">
+            </Component>
+            <Component class="javax.swing.JTextField" name="AptStreetTextField">
+            </Component>
+            <Component class="javax.swing.JTextField" name="AptCommTextField">
+            </Component>
+            <Component class="javax.swing.JTextField" name="AptBuildingTextField">
+            </Component>
+            <Component class="javax.swing.JLabel" name="AptBathroomsjLabel">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Segoe UI" size="14" style="0"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="No. of bathrooms"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="AptStreetjLabel1">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Segoe UI" size="14" style="0"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Street"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="AptBuildingjLabel">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Segoe UI" size="14" style="0"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Building"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="UtilitiesjLabel">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Segoe UI" size="14" style="0"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Utilities"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="AptCommjLabel2">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Segoe UI" size="14" style="0"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Community"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="AptNojLabel">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Segoe UI" size="14" style="0"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Apartment no."/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="AptBedroomsTextField">
+            </Component>
+            <Component class="javax.swing.JLabel" name="AptAddressjLabel">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Segoe UI" size="14" style="0"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Address:"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="AptAvlblDateTextField">
+            </Component>
+            <Component class="javax.swing.JLabel" name="AptFeaturesjLabel">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Segoe UI" size="14" style="0"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Extra features"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="AptFeaturesTextField">
+            </Component>
+            <Component class="javax.swing.JLabel" name="MgmtCompjLabel">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Segoe UI" size="14" style="0"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Management Company"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="MgmtCompTextField">
+            </Component>
+            <Component class="javax.swing.JLabel" name="ElectricityjLabel">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Segoe UI" size="14" style="0"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Electricity service details"/>
+              </Properties>
+            </Component>
+            <Container class="javax.swing.JScrollPane" name="jScrollPane2">
+              <AuxValues>
+                <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+              </AuxValues>
+
+              <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+              <SubComponents>
+                <Component class="javax.swing.JTextArea" name="ElectricityjTextArea">
+                  <Properties>
+                    <Property name="columns" type="int" value="20"/>
+                    <Property name="rows" type="int" value="5"/>
+                  </Properties>
+                </Component>
+              </SubComponents>
+            </Container>
+            <Component class="javax.swing.JLabel" name="GasjLabel">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Segoe UI" size="14" style="0"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Gas service details"/>
+              </Properties>
+            </Component>
+            <Container class="javax.swing.JScrollPane" name="jScrollPane3">
+              <AuxValues>
+                <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+              </AuxValues>
+
+              <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+              <SubComponents>
+                <Component class="javax.swing.JTextArea" name="GasjTextArea">
+                  <Properties>
+                    <Property name="columns" type="int" value="20"/>
+                    <Property name="rows" type="int" value="5"/>
+                  </Properties>
+                </Component>
+              </SubComponents>
+            </Container>
+            <Component class="javax.swing.JLabel" name="WaterjLabel">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Segoe UI" size="14" style="0"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Water service details"/>
+              </Properties>
+            </Component>
+            <Container class="javax.swing.JScrollPane" name="jScrollPane4">
+              <AuxValues>
+                <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+              </AuxValues>
+
+              <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+              <SubComponents>
+                <Component class="javax.swing.JTextArea" name="WaterjTextArea">
+                  <Properties>
+                    <Property name="columns" type="int" value="20"/>
+                    <Property name="rows" type="int" value="5"/>
+                  </Properties>
+                </Component>
+              </SubComponents>
+            </Container>
+            <Component class="javax.swing.JLabel" name="RentjLabel">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Segoe UI" size="14" style="0"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Final rent"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="RentTextField">
+            </Component>
+            <Component class="javax.swing.JTextField" name="AptIdTextField">
+            </Component>
+          </SubComponents>
+        </Container>
+      </SubComponents>
+    </Container>
   </SubComponents>
 </Form>

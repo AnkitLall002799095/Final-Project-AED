@@ -5,9 +5,12 @@
 package UserInterface.Main;
 
 //import com.sun.jdi.connect.spi.Connection;
+import Application.Utils.AppSystem;
 import Application.Utils.DatabaseUtils;
 import Application.Utils.Helper;
+import Business.ContractApplication.ContractApplication;
 import Business.Users.Person;
+import Business.Users.User;
 import Business.Users.UserDirectory;
 import java.awt.event.KeyEvent;
 import static java.awt.event.KeyEvent.VK_NUMPAD9;
@@ -15,8 +18,13 @@ import java.sql.Statement;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Arrays;
 import javax.swing.ButtonGroup;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 import static javax.swing.UIManager.get;
 
 /**
@@ -30,10 +38,48 @@ public class RegisterView extends javax.swing.JPanel {
      */
     UserDirectory userDirectory;
     public RegisterView() {
-        this.setBounds(0, 0, 1040, 700);
+        this.setBounds(0, 0, 1040, 750);
         this.userDirectory = new UserDirectory();
         initComponents();
+        setPanelContent();
+    }
+    
+    private String[] setMonthsList() {
+    	String[] monthList = Helper.getCurrentMonthsList();
+
+        return monthList;
+    }
+    
+    private void updateDaysList() {
+    	Integer selectedDay = (Integer) days.getSelectedItem();
+        Integer[] updatedDaysList = Helper.getDays(
+                        years.getItemAt(years.getSelectedIndex()), 
+                        Arrays.asList(Helper.monthsList).indexOf(months.getSelectedItem())+1
+        );
+        DefaultComboBoxModel<Integer> cmbModel = new DefaultComboBoxModel<>(updatedDaysList);
+        days.setModel(cmbModel);
+        if(Arrays.asList(updatedDaysList).contains(selectedDay)) {
+                days.setSelectedItem((Object) selectedDay);
+        }
+    }
+    
+    private void setPanelContent() {
+        years.setModel(new DefaultComboBoxModel(Helper.getYearsList(1964)));
+        months.setModel(new DefaultComboBoxModel(((int) years.getSelectedItem() == LocalDate.now().getYear())?setMonthsList():Helper.monthsList)); 
+        days.setModel(new DefaultComboBoxModel<>(Helper.getDays(
+				years.getItemAt(years.getSelectedIndex()), 
+				Arrays.asList(Helper.monthsList).indexOf(months.getSelectedItem())+1
+		)));  
+        btnMale.setSelected(true);
+    }
+    
+    private boolean checkErr() {
+        boolean check = true;
+        if(phoneNumberErrLabel.getText() == "" && nameErrLabel.getText() == "" &&  emailErrLabel.getText() == "" &&  passwordErrLabel.getText() == "" &&  streetErrLabel.getText() == "" &&  communityErrLabel.getText() == "" &&  cityErrLabel.getText() == "" &&  stateErrLabel.getText() == ""){
+            check = false;
+        }
         
+        return check;
     }
 
     /**
@@ -71,10 +117,7 @@ public class RegisterView extends javax.swing.JPanel {
         txt_city = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         txt_state = new javax.swing.JTextField();
-        txt_dob = new javax.swing.JTextField();
         nameErrLabel = new javax.swing.JLabel();
-        dobErrLabel = new javax.swing.JLabel();
-        genderErrLabel = new javax.swing.JLabel();
         emailErrLabel = new javax.swing.JLabel();
         phoneNumberErrLabel = new javax.swing.JLabel();
         passwordErrLabel = new javax.swing.JLabel();
@@ -82,7 +125,14 @@ public class RegisterView extends javax.swing.JPanel {
         communityErrLabel = new javax.swing.JLabel();
         cityErrLabel = new javax.swing.JLabel();
         stateErrLabel = new javax.swing.JLabel();
+        years = new javax.swing.JComboBox<>();
+        months = new javax.swing.JComboBox<>();
+        days = new javax.swing.JComboBox<>();
 
+        setPreferredSize(new java.awt.Dimension(1040, 750));
+        setSize(new java.awt.Dimension(1040, 750));
+
+        lbl_registrationform.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
         lbl_registrationform.setText("Registration Form");
 
         lbl_name.setText("Name:");
@@ -108,7 +158,7 @@ public class RegisterView extends javax.swing.JPanel {
             }
         });
 
-        btn_reset.setText("RESET");
+        btn_reset.setText("Cancel");
         btn_reset.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_resetActionPerformed(evt);
@@ -136,7 +186,7 @@ public class RegisterView extends javax.swing.JPanel {
         buttonGroup1.add(btnOthers);
         btnOthers.setText("Others");
 
-        lbl_dob.setText("D.O.B: ");
+        lbl_dob.setText("Date of Birth:");
 
         lbl_email.setText("Email:");
 
@@ -217,21 +267,55 @@ public class RegisterView extends javax.swing.JPanel {
             }
         });
 
-        txt_dob.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txt_dobKeyPressed(evt);
-            }
-        });
+        nameErrLabel.setText("Field must not be empty.");
+        nameErrLabel.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
+        emailErrLabel.setText("Field must not be empty.");
+        emailErrLabel.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+
+        phoneNumberErrLabel.setText("Field must not be empty.");
+        phoneNumberErrLabel.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+
+        passwordErrLabel.setText("Field must not be empty.");
+        passwordErrLabel.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+
+        streetErrLabel.setText("Field must not be empty.");
+        streetErrLabel.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+
+        communityErrLabel.setText("Field must not be empty.");
+        communityErrLabel.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         communityErrLabel.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 communityErrLabelKeyPressed(evt);
             }
         });
 
+        cityErrLabel.setText("Field must not be empty.");
+        cityErrLabel.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         cityErrLabel.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 cityErrLabelKeyPressed(evt);
+            }
+        });
+
+        stateErrLabel.setText("Field must not be empty.");
+        stateErrLabel.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+
+        years.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                yearsActionPerformed(evt);
+            }
+        });
+
+        months.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                monthsActionPerformed(evt);
+            }
+        });
+
+        days.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                daysActionPerformed(evt);
             }
         });
 
@@ -240,257 +324,184 @@ public class RegisterView extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(75, 75, 75)
+                .addContainerGap(252, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lbl_dob)
+                    .addComponent(lbl_gender)
+                    .addComponent(lbl_email)
+                    .addComponent(lbl_phonenumber)
+                    .addComponent(lbl_password, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lbl_address)
-                    .addComponent(lbl_street))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(43, 43, 43)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(31, 31, 31)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(lbl_name, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(lbl_gender)
-                                .addComponent(lbl_dob)
-                                .addComponent(lbl_email))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addGap(13, 13, 13)
-                                            .addComponent(txt_email, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addGap(5, 5, 5)
-                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                .addComponent(txt_name, javax.swing.GroupLayout.DEFAULT_SIZE, 208, Short.MAX_VALUE)
-                                                .addComponent(txt_dob))))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(2, 2, 2)
-                                    .addComponent(btnMale)
-                                    .addGap(29, 29, 29)
-                                    .addComponent(btnFemale)
-                                    .addGap(27, 27, 27)
-                                    .addComponent(btnOthers)
-                                    .addGap(0, 0, Short.MAX_VALUE))))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lbl_community)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(lbl_password, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(lbl_phonenumber, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(6, 6, 6)
-                                        .addComponent(lbl_city)))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(btn_submit)
-                                    .addGap(42, 42, 42))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addGap(14, 14, 14)
-                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                    .addGap(0, 0, Short.MAX_VALUE)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(txt_phone, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(txt_password, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(txt_street, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGap(1, 1, 1))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addGap(73, 73, 73)
-                                            .addComponent(btn_reset))
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addGap(29, 29, 29)
-                                            .addComponent(txt_community, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addComponent(txt_city, javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(txt_state, javax.swing.GroupLayout.Alignment.TRAILING))
-                                    .addGap(0, 0, Short.MAX_VALUE)))))
-                    .addComponent(lbl_registrationform, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lbl_community)
+                            .addComponent(lbl_street)
+                            .addComponent(lbl_city)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(lbl_name, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(37, 37, 37)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 101, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(nameErrLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(dobErrLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(78, 78, 78))
-                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btn_submit)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(txt_email, javax.swing.GroupLayout.DEFAULT_SIZE, 277, Short.MAX_VALUE)
+                                .addComponent(txt_phone)
+                                .addComponent(txt_password)
+                                .addComponent(txt_street)
+                                .addComponent(txt_community)
+                                .addComponent(txt_city)
+                                .addComponent(txt_state)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(79, 79, 79)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(emailErrLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(genderErrLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(18, 18, 18)
+                                .addComponent(btn_reset))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(82, 82, 82)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(cityErrLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(stateErrLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(communityErrLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(streetErrLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(passwordErrLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(phoneNumberErrLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addContainerGap())))))
+                                .addGap(45, 45, 45)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(passwordErrLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(streetErrLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 265, Short.MAX_VALUE)
+                                    .addComponent(communityErrLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(cityErrLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(stateErrLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(phoneNumberErrLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(emailErrLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(nameErrLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(txt_name, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(days, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(months, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(btnMale)
+                                    .addGap(47, 47, 47)
+                                    .addComponent(btnFemale)))
+                            .addGap(18, 18, 18)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(btnOthers)
+                                .addComponent(years, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addGap(0, 66, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(520, Short.MAX_VALUE)
+                .addComponent(lbl_registrationform, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(216, 216, 216))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(21, 21, 21)
+                .addGap(18, 18, 18)
                 .addComponent(lbl_registrationform)
-                .addGap(28, 28, 28)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(nameErrLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(lbl_name, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(txt_name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(86, 86, 86)
+                        .addGap(118, 118, 118)
                         .addComponent(lbl_gender))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(33, 33, 33)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lbl_dob)
-                            .addComponent(txt_dob, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(dobErrLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(40, 40, 40)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(btnFemale)
-                                    .addComponent(btnMale)
-                                    .addComponent(btnOthers)))
+                                .addGap(34, 34, 34)
+                                .addComponent(lbl_name)
+                                .addGap(32, 32, 32)
+                                .addComponent(lbl_dob))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(30, 30, 30)
-                                .addComponent(genderErrLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addGap(92, 92, 92)
+                                .addGap(35, 35, 35)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(nameErrLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(txt_name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(22, 22, 22)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(days, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(months, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(years, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnMale)
+                            .addComponent(btnFemale)
+                            .addComponent(btnOthers))))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txt_email, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lbl_email))
+                    .addComponent(emailErrLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lbl_email)
-                            .addComponent(txt_email, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(60, 60, 60)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lbl_phonenumber)
                             .addComponent(txt_phone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(phoneNumberErrLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(58, 58, 58)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(lbl_password)
-                            .addComponent(txt_password)
-                            .addComponent(passwordErrLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addComponent(emailErrLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(29, 29, 29)
-                .addComponent(lbl_address)
-                .addGap(24, 24, 24)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lbl_phonenumber))
+                        .addGap(19, 19, 19))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(phoneNumberErrLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lbl_street)
-                            .addComponent(txt_street, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(25, 25, 25)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(lbl_community)
-                                    .addComponent(txt_community, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(17, 17, 17))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(communityErrLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(lbl_city)
-                                        .addGap(36, 36, 36))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(cityErrLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addGap(30, 30, 30)))
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(txt_state, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(stateErrLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(btn_submit)
-                                    .addComponent(btn_reset)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(txt_city, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(streetErrLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                            .addComponent(txt_password, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lbl_password))
+                        .addGap(18, 18, 18)
+                        .addComponent(lbl_address))
+                    .addComponent(passwordErrLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbl_street)
+                    .addComponent(txt_street, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(streetErrLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbl_community)
+                    .addComponent(txt_community, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(communityErrLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(17, 17, 17)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbl_city)
+                    .addComponent(txt_city, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cityErrLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txt_state, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(stateErrLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(79, 79, 79)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btn_submit)
+                    .addComponent(btn_reset))
+                .addContainerGap(115, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_submitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_submitActionPerformed
         // TODO add your handling code here:
-        Person person = userDirectory.addNewUser();
-        //person.setUid(3);
-        person.setUserRole("consumer");
-        person.setName(txt_name.getText());
-        person.setDob(txt_dob.getText());
-       if(btnMale.isSelected()){
-            person.setGender("Male");
-        }
-       if(btnFemale.isSelected()){
-           person.setGender("Female");
-       }
-       else
-       {
-           person.setGender("Others");
-       }
-                
-        person.setEmail(txt_email.getText());
-       // person.setPhoneNumber(txt_phone.getText());
-        person.setPassword(txt_password.getText());
-        person.setStreet(txt_street.getText());
-        person.setCommunity(txt_community.getText());
-        person.setCity(txt_city.getText());
-        person.setState(txt_state.getText());
-        
-        DatabaseUtils.createNewUser(person);
-        
-        JOptionPane.showMessageDialog(btn_submit, "User Registered");
-        //Send booking request to management company.
-        
-    
-        
-        
-        
-        
-        
-        
+        if(!checkErr()) {
+            String day=String.valueOf(days.getSelectedItem());
+            String month=String.valueOf(months.getSelectedItem());
+            String year=String.valueOf(years.getSelectedItem());
+
+            String gender = Helper.getRadioButtonsValue(buttonGroup1);
+            String email = txt_email.getText();
+            long phNum = Long.parseLong(txt_phone.getText());
+            String street = txt_street.getText();
+            String comm = txt_community.getText();
+            String city = txt_city.getText();
+            String state = txt_state.getText();
+            String password = String.valueOf(txt_password.getPassword());
+            String name = txt_name.getText();
+
+            User user = new User(name, Helper.getDate(day, month, year), gender, email, phNum, password, street, comm, city, state);                        
+            int id = new UserDirectory().createNewUser(user);
+            AppSystem.setCurrentUid(id);
+            AppSystem.setCurrentUserRole("consumer");
+            SwingUtilities.invokeLater(() -> AppSystem.appViewObj.setView(new WorkAreaContPanel()));
+        }      
     }//GEN-LAST:event_btn_submitActionPerformed
 
     private void btn_resetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_resetActionPerformed
         // TODO add your handling code here:
-         txt_name.setText("");
-         
-        txt_dob.setText("");
-         txt_password.setText("");
-       // .setText("")txt_confirmpassword;
-        txt_email.setText("");
-        txt_phone.setText("");
-        txt_password.setText("");
-        txt_street.setText("");
-        txt_community.setText("");
-        txt_city.setText("");
-        txt_state.setText("");
-        
+        SwingUtilities.invokeLater(() -> AppSystem.appViewObj.setView(new LoginView()));
     }//GEN-LAST:event_btn_resetActionPerformed
 
     private void txt_nameMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txt_nameMousePressed
@@ -512,11 +523,6 @@ public class RegisterView extends javax.swing.JPanel {
     private void txt_nameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_nameKeyPressed
        
     }//GEN-LAST:event_txt_nameKeyPressed
-
-    private void txt_dobKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_dobKeyPressed
-        // TODO add your handling code here:
-       
-    }//GEN-LAST:event_txt_dobKeyPressed
 
     private void txt_emailKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_emailKeyPressed
         // TODO add your handling code here:
@@ -623,6 +629,35 @@ public class RegisterView extends javax.swing.JPanel {
         stateErrLabel.setText(err);
     }//GEN-LAST:event_txt_stateKeyReleased
 
+    private void yearsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_yearsActionPerformed
+        // TODO add your handling code here:
+        String[] monthsList;
+        String selectedMonth = String.valueOf(months.getSelectedItem());
+        if((int) years.getSelectedItem() == LocalDate.now().getYear()) {
+            monthsList = Helper.getCurrentMonthsList();
+        }else {
+            monthsList = Helper.monthsList;
+        }
+        
+        DefaultComboBoxModel<String> cmbModel = new DefaultComboBoxModel<>(Helper.monthsList);
+        months.setModel(cmbModel);
+        
+        if(Arrays.asList(monthsList).contains(selectedMonth)) {
+                months.setSelectedItem((Object) selectedMonth);
+        }
+                
+        updateDaysList();
+    }//GEN-LAST:event_yearsActionPerformed
+
+    private void monthsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_monthsActionPerformed
+        // TODO add your handling code here:
+        updateDaysList();
+    }//GEN-LAST:event_monthsActionPerformed
+
+    private void daysActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_daysActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_daysActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JRadioButton btnFemale;
@@ -633,9 +668,8 @@ public class RegisterView extends javax.swing.JPanel {
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel cityErrLabel;
     private javax.swing.JLabel communityErrLabel;
-    private javax.swing.JLabel dobErrLabel;
+    private javax.swing.JComboBox<Integer> days;
     private javax.swing.JLabel emailErrLabel;
-    private javax.swing.JLabel genderErrLabel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel lbl_address;
     private javax.swing.JLabel lbl_city;
@@ -648,6 +682,7 @@ public class RegisterView extends javax.swing.JPanel {
     private javax.swing.JLabel lbl_phonenumber;
     private javax.swing.JLabel lbl_registrationform;
     private javax.swing.JLabel lbl_street;
+    private javax.swing.JComboBox<String> months;
     private javax.swing.JLabel nameErrLabel;
     private javax.swing.JLabel passwordErrLabel;
     private javax.swing.JLabel phoneNumberErrLabel;
@@ -655,12 +690,12 @@ public class RegisterView extends javax.swing.JPanel {
     private javax.swing.JLabel streetErrLabel;
     private javax.swing.JTextField txt_city;
     private javax.swing.JTextField txt_community;
-    private javax.swing.JTextField txt_dob;
     private javax.swing.JTextField txt_email;
     private javax.swing.JTextField txt_name;
     private javax.swing.JPasswordField txt_password;
     private javax.swing.JTextField txt_phone;
     private javax.swing.JTextField txt_state;
     private javax.swing.JTextField txt_street;
+    private javax.swing.JComboBox<Integer> years;
     // End of variables declaration//GEN-END:variables
 }

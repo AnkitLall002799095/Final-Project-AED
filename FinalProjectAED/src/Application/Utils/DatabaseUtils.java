@@ -4,15 +4,26 @@
  */
 package Application.Utils;
 
+import static Application.Utils.AppSystem.currentUid;
 import Business.Apartment.Apartment;
 import Business.Apartment.ApartmentDirectory;
 import Business.ContractApplication.ContractApplication;
-import Business.ManagementCompany.ManagementCompany;
-import Business.ManagementCompany.ManagementCompanyDirectory;
+import Business.FinanceCompanyPackage.FinanceCompany;
+import Business.FinanceCompanyPackage.FinanceCompanyDirectory;
+import Business.LegalCompany.LegalCompany;
+import Business.LegalCompany.LegalCompanyDirectory;
+import Business.ManagementCompanyPackage.ManagementCompany;
+import Business.ManagementCompanyPackage.ManagementCompanyDirectory;
+import Business.FinanceCompanyPackage.FinanceCompanyDirectory;
+import Business.FinanceCompanyPackage.FinanceCompany;
+import Business.LegalCompany.LegalCompany;
+import Business.LegalCompany.LegalCompanyDirectory;
 import Business.Property.Property;
 import Business.Property.PropertyDirectory;
 import Business.Request.UserRequest;
 import Business.Request.UserRequestDirectory;
+import Business.Users.ManagementCompanyEmployeeDirectory;
+import Business.Users.ManagementCompanyEmployee;
 import Business.UtilityCompany.ElectricityCompany;
 import Business.UtilityCompany.ElectricityCompanyDirectory;
 import Business.UtilityCompany.GasCompany;
@@ -53,27 +64,46 @@ public class DatabaseUtils {
     }
     
     
-    public static void createNewUser(Person person){
-    
-    try{
+    public static int createNewUser(String userRole, String name, LocalDate date, String gender, String email, long phNum, String password, String street, String comm, String city, String state){
+        int id=0;
+        try{
 
             Connection conn= getConnection();
             Statement st = conn.createStatement();
-            st.executeUpdate("INSERT INTO `aedfinalproject`.`user_table` (`Uid`, `UserRole`, `Name`, `DOB`, `Gender`, `Email`, `PhoneNumber`, `Password` , `Street` , `Community` , `City` , `State`) "
-                    + "VALUES ('" + person.getUid() + "','" + person.getUserRole() + "','" + person.getName() + "','" + person.getDob() + "','" + person.getGender() + "','" + person.getEmail() + "','" 
-                    + person.getPhoneNumber()
-                    + "','" + person.getPassword()+ "','" + person.getStreet()+ "','" + person.getCommunity()+ "','" + person.getCity()+ "','" + person.getState()+ "')");
+            st.executeUpdate("INSERT INTO `aedfinalproject`.`user_table` (`UserRole`, `Name`, `DOB`, `Gender`, `Email`, `PhoneNumber`, `Password` , `Street` , `Community` , `City` , `State`) "
+                    + "VALUES ('" + userRole + "','" + name + "','" + date + "','" + gender + "','" + email + "','" 
+                    + phNum
+                    + "','" + password+ "','" + street+ "','" + comm+ "','" + city+ "','" + state+ "')", st.RETURN_GENERATED_KEYS);
+            
+            ResultSet rs=st.getGeneratedKeys();
+            if(rs.next()){
+                id=rs.getInt(1);
+            }
+        }
+        catch(Exception e){
+            System.out.println(e);
+        }
+        
+        return id;
+    }
+    
+    public static void addCompanyUsers(int companyId, String companyType, int uId) {                    
+        try{
+
+            Connection conn= getConnection();
+            Statement st = conn.createStatement();
+            String query="UPDATE aedfinalproject.user_table SET "+
+                                                    " company_id="+ companyId + 
+                                                    " ,company_type="+"'"+companyType+"'"+ " WHERE Uid="+uId;
+            st.executeUpdate(query);
 
         }
-            catch(Exception e){
-                System.out.println(e);
-            }
-    
-    
-    
-    
-    
+        catch(Exception e){
+            System.out.println(e);
+        }
     }
+    
+    
     public static boolean loginUser(String email, String password){
         
         try{
@@ -83,18 +113,12 @@ public class DatabaseUtils {
              String query = "select * from user_table where Email='"+email+"'and Password = '"+password+"'";
              ResultSet rs = sta.executeQuery(query);
              if(rs.next()){
-               // dispose(); // when credentials are correct close login page
                AppSystem.setCurrentUserRole(rs.getString("UserRole"));
                AppSystem.setCurrentUid(rs.getInt("Uid"));
                return true;
-               
              }else{
-                // JOptionPane.showMessageDialog(this,"username or password is wrong");
-                // txt_name.setText("");
-                // txt_password.setText("");
                 return false;
              }
-//             connection.close();
             
         }catch(Exception e){
             System.out.println(e);
@@ -111,7 +135,14 @@ public class DatabaseUtils {
             Connection dbConn = getConnection();
             Statement stmt = dbConn.createStatement();
             
-            String query = "INSERT INTO contract_application values(Null," + contract.get("aptNum") + 
+            String query = "INSERT INTO contract_application (apt_id, prop_id, elec_comp_id, water_comp_id, gas_comp_id, fin_comp_id, legal_comp_id, prop_name, start_date, street, community, city, state, prop_images, apt_type, room_count, bath_count, features, avl_date, utilities, mgt_comp_id, app_status, sqft, app_owner_type, app_owner)"
+                    + " values(" + contract.get("aptId") + 
+                    "," + contract.get("propId") + 
+                    "," + contract.get("elecCompId") + 
+                    "," + contract.get("waterCompId") + 
+                    "," + contract.get("gasCompId") + 
+                    "," + contract.get("finId") + 
+                    "," + contract.get("legalId") + 
                     ",'" + contract.get("propName") + 
                     "','" + contract.get("date") + 
                     "','" + contract.get("street") + 
@@ -125,8 +156,10 @@ public class DatabaseUtils {
                     ",'" + contract.get("features") + 
                     "','" + contract.get("availability") + 
                     "','" + contract.get("utilities") + 
-                    "','" + contract.get("managementCompany") + 
-                    "','" + contract.get("status") + 
+                    "','" + contract.get("mgtCompanyId") + 
+                    "','" + contract.get("status") +
+                    "','" + contract.get("sqft") +
+                    "','" + contract.get("appOwnerType") +
                     "','" + contract.get("appOwner") + "')";
             int x = stmt.executeUpdate(query);
             if (x == 0) {
@@ -164,8 +197,7 @@ public class DatabaseUtils {
                     res.getDate("avl_date").toLocalDate(),
                     Helper.convertStringToArr(res.getString("utilities")), 
                     Helper.convertStringToArr(res.getString("prop_images")),
-                    res.getString("mgt_comp"),
-                    res.getInt("apt_num"),
+                    res.getInt("apt_Id"),
                     res.getInt("prop_id"),
                     res.getInt("mgt_comp_id"),
                     res.getString("app_status"),
@@ -180,22 +212,22 @@ public class DatabaseUtils {
                 );
                 
                 contract.setElecAccNum(res.getLong("elec_acc_num"));
-                LocalDate elecBillingDate = (res.getDate("elec_bill_date") != null)?res.getDate("elec_bill_date").toLocalDate(): null;
+                String elecBillingDate = res.getString("elec_bill_date");
                 contract.setElecBillingDate(elecBillingDate);
                 contract.setElecContactNum(res.getLong("elec_contact"));
                 
                 contract.setWaterAccNum(res.getLong("water_acc_num"));
-                LocalDate waterBillingDate = (res.getDate("water_bill_date") != null)?res.getDate("water_bill_date").toLocalDate(): null;
+                String waterBillingDate = res.getString("water_bill_date");
                 contract.setWaterBillingDate(waterBillingDate);
                 contract.setWaterContactNum(res.getLong("water_contact"));
                 
                 contract.setGasAccNum(res.getLong("gas_acc_num"));
-                LocalDate gasBillingDate = (res.getDate("gas_bill_date") != null)?res.getDate("gas_bill_date").toLocalDate(): null;
+                String gasBillingDate =res.getString("gas_bill_date");
                 contract.setGasBillingDate(gasBillingDate);
                 contract.setGasContactNum(res.getLong("gas_contact"));
                 
                 contract.setLeaseCost(res.getInt("fin_lease_cost"));
-                LocalDate aptBillingDate = (res.getDate("fin_bill_date") != null)?res.getDate("fin_bill_date").toLocalDate(): null;
+                String aptBillingDate = res.getString("fin_bill_date");
                 contract.setAptBillingDate(gasBillingDate);
                 contract.setMaintanenceCost(res.getInt("fin_maint_cost"));
                 contract.setUtilitiesCost(res.getInt("fin_utility_cost"));
@@ -253,18 +285,8 @@ public class DatabaseUtils {
                 Apartment apt= aptListFromDB.addNewProfile();
                 apt.setAptId(aptRs.getInt(1));
                 apt.setTenantId(aptRs.getInt(2));
-                apt.setSize(aptRs.getInt(3));
-                apt.setBedroom(aptRs.getInt(4));
-                apt.setBathroom(aptRs.getInt(5));
-                apt.setType(aptRs.getString(6));
-                apt.setAvlblDate(aptRs.getDate(7));
-                apt.setRent(aptRs.getInt(8));
-                apt.setDetails(aptRs.getString(9));
-                apt.setLattitude(aptRs.getString(10));
-                apt.setLongitude(aptRs.getString(11));
-                apt.setIsLeased(aptRs.getBoolean(12));
-                apt.setAptPropId(aptRs.getInt(13));
-                apt.setImages(Helper.convertStringToArr(aptRs.getString(14)));
+                apt.setIsLeased(aptRs.getBoolean(3));
+                apt.setAptPropId(aptRs.getInt(4));
                                 
                 for (Property p : propList.getPropList()){
                     if (p.getPropId()==apt.getAptPropId())
@@ -310,7 +332,7 @@ public class DatabaseUtils {
             UserRequestDirectory reqListFromDB = new UserRequestDirectory();
             Connection conn= getConnection();
             Statement st = conn.createStatement();
-            ResultSet reqRs = st.executeQuery("SELECT * FROM aedfinalproject.user_application_request");
+            ResultSet reqRs = st.executeQuery("SELECT * FROM aedfinalproject.user_application_request WHERE User_Id = " + currentUid );
             
             SimpleDateFormat dFormatView = new SimpleDateFormat("yyyy-MM-dd");
             
@@ -333,6 +355,36 @@ public class DatabaseUtils {
         }
     }
     
+    public static UserRequestDirectory getMgmtRequestListFromDB(){
+        
+        try{
+            UserRequestDirectory reqMgmtListFromDB = new UserRequestDirectory();
+            Connection conn= getConnection();
+            Statement st = conn.createStatement();
+            int mgmtID= getCompanyId(currentUid);
+            ResultSet reqRs = st.executeQuery("SELECT * FROM aedfinalproject.user_application_request WHERE Mgmt_Comp_Id = " + mgmtID );
+            
+            SimpleDateFormat dFormatView = new SimpleDateFormat("yyyy-MM-dd");
+            
+            while (reqRs.next()){
+                UserRequest req = reqMgmtListFromDB.addNewProfile();
+                req.setRequestId(reqRs.getInt(1));
+                req.setPropId(reqRs.getInt(2));
+                req.setAptId(reqRs.getInt(3));
+                req.setMgmtId(reqRs.getInt(4));
+                req.setRequestType(reqRs.getString(5));
+                req.setStatus(reqRs.getString(6));
+                req.setLastMdfdDate(dFormatView.format(reqRs.getDate(7)));
+                req.setUserId(reqRs.getInt(8));
+            }
+            return reqMgmtListFromDB;
+        }
+        catch(Exception e){
+            System.out.println(e);
+            return null;
+        }
+    }
+    
     public static HashMap<String, Integer> getUtilityCompIds(int propId) {
         HashMap<String, Integer> result = new HashMap<>();
         try {
@@ -340,9 +392,11 @@ public class DatabaseUtils {
             Statement stmt = dbConn.createStatement();
             String query ="SELECT * FROM aedfinalproject.property_details where prop_id="+propId;
             ResultSet res = stmt.executeQuery(query);
-            result.put("elecCompId", res.getInt("elec_comp_id"));
-            result.put("waterCompId", res.getInt("water_comp_id"));
-            result.put("gasCompId", res.getInt("gas_comp_id"));
+            while(res.next()) {
+                result.put("elecCompId", res.getInt("elec_comp_id"));
+                result.put("waterCompId", res.getInt("water_comp_id"));
+                result.put("gasCompId", res.getInt("gas_comp_id"));
+            }
         }catch(Exception e) {
             System.out.println(e);
         }
@@ -350,12 +404,12 @@ public class DatabaseUtils {
         return result;
     }
     
-    public static HashMap<String, Integer> getPropInfo(int mgtId) {
+    public static HashMap<String, Integer> getPropInfo(int mgtEmpId) {
         HashMap<String, Integer> result = new HashMap<>();
         try {
             Connection dbConn = getConnection();
             Statement stmt = dbConn.createStatement();
-            String query ="SELECT * FROM aedfinalproject.property_details where mgt_comp_id="+mgtId;
+            String query ="SELECT * FROM aedfinalproject.property_details where mgt_broker_id="+mgtEmpId;
             ResultSet res = stmt.executeQuery(query);
             while(res.next()) {
                 result.put(res.getString("prop_names"),res.getInt("prop_id"));
@@ -379,6 +433,8 @@ public class DatabaseUtils {
                 GasCompany gas= gasListFromDB.addNewProfile();
                 gas.setGasId(gasRs.getInt(1));
                 gas.setGasName(gasRs.getString(2));
+                gas.setGasCity(gasRs.getString(3));
+                gas.setGasState(gasRs.getString(4));
             }
             return gasListFromDB;
         }
@@ -400,6 +456,8 @@ public class DatabaseUtils {
                 WaterCompany water= waterListFromDB.addNewProfile();
                 water.setWaterId(waterRs.getInt(1));
                 water.setWaterName(waterRs.getString(2));
+                water.setWaterCity(waterRs.getString(3));
+                water.setWaterState(waterRs.getString(4));
             }
             return waterListFromDB;
         }
@@ -421,8 +479,56 @@ public class DatabaseUtils {
                 ElectricityCompany elec= elecListFromDB.addNewProfile();
                 elec.setElectricityId(elecRs.getInt(1));
                 elec.setElectricityName(elecRs.getString(2));
+                elec.setElectricityCity(elecRs.getString(3));
+                elec.setElectricityState(elecRs.getString(4));
             }
             return elecListFromDB;
+        }
+        catch(Exception e){
+            System.out.println(e);
+            return null;
+        }
+    }
+    
+    public static FinanceCompanyDirectory getFinanceListFromDB(){
+        
+        try{
+            FinanceCompanyDirectory financeListFromDB = new FinanceCompanyDirectory();
+            Connection conn= getConnection();
+            Statement st = conn.createStatement();
+            ResultSet finRs = st.executeQuery("SELECT * FROM aedfinalproject.fin_companies");
+            
+            while (finRs.next()){
+                FinanceCompany finance = financeListFromDB.addNewProfile();
+                finance.setFinanceId(finRs.getInt(1));
+                finance.setFinanceName(finRs.getString(2));
+                finance.setFinanceCity(finRs.getString(3));
+                finance.setFinanceState(finRs.getString(4));
+            }
+            return financeListFromDB;
+        }
+        catch(Exception e){
+            System.out.println(e);
+            return null;
+        }
+    }
+    
+    public static LegalCompanyDirectory getLegalListFromDB(){
+        
+        try{
+            LegalCompanyDirectory legalListFromDB = new LegalCompanyDirectory();
+            Connection conn= getConnection();
+            Statement st = conn.createStatement();
+            ResultSet legalRs = st.executeQuery("SELECT * FROM aedfinalproject.legal_companies");
+            
+            while (legalRs.next()){
+                LegalCompany legal= legalListFromDB.addNewProfile();
+                legal.setLegalId(legalRs.getInt(1));
+                legal.setLegalName(legalRs.getString(2));
+                legal.setLegalCity(legalRs.getString(3));
+                legal.setLegalState(legalRs.getString(4));
+            }
+            return legalListFromDB;
         }
         catch(Exception e){
             System.out.println(e);
@@ -440,8 +546,6 @@ public class DatabaseUtils {
             int x = st.executeUpdate(query);
             if (x == 0) {
                 JOptionPane.showMessageDialog(new JButton(), "Incorrect Id");
-            } else {
-                JOptionPane.showMessageDialog(new JButton(),"Contract details saved successfully!!");
             }
         }catch(Exception e){
             System.out.println(e);
@@ -458,8 +562,6 @@ public class DatabaseUtils {
             int x = st.executeUpdate(query);
             if (x == 0) {
                 JOptionPane.showMessageDialog(new JButton(), "Incorrect Id");
-            } else {
-                JOptionPane.showMessageDialog(new JButton(),"Contract details saved successfully!!");
             }
         }catch(Exception e){
             System.out.println(e);
@@ -476,9 +578,7 @@ public class DatabaseUtils {
             int x = st.executeUpdate(query);
             if (x == 0) {
                 JOptionPane.showMessageDialog(new JButton(), "Incorrect Id");
-            } else {
-                JOptionPane.showMessageDialog(new JButton(),"Contract details saved successfully!!");
-            }
+            } 
         }catch(Exception e){
             System.out.println(e);
         }
@@ -496,8 +596,6 @@ public class DatabaseUtils {
             int x = st.executeUpdate(query);
             if (x == 0) {
                 JOptionPane.showMessageDialog(new JButton(), "Incorrect Id");
-            } else {
-                JOptionPane.showMessageDialog(new JButton(),"Contract details saved successfully!!");
             }
         }catch(Exception e){
             System.out.println(e);
@@ -510,12 +608,10 @@ public class DatabaseUtils {
             Statement st = conn.createStatement();
             String query="UPDATE aedfinalproject.contract_application SET fin_lease_cost= "+contract.getLeaseCost()+
                                                     " ,lease_end_date="+ "'"+contract.getLeaseEndDate()+"'" + 
-                                                    ",app_status='approved' WHERE app_id="+contract.getAppId();
+                                                    ",app_status='approved', app_owner='management' WHERE app_id="+contract.getAppId();
             int x = st.executeUpdate(query);
             if (x == 0) {
                 JOptionPane.showMessageDialog(new JButton(), "Incorrect Id");
-            } else {
-                JOptionPane.showMessageDialog(new JButton(),"Contract details saved successfully!!");
             }
         }catch(Exception e){
             System.out.println(e);
@@ -528,8 +624,8 @@ public class DatabaseUtils {
             Statement st = conn.createStatement();
             String query = "INSERT INTO apartment_details values(" + aptId + 
                     ",null" +   
-                    "','" + 0 + 
-                    "','" + propId + "')";
+                    "," + 0 + 
+                    "," + propId + ")";
             int x = st.executeUpdate(query);
             if (x == 0) {
                 JOptionPane.showMessageDialog(new JButton(), "This contract application alredy exist");
@@ -541,15 +637,58 @@ public class DatabaseUtils {
         }
     }
     
-    public static HashMap<String, Integer> getFinComps() {
-        HashMap<String, Integer> result = new HashMap<>();
+    public static FinanceCompanyDirectory getFinComps() {
+        FinanceCompanyDirectory finDir = new FinanceCompanyDirectory();
         try {
             Connection dbConn = getConnection();
             Statement stmt = dbConn.createStatement();
             String query ="SELECT * FROM aedfinalproject.fin_companies";
             ResultSet res = stmt.executeQuery(query);
             while(res.next()) {
-                result.put(res.getString("fin_name"),res.getInt("fin_id"));
+                FinanceCompany finComp = new FinanceCompany(res.getString("fin_name"));
+                finComp.setFinId(res.getInt("fin_id"));
+                finDir.addNewCompanyToList(finComp);
+            }
+        }catch(Exception e) {
+            System.out.println(e);
+        }
+        
+        return finDir;
+    }
+    
+    public static LegalCompanyDirectory getLegalComps() {
+        LegalCompanyDirectory legalDir = new LegalCompanyDirectory();
+        try {
+            Connection dbConn = getConnection();
+            Statement stmt = dbConn.createStatement();
+            String query ="SELECT * FROM aedfinalproject.legal_companies";
+            ResultSet res = stmt.executeQuery(query);
+            while(res.next()) {
+                LegalCompany legalComp = new LegalCompany(res.getString("legal_comp_name"));
+                legalComp.setLegalId(res.getInt("legal_comp_id"));
+                legalDir.addNewCompanyToList(legalComp);
+            }
+        }catch(Exception e) {
+            System.out.println(e);
+        }
+        
+        return legalDir;
+    }
+    
+    public static ArrayList<HashMap<String, Object>> getAdminUsers() {
+        ArrayList<HashMap<String, Object>> result = new ArrayList<HashMap<String, Object>>();
+        try {
+            Connection dbConn = getConnection();
+            Statement stmt = dbConn.createStatement();
+            String query ="SELECT * FROM aedfinalproject.user_table where UserRole <> 'consumer'";
+            ResultSet res = stmt.executeQuery(query);
+            while(res.next()) {
+                HashMap<String, Object> obj = new HashMap<String, Object>();
+                obj.put("userId", res.getInt("Uid"));
+                obj.put("name", res.getString("Name"));
+                obj.put("role", res.getString("UserRole"));
+                
+                result.add(obj);
             }
         }catch(Exception e) {
             System.out.println(e);
@@ -558,20 +697,75 @@ public class DatabaseUtils {
         return result;
     }
     
-    public static HashMap<String, Integer> getLegalComps() {
-        HashMap<String, Integer> result = new HashMap<>();
+    public static ArrayList<HashMap<String, Object>> getMgtEmps() {
+        ArrayList<HashMap<String, Object>> result = new ArrayList<HashMap<String, Object>>();
         try {
             Connection dbConn = getConnection();
             Statement stmt = dbConn.createStatement();
-            String query ="SELECT * FROM aedfinalproject.legal_companies";
+            String query ="SELECT * FROM aedfinalproject.user_table where UserRole = 'mgtEmployee'";
             ResultSet res = stmt.executeQuery(query);
             while(res.next()) {
-                result.put(res.getString("legal_comp_name"),res.getInt("legal_comp_id"));
+                HashMap<String, Object> obj = new HashMap<String, Object>();
+                obj.put("userId", res.getInt("Uid"));
+                obj.put("name", res.getString("Name"));
+                
+                result.add(obj);
             }
         }catch(Exception e) {
             System.out.println(e);
         }
         
         return result;
+    }
+    
+    public static int getCompanyId(int id) {
+        int result = 0;
+        try {
+            Connection dbConn = getConnection();
+            Statement stmt = dbConn.createStatement();
+            String query ="SELECT * FROM aedfinalproject.user_table where Uid="+id;
+            ResultSet res = stmt.executeQuery(query);
+            while(res.next()) {
+                
+                result=res.getInt("company_id");
+            }
+        }catch(Exception e) {
+            System.out.println(e);
+        }
+        
+        return result;
+    }
+    
+    public static void updateCompany(String tableName, int id, String name, String city, String state, String idLabel, String nameLabel,String cityLabel,String stateLabel) {                    
+        try{
+
+            Connection conn= getConnection();
+            Statement st = conn.createStatement();
+            String query="UPDATE aedfinalproject."+tableName+ " SET "+
+                                                    idLabel+"="+ id + 
+                                                    " ,"+nameLabel+"="+"'"+name+"'"+
+                                                    " ,"+cityLabel+"="+"'"+city+"'"+
+                                                    " ,"+stateLabel+"="+"'"+state+"'"+
+                                                    " WHERE "+idLabel+"="+id;
+            st.executeUpdate(query);
+
+        }
+        catch(Exception e){
+            System.out.println(e);
+        }
+    }
+    
+    public static void deleteCompany(String tableName, int id,  String idLabel) {                    
+        try{
+
+            Connection conn= getConnection();
+            Statement st = conn.createStatement();
+            String query="DELETE from aedfinalproject."+tableName+" WHERE "+idLabel+"="+id;
+            st.executeUpdate(query);
+
+        }
+        catch(Exception e){
+            System.out.println(e);
+        }
     }
 }

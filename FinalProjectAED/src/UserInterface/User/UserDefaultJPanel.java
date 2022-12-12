@@ -17,13 +17,12 @@ public class UserDefaultJPanel extends javax.swing.JPanel {
     /**
      * Creates new form UserDefaultJPanel
      */
-    public static int requestCounter;
+    
     UserRequestDirectory reqList;
     WorkAreaContPanel workAreaPanel;
     
     public UserDefaultJPanel() {
         this.workAreaPanel = AppSystem.workAreaPanel;
-        requestCounter=1;
         reqList = new UserRequestDirectory();
         initComponents();
     }

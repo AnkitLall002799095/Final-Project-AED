@@ -11,6 +11,8 @@ package Business.UtilityCompany;
 public class ElectricityCompany {
     private int electricityId;
     private String electricityName;
+    private String electricityCity;
+    private String electricityState;
 
     public int getElectricityId() {
         return electricityId;
@@ -26,6 +28,22 @@ public class ElectricityCompany {
 
     public void setElectricityName(String electricityName) {
         this.electricityName = electricityName;
+    }
+
+    public String getElectricityCity() {
+        return electricityCity;
+    }
+
+    public void setElectricityCity(String electricityCity) {
+        this.electricityCity = electricityCity;
+    }
+
+    public String getElectricityState() {
+        return electricityState;
+    }
+
+    public void setElectricityState(String electricityState) {
+        this.electricityState = electricityState;
     }
     
 }

@@ -5,10 +5,11 @@
 package UserInterface.ManagementCompany;
 
 import Application.Utils.DatabaseUtils;
-import Business.ManagementCompany.ManagementCompany;
-import Business.ManagementCompany.ManagementCompanyDirectory;
+import Business.ManagementCompanyPackage.ManagementCompany;
+import Business.ManagementCompanyPackage.ManagementCompanyDirectory;
 import Business.Request.UserRequest;
 import Business.Request.UserRequestDirectory;
+import Email.Utils.EmailUtil;
 import UserInterface.Main.WorkAreaContPanel;
 import java.sql.Connection;
 import java.sql.Statement;
@@ -24,14 +25,13 @@ public class MgmtUserRequestJPanel extends javax.swing.JPanel {
      * Creates new form MgmtUserRequestJPanel
      */
     ManagementCompanyDirectory mgmtList;
-    UserRequestDirectory reqList;
+    UserRequestDirectory reqMgmtReqList;
     WorkAreaContPanel workAreaPanel;
     
-    public MgmtUserRequestJPanel(WorkAreaContPanel workAreaPanel) {
+    public MgmtUserRequestJPanel() {
         initComponents();
-        this.workAreaPanel = workAreaPanel;
         this.mgmtList= DatabaseUtils.getMgmtListFromDB();
-        this.reqList= DatabaseUtils.getRequestListFromDB();
+        this.reqMgmtReqList= DatabaseUtils.getMgmtRequestListFromDB();
         populateRequestTable();
     }
 
@@ -177,7 +177,7 @@ public class MgmtUserRequestJPanel extends javax.swing.JPanel {
                 status = (String) model.getValueAt(selectedRow[i], 5);
                 
                 if (status.equals("Pending")){
-                    for (UserRequest u : reqList.getReqList()){
+                    for (UserRequest u : reqMgmtReqList.getReqList()){
                     if (u.getRequestId()==reqToUpdate)
                         u.setStatus("Approved");
                     }
@@ -204,6 +204,9 @@ public class MgmtUserRequestJPanel extends javax.swing.JPanel {
                         System.out.println(e);
                     }
                     JOptionPane.showMessageDialog(ApprovejButton, "Request approved!");
+                    
+                    EmailUtil.triggerManagementToUserMail("managementcomptestacc@gmail.com", "abcx98414@gmail.com");
+                    
                 }
                 
                 else{
@@ -246,7 +249,7 @@ public class MgmtUserRequestJPanel extends javax.swing.JPanel {
                 status = (String) model.getValueAt(selectedRow[i], 5);
                 
                 if (status.equals("Pending")){
-                    for (UserRequest u : reqList.getReqList()){
+                    for (UserRequest u : reqMgmtReqList.getReqList()){
                     if (u.getRequestId()==reqToUpdate)
                         u.setStatus("Rejected");
                     }
@@ -268,6 +271,9 @@ public class MgmtUserRequestJPanel extends javax.swing.JPanel {
                         System.out.println(e);
                     }
                     JOptionPane.showMessageDialog(RejectjButton, "Request rejected!");
+                    
+                    EmailUtil.triggerManagementToUserMail("managementcomptestacc@gmail.com", "abcx98414@gmail.com");
+                    
                 }
                 else{
                     JOptionPane.showMessageDialog(RejectjButton, "Request already closed!");
@@ -293,19 +299,19 @@ public class MgmtUserRequestJPanel extends javax.swing.JPanel {
         javax.swing.table.DefaultTableModel model = (javax.swing.table.DefaultTableModel) RequestListjTable.getModel();
         model.setRowCount(0);
         
-        for (UserRequest u : reqList.getReqList()){
-            if (u.getMgmtId()==2){
-                Object[] row = new Object[7];
-                row[0] = u.getRequestId();
-                row[1] = u.getUserId();
-                row[2] = u.getPropId();
-                row[3] = u.getAptId();
-                row[4] = u.getRequestType();
-                row[5] = u.getStatus();
-                row[6] = u.getLastMdfdDate();
+        for (UserRequest u : reqMgmtReqList.getReqList()){
+            
+            Object[] row = new Object[7];
+            row[0] = u.getRequestId();
+            row[1] = u.getUserId();
+            row[2] = u.getPropId();
+            row[3] = u.getAptId();
+            row[4] = u.getRequestType();
+            row[5] = u.getStatus();
+            row[6] = u.getLastMdfdDate();
 
-                model.addRow(row);
-            }
+            model.addRow(row);
+            
         }
     }
 

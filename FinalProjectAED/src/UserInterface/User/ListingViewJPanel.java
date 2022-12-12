@@ -7,6 +7,9 @@ package UserInterface.User;
 import Business.Apartment.Apartment;
 import Business.Apartment.ApartmentDirectory;
 import Application.Utils.AppSystem;
+import static Application.Utils.AppSystem.currentUid;
+import static Application.Utils.AppSystem.requestCounter;
+import static Application.Utils.AppSystem.workAreaPanel;
 import Application.Utils.DatabaseUtils;
 import java.sql.*;
 import Application.Utils.Helper;
@@ -14,8 +17,8 @@ import Business.Property.Property;
 import Business.Property.PropertyDirectory;
 import Business.Request.UserRequest;
 import Business.Request.UserRequestDirectory;
+import Email.Utils.EmailUtil;
 import UserInterface.Main.WorkAreaContPanel;
-import static UserInterface.User.UserDefaultJPanel.requestCounter;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -32,7 +35,6 @@ public class ListingViewJPanel extends javax.swing.JPanel {
     /**
      * Creates new form ListingViewJPanel
      */
-    WorkAreaContPanel workAreaPanel;
     ApartmentDirectory aptList;
     PropertyDirectory propList;
     UserRequestDirectory reqList;
@@ -42,13 +44,12 @@ public class ListingViewJPanel extends javax.swing.JPanel {
         
     }
     
-    public ListingViewJPanel(WorkAreaContPanel workAreaPanel) {
+    public ListingViewJPanel() {
         initComponents();
         aptList = DatabaseUtils.getAptListFromDB();
         propList = DatabaseUtils.getPropListFromDB();
         reqList = DatabaseUtils.getRequestListFromDB();  
         
-        this.workAreaPanel=workAreaPanel;     
         populateListingTable();
         populateRequestTable();
     }
@@ -237,7 +238,7 @@ public class ListingViewJPanel extends javax.swing.JPanel {
             newReq.setRequestType("Lease");
             newReq.setStatus("Pending");
             newReq.setLastMdfdDate(statusDate);
-            newReq.setUserId(123);
+            newReq.setUserId(currentUid);
             
             try{
                 
@@ -253,6 +254,9 @@ public class ListingViewJPanel extends javax.swing.JPanel {
             }
             
             JOptionPane.showMessageDialog(BookAptjButton, "Apartment booking request placed!");
+            
+            EmailUtil.triggerUserToManagementMail("abcx98414@gmail.com", "managementcomptestacc@gmail.com");
+            
             return;
         }
         
@@ -279,7 +283,7 @@ public class ListingViewJPanel extends javax.swing.JPanel {
             
             for (int i=0;i<selectedRow.length;i++){
                 Apartment apt = (Apartment) model.getValueAt(selectedRow[i], 0);
-                workAreaPanel.setRightPanel(new AptDetailsJPanel(workAreaPanel, apt, reqList));
+                workAreaPanel.setRightPanel(new AptDetailsJPanel(apt, reqList));
             }
 
         }

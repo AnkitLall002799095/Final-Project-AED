@@ -4,6 +4,9 @@
  */
 package UserInterface.User;
 
+import Application.Utils.AppSystem;
+import static Application.Utils.AppSystem.currentUid;
+import static Application.Utils.AppSystem.requestCounter;
 import Application.Utils.DatabaseUtils;
 import Application.Utils.Helper;
 import Business.Property.Property;
@@ -17,7 +20,6 @@ import Business.UtilityCompany.GasCompanyDirectory;
 import Business.UtilityCompany.WaterCompany;
 import Business.UtilityCompany.WaterCompanyDirectory;
 import UserInterface.Main.WorkAreaContPanel;
-import static UserInterface.User.UserDefaultJPanel.requestCounter;
 import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -34,15 +36,13 @@ public class CreateListingRequestJPanel extends javax.swing.JPanel {
      * Creates new form CreateListingJPanel
      */
     
-    WorkAreaContPanel workAreaPanel;
     UserRequestDirectory reqList;
     PropertyDirectory createPropList;
     GasCompanyDirectory gasList;
     ElectricityCompanyDirectory elecList;
     WaterCompanyDirectory waterList;
     
-    public CreateListingRequestJPanel(WorkAreaContPanel workAreaPanel) {
-        this.workAreaPanel= workAreaPanel;
+    public CreateListingRequestJPanel() {
         reqList = DatabaseUtils.getRequestListFromDB();
         gasList = DatabaseUtils.getGasListFromDB();
         elecList = DatabaseUtils.getElecListFromDB();
@@ -302,82 +302,75 @@ public class CreateListingRequestJPanel extends javax.swing.JPanel {
     private void CreatejButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreatejButtonActionPerformed
         // TODO add your handling code here:
         
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-        java.util.Date date = new java.util.Date();
-        String statusDate = formatter.format(date);
-        
-        Property createProp = createPropList.addNewProfile();
-        createProp.setPropId(Integer.parseInt(PropIdjTextField.getText()));
-        createProp.setOwnerId(123);
-        createProp.setMgtComp(Helper.getCompIDfromCombo(MgmtCompjComboBox));
-        createProp.setStreet(StreetjTextField.getText());
-        createProp.setCommunity(CommunityjTextField.getText());
-        createProp.setCity(CityjTextField.getText());
-        createProp.setState(StatejTextField.getText());
-        createProp.setPropName(PropNamejTextField.getText());
-        
-        for (GasCompany g : gasList.getGasList()){
-            if (g.getGasId()==Helper.getCompIDfromCombo(GasCompjComboBox))
-                createProp.setGas(g);
+        if ((PropIdjTextField.getText().equals("")) || (PropNamejTextField.getText().equals("")) || (StreetjTextField.getText().equals("")) || (CommunityjTextField.getText().equals("")) || (CityjTextField.getText().equals("")) || (StatejTextField.getText().equals(""))){
+            JOptionPane.showMessageDialog(CreatejButton, "Please provide value for all fields!");
         }
-        
-        for (ElectricityCompany e : elecList.getElecList()){
-            if (e.getElectricityId()==Helper.getCompIDfromCombo(ElecCompjComboBox))
-                createProp.setElectricity(e);
+        else{
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+            java.util.Date date = new java.util.Date();
+            String statusDate = formatter.format(date);
+
+            Property createProp = createPropList.addNewProfile();
+            createProp.setPropId(Integer.parseInt(PropIdjTextField.getText()));
+            createProp.setOwnerId(currentUid);
+            createProp.setMgtComp(Helper.getCompIDfromCombo(MgmtCompjComboBox));
+            createProp.setStreet(StreetjTextField.getText());
+            createProp.setCommunity(CommunityjTextField.getText());
+            createProp.setCity(CityjTextField.getText());
+            createProp.setState(StatejTextField.getText());
+            createProp.setPropName(PropNamejTextField.getText());
+
+            for (GasCompany g : gasList.getGasList()){
+                if (g.getGasId()==Helper.getCompIDfromCombo(GasCompjComboBox))
+                    createProp.setGas(g);
+            }
+
+            for (ElectricityCompany e : elecList.getElecList()){
+                if (e.getElectricityId()==Helper.getCompIDfromCombo(ElecCompjComboBox))
+                    createProp.setElectricity(e);
+            }
+
+            for (WaterCompany w : waterList.getWaterList()){
+                if (w.getWaterId()==Helper.getCompIDfromCombo(WaterCompjComboBox))
+                    createProp.setWater(w);
+            }
+
+            UserRequest newReq = reqList.addNewProfile();
+            newReq.setRequestId(requestCounter++);
+            newReq.setPropId(Integer.parseInt(PropIdjTextField.getText()));
+            newReq.setMgmtId(Helper.getCompIDfromCombo(MgmtCompjComboBox));
+            newReq.setRequestType("To-Lease");
+            newReq.setStatus("Pending");
+            newReq.setLastMdfdDate(statusDate);
+            newReq.setUserId(currentUid);
+
+            try{
+
+                Connection conn= DatabaseUtils.getConnection();
+                Statement st1 = conn.createStatement();
+                st1.executeUpdate("INSERT INTO `aedfinalproject`.`property_details` (`prop_id`, `user_id`, `mgt_comp_id`, `street`, `community`, `city`, `state`, `prop_names`, `elec_comp_id`, `water_comp_id`, `gas_comp_id`) VALUES ('" + createProp.getPropId() + "','" + createProp.getOwnerId() + "','" + createProp.getMgtComp() + "','" + createProp.getStreet() + "','" + createProp.getCommunity() + "','" + createProp.getCity() + "','" + createProp.getState() + "','" + createProp.getPropName() + "','" + createProp.electricity.getElectricityId() + "','" + createProp.water.getWaterId() + "','" + createProp.gas.getGasId() + "')");
+
+                Statement st2 = conn.createStatement();
+                st2.executeUpdate("INSERT INTO `aedfinalproject`.`user_application_request` (`Request_Id`, `Prop_Id`, `Mgmt_Comp_Id`, `Request_Type`, `Status`, `Last_Mdfd_Date`, `User_Id`) VALUES ('" + newReq.getRequestId() + "','" + newReq.getPropId() + "','" + newReq.getMgmtId() + "','" + newReq.getRequestType() + "','" + newReq.getStatus() + "','" + newReq.getLastMdfdDate() + "','" + newReq.getUserId()+ "')");
+
+                populateRequestTable();
+
+            }
+            catch(Exception e){
+                System.out.println(e);
+            }
+
+            JOptionPane.showMessageDialog(CreatejButton, "Property lisitng request placed!");
+
+            PropIdjTextField.setText("");
+            PropNamejTextField.setText("");
+            StreetjTextField.setText("");
+            CommunityjTextField.setText("");
+            CityjTextField.setText("");
+            StatejTextField.setText("");
+
+            return;
         }
-        
-        for (WaterCompany w : waterList.getWaterList()){
-            if (w.getWaterId()==Helper.getCompIDfromCombo(WaterCompjComboBox))
-                createProp.setWater(w);
-        }
-        
-        UserRequest newReq = reqList.addNewProfile();
-        newReq.setRequestId(requestCounter++);
-        newReq.setPropId(Integer.parseInt(PropIdjTextField.getText()));
-        newReq.setMgmtId(Helper.getCompIDfromCombo(MgmtCompjComboBox));
-        newReq.setRequestType("To-Lease");
-        newReq.setStatus("Pending");
-        newReq.setLastMdfdDate(statusDate);
-        newReq.setUserId(123);
-
-        createProp.getPropId();
-        createProp.getOwnerId();
-        createProp.getMgtComp();
-        createProp.getStreet();
-        createProp.getCommunity();
-        createProp.getCity();
-        createProp.getState();
-        createProp.getPropName();
-        createProp.electricity.getElectricityId();
-        createProp.water.getWaterId();
-        createProp.gas.getGasId();
-        
-        try{
-
-            Connection conn= DatabaseUtils.getConnection();
-            Statement st1 = conn.createStatement();
-            st1.executeUpdate("INSERT INTO `aedfinalproject`.`property_details` (`prop_id`, `user_id`, `mgt_comp_id`, `street`, `community`, `city`, `state`, `prop_names`, `elec_comp_id`, `water_comp_id`, `gas_comp_id`) VALUES ('" + createProp.getPropId() + "','" + createProp.getOwnerId() + "','" + createProp.getMgtComp() + "','" + createProp.getStreet() + "','" + createProp.getCommunity() + "','" + createProp.getCity() + "','" + createProp.getState() + "','" + createProp.getPropName() + "','" + createProp.electricity.getElectricityId() + "','" + createProp.water.getWaterId() + "','" + createProp.gas.getGasId() + "')");
-            
-            Statement st2 = conn.createStatement();
-            st2.executeUpdate("INSERT INTO `aedfinalproject`.`user_application_request` (`Request_Id`, `Prop_Id`, `Mgmt_Comp_Id`, `Request_Type`, `Status`, `Last_Mdfd_Date`, `User_Id`) VALUES ('" + newReq.getRequestId() + "','" + newReq.getPropId() + "','" + newReq.getMgmtId() + "','" + newReq.getRequestType() + "','" + newReq.getStatus() + "','" + newReq.getLastMdfdDate() + "','" + newReq.getUserId()+ "')");
-
-            populateRequestTable();
-
-        }
-        catch(Exception e){
-            System.out.println(e);
-        }
-
-        JOptionPane.showMessageDialog(CreatejButton, "Property lisitng request placed!");
-        
-        PropIdjTextField.setText("");
-        PropNamejTextField.setText("");
-        StreetjTextField.setText("");
-        CommunityjTextField.setText("");
-        CityjTextField.setText("");
-        StatejTextField.setText("");
-        
-        return;
         
     }//GEN-LAST:event_CreatejButtonActionPerformed
 

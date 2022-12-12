@@ -14,6 +14,8 @@ import UserInterface.LegalCompany.LegalCompRequestPanel;
 //import UserInterface.EclectricityUtility.RequestsListingElecUtility;
 import UserInterface.ManagementCompany.ApplicationsListingMgtComp;
 import UserInterface.ManagementCompany.CompanyEmployeeLeftPanel;
+import UserInterface.ManagementCompany.MgmtAdminLeftPanel;
+import UserInterface.ManagementCompany.MgmtUserRequestJPanel;
 import UserInterface.SystemAdmin.SystemAdminLeftJPanel;
 
 import UserInterface.SystemAdmin.SystemAdminMgmtJPanel;
@@ -66,7 +68,9 @@ public class WorkAreaContPanel extends javax.swing.JPanel {
 
     private void setDefaultPanelViews() {
   jSplitPane1.setLeftComponent(new UserLeftPanel());
-//        jSplitPane1.setRightComponent(new UserDefaultJPanel());
+        jSplitPane1.setRightComponent(new UserDefaultJPanel());
+//        jSplitPane1.setLeftComponent(new SystemAdminLeftJPanel());
+//        jSplitPane1.setRightComponent(new SystemAdminMgmtJPanel());        
         
         String currentUserRole = AppSystem.currentUserRole;
         
@@ -79,24 +83,24 @@ public class WorkAreaContPanel extends javax.swing.JPanel {
                 jSplitPane1.setLeftComponent(new UserLeftPanel());
                 jSplitPane1.setRightComponent(new UserDefaultJPanel());
                 break;
-            case "mgtCompEmp":
+            case "mgtEmployee":
                 jSplitPane1.setLeftComponent(new CompanyEmployeeLeftPanel());
                 break;
             case "mgtCompAdmin":
-//                jSplitPane1.setLeftComponent(new UserLeftPanel());
+                jSplitPane1.setLeftComponent(new MgmtAdminLeftPanel());
                 break;
             case "sysAdmin":
                 jSplitPane1.setLeftComponent(new SystemAdminLeftJPanel());
                 break;
-            case "elecUtility":
-            case "waterUtility":
-            case "gasUtility":
+            case "elecAdmin":
+            case "waterAdmin":
+            case "gasAdmin":
                 jSplitPane1.setLeftComponent(new UtilityCompLeftPanel());
                 break;
-            case "legalComp":
+            case "legalAdmin":
                 jSplitPane1.setLeftComponent(new LegalCompLeftPanel());
                 break;
-            case "finComp":
+            case "finAdmin":
                 jSplitPane1.setLeftComponent(new FinanceCompLeftPanel());
                 break;
         }
