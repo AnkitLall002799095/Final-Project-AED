@@ -40,17 +40,17 @@ public class UtilityCompFormDetails extends javax.swing.JPanel {
         
         switch(type) {
             case "electricity":
-                billingDate.setText(Helper.getFormattedDate(contract.getElecBillingDate()));
+                billingDate.setText(contract.getElecBillingDate());
                 accNum.setText(String.valueOf(contract.getElecAccNum()));
                 contactNum.setText(String.valueOf(contract.getElecContactNum()));
                 break;
             case "water":
-                billingDate.setText(Helper.getFormattedDate(contract.getWaterBillingDate()));
+                billingDate.setText(contract.getWaterBillingDate());
                 accNum.setText(String.valueOf(contract.getWaterAccNum()));
                 contactNum.setText(String.valueOf(contract.getWaterContactNum()));
                 break;
             case "gas":
-                billingDate.setText(Helper.getFormattedDate(contract.getGasBillingDate()));
+                billingDate.setText(contract.getGasBillingDate());
                 accNum.setText(String.valueOf(contract.getGasAccNum()));
                 contactNum.setText(String.valueOf(contract.getGasContactNum()));
                 break;

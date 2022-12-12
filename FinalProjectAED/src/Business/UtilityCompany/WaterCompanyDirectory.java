@@ -4,6 +4,9 @@
  */
 package Business.UtilityCompany;
 
+import Application.Utils.DatabaseUtils;
+import Business.ManagementCompanyPackage.ManagementCompany;
+import Business.ManagementCompanyPackage.ManagementCompanyDirectory;
 import java.util.ArrayList;
 
 /**
@@ -36,4 +39,23 @@ public class WaterCompanyDirectory {
         waterList.remove(water);
     }
     
+    public WaterCompany getCompanyDetails(int id) {
+        WaterCompanyDirectory dir = DatabaseUtils.getWaterListFromDB();
+        WaterCompany resComp = null;
+        for(WaterCompany comp : dir.getWaterList()) {
+            if(comp.getWaterId()== id) {
+                resComp = comp;
+            }
+        }
+        
+        return resComp;
+    }
+    
+    public void updateCompanyInfo(WaterCompany comp) {
+        DatabaseUtils.updateCompany("water_companies", comp.getWaterId(), comp.getWaterName(), comp.getWaterCity(), comp.getWaterState(), "water_comp_id", "water_comp_name", "water_city", "water_state");
+    }
+    
+    public void deleteCompany(int id) {
+        DatabaseUtils.deleteCompany("management_companies", id, "water_comp_id");
+    }
 }

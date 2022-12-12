@@ -16,58 +16,74 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="137" max="-2" attributes="0"/>
+          <Group type="102" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="67" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="ElectricityjButton" max="32767" attributes="0"/>
-                          <Component id="ManagementjButton" pref="130" max="32767" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="FinancejButton" pref="136" max="32767" attributes="0"/>
-                          <Component id="GasjButton" max="32767" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="137" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="WaterjButton" min="-2" pref="141" max="-2" attributes="0"/>
-                          <Component id="LegaljButton" min="-2" pref="141" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
+                              <Component id="SubmitjButton" min="-2" pref="152" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
+                              <Component id="CanceljButton" min="-2" pref="152" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="SubHeadingjLabel" min="-2" pref="356" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="CompanyTypejLabel" alignment="0" min="-2" pref="137" max="-2" attributes="0"/>
+                                  <Component id="CompanyIdjLabel" alignment="0" min="-2" pref="137" max="-2" attributes="0"/>
+                                  <Component id="CompanyNamejLabel" alignment="0" min="-2" pref="137" max="-2" attributes="0"/>
+                                  <Component id="CompanyCityjLabel" alignment="0" min="-2" pref="137" max="-2" attributes="0"/>
+                                  <Component id="CompanyStatejLabel" min="-2" pref="137" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="CompanyTypejComboBox" max="32767" attributes="0"/>
+                                  <Component id="CompanyIdjTextField" max="32767" attributes="0"/>
+                                  <Component id="CompanyNamejTextField" max="32767" attributes="0"/>
+                                  <Component id="CompanycityjTextField" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="CompanyStatejTextField" min="-2" pref="171" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace pref="108" max="-2" attributes="0"/>
+                              <Component id="WelcomejLabel" min="-2" pref="378" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                   </Group>
-                  <Group type="102" attributes="0">
-                      <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
-                      <Component id="SubmitjButton" min="-2" pref="152" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
-                      <Component id="CanceljButton" min="-2" pref="152" max="-2" attributes="0"/>
-                  </Group>
-                  <Component id="jScrollPane1" min="-2" pref="577" max="-2" attributes="0"/>
-                  <Component id="SubHeadingjLabel" min="-2" pref="356" max="-2" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="79" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="CompanyTypejLabel" alignment="0" min="-2" pref="137" max="-2" attributes="0"/>
-                          <Component id="CompanyIdjLabel" alignment="0" min="-2" pref="137" max="-2" attributes="0"/>
-                          <Component id="CompanyNamejLabel" alignment="0" min="-2" pref="137" max="-2" attributes="0"/>
-                          <Component id="CompanyCityjLabel" alignment="0" min="-2" pref="137" max="-2" attributes="0"/>
-                          <Component id="CompanyStatejLabel" min="-2" pref="137" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="67" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="ElectricityjButton" max="32767" attributes="0"/>
+                                  <Component id="ManagementjButton" min="-2" pref="130" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="FinancejButton" max="32767" attributes="0"/>
+                                  <Component id="GasjButton" min="-2" pref="136" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="WaterjButton" min="-2" pref="141" max="-2" attributes="0"/>
+                                  <Component id="LegaljButton" min="-2" pref="141" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Component id="TableHeadingjLabel" alignment="0" min="-2" pref="356" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Component id="jScrollPane1" min="-2" pref="577" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="jButton1" pref="128" max="32767" attributes="0"/>
+                                  <Component id="jButton2" max="32767" attributes="0"/>
+                              </Group>
+                          </Group>
                       </Group>
-                      <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="CompanyTypejComboBox" max="32767" attributes="0"/>
-                          <Component id="CompanyIdjTextField" max="32767" attributes="0"/>
-                          <Component id="CompanyNamejTextField" max="32767" attributes="0"/>
-                          <Component id="CompanycityjTextField" alignment="0" max="32767" attributes="0"/>
-                          <Component id="CompanyStatejTextField" min="-2" pref="171" max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
-                  <Component id="TableHeadingjLabel" alignment="0" min="-2" pref="356" max="-2" attributes="0"/>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace pref="108" max="-2" attributes="0"/>
-                      <Component id="WelcomejLabel" min="-2" pref="378" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace min="243" max="32767" attributes="0"/>
+              <EmptySpace pref="14" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -123,7 +139,14 @@
                   <Component id="WaterjButton" alignment="3" min="-2" pref="23" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="jScrollPane1" min="-2" pref="99" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jScrollPane1" min="-2" pref="99" max="-2" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="jButton2" min="-2" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
               <EmptySpace pref="60" max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -345,6 +368,22 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="FinancejButtonActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="jButton1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="View/Update"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="jButton2">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Delete"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton2ActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

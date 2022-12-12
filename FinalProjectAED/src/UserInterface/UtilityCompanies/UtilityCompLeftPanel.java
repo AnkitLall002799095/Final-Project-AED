@@ -77,7 +77,7 @@ public class UtilityCompLeftPanel extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        AppSystem.workAreaPanel.setRightPanel(new RequestsListingUtility("gas"));
+        AppSystem.workAreaPanel.setRightPanel(new RequestsListingUtility(AppSystem.currentUserRole));
     }//GEN-LAST:event_jButton1ActionPerformed
 
 

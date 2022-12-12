@@ -27,10 +27,10 @@ public class ElectricityContractFormCont extends javax.swing.JPanel {
         contentPanel.add(new UtilityContractForm(appId, "electricity"));
     }
     
-        private void populateCombobox() {
+    private void populateCombobox() {
         DefaultComboBoxModel<String> cmbModel = new DefaultComboBoxModel<>(getDropdownValues());
         formType.setModel(cmbModel);
-        formType.setSelectedItem("Gas Company Form");
+        formType.setSelectedItem("Electricity Company Form");
     }
     
     private String[] getDropdownValues() {
@@ -87,12 +87,13 @@ public class ElectricityContractFormCont extends javax.swing.JPanel {
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 58, Short.MAX_VALUE)
-                        .addComponent(formType, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(621, 621, 621))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(243, 243, 243))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(243, 243, 243))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(formType, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(524, 524, 524))))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -118,7 +119,7 @@ public class ElectricityContractFormCont extends javax.swing.JPanel {
             contentPanel.add(new MgtCompFormDetails(appId));
             break;
             case "Electricity Company Form":
-            contentPanel.add(new UtilityCompFormDetails(appId, "electricity"));
+            contentPanel.add(new UtilityContractForm(appId, "electricity"));
             break;
         }
 

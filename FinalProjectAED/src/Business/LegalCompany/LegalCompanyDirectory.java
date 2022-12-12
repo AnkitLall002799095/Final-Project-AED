@@ -4,7 +4,10 @@
  */
 package Business.LegalCompany;
 
+import Application.Utils.DatabaseUtils;
 import Business.FinanceCompanyPackage.FinanceCompany;
+import Business.ManagementCompanyPackage.ManagementCompany;
+import Business.ManagementCompanyPackage.ManagementCompanyDirectory;
 import java.util.ArrayList;
 import java.util.ArrayList;
 
@@ -44,6 +47,26 @@ public class LegalCompanyDirectory {
     
     public ArrayList<LegalCompany> getLegalCompanyList() {
         return this.legalCompanyList;
+    }
+    
+    public LegalCompany getCompanyDetails(int id) {
+        LegalCompanyDirectory dir = DatabaseUtils.getLegalListFromDB();
+        LegalCompany resComp = null;
+        for(LegalCompany comp : dir.getLegalList()) {
+            if(comp.getLegalId()== id) {
+                resComp = comp;
+            }
+        }
+        
+        return resComp;
+    }
+    
+    public void updateCompanyInfo(LegalCompany comp) {
+        DatabaseUtils.updateCompany("legal_companies", comp.getLegalId(), comp.getLegalName(), comp.getLegalCity(), comp.getLegalState(), "legal_comp_id", "legal_comp_name", "legal_city", "legal_state");
+    }
+    
+    public void deleteCompany(int id) {
+        DatabaseUtils.deleteCompany("management_companies", id, "legal_comp_id");
     }
 
 }

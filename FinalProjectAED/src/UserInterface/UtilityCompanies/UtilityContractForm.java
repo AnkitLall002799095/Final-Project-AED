@@ -43,10 +43,9 @@ public class UtilityContractForm extends javax.swing.JPanel {
         streetLabel.setText(contract.getStreet());
         
         
-        years.setModel(new DefaultComboBoxModel(Helper.getYearsList(2000)));
-        months.setModel(new DefaultComboBoxModel(((int) years.getSelectedItem() == LocalDate.now().getYear())?setMonthsList():Helper.monthsList)); 
+        months.setModel(new DefaultComboBoxModel(Helper.monthsList)); 
         days.setModel(new DefaultComboBoxModel<>(Helper.getDays(
-				years.getItemAt(years.getSelectedIndex()), 
+				LocalDate.now().getYear(), 
 				Arrays.asList(Helper.monthsList).indexOf(months.getSelectedItem())+1
 		)));       
     }
@@ -64,7 +63,7 @@ public class UtilityContractForm extends javax.swing.JPanel {
     private void updateDaysList() {
     	Integer selectedDay = (Integer) days.getSelectedItem();
   		Integer[] updatedDaysList = Helper.getDays(
-				years.getItemAt(years.getSelectedIndex()), 
+				LocalDate.now().getYear(), 
 				Arrays.asList(Helper.monthsList).indexOf(months.getSelectedItem())+1
 		);
   		DefaultComboBoxModel<Integer> cmbModel = new DefaultComboBoxModel<>(updatedDaysList);
@@ -100,7 +99,6 @@ public class UtilityContractForm extends javax.swing.JPanel {
         stateLabel = new javax.swing.JLabel();
         days = new javax.swing.JComboBox<>();
         months = new javax.swing.JComboBox<>();
-        years = new javax.swing.JComboBox<>();
         contactNumField = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
 
@@ -139,12 +137,6 @@ public class UtilityContractForm extends javax.swing.JPanel {
         months.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 monthsActionPerformed(evt);
-            }
-        });
-
-        years.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                yearsActionPerformed(evt);
             }
         });
 
@@ -190,9 +182,7 @@ public class UtilityContractForm extends javax.swing.JPanel {
                                 .addComponent(days, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(months, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(years, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
+                                .addGap(0, 90, Short.MAX_VALUE))
                             .addComponent(stateLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(contactNumField))
                         .addGap(150, 150, 150))))
@@ -232,8 +222,7 @@ public class UtilityContractForm extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
                     .addComponent(days, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(months, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(years, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(months, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
@@ -243,18 +232,6 @@ public class UtilityContractForm extends javax.swing.JPanel {
                 .addGap(66, 66, 66))
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void yearsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_yearsActionPerformed
-        // TODO add your handling code here:
-        if((int) years.getSelectedItem() == LocalDate.now().getYear()) {    	  			
-                DefaultComboBoxModel<String> cmbModel = new DefaultComboBoxModel<>(Helper.getCurrentMonthsList());
-                months.setModel(cmbModel);
-        }else {
-                DefaultComboBoxModel<String> cmbModel = new DefaultComboBoxModel<>(Helper.monthsList);
-                months.setModel(cmbModel);
-        }
-        updateDaysList();
-    }//GEN-LAST:event_yearsActionPerformed
 
     private void monthsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_monthsActionPerformed
         // TODO add your handling code here:
@@ -268,24 +245,27 @@ public class UtilityContractForm extends javax.swing.JPanel {
 
         String day=String.valueOf(days.getSelectedItem());
         String month=String.valueOf(months.getSelectedItem());
-        String year=String.valueOf(years.getSelectedItem());
+//        String year=String.valueOf(LocalDate.now().getYear());
         
         switch(type) {
             case "electricity":
                 contract.setElecAccNum(accNum);
                 contract.setElecContactNum(contactNum);
-                contract.setElecBillingDate(Helper.getDate(day, month, year));
+                contract.setElecBillingDate(String.valueOf(day)+"-"+String.valueOf(month));
                 DatabaseUtils.updateContractElec(contract);
+                break;
             case "water":
                 contract.setWaterAccNum(accNum);
                 contract.setWaterContactNum(contactNum);
-                contract.setWaterBillingDate(Helper.getDate(day, month, year));
+                contract.setWaterBillingDate(String.valueOf(day)+"-"+String.valueOf(month));
                 DatabaseUtils.updateContractWater(contract);
+                break;
             case "gas":
                 contract.setGasAccNum(accNum);
                 contract.setGasContactNum(contactNum);
-                contract.setGasBillingDate(Helper.getDate(day, month, year));
+                contract.setGasBillingDate(String.valueOf(day)+"-"+String.valueOf(month));
                 DatabaseUtils.updateContractGas(contract);
+                break;
         }        
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -310,6 +290,5 @@ public class UtilityContractForm extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> months;
     private javax.swing.JLabel stateLabel;
     private javax.swing.JLabel streetLabel;
-    private javax.swing.JComboBox<Integer> years;
     // End of variables declaration//GEN-END:variables
 }

@@ -37,6 +37,9 @@ public class NewCompaniesAddJPanel extends javax.swing.JPanel {
     LegalCompanyDirectory legalList, readLegalList;
     FinanceCompanyDirectory financeList, readFinanceList;
     
+    String formType;
+    String companyTypeSelected;
+    
     public NewCompaniesAddJPanel() {
         initComponents();
         mgtList= new ManagementCompanyDirectory();
@@ -80,6 +83,8 @@ public class NewCompaniesAddJPanel extends javax.swing.JPanel {
         WaterjButton = new javax.swing.JButton();
         LegaljButton = new javax.swing.JButton();
         FinancejButton = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         WelcomejLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         WelcomejLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -188,52 +193,76 @@ public class NewCompaniesAddJPanel extends javax.swing.JPanel {
             }
         });
 
+        jButton1.setText("View/Update");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jButton2.setText("Delete");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(137, 137, 137)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(67, 67, 67)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(ElectricityjButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(ManagementjButton, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(FinancejButton, javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE)
-                            .addComponent(GasjButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(137, 137, 137)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(WaterjButton, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(LegaljButton, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(SubmitjButton, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(21, 21, 21)
+                                .addComponent(CanceljButton, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(SubHeadingjLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 356, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(CompanyTypejLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(CompanyIdjLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(CompanyNamejLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(CompanyCityjLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(CompanyStatejLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(36, 36, 36)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(CompanyTypejComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(CompanyIdjTextField)
+                                    .addComponent(CompanyNamejTextField)
+                                    .addComponent(CompanycityjTextField)
+                                    .addComponent(CompanyStatejTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(WelcomejLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 378, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(SubmitjButton, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(21, 21, 21)
-                        .addComponent(CanceljButton, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 577, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(SubHeadingjLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 356, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
+                        .addGap(79, 79, 79)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(CompanyTypejLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(CompanyIdjLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(CompanyNamejLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(CompanyCityjLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(CompanyStatejLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(36, 36, 36)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(CompanyTypejComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(CompanyIdjTextField)
-                            .addComponent(CompanyNamejTextField)
-                            .addComponent(CompanycityjTextField)
-                            .addComponent(CompanyStatejTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(TableHeadingjLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 356, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(WelcomejLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 378, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(67, 67, 67)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(ElectricityjButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(ManagementjButton, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(FinancejButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(GasjButton, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(WaterjButton, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(LegaljButton, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(TableHeadingjLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 356, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 577, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)
+                                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -279,7 +308,12 @@ public class NewCompaniesAddJPanel extends javax.swing.JPanel {
                     .addComponent(GasjButton, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(WaterjButton, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton2)))
                 .addContainerGap(60, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -287,7 +321,60 @@ public class NewCompaniesAddJPanel extends javax.swing.JPanel {
     private void SubmitjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SubmitjButtonActionPerformed
         // TODO add your handling code here:
         
-        if ((CompanyIdjTextField.getText().equals("")) || (CompanyNamejTextField.getText().equals("")) || (CompanycityjTextField.getText().equals("")) || (CompanyStatejTextField.getText().equals("")) ){
+        if(formType == "update") {
+            switch(companyTypeSelected) {
+                case "management":
+                    ManagementCompany mgtComp = new ManagementCompany();
+                    mgtComp.setMgmtId(Integer.parseInt(CompanyIdjTextField.getText()));
+                    mgtComp.setMgmtName(CompanyNamejTextField.getText());
+                    mgtComp.setState(CompanyStatejTextField.getText());
+                    mgtComp.setCity(CompanycityjTextField.getText());
+                    new ManagementCompanyDirectory().updateCompanyInfo(mgtComp);
+                    break;
+                case "electricity":
+                    ElectricityCompany elecComp = new ElectricityCompany();
+                    elecComp.setElectricityId(Integer.parseInt(CompanyIdjTextField.getText()));
+                    elecComp.setElectricityName(CompanyNamejTextField.getText());
+                    elecComp.setElectricityState(CompanyStatejTextField.getText());
+                    elecComp.setElectricityCity(CompanycityjTextField.getText());
+                    new ElectricityCompanyDirectory().updateCompanyInfo(elecComp);
+                    break;
+                case "water":
+                    WaterCompany waterComp = new WaterCompany();
+                    waterComp.setWaterId(Integer.parseInt(CompanyIdjTextField.getText()));
+                    waterComp.setWaterName(CompanyNamejTextField.getText());
+                    waterComp.setWaterState(CompanyStatejTextField.getText());
+                    waterComp.setWaterCity(CompanycityjTextField.getText());
+                    new WaterCompanyDirectory().updateCompanyInfo(waterComp);
+                    break;
+                case "gas":
+                    GasCompany gasComp = new GasCompany();
+                    gasComp.setGasId(Integer.parseInt(CompanyIdjTextField.getText()));
+                    gasComp.setGasName(CompanyNamejTextField.getText());
+                    gasComp.setGasState(CompanyStatejTextField.getText());
+                    gasComp.setGasCity(CompanycityjTextField.getText());
+                    new GasCompanyDirectory().updateCompanyInfo(gasComp);
+                    break;
+                case "finance":
+                    FinanceCompany finComp = new FinanceCompany();
+                    finComp.setFinId(Integer.parseInt(CompanyIdjTextField.getText()));
+                    finComp.setFinanceName(CompanyNamejTextField.getText());
+                    finComp.setFinanceState(CompanyStatejTextField.getText());
+                    finComp.setFinanceCity(CompanycityjTextField.getText());
+                    new FinanceCompanyDirectory().updateCompanyInfo(finComp);
+                    break;
+                case "legal":
+                    LegalCompany legaComp = new LegalCompany();
+                    legaComp.setLegalId(Integer.parseInt(CompanyIdjTextField.getText()));
+                    legaComp.setLegalName(CompanyNamejTextField.getText());
+                    legaComp.setLegalState(CompanyStatejTextField.getText());
+                    legaComp.setLegalCity(CompanycityjTextField.getText());
+                    new LegalCompanyDirectory().updateCompanyInfo(legaComp);
+                    break;
+            } 
+            clearSelection();
+            formType = "";
+        }else if ((CompanyIdjTextField.getText().equals("")) || (CompanyNamejTextField.getText().equals("")) || (CompanycityjTextField.getText().equals("")) || (CompanyStatejTextField.getText().equals("")) ){
             JOptionPane.showMessageDialog(SubmitjButton, "Please provide value for all fields!");
         }
         else{
@@ -442,7 +529,7 @@ public class NewCompaniesAddJPanel extends javax.swing.JPanel {
                 default: break;
 
             }
-        }
+        }                
     }//GEN-LAST:event_SubmitjButtonActionPerformed
 
     private void CanceljButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CanceljButtonActionPerformed
@@ -455,32 +542,121 @@ public class NewCompaniesAddJPanel extends javax.swing.JPanel {
     private void ManagementjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ManagementjButtonActionPerformed
         // TODO add your handling code here:    
         populateMgmtListTable();
+        companyTypeSelected = "management";
     }//GEN-LAST:event_ManagementjButtonActionPerformed
 
     private void ElectricityjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ElectricityjButtonActionPerformed
         // TODO add your handling code here:
         populateElecListTable();
+        companyTypeSelected = "electricity";
     }//GEN-LAST:event_ElectricityjButtonActionPerformed
 
     private void GasjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GasjButtonActionPerformed
         // TODO add your handling code here:
         populateGasListTable();
+        companyTypeSelected = "gas";
     }//GEN-LAST:event_GasjButtonActionPerformed
 
     private void WaterjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_WaterjButtonActionPerformed
         // TODO add your handling code here:
         populateWaterListTable();
+        companyTypeSelected = "water";
     }//GEN-LAST:event_WaterjButtonActionPerformed
 
     private void LegaljButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LegaljButtonActionPerformed
         // TODO add your handling code here:
         populateLegalListTable();
+        companyTypeSelected = "legal";
     }//GEN-LAST:event_LegaljButtonActionPerformed
 
     private void FinancejButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FinancejButtonActionPerformed
         // TODO add your handling code here:
         populateFinanceListTable();
+        companyTypeSelected = "finance";
     }//GEN-LAST:event_FinancejButtonActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        if(CompanyListjTable.getSelectedRow() >= 0){
+            formType = "update";   
+            switch(companyTypeSelected) {
+                case "management":
+                    ManagementCompany mgtComp = new ManagementCompanyDirectory().getCompanyDetails((int)CompanyListjTable.getValueAt(CompanyListjTable.getSelectedRow(), 1));
+                    CompanyIdjTextField.setText(String.valueOf(mgtComp.getMgmtId()));
+                    CompanyNamejTextField.setText(mgtComp.getMgmtName());
+                    CompanyStatejTextField.setText(mgtComp.getState());
+                    CompanycityjTextField.setText(mgtComp.getCity()); 
+                    CompanyTypejComboBox.setSelectedIndex(0);
+                    break;
+                case "electricity":
+                    ElectricityCompany elecComp = new ElectricityCompanyDirectory().getCompanyDetails((int)CompanyListjTable.getValueAt(CompanyListjTable.getSelectedRow(), 1));
+                    CompanyIdjTextField.setText(String.valueOf(elecComp.getElectricityId()));
+                    CompanyNamejTextField.setText(elecComp.getElectricityName());
+                    CompanyStatejTextField.setText(elecComp.getElectricityState());
+                    CompanycityjTextField.setText(elecComp.getElectricityCity());
+                    CompanyTypejComboBox.setSelectedIndex(1);
+                    break;
+                case "water":
+                    WaterCompany waterComp = new WaterCompanyDirectory().getCompanyDetails((int)CompanyListjTable.getValueAt(CompanyListjTable.getSelectedRow(), 1));
+                    CompanyIdjTextField.setText(String.valueOf(waterComp.getWaterId()));
+                    CompanyNamejTextField.setText(waterComp.getWaterName());
+                    CompanyStatejTextField.setText(waterComp.getWaterState());
+                    CompanycityjTextField.setText(waterComp.getWaterCity());
+                    CompanyTypejComboBox.setSelectedIndex(3);
+                    break;
+                case "gas":
+                    GasCompany gasComp = new GasCompanyDirectory().getCompanyDetails((int)CompanyListjTable.getValueAt(CompanyListjTable.getSelectedRow(), 1));
+                    CompanyIdjTextField.setText(String.valueOf(gasComp.getGasId()));
+                    CompanyNamejTextField.setText(gasComp.getGasName());
+                    CompanyStatejTextField.setText(gasComp.getGasState());
+                    CompanycityjTextField.setText(gasComp.getGasCity());
+                    CompanyTypejComboBox.setSelectedIndex(2);
+                    break;
+                case "finance":
+                    FinanceCompany finComp = new FinanceCompanyDirectory().getCompanyDetails((int)CompanyListjTable.getValueAt(CompanyListjTable.getSelectedRow(), 1));
+                    CompanyIdjTextField.setText(String.valueOf(finComp.getFinanceId()));
+                    CompanyNamejTextField.setText(finComp.getFinanceName());
+                    CompanyStatejTextField.setText(finComp.getFinanceState());
+                    CompanycityjTextField.setText(finComp.getFinanceCity());
+                    CompanyTypejComboBox.setSelectedIndex(5);
+                    break;
+                case "legal":
+                    LegalCompany legaComp = new LegalCompanyDirectory().getCompanyDetails((int)CompanyListjTable.getValueAt(CompanyListjTable.getSelectedRow(), 1));
+                    CompanyIdjTextField.setText(String.valueOf(legaComp.getLegalId()));
+                    CompanyNamejTextField.setText(legaComp.getLegalName());
+                    CompanyStatejTextField.setText(legaComp.getLegalState());
+                    CompanycityjTextField.setText(legaComp.getLegalCity());
+                    CompanyTypejComboBox.setSelectedIndex(4);
+                    break;
+            }  
+        }      
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        if(CompanyListjTable.getSelectedRow() >= 0){
+            switch(companyTypeSelected) {
+                case "management":
+                    new ManagementCompanyDirectory().deleteCompany((int)CompanyListjTable.getValueAt(CompanyListjTable.getSelectedRow(), 1));
+                    break;
+                case "electricity":
+                    new ElectricityCompanyDirectory().deleteCompany((int)CompanyListjTable.getValueAt(CompanyListjTable.getSelectedRow(), 1));
+                    break;
+                case "water":
+                    new WaterCompanyDirectory().deleteCompany((int)CompanyListjTable.getValueAt(CompanyListjTable.getSelectedRow(), 1));
+                    break;
+                case "gas":
+                    new GasCompanyDirectory().deleteCompany((int)CompanyListjTable.getValueAt(CompanyListjTable.getSelectedRow(), 1));
+                    break;
+                case "finance":
+                    new FinanceCompanyDirectory().deleteCompany((int)CompanyListjTable.getValueAt(CompanyListjTable.getSelectedRow(), 1));
+                    break;
+                case "legal":
+                    new LegalCompanyDirectory().deleteCompany((int)CompanyListjTable.getValueAt(CompanyListjTable.getSelectedRow(), 1));
+                    break;
+            }
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -506,6 +682,8 @@ public class NewCompaniesAddJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel TableHeadingjLabel;
     private javax.swing.JButton WaterjButton;
     private javax.swing.JLabel WelcomejLabel;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
     

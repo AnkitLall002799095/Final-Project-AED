@@ -39,7 +39,7 @@ public class LegalCompForm extends javax.swing.JPanel {
         propName.setText(contract.getPropName());
         
         
-        years.setModel(new DefaultComboBoxModel(Helper.getYearsList(2000)));
+        years.setModel(new DefaultComboBoxModel(Helper.getFutYearsList()));
         months.setModel(new DefaultComboBoxModel(((int) years.getSelectedItem() == LocalDate.now().getYear())?setMonthsList():Helper.monthsList)); 
         days.setModel(new DefaultComboBoxModel<>(Helper.getDays(
 				years.getItemAt(years.getSelectedIndex()), 
@@ -48,26 +48,22 @@ public class LegalCompForm extends javax.swing.JPanel {
     }
     
     private String[] setMonthsList() {
-    	Integer selectedMonth = (Integer) months.getSelectedItem();
     	String[] monthList = Helper.getCurrentMonthsList();
-  		if(Arrays.asList(monthList).contains(selectedMonth)) {
-  			months.setSelectedItem((Object) selectedMonth);
-  		}
-  		
-  		return monthList;
+
+        return monthList;
     }
     
     private void updateDaysList() {
     	Integer selectedDay = (Integer) days.getSelectedItem();
-  		Integer[] updatedDaysList = Helper.getDays(
-				years.getItemAt(years.getSelectedIndex()), 
-				Arrays.asList(Helper.monthsList).indexOf(months.getSelectedItem())+1
-		);
-  		DefaultComboBoxModel<Integer> cmbModel = new DefaultComboBoxModel<>(updatedDaysList);
-  		days.setModel(cmbModel);
-  		if(Arrays.asList(updatedDaysList).contains(selectedDay)) {
-  			days.setSelectedItem((Object) selectedDay);
-  		}
+        Integer[] updatedDaysList = Helper.getDays(
+                        years.getItemAt(years.getSelectedIndex()), 
+                        Arrays.asList(Helper.monthsList).indexOf(months.getSelectedItem())+1
+        );
+        DefaultComboBoxModel<Integer> cmbModel = new DefaultComboBoxModel<>(updatedDaysList);
+        days.setModel(cmbModel);
+        if(Arrays.asList(updatedDaysList).contains(selectedDay)) {
+                days.setSelectedItem((Object) selectedDay);
+        }
     }
 
     /**
