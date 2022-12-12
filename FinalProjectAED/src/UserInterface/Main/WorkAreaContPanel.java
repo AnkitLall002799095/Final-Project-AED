@@ -14,6 +14,7 @@ import UserInterface.LegalCompany.LegalCompRequestPanel;
 //import UserInterface.EclectricityUtility.RequestsListingElecUtility;
 import UserInterface.ManagementCompany.ApplicationsListingMgtComp;
 import UserInterface.ManagementCompany.CompanyEmployeeLeftPanel;
+import UserInterface.ManagementCompany.MgmtAdminDefaultJPanel;
 import UserInterface.ManagementCompany.MgmtAdminLeftPanel;
 import UserInterface.ManagementCompany.MgmtUserRequestJPanel;
 import UserInterface.SystemAdmin.SystemAdminLeftJPanel;
@@ -88,7 +89,7 @@ public class WorkAreaContPanel extends javax.swing.JPanel {
                 break;
             case "mgtCompAdmin":
                 jSplitPane1.setLeftComponent(new MgmtAdminLeftPanel());
-                jSplitPane1.setRightComponent(new MgmtUserRequestJPanel());
+                jSplitPane1.setRightComponent(new MgmtAdminDefaultJPanel());
                 break;
             case "sysAdmin":
                 jSplitPane1.setLeftComponent(new SystemAdminLeftJPanel());

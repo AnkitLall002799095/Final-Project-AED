@@ -5,7 +5,9 @@
 package UserInterface.SystemAdmin;
 
 import Application.Utils.AppSystem;
+import UserInterface.Main.LoginView;
 import UserInterface.SystemAdmin.NewCompaniesAddJPanel;
+import javax.swing.SwingUtilities;
 
 /**
  *
@@ -34,7 +36,7 @@ public class SystemAdminLeftJPanel extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         CompanyjButton = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        LogoutjButton = new javax.swing.JButton();
 
         setPreferredSize(new java.awt.Dimension(810, 700));
 
@@ -55,7 +57,13 @@ public class SystemAdminLeftJPanel extends javax.swing.JPanel {
                 CompanyjButtonActionPerformed(evt);
             }
         });
-        jButton2.setText("Company Listing");
+
+        LogoutjButton.setText("Logout");
+        LogoutjButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LogoutjButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -68,7 +76,7 @@ public class SystemAdminLeftJPanel extends javax.swing.JPanel {
                         .addComponent(CompanyjButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE))
+                        .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGap(71, 71, 71)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -78,8 +86,8 @@ public class SystemAdminLeftJPanel extends javax.swing.JPanel {
                                 .addComponent(jLabel2))))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(22, Short.MAX_VALUE))
+                        .addComponent(LogoutjButton, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(630, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -92,10 +100,9 @@ public class SystemAdminLeftJPanel extends javax.swing.JPanel {
                 .addComponent(jButton1)
                 .addGap(28, 28, 28)
                 .addComponent(CompanyjButton)
-                .addContainerGap(531, Short.MAX_VALUE)
-		    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton2)
-                .addContainerGap(545, Short.MAX_VALUE))
+                .addGap(30, 30, 30)
+                .addComponent(LogoutjButton)
+                .addContainerGap(478, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -111,11 +118,18 @@ public class SystemAdminLeftJPanel extends javax.swing.JPanel {
         AppSystem.workAreaPanel.setRightPanel(new SystemAdminMgmtJPanel());
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void LogoutjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogoutjButtonActionPerformed
+        // TODO add your handling code here:
+        
+        SwingUtilities.invokeLater(() -> AppSystem.appViewObj.setView(new LoginView())); 
+        
+    }//GEN-LAST:event_LogoutjButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton CompanyjButton;
+    private javax.swing.JButton LogoutjButton;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables

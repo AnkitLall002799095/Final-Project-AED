@@ -287,158 +287,162 @@ public class NewCompaniesAddJPanel extends javax.swing.JPanel {
     private void SubmitjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SubmitjButtonActionPerformed
         // TODO add your handling code here:
         
-        String companyType= new String();
-        companyType= (String) CompanyTypejComboBox.getSelectedItem();
-        
-        switch (companyType){
-            case "Management Company":
-                ManagementCompany mgtComp= mgtList.addNewProfile();
-                mgtComp.setMgmtId(Integer.parseInt(CompanyIdjTextField.getText()));
-                mgtComp.setMgmtName(CompanyNamejTextField.getText());
-                mgtComp.setCity(CompanycityjTextField.getText());
-                mgtComp.setState(CompanyStatejTextField.getText());
-                
-                try{
-
-                    Connection conn= DatabaseUtils.getConnection();
-                    Statement st = conn.createStatement();
-                    st.executeUpdate("INSERT INTO `aedfinalproject`.`management_companies` (`mgt_comp_id`, `mgt_comp_name`, `mgt_city`, `mgt_state`) VALUES ('" + mgtComp.getMgmtId() + "','" + mgtComp.getMgmtName() + "','" + mgtComp.getCity() + "','" + mgtComp.getState() + "')");
-
-                }
-                catch(Exception e){
-                    System.out.println(e);
-                }
-
-                JOptionPane.showMessageDialog(SubmitjButton, "Company added successfully");
-                
-                clearSelection();
-                
-                break;
-                
-            case "Electricity Company":
-                ElectricityCompany elecComp= elecList.addNewProfile();
-                elecComp.setElectricityId(Integer.parseInt(CompanyIdjTextField.getText()));
-                elecComp.setElectricityName(CompanyNamejTextField.getText());
-                elecComp.setElectricityCity(CompanycityjTextField.getText());
-                elecComp.setElectricityState(CompanyStatejTextField.getText());
-                
-                try{
-
-                    Connection conn= DatabaseUtils.getConnection();
-                    Statement st = conn.createStatement();
-                    st.executeUpdate("INSERT INTO `aedfinalproject`.`electricity_companies` (`elec_comp_id`, `elec_comp_name`, `elec_city`, `elec_state`) VALUES ('" + elecComp.getElectricityId() + "','" + elecComp.getElectricityName() + "','" + elecComp.getElectricityCity() + "','" + elecComp.getElectricityState() + "')");
-
-                }
-                catch(Exception e){
-                    System.out.println(e);
-                }
-
-                JOptionPane.showMessageDialog(SubmitjButton, "Company added successfully");
-                
-                clearSelection();
-                
-                break;
-                
-            case "Gas Company":
-                GasCompany gasComp= gasList.addNewProfile();
-                gasComp.setGasId(Integer.parseInt(CompanyIdjTextField.getText()));
-                gasComp.setGasName(CompanyNamejTextField.getText());
-                gasComp.setGasCity(CompanycityjTextField.getText());
-                gasComp.setGasState(CompanyStatejTextField.getText());
-                
-                try{
-
-                    Connection conn= DatabaseUtils.getConnection();
-                    Statement st = conn.createStatement();
-                    st.executeUpdate("INSERT INTO `aedfinalproject`.`gas_companies` (`gas_comp_id`, `gas_comp_name`, `gas_city`, `gas_state`) VALUES ('" + gasComp.getGasId() + "','" + gasComp.getGasName() + "','" + gasComp.getGasCity() + "','" + gasComp.getGasState() + "')");
-
-                }
-                catch(Exception e){
-                    System.out.println(e);
-                }
-
-                JOptionPane.showMessageDialog(SubmitjButton, "Company added successfully");
-                
-                clearSelection();
-                
-                break;
-                
-            case "Water Company":
-                WaterCompany waterComp= waterList.addNewProfile();
-                waterComp.setWaterId(Integer.parseInt(CompanyIdjTextField.getText()));
-                waterComp.setWaterName(CompanyNamejTextField.getText());
-                waterComp.setWaterCity(CompanycityjTextField.getText());
-                waterComp.setWaterState(CompanyStatejTextField.getText());
-                
-                try{
-
-                    Connection conn= DatabaseUtils.getConnection();
-                    Statement st = conn.createStatement();
-                    st.executeUpdate("INSERT INTO `aedfinalproject`.`water_companies` (`water_comp_id`, `water_comp_name`, `water_city`, `water_state`) VALUES ('" + waterComp.getWaterId() + "','" + waterComp.getWaterName() + "','" + waterComp.getWaterCity() + "','" + waterComp.getWaterState() + "')");
-
-                }
-                catch(Exception e){
-                    System.out.println(e);
-                }
-
-                JOptionPane.showMessageDialog(SubmitjButton, "Company added successfully");
-                
-                clearSelection();
-                
-                break;
-                
-            case "Legal Company":
-                LegalCompany legalComp= legalList.addNewProfile();
-                legalComp.setLegalId(Integer.parseInt(CompanyIdjTextField.getText()));
-                legalComp.setLegalName(CompanyNamejTextField.getText());
-                legalComp.setLegalCity(CompanycityjTextField.getText());
-                legalComp.setLegalState(CompanyStatejTextField.getText());
-                
-                try{
-
-                    Connection conn= DatabaseUtils.getConnection();
-                    Statement st = conn.createStatement();
-                    st.executeUpdate("INSERT INTO `aedfinalproject`.`legal_companies` (`legal_comp_id`, `legal_comp_name`, `legal_city`, `legal_state` ) VALUES ('" + legalComp.getLegalId() + "','" + legalComp.getLegalName() + "','" + legalComp.getLegalCity() + "','" + legalComp.getLegalState() + "')");
-                    
-                }
-                catch(Exception e){
-                    System.out.println(e);
-                }
-
-                JOptionPane.showMessageDialog(SubmitjButton, "Company added successfully");
-                
-                clearSelection();
-                
-                break;
-                
-            case "Finance Company":
-                FinanceCompany financeComp= financeList.addNewProfile();
-                financeComp.setFinanceId(Integer.parseInt(CompanyIdjTextField.getText()));
-                financeComp.setFinanceName(CompanyNamejTextField.getText());
-                financeComp.setFinanceCity(CompanycityjTextField.getText());
-                financeComp.setFinanceState(CompanyStatejTextField.getText());
-                
-                try{
-
-                    Connection conn= DatabaseUtils.getConnection();
-                    Statement st = conn.createStatement();
-                    st.executeUpdate("INSERT INTO `aedfinalproject`.`fin_companies` (`fin_id`, `fin_name`, `fin_city`, `fin_state` ) VALUES ('" + financeComp.getFinanceId() + "','" + financeComp.getFinanceName() + "','" + financeComp.getFinanceCity() + "','" + financeComp.getFinanceState() + "')");
-                    
-                }
-                catch(Exception e){
-                    System.out.println(e);
-                }
-
-                JOptionPane.showMessageDialog(SubmitjButton, "Company added successfully");
-                
-                clearSelection();
-                
-                break;
-                
-            default: break;
-                
+        if ((CompanyIdjTextField.getText().equals("")) || (CompanyNamejTextField.getText().equals("")) || (CompanycityjTextField.getText().equals("")) || (CompanyStatejTextField.getText().equals("")) ){
+            JOptionPane.showMessageDialog(SubmitjButton, "Please provide value for all fields!");
         }
-         
+        else{
+            String companyType= new String();
+            companyType= (String) CompanyTypejComboBox.getSelectedItem();
+
+            switch (companyType){
+                case "Management Company":
+                    ManagementCompany mgtComp= mgtList.addNewProfile();
+                    mgtComp.setMgmtId(Integer.parseInt(CompanyIdjTextField.getText()));
+                    mgtComp.setMgmtName(CompanyNamejTextField.getText());
+                    mgtComp.setCity(CompanycityjTextField.getText());
+                    mgtComp.setState(CompanyStatejTextField.getText());
+
+                    try{
+
+                        Connection conn= DatabaseUtils.getConnection();
+                        Statement st = conn.createStatement();
+                        st.executeUpdate("INSERT INTO `aedfinalproject`.`management_companies` (`mgt_comp_id`, `mgt_comp_name`, `mgt_city`, `mgt_state`) VALUES ('" + mgtComp.getMgmtId() + "','" + mgtComp.getMgmtName() + "','" + mgtComp.getCity() + "','" + mgtComp.getState() + "')");
+
+                    }
+                    catch(Exception e){
+                        System.out.println(e);
+                    }
+
+                    JOptionPane.showMessageDialog(SubmitjButton, "Company added successfully");
+
+                    clearSelection();
+
+                    break;
+
+                case "Electricity Company":
+                    ElectricityCompany elecComp= elecList.addNewProfile();
+                    elecComp.setElectricityId(Integer.parseInt(CompanyIdjTextField.getText()));
+                    elecComp.setElectricityName(CompanyNamejTextField.getText());
+                    elecComp.setElectricityCity(CompanycityjTextField.getText());
+                    elecComp.setElectricityState(CompanyStatejTextField.getText());
+
+                    try{
+
+                        Connection conn= DatabaseUtils.getConnection();
+                        Statement st = conn.createStatement();
+                        st.executeUpdate("INSERT INTO `aedfinalproject`.`electricity_companies` (`elec_comp_id`, `elec_comp_name`, `elec_city`, `elec_state`) VALUES ('" + elecComp.getElectricityId() + "','" + elecComp.getElectricityName() + "','" + elecComp.getElectricityCity() + "','" + elecComp.getElectricityState() + "')");
+
+                    }
+                    catch(Exception e){
+                        System.out.println(e);
+                    }
+
+                    JOptionPane.showMessageDialog(SubmitjButton, "Company added successfully");
+
+                    clearSelection();
+
+                    break;
+
+                case "Gas Company":
+                    GasCompany gasComp= gasList.addNewProfile();
+                    gasComp.setGasId(Integer.parseInt(CompanyIdjTextField.getText()));
+                    gasComp.setGasName(CompanyNamejTextField.getText());
+                    gasComp.setGasCity(CompanycityjTextField.getText());
+                    gasComp.setGasState(CompanyStatejTextField.getText());
+
+                    try{
+
+                        Connection conn= DatabaseUtils.getConnection();
+                        Statement st = conn.createStatement();
+                        st.executeUpdate("INSERT INTO `aedfinalproject`.`gas_companies` (`gas_comp_id`, `gas_comp_name`, `gas_city`, `gas_state`) VALUES ('" + gasComp.getGasId() + "','" + gasComp.getGasName() + "','" + gasComp.getGasCity() + "','" + gasComp.getGasState() + "')");
+
+                    }
+                    catch(Exception e){
+                        System.out.println(e);
+                    }
+
+                    JOptionPane.showMessageDialog(SubmitjButton, "Company added successfully");
+
+                    clearSelection();
+
+                    break;
+
+                case "Water Company":
+                    WaterCompany waterComp= waterList.addNewProfile();
+                    waterComp.setWaterId(Integer.parseInt(CompanyIdjTextField.getText()));
+                    waterComp.setWaterName(CompanyNamejTextField.getText());
+                    waterComp.setWaterCity(CompanycityjTextField.getText());
+                    waterComp.setWaterState(CompanyStatejTextField.getText());
+
+                    try{
+
+                        Connection conn= DatabaseUtils.getConnection();
+                        Statement st = conn.createStatement();
+                        st.executeUpdate("INSERT INTO `aedfinalproject`.`water_companies` (`water_comp_id`, `water_comp_name`, `water_city`, `water_state`) VALUES ('" + waterComp.getWaterId() + "','" + waterComp.getWaterName() + "','" + waterComp.getWaterCity() + "','" + waterComp.getWaterState() + "')");
+
+                    }
+                    catch(Exception e){
+                        System.out.println(e);
+                    }
+
+                    JOptionPane.showMessageDialog(SubmitjButton, "Company added successfully");
+
+                    clearSelection();
+
+                    break;
+
+                case "Legal Company":
+                    LegalCompany legalComp= legalList.addNewProfile();
+                    legalComp.setLegalId(Integer.parseInt(CompanyIdjTextField.getText()));
+                    legalComp.setLegalName(CompanyNamejTextField.getText());
+                    legalComp.setLegalCity(CompanycityjTextField.getText());
+                    legalComp.setLegalState(CompanyStatejTextField.getText());
+
+                    try{
+
+                        Connection conn= DatabaseUtils.getConnection();
+                        Statement st = conn.createStatement();
+                        st.executeUpdate("INSERT INTO `aedfinalproject`.`legal_companies` (`legal_comp_id`, `legal_comp_name`, `legal_city`, `legal_state` ) VALUES ('" + legalComp.getLegalId() + "','" + legalComp.getLegalName() + "','" + legalComp.getLegalCity() + "','" + legalComp.getLegalState() + "')");
+
+                    }
+                    catch(Exception e){
+                        System.out.println(e);
+                    }
+
+                    JOptionPane.showMessageDialog(SubmitjButton, "Company added successfully");
+
+                    clearSelection();
+
+                    break;
+
+                case "Finance Company":
+                    FinanceCompany financeComp= financeList.addNewProfile();
+                    financeComp.setFinanceId(Integer.parseInt(CompanyIdjTextField.getText()));
+                    financeComp.setFinanceName(CompanyNamejTextField.getText());
+                    financeComp.setFinanceCity(CompanycityjTextField.getText());
+                    financeComp.setFinanceState(CompanyStatejTextField.getText());
+
+                    try{
+
+                        Connection conn= DatabaseUtils.getConnection();
+                        Statement st = conn.createStatement();
+                        st.executeUpdate("INSERT INTO `aedfinalproject`.`fin_companies` (`fin_id`, `fin_name`, `fin_city`, `fin_state` ) VALUES ('" + financeComp.getFinanceId() + "','" + financeComp.getFinanceName() + "','" + financeComp.getFinanceCity() + "','" + financeComp.getFinanceState() + "')");
+
+                    }
+                    catch(Exception e){
+                        System.out.println(e);
+                    }
+
+                    JOptionPane.showMessageDialog(SubmitjButton, "Company added successfully");
+
+                    clearSelection();
+
+                    break;
+
+                default: break;
+
+            }
+        }
     }//GEN-LAST:event_SubmitjButtonActionPerformed
 
     private void CanceljButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CanceljButtonActionPerformed
