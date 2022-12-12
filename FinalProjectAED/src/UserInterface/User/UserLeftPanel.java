@@ -118,14 +118,14 @@ public class UserLeftPanel extends javax.swing.JPanel {
     private void ViewjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewjButtonActionPerformed
         // TODO add your handling code here:
         
-        workAreaPanel.setRightPanel(new ListingViewJPanel(workAreaPanel));
+        workAreaPanel.setRightPanel(new ListingViewJPanel());
         
     }//GEN-LAST:event_ViewjButtonActionPerformed
 
     private void ViewjButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewjButton1ActionPerformed
         // TODO add your handling code here:
         
-        workAreaPanel.setRightPanel(new CreateListingRequestJPanel(workAreaPanel));
+        workAreaPanel.setRightPanel(new CreateListingRequestJPanel());
         
     }//GEN-LAST:event_ViewjButton1ActionPerformed
 
@@ -136,6 +136,9 @@ public class UserLeftPanel extends javax.swing.JPanel {
 
     private void OwnerReportjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OwnerReportjButtonActionPerformed
         // TODO add your handling code here:
+        
+        workAreaPanel.setRightPanel(new OwnerReportJPanel());
+        
     }//GEN-LAST:event_OwnerReportjButtonActionPerformed
 
 

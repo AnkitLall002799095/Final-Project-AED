@@ -2,28 +2,18 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package UserInterface.User;
-
-import Application.Utils.AppSystem;
-import Business.Request.UserRequestDirectory;
-import UserInterface.Main.WorkAreaContPanel;
+package UserInterface.ManagementCompany;
 
 /**
  *
  * @author hmitt
  */
-public class UserDefaultJPanel extends javax.swing.JPanel {
+public class MgmtAdminDefaultJPanel extends javax.swing.JPanel {
 
     /**
-     * Creates new form UserDefaultJPanel
+     * Creates new form MgmtAdminDefaultJPanel
      */
-    
-    UserRequestDirectory reqList;
-    WorkAreaContPanel workAreaPanel;
-    
-    public UserDefaultJPanel() {
-        this.workAreaPanel = AppSystem.workAreaPanel;
-        reqList = new UserRequestDirectory();
+    public MgmtAdminDefaultJPanel() {
         initComponents();
     }
 
@@ -36,16 +26,16 @@ public class UserDefaultJPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        WelcomejLabel = new javax.swing.JLabel();
         SubHeadingjLabel = new javax.swing.JLabel();
-
-        WelcomejLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        WelcomejLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        WelcomejLabel.setText("Welcome to Apartment management portal!");
+        WelcomejLabel = new javax.swing.JLabel();
 
         SubHeadingjLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         SubHeadingjLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         SubHeadingjLabel.setText("Please choose an action from left panel!");
+
+        WelcomejLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        WelcomejLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        WelcomejLabel.setText("Welcome to Apartment management portal!");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -56,7 +46,7 @@ public class UserDefaultJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(WelcomejLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 464, Short.MAX_VALUE)
                     .addComponent(SubHeadingjLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(161, Short.MAX_VALUE))
+                .addContainerGap(211, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

@@ -4,7 +4,16 @@
  */
 package UserInterface.User;
 
-import Business.Users.UserSummary;
+import static Application.Utils.AppSystem.currentUid;
+import Application.Utils.DatabaseUtils;
+import Business.Property.Property;
+import Business.Property.PropertyDirectory;
+import Business.UserSummary.UserSummary;
+import Business.UserSummary.UserSummaryDirectory;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
 
 /**
  *
@@ -15,9 +24,14 @@ public class OwnerReportJPanel extends javax.swing.JPanel {
     /**
      * Creates new form OwnerReportJPanel
      */
+    
+    PropertyDirectory propList;
+    
     public OwnerReportJPanel() {
         initComponents();
-        //UserSummary();
+        propList= DatabaseUtils.getPropListFromDB();
+        populateReportTable();
+        
     }
 
     /**
@@ -29,54 +43,54 @@ public class OwnerReportJPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        WelcomejLabel = new javax.swing.JLabel();
+        SubHeadingjLabel = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
+        ReportjTable = new javax.swing.JTable();
+        totalAptjLabel = new javax.swing.JLabel();
+        costliestjLabel = new javax.swing.JLabel();
+        cheapestjLabel = new javax.swing.JLabel();
+        rentjLabel = new javax.swing.JLabel();
+        aptCountjTextField = new javax.swing.JTextField();
+        costliestAptjTextField = new javax.swing.JTextField();
+        cheapestAptjTextField = new javax.swing.JTextField();
+        totalRentjTextField = new javax.swing.JTextField();
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Welcome to your reporting wizard!");
+        WelcomejLabel.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        WelcomejLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        WelcomejLabel.setText("Welcome to your reporting wizard!");
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel2.setText("Kindly refer to your summary report below:");
+        SubHeadingjLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        SubHeadingjLabel.setText("Kindly refer to your summary report below:");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        ReportjTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Property name", "Apartment ID", "City", "Apartment type", "Management company", "Apartment size", "Rent", "Occupied"
+                "Property name", "Apartment ID", "City", "Apartment type", "Management company", "Apartment size", "Rent"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(ReportjTable);
 
-        jLabel3.setText("Total listed apartments");
+        totalAptjLabel.setText("Total listed apartments");
 
-        jLabel4.setText("Costliest rented apartment");
+        costliestjLabel.setText("Costliest apartment");
 
-        jLabel5.setText("Cheapest rented apartments");
+        cheapestjLabel.setText("Cheapest apartment");
 
-        jLabel6.setText("Total rent generated");
+        rentjLabel.setText("Total rent generated");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -86,68 +100,151 @@ public class OwnerReportJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(228, 228, 228)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 421, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(WelcomejLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 421, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(112, 112, 112)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(SubHeadingjLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 629, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(89, 89, 89)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                    .addComponent(totalAptjLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(costliestjLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(cheapestjLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(rentjLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(cheapestAptjTextField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE)
+                                    .addComponent(costliestAptjTextField, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(aptCountjTextField, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(totalRentjTextField))))))
                 .addContainerGap(109, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(77, 77, 77)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(WelcomejLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(SubHeadingjLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(totalAptjLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(aptCountjTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(costliestjLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(costliestAptjTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cheapestjLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cheapestAptjTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(rentjLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(totalRentjTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(207, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
+    private javax.swing.JTable ReportjTable;
+    private javax.swing.JLabel SubHeadingjLabel;
+    private javax.swing.JLabel WelcomejLabel;
+    private javax.swing.JTextField aptCountjTextField;
+    private javax.swing.JTextField cheapestAptjTextField;
+    private javax.swing.JLabel cheapestjLabel;
+    private javax.swing.JTextField costliestAptjTextField;
+    private javax.swing.JLabel costliestjLabel;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
+    private javax.swing.JLabel rentjLabel;
+    private javax.swing.JLabel totalAptjLabel;
+    private javax.swing.JTextField totalRentjTextField;
     // End of variables declaration//GEN-END:variables
+    
+    public void populateReportTable(){
+        
+        int costliest=0;
+        int costliestApt=0;
+        int cheapest=1000000;
+        int cheapestApt=0;
+        int totalRent=0;
+        String ownerProp = new String();
+        
+        for (Property p : propList.getPropList()){
+            if (p.getOwnerId()==currentUid)
+                ownerProp+=(p.getPropId()+",");
+        }
+        
+        int strLength= ownerProp.length();
+        String ownerProperties = ownerProp.substring(0, strLength-1);
+        
+        try{
+            
+            UserSummaryDirectory summaryFromDB = new UserSummaryDirectory();
+            Connection conn= DatabaseUtils.getConnection();
+            Statement st = conn.createStatement();
+            ResultSet appRs = st.executeQuery("SELECT * FROM aedfinalproject.contract_application WHERE prop_id IN (" + ownerProperties +")");
+            
+            while (appRs.next()){
+                UserSummary uSum= summaryFromDB.addNewProfile();
+                uSum.setAptId(appRs.getInt(42));
+                uSum.setAptType(appRs.getString(10));
+                uSum.setCity(appRs.getString(7));
+                uSum.setMgtComp(appRs.getString(17));
+                uSum.setPropName(appRs.getString(3));
+                uSum.setSize(appRs.getInt(20));
+                uSum.setUserId(currentUid);
+                uSum.setRent(appRs.getInt(34)+appRs.getInt(35)+appRs.getInt(36)+appRs.getInt(39));
+            }
+            
+            javax.swing.table.DefaultTableModel model = (javax.swing.table.DefaultTableModel) ReportjTable.getModel();
+            model.setRowCount(0);
+
+            for (UserSummary us : summaryFromDB.getSummList()){
+
+                Object[] row = new Object[7];
+                row[0] = us.getPropName();
+                row[1] = us.getAptId();
+                row[2] = us.getCity();
+                row[3] = us.getAptType();
+                row[4] = us.getMgtComp();
+                row[5] = us.getSize();
+                row[6] = us.getRent();
+
+                model.addRow(row);
+                
+                if (us.getRent()>=costliest){
+                    costliest=us.getRent();
+                    costliestApt=us.getAptId();
+                }
+                    
+                if (us.getRent()<=cheapest){
+                    cheapest=us.getRent();
+                    cheapestApt=us.getAptId();
+                }
+                
+                totalRent+=us.getRent();
+
+            }
+            
+            aptCountjTextField.setText(Integer.toString(model.getRowCount()));
+            costliestAptjTextField.setText(Integer.toString(costliestApt));
+            cheapestAptjTextField.setText(Integer.toString(cheapestApt));
+            totalRentjTextField.setText(Integer.toString(totalRent));
+            
+            aptCountjTextField.setEditable(false);
+            costliestAptjTextField.setEditable(false);
+            cheapestAptjTextField.setEditable(false);
+            totalRentjTextField.setEditable(false);
+            
+        }
+        catch(Exception e){
+            System.out.println(e);
+        }
+    }
+
 }
