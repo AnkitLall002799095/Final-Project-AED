@@ -5,6 +5,7 @@
 package UserInterface.LegalCompany;
 
 import Application.Utils.AppSystem;
+import Application.Utils.DatabaseUtils;
 import Business.ContractApplication.ContractApplication;
 import UserInterface.Main.WorkAreaContPanel;
 import java.util.ArrayList;
@@ -31,7 +32,7 @@ public class LegalCompRequestPanel extends javax.swing.JPanel {
     public void generateTableData() {
         jTable1.setCellSelectionEnabled(false);
         jTable1.setRowSelectionAllowed(true);
-        AppSystem.contractApplicationCatalog.getContracts(1, "legal_comp_id");
+        AppSystem.contractApplicationCatalog.getContracts(DatabaseUtils.getCompanyId(AppSystem.currentUid), "legal_comp_id");
         contractApplicationCatalog = AppSystem.contractApplicationCatalog.getContractApplicationCatalog();
         populateTable();
     }
