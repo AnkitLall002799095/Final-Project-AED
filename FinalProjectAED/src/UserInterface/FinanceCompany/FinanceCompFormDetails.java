@@ -37,7 +37,7 @@ public class FinanceCompFormDetails extends javax.swing.JPanel {
         utilitiesCost.setText(String.valueOf(contract.getUtilitiesCost()));
         propName.setText(contract.getPropName());
         deposit.setText(String.valueOf(contract.getDeposit()));
-        billDate.setText(Helper.getFormattedDate(contract.getAptBillingDate()));
+        billDate.setText(contract.getAptBillingDate());
     }
 
     /**

@@ -215,7 +215,7 @@ public class Helper {
     
         // Convert date object to formatted string. 
     public static String getFormattedDate(LocalDate date) {
-    	return date.format(DateTimeFormatter.ofPattern("d-MMMM-yy"));
+    	return date.format(DateTimeFormatter.ofPattern("d-MMMM-yyyy"));
     }
     
     public static int getCompIDfromCombo(javax.swing.JComboBox<String> comboBox){
@@ -242,6 +242,19 @@ public class Helper {
         AppSystem.currentUid = 0;
         AppSystem.currentUserRole = "";
         SwingUtilities.invokeLater(() -> AppSystem.appViewObj.setView(new LoginView()));
+    }
+    
+    public static Integer[] getFutYearsList() {
+    	
+    	int start = (int)LocalDate.now().getYear();
+        LocalDate end = LocalDate.of(start+5, 1, 1);
+    	Integer[] yearsList = new Integer[5];
+    	yearsList[0] = start;
+    	for(int i=0;i < 4;i++) {
+    		yearsList[i+1] = yearsList[i]+1;
+    	}
+    	
+    	return yearsList;
     }
     
 }

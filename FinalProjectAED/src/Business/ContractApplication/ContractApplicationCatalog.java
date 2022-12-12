@@ -25,6 +25,8 @@ public class ContractApplicationCatalog {
     public void newContract(ContractApplication contract) {
         HashMap<String, Object> contractObj = new HashMap<>(){
             {
+                put("aptId", contract.getAptId());
+                put("propId", contract.getPropId());
                 put("propName", contract.propName);
                 put("date", contract.date);
                 put("street", contract.street);
@@ -38,9 +40,16 @@ public class ContractApplicationCatalog {
                 put("features", contract.features);
                 put("availability", contract.availability);
                 put("utilities", contract.utilities);
-                put("managementCompany", contract.managementCompany);
+                put("mgtCompanyId", contract.getManagementCompanyId());
                 put("status", "pending");
-                put("appOwner", "utility");
+                put("appOwner", "electricity");
+                put("sqft", contract.getSqft());
+                put("appOwnerType", "utility");
+                put("elecCompId", contract.getElecCompId());
+                put("waterCompId", contract.getWaterCompId());
+                put("gasCompId", contract.getGasCompId());
+                put("finId", contract.getFinCompId());
+                put("legalId", contract.getLegalCompId());
             }
         };
         
