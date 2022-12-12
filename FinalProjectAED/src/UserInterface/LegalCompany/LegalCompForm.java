@@ -12,6 +12,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JButton;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -183,6 +185,7 @@ public class LegalCompForm extends javax.swing.JPanel {
         contract.setLeaseEndDate(Helper.getDate(day, month, year));
         DatabaseUtils.updateContractLegal(contract);
         DatabaseUtils.createNewApartment(contract.getAptId(), contract.getPropId());
+        JOptionPane.showMessageDialog(new JButton(), "Contract Updated.");
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void yearsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_yearsActionPerformed

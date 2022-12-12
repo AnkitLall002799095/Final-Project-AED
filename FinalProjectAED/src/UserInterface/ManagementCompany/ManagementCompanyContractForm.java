@@ -27,7 +27,9 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 import org.apache.commons.io.IOUtils;
 
 /**
@@ -619,6 +621,7 @@ public class ManagementCompanyContractForm extends javax.swing.JPanel implements
         );
         
         AppSystem.contractApplicationCatalog.newContract(contract);
+        JOptionPane.showMessageDialog(new JButton(), "Contract Created.");
     }//GEN-LAST:event_saveButtonActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed

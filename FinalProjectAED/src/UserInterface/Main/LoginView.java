@@ -27,8 +27,8 @@ public class LoginView extends javax.swing.JPanel {
      * Creates new form LoginView
      */
     public LoginView() {
+        setBounds(0, 0, 1040, 700);
         initComponents();
-//       emailErrLabel.setLi
     }
 
     /**
