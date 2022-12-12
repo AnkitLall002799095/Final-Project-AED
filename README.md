@@ -50,13 +50,12 @@ Workflow of the Project:
 ![OwnersSequenceDiagram](https://user-images.githubusercontent.com/114889989/206951780-95acb9f4-b849-42ab-83c8-cec4a1c3c8d5.jpg)
 
 
-![MgmtCompanyAdmin](https://user-images.githubusercontent.com/114889989/206951840-22af6cdc-5ff5-43a9-bc51-b392aaf9cb1b.jpg)
-
 
 ![ElecCompAdmin](https://user-images.githubusercontent.com/114889989/206951902-cbdd6f19-2717-4cf4-8e36-00e6b881f769.jpg)
 
 
 ![WaterCompanyAdmin](https://user-images.githubusercontent.com/114889989/206952183-611eeabb-93a7-468e-9486-19134d8cc16c.jpg)
+
 
 
 ![GasCompanyAdmin](https://user-images.githubusercontent.com/114889989/206952474-9818c7bc-ff97-4f45-a972-326c9aee6315.jpg)
@@ -68,3 +67,19 @@ Workflow of the Project:
 
 
 ![SystemAdmin](https://user-images.githubusercontent.com/114889989/206953406-7609c9db-8803-479b-99a1-1982f2091489.jpg)
+
+
+![ManagementCompanyEmployee](https://user-images.githubusercontent.com/114889989/206962987-eddf7f51-b790-4429-b3f7-ba2517dbfea8.jpg)
+
+
+
+![MgmtCompanyAdminmainjpg](https://user-images.githubusercontent.com/114889989/206962874-b636609d-8432-44fa-857d-0d1f0946c719.jpg)
+
+
+
+
+
+
+
+
+
